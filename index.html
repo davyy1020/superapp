@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super App Startup - Interactive Simulation Suite</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS & JS for Real OpenStreetMap integration -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- SweetAlert2 Dark Theme for gorgeous premium popup notifications -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="dark-theme">
+    <!-- Top Global simulation Alert Bar -->
+    <div id="alert-bar" class="alert-bar hidden">
+        <div class="alert-content">
+            <span id="alert-icon">⚠️</span>
+            <span id="alert-message">Notifikasi Simulasi</span>
+        </div>
+        <button onclick="closeAlert()" class="alert-close">&times;</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">🚀</div>
+                <div class="logo-text">
+                    <h2>Go-Super</h2>
+                    <span>Interactive Prototype</span>
+                </div>
+            </div>
+
+            <!-- View Mode Switch -->
+            <div class="view-mode-selector"
+                style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+                <span
+                    style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px;">MODE
+                    SIMULASI ZOOM</span>
+                <div class="toggle-buttons"
+                    style="display: flex; gap: 4px; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 10px; border: 1px solid var(--border-color);">
+                    <button id="btn-focus-mode" class="btn btn-sm btn-primary"
+                        style="flex: 1; font-size: 11px; padding: 6px 4px; border-radius: 6px; box-shadow: none;"
+                        onclick="setViewMode('focus')">Fokus Tab</button>
+                    <button id="btn-multi-mode" class="btn btn-sm btn-outline"
+                        style="flex: 1; font-size: 11px; padding: 6px 4px; border-radius: 6px;"
+                        onclick="setViewMode('multi')">Ekosistem Live</button>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="admin-portal"
+                    onclick="switchPortal(event, 'admin-portal')">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">1. Website Admin</span>
+                </a>
+                <a href="#" class="nav-item" data-target="user-portal" onclick="switchPortal(event, 'user-portal')">
+                    <span class="nav-icon">📱</span>
+                    <span class="nav-label">2. Aplikasi User</span>
+                </a>
+                <a href="#" class="nav-item" data-target="driver-portal" onclick="switchPortal(event, 'driver-portal')">
+                    <span class="nav-icon">🛵</span>
+                    <span class="nav-label">3. Aplikasi Driver</span>
+                </a>
+                <a href="#" class="nav-item" data-target="merchant-food-portal"
+                    onclick="switchPortal(event, 'merchant-food-portal')">
+                    <span class="nav-icon">🍔</span>
+                    <span class="nav-label">4. Merchant Food</span>
+                </a>
+                <a href="#" class="nav-item" data-target="merchant-health-portal"
+                    onclick="switchPortal(event, 'merchant-health-portal')">
+                    <span class="nav-icon">🏥</span>
+                    <span class="nav-label">5. Merchant Health</span>
+                </a>
+                <a href="#" class="nav-item" data-target="osrm-portal" onclick="switchPortal(event, 'osrm-portal')">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">6. OSRM GIS Engine</span>
+                </a>
+                <a href="#" class="nav-item" data-target="explanation-portal" onclick="switchPortal(event, 'explanation-portal')">
+                    <span class="nav-icon">💡</span>
+                    <span class="nav-label">7. Edukasi & Kalkulator Tarif</span>
+                </a>
+            </nav>
+
+            <!-- Global Simulation Control Panel inside Sidebar -->
+            <div class="simulation-controls">
+                <h3>SIMULATOR ALUR</h3>
+                <div class="control-buttons">
+                    <button class="btn btn-primary btn-full" onclick="startRideHailingSimulation()">
+                        ⚡ Simulasikan Ride Hailing
+                    </button>
+                    <button class="btn btn-success btn-full mt-2" onclick="startFoodDeliverySimulation()">
+                        🍕 Simulasikan Food Delivery
+                    </button>
+                    <button class="btn btn-danger btn-full mt-2" onclick="triggerGpsFraudSimulation()">
+                        🚨 Tes Proteksi Fake GPS
+                    </button>
+                    <button class="btn btn-warning btn-full mt-2" onclick="resetSimulation()">
+                        🔄 Reset Simulasi
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <span class="status-indicator online"></span>
+                <span>OSRM Engine: Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- SECTION 1: WEBSITE ADMIN -->
+            <section id="admin-portal" class="portal-section active">
+                <header class="portal-header">
+                    <div>
+                        <h1>Website Admin Dashboard</h1>
+                        <p class="subtitle">Pusat kendali operasional, verifikasi, pengaturan tarif, dan monitoring
+                            realtime.</p>
+                    </div>
+                    <div class="admin-badge">Admin System</div>
+                </header>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Total User Aktif</span>
+                            <span class="stat-trend positive">+12.4%</span>
+                        </div>
+                        <div class="stat-value" id="admin-stat-users">12,450</div>
+                        <div class="stat-footer">Pelanggan terdaftar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Driver Terverifikasi</span>
+                            <span class="stat-trend positive">+8.2%</span>
+                        </div>
+                        <div class="stat-value" id="admin-stat-drivers">1,840</div>
+                        <div class="stat-footer" id="admin-stat-drivers-online">245 Online saat ini</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Merchant Aktif</span>
+                            <span class="stat-trend positive">+5.1%</span>
+                        </div>
+                        <div class="stat-value" id="admin-stat-merchants">520</div>
+                        <div class="stat-footer">Food & Health</div>
+                    </div>
+                    <div class="stat-card premium-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Total Pendapatan (Platform)</span>
+                            <span class="stat-trend positive">+15.8%</span>
+                        </div>
+                        <div class="stat-value" id="admin-stat-revenue">Rp 48,250,000</div>
+                        <div class="stat-footer">Bulan ini (20% Komisi)</div>
+                    </div>
+                </div>
+
+                <div class="admin-layout-grid">
+                    <!-- Left: Live Tracking Map & Logs -->
+                    <div class="admin-main-panel">
+                        <div class="panel-card map-card">
+                            <div class="panel-header">
+                                <h3>Peta Live Tracking Driver & Pesanan</h3>
+                                <span class="badge badge-pulse">Realtime OSRM Simulation</span>
+                            </div>
+                            <div class="map-container">
+                                <!-- Simulated Real OpenStreetMap via Leaflet -->
+                                <div id="leaflet-map"
+                                    style="width: 100%; height: 100%; min-height: 350px; border-radius: 12px; z-index: 1; border: 1px solid var(--border-color);">
+                                </div>
+
+                                <div class="map-overlay-info">
+                                    <div id="osrm-stats">
+                                        <span class="info-tag">OSRM Route</span>
+                                        <span id="osrm-distance">Jarak: - km</span>
+                                        <span id="osrm-duration">Waktu: - mnt</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Logs / Realtime events -->
+                        <div class="panel-card mt-4">
+                            <div class="panel-header">
+                                <h3>Log Aktivitas Sistem (Realtime)</h3>
+                                <button class="btn btn-sm btn-outline" onclick="clearLogs()">Hapus Log</button>
+                            </div>
+                            <div class="logs-container" id="admin-logs">
+                                <div class="log-row info">
+                                    <span class="log-time">[23:29:10]</span>
+                                    <span class="log-text">Sistem Go-Super berhasil diinisialisasi. Menghubungkan ke
+                                        database terpadu.</span>
+                                </div>
+                                <div class="log-row success">
+                                    <span class="log-time">[23:29:12]</span>
+                                    <span class="log-text">OSRM Routing Server terhubung di alamat lokal. Kalkulasi rute
+                                        siap digunakan.</span>
+                                </div>
+                                <div class="log-row success">
+                                    <span class="log-time">[23:29:15]</span>
+                                    <span class="log-text">Driver #001 (Budi) mengubah status menjadi ONLINE di
+                                        koordinat (-6.2088, 106.8456).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Config, Driver Verification & Commision Settings -->
+                    <div class="admin-side-panel">
+                        <!-- Verification Panel -->
+                        <div class="panel-card mb-4">
+                            <div class="panel-header">
+                                <h3>Verifikasi Driver Baru</h3>
+                                <span class="badge badge-warning" id="pending-driver-count">1 Pending</span>
+                            </div>
+                            <div class="verification-list">
+                                <div class="driver-verif-item" id="pending-driver-item">
+                                    <div class="driver-info">
+                                        <h4>Anto Wijaya</h4>
+                                        <p>Honda Vario - B 1234 ABC</p>
+                                    </div>
+                                    <div class="docs-preview">
+                                        <span class="doc-badge" title="KTP Terunggah">🪪 KTP</span>
+                                        <span class="doc-badge" title="SIM C Terunggah">💳 SIM</span>
+                                        <span class="doc-badge" title="STNK Terunggah">📄 STNK</span>
+                                        <span class="doc-badge" title="Foto Kendaraan Terunggah">🛵 Foto</span>
+                                    </div>
+                                    <div class="verif-actions mt-3">
+                                        <button class="btn btn-success btn-sm btn-half"
+                                            onclick="approveDriver()">Setujui</button>
+                                        <button class="btn btn-danger btn-sm btn-half"
+                                            onclick="rejectDriver()">Tolak</button>
+                                    </div>
+                                </div>
+                                <div id="no-pending-drivers" class="no-data hidden">
+                                    Tidak ada driver menunggu verifikasi.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tariff & Commision Configurations -->
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Pengaturan Tarif & Komisi</h3>
+                            </div>
+                            <form class="admin-form" onsubmit="saveTariffSettings(event)">
+                                <div class="form-group">
+                                    <label>Tarif per Kilometer (IDR)</label>
+                                    <div class="input-prefix-group">
+                                        <span class="prefix">Rp</span>
+                                        <input type="number" id="cfg-tariff-per-km" value="2500" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Biaya Minimum Perjalanan (IDR)</label>
+                                    <div class="input-prefix-group">
+                                        <span class="prefix">Rp</span>
+                                        <input type="number" id="cfg-min-fare" value="8000" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Biaya Layanan Platform (IDR)</label>
+                                    <div class="input-prefix-group">
+                                        <span class="prefix">Rp</span>
+                                        <input type="number" id="cfg-service-fee" value="2000" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Pembagian Komisi Platform (%)</label>
+                                    <div class="input-suffix-group">
+                                        <input type="number" id="cfg-platform-commission" value="20"
+                                            class="form-control" max="100">
+                                        <span class="suffix">%</span>
+                                    </div>
+                                    <span class="help-text">Sisa persentase komisi secara otomatis ditugaskan ke Driver
+                                        (80%).</span>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full mt-4">Simpan Konfigurasi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION 2: APLIKASI USER (MOBILE SIMULATOR) -->
+            <section id="user-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>Aplikasi User (Pelanggan)</h1>
+                        <p class="subtitle">Simulasi antarmuka pemesanan Ride Hailing, Food Delivery, dan Layanan
+                            Kesehatan dalam genggaman handphone pelanggan.</p>
+                    </div>
+                </header>
+
+                <div class="simulator-layout">
+                    <!-- Phone Frame -->
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+
+                            <!-- Phone Top Bar -->
+                            <div class="phone-header">
+                                <span class="time">23:29</span>
+                                <div class="status-icons">📶 🔋 100%</div>
+                            </div>
+
+                            <!-- Phone Body Viewport -->
+                            <div class="phone-body">
+
+                                <!-- USER HOME PAGE -->
+                                <div id="user-home-view" class="phone-view active">
+                                    <div class="user-profile-header">
+                                        <div class="user-greeting">
+                                            <span>Halo, Selamat Malam</span>
+                                            <h4 id="user-display-name">Davy Pratama</h4>
+                                        </div>
+                                        <div class="user-avatar">👤</div>
+                                    </div>
+
+                                    <!-- E-wallet Card -->
+                                    <div class="wallet-card">
+                                        <div class="wallet-left">
+                                            <span>Saldo Go-Pay</span>
+                                            <h3 id="user-wallet-balance">Rp 150,000</h3>
+                                        </div>
+                                        <div class="wallet-actions">
+                                            <button class="wallet-btn" onclick="topupWallet()">➕ Topup</button>
+                                            <button class="wallet-btn">💳 Riwayat</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Services Grid -->
+                                    <div class="services-title">Layanan Kami</div>
+                                    <div class="services-grid">
+                                        <div class="service-icon-card" onclick="openUserView('user-ride-view')">
+                                            <div class="service-badge-icon ride">🛵</div>
+                                            <span>Ride Hailing</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-food-view')">
+                                            <div class="service-badge-icon food">🍕</div>
+                                            <span>Pesan Makanan</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-health-view')">
+                                            <div class="service-badge-icon health">🏥</div>
+                                            <span>Kesehatan</span>
+                                        </div>
+                                        <div class="service-icon-card lock-disabled"
+                                            onclick="alert('Fitur segera hadir!')">
+                                            <div class="service-badge-icon more">✨</div>
+                                            <span>Lainnya</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Promos Carousel Simulated -->
+                                    <div class="services-title mt-4">Promo Menarik Untukmu</div>
+                                    <div class="promo-banner">
+                                        <div class="promo-content">
+                                            <h4>Diskon Hemat 50%</h4>
+                                            <p>Gunakan kode: **MAKANHEMAT**</p>
+                                        </div>
+                                        <div class="promo-tag">Diskon</div>
+                                    </div>
+                                </div>
+
+                                <!-- USER RIDE HAILING VIEW -->
+                                <div id="user-ride-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Pesan Perjalanan (Ride)</h3>
+                                    </div>
+
+                                    <div class="ride-booking-card">
+                                        <div class="form-group">
+                                            <label>Titik Jemput</label>
+                                            <select id="user-ride-pickup" class="form-control"
+                                                onchange="calculateRideFareSim()">
+                                                <option value="sudirman">Sudirman Center (Titik A)</option>
+                                                <option value="monas">Monas Park (Titik B)</option>
+                                                <option value="kemang">Kemang Square (Titik C)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Titik Tujuan</label>
+                                            <select id="user-ride-dest" class="form-control"
+                                                onchange="calculateRideFareSim()">
+                                                <option value="monas" selected>Monas Park (Titik B)</option>
+                                                <option value="sudirman">Sudirman Center (Titik A)</option>
+                                                <option value="kemang">Kemang Square (Titik C)</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="ride-calc-info mt-3" id="ride-calc-panel">
+                                            <div class="flex-between">
+                                                <span>Jarak Estimasi:</span>
+                                                <strong id="user-ride-distance">8.2 KM</strong>
+                                            </div>
+                                            <div class="flex-between mt-1">
+                                                <span>Waktu Tempuh:</span>
+                                                <strong id="user-ride-duration">15 Menit</strong>
+                                            </div>
+                                            <div class="flex-between mt-2 divider-top pt-2">
+                                                <span class="text-large">Total Tarif:</span>
+                                                <strong class="text-large text-indigo" id="user-ride-price">Rp
+                                                    22,500</strong>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary btn-full mt-4" id="btn-book-ride"
+                                            onclick="bookRideHailing()">
+                                            Pesan Sekarang 🛵
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- USER FOOD VIEW -->
+                                <div id="user-food-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Go-Food Kuliner</h3>
+                                    </div>
+
+                                    <div class="food-merchant-list">
+                                        <div class="merchant-row-card"
+                                            onclick="openFoodMerchantDetail('Bakso Solo Baru')">
+                                            <span class="merchant-emoji">🍜</span>
+                                            <div class="merchant-desc">
+                                                <h4>Bakso Solo Baru</h4>
+                                                <p>Bakso, Mie Ayam, Minuman • ⭐ 4.8 (1.2k+)</p>
+                                                <span class="delivery-time">🛵 15 mnt • Jarak 1.5 KM</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="merchant-row-card mt-2"
+                                            onclick="openFoodMerchantDetail('Ayam Geprek Gahar')">
+                                            <span class="merchant-emoji">🍗</span>
+                                            <div class="merchant-desc">
+                                                <h4>Ayam Geprek Gahar</h4>
+                                                <p>Ayam Geprek, Ricebox, Sambal • ⭐ 4.7 (800+)</p>
+                                                <span class="delivery-time">🛵 20 mnt • Jarak 2.8 KM</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cart Float Card -->
+                                    <div class="cart-float-card hidden" id="user-food-cart">
+                                        <div class="flex-between">
+                                            <div>
+                                                <h4 id="cart-item-name">Ayam Geprek Level 3</h4>
+                                                <p id="cart-item-qty">1 Porsi • Rp 18,000</p>
+                                            </div>
+                                            <button class="btn btn-success btn-sm" onclick="checkoutFoodOrder()">Pesan
+                                                Makanan</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- USER HEALTH VIEW -->
+                                <div id="user-health-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Go-Health Medis</h3>
+                                    </div>
+
+                                    <div class="health-categories">
+                                        <div class="h-cat-card" onclick="openApotekCatalog()">
+                                            <span class="h-emoji">💊</span>
+                                            <h4>Beli Obat & Vitamin</h4>
+                                            <p>Apotek Terdekat</p>
+                                        </div>
+                                        <div class="h-cat-card" onclick="openClinicBooking()">
+                                            <span class="h-emoji">🩺</span>
+                                            <h4>Booking Klinik</h4>
+                                            <p>Dokter & Laboratorium</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Simulated Apotek catalog -->
+                                    <div class="pharmacy-catalog hidden" id="pharmacy-catalog-section">
+                                        <h4>Rekomendasi Apotek Mitra</h4>
+                                        <div class="merchant-row-card mt-2" onclick="selectMedicineItem()">
+                                            <span class="merchant-emoji">🏪</span>
+                                            <div class="merchant-desc">
+                                                <h4>Apotek Kimia Farma Sudirman</h4>
+                                                <p>Obat Resep, Multivitamin • ⭐ 4.9</p>
+                                                <span class="delivery-time">🛵 10 mnt • 800m</span>
+                                            </div>
+                                        </div>
+                                        <div class="medicine-item-card hidden" id="med-item-card">
+                                            <div class="flex-between">
+                                                <div>
+                                                    <strong>Multivitamin Booster C+ (10 Tab)</strong>
+                                                    <p>Rp 35,000</p>
+                                                </div>
+                                                <button class="btn btn-primary btn-sm"
+                                                    onclick="checkoutHealthOrder()">Beli & Antar 💊</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- USER ORDER TRACKING VIEW (REALTIME SIMULATOR) -->
+                                <div id="user-tracking-view" class="phone-view">
+                                    <div class="view-header">
+                                        <h3>Pelacakan Pesanan Realtime</h3>
+                                    </div>
+                                    <div class="tracking-screen-content">
+                                        <div class="tracking-map-mini" style="position: relative; overflow: hidden;">
+                                            <div id="user-leaflet-map" style="width: 100%; height: 100%; z-index: 1;"></div>
+                                        </div>
+
+                                        <div class="tracking-details-card mt-3">
+                                            <div class="order-status-badge text-center" id="tracking-status-badge">
+                                                MENCARI DRIVER...</div>
+
+                                            <div class="driver-match-info mt-3 flex-between">
+                                                <div>
+                                                    <h4 id="matching-driver-name">Budi Santoso</h4>
+                                                    <p id="matching-driver-vehicle">Honda Vario (B 1234 ABC) • ⭐ 4.9</p>
+                                                </div>
+                                                <div class="driver-avatar">🛵</div>
+                                            </div>
+
+                                            <div class="divider-top mt-3 pt-3">
+                                                <div class="flex-between">
+                                                    <span>Tipe Pesanan:</span>
+                                                    <strong id="tracking-order-type">Ride Hailing</strong>
+                                                </div>
+                                                <div class="flex-between mt-1">
+                                                    <span>Jarak OSRM:</span>
+                                                    <strong id="tracking-order-distance">8.2 KM</strong>
+                                                </div>
+                                                <div class="flex-between mt-1">
+                                                    <span>Metode Pembayaran:</span>
+                                                    <strong>Go-Pay (E-wallet)</strong>
+                                                </div>
+                                                <div class="flex-between mt-2 pt-2 divider-top">
+                                                    <span class="text-large">Total Pembayaran:</span>
+                                                    <strong class="text-large text-indigo" id="tracking-order-price">Rp
+                                                        22,500</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Phone Home Indicator Button -->
+                            <div class="phone-home-btn" onclick="openUserView('user-home-view')"></div>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Side Console explaining steps -->
+                    <div class="simulator-notes-panel">
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Informasi Simulator User</h3>
+                            </div>
+                            <div class="sim-guide-content">
+                                <p><strong>Layanan yang didukung:</strong></p>
+                                <ul>
+                                    <li><strong>Ride Hailing:</strong> Menghubungkan titik jemput & tujuan ke kalkulator
+                                        tarif.</li>
+                                    <li><strong>Food Delivery:</strong> Memilih merchant kuliner terdaftar, memilih
+                                        menu, checkout.</li>
+                                    <li><strong>Health Service:</strong> Layanan pembelian obat di Apotek mitra secara
+                                        realtime.</li>
+                                </ul>
+                                <div class="alert alert-info mt-3">
+                                    💡 <strong>Tips Presentasi:</strong> Buka tab <strong>Aplikasi User</strong>, pilih
+                                    titik penjemputan dan tujuan, lalu klik <strong>Pesan Sekarang</strong>. Setelah
+                                    itu, beralihlah ke tab **Aplikasi Driver** untuk melihat pesanan masuk!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION 3: APLIKASI DRIVER (MOBILE SIMULATOR) -->
+            <section id="driver-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>Aplikasi Driver (Mitra Pengemudi)</h1>
+                        <p class="subtitle">Simulasi dashboard pengemudi saat aktif menerima order, navigasi rute jalan,
+                            dan mengelola saldo pendapatan.</p>
+                    </div>
+                </header>
+
+                <div class="simulator-layout">
+                    <!-- Phone Frame for Driver -->
+                    <div class="phone-frame driver-theme">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+
+                            <!-- Phone Top Bar -->
+                            <div class="phone-header">
+                                <span class="time">23:29</span>
+                                <div class="status-icons">📶 🔋 98%</div>
+                            </div>
+
+                            <!-- Phone Body Viewport -->
+                            <div class="phone-body">
+
+                                <!-- DRIVER MAIN DASHBOARD -->
+                                <div class="phone-view active" id="driver-main-view">
+                                    <div class="driver-profile-header">
+                                        <div class="driver-identity">
+                                            <span>Halo Mitra,</span>
+                                            <h4 id="driver-name-disp">Budi Santoso</h4>
+                                            <span class="badge badge-success">Akun Aktif (Verified)</span>
+                                        </div>
+                                        <div class="status-toggle-wrapper">
+                                            <!-- Online/Offline toggle -->
+                                            <label class="switch">
+                                                <input type="checkbox" id="driver-status-toggle"
+                                                    onchange="toggleDriverOnlineStatus(this)" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <span id="driver-status-text"
+                                                class="status-text-label text-success">ONLINE</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Driver Daily Revenue -->
+                                    <div class="driver-wallet-card">
+                                        <span>Pendapatan Dompet (Hari Ini)</span>
+                                        <h2 id="driver-wallet-disp">Rp 120,000</h2>
+                                        <div class="flex-between mt-2 divider-top pt-2">
+                                            <div>
+                                                <span class="sub-text">Total Order</span>
+                                                <h4 id="driver-completed-orders">6 Selesai</h4>
+                                            </div>
+                                            <div>
+                                                <span class="sub-text">Komisi (80%)</span>
+                                                <h4>Rp 96,000 Bersih</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Driver Document Verification Status View -->
+                                    <div class="driver-docs-status-card mt-3">
+                                        <h4>Kelengkapan Berkas Pendaftaran</h4>
+                                        <div class="doc-list-checklist mt-2">
+                                            <div class="checklist-item checked">✔️ KTP Asli (Terverifikasi)</div>
+                                            <div class="checklist-item checked">✔️ SIM C Aktif (Terverifikasi)</div>
+                                            <div class="checklist-item checked">✔️ STNK Pajak Hidup (Terverifikasi)
+                                            </div>
+                                            <div class="checklist-item checked">✔️ Foto Motor Sendiri (Terverifikasi)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Active Map/Status indicator -->
+                                    <div class="driver-status-map-preview mt-3">
+                                        <span>📍 Posisi Anda: Sudirman Center (-6.2088, 106.8456)</span>
+                                    </div>
+                                </div>
+
+                                <!-- DRIVER INCOMING ORDER POPUP -->
+                                <div class="phone-view" id="driver-order-popup-view">
+                                    <div class="order-proposal-card">
+                                        <div class="pulse-bell">🔔</div>
+                                        <h3>ORDER MASUK!</h3>
+                                        <span class="badge-tag-order" id="pop-order-type">RIDE HAILING</span>
+
+                                        <div class="proposal-route mt-3">
+                                            <div class="route-step">
+                                                <span class="bullet bullet-indigo"></span>
+                                                <div>
+                                                    <span class="label">JEMPUT</span>
+                                                    <p id="pop-pickup-loc">Sudirman Center (Titik A)</p>
+                                                </div>
+                                            </div>
+                                            <div class="route-step mt-2">
+                                                <span class="bullet bullet-red"></span>
+                                                <div>
+                                                    <span class="label">TUJUAN</span>
+                                                    <p id="pop-dest-loc">Monas Park (Titik B)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="proposal-meta flex-between mt-3">
+                                            <div>
+                                                <span>Estimasi Jarak</span>
+                                                <h4 id="pop-distance">8.2 KM</h4>
+                                            </div>
+                                            <div>
+                                                <span>Tarif Bersih</span>
+                                                <h4 class="text-indigo" id="pop-net-fare">Rp 18,000</h4>
+                                            </div>
+                                        </div>
+
+                                        <div class="proposal-actions mt-4">
+                                            <button class="btn btn-success btn-full btn-lg"
+                                                onclick="acceptIncomingOrder()">TERIMA ORDER ✔️</button>
+                                            <button class="btn btn-outline btn-full mt-2"
+                                                onclick="declineIncomingOrder()">Tolak</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- DRIVER NAVIGATION VIEW (ON-TRIP) -->
+                                <div class="phone-view" id="driver-navigation-view">
+                                    <div class="navigation-top-directions">
+                                        <span class="nav-arrow">⬆️</span>
+                                        <div>
+                                            <h4 id="nav-instructions">Lurus terus ke arah Monas (3.2 km lagi)</h4>
+                                            <p id="nav-status-desc">Menuju Lokasi Pengantaran</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="driver-navigation-map" style="position: relative; overflow: hidden;">
+                                        <div id="driver-leaflet-map" style="width: 100%; height: 100%; z-index: 1;"></div>
+                                    </div>
+
+                                    <div class="trip-details-tray">
+                                        <div class="flex-between">
+                                            <div>
+                                                <span class="lbl">Nama Pelanggan</span>
+                                                <h4 id="nav-customer-name">Davy Pratama</h4>
+                                            </div>
+                                            <div>
+                                                <span class="lbl">Metode</span>
+                                                <span class="payment-badge">Go-Pay</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary btn-full mt-3" id="btn-complete-trip"
+                                            onclick="completeOngoingTrip()">
+                                            SELESAIKAN PERJALANAN 🏁
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="phone-home-btn" onclick="openDriverView('driver-main-view')"></div>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Side Console -->
+                    <div class="simulator-notes-panel">
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Informasi Simulator Driver</h3>
+                            </div>
+                            <div class="sim-guide-content">
+                                <p><strong>Fungsi Utama Aplikasi Driver:</strong></p>
+                                <ul>
+                                    <li><strong>Online/Offline Toggle:</strong> Status online membuat driver terlihat di
+                                        Peta Admin & sistem order.</li>
+                                    <li><strong>Menerima Order:</strong> Simulasi prompt order masuk yang menampilkan
+                                        rute jemput, tujuan, jarak OSRM, dan pendapatan bersih.</li>
+                                    <li><strong>Navigasi Perjalanan:</strong> Memberikan rute pengemudi dan tombol
+                                        penyelesaian trip.</li>
+                                </ul>
+                                <div class="alert alert-warning mt-3">
+                                    🛡️ <strong>Anti Fake GPS:</strong> Coba klik tombol merah di sidebar menu kiri
+                                    **"Tes Proteksi Fake GPS"** untuk mensimulasikan sistem keamanan saat mendeteksi
+                                    driver memanipulasi koordinat GPS menggunakan mock location provider!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION 4: MERCHANT FOOD PORTAL -->
+            <section id="merchant-food-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>Merchant Food Portal (Dashboard Resto)</h1>
+                        <p class="subtitle">Dasbor pengelolaan menu restoran, konfirmasi antrean pesanan makanan, dan
+                            rekapitulasi total penjualan harian.</p>
+                    </div>
+                    <div class="merchant-badge food">Merchant Food</div>
+                </header>
+
+                <div class="merchant-grid">
+                    <!-- Left: Menu Management -->
+                    <div class="merchant-main-content">
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Kelola Daftar Menu Restoran</h3>
+                                <button class="btn btn-primary btn-sm" onclick="showAddMenuModal()">+ Tambah Menu
+                                    Baru</button>
+                            </div>
+
+                            <div class="menu-table-wrapper mt-3">
+                                <table class="menu-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Foto</th>
+                                            <th>Nama Menu</th>
+                                            <th>Deskripsi</th>
+                                            <th>Harga</th>
+                                            <th>Stok</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="merchant-food-menu-list">
+                                        <tr>
+                                            <td>🍜</td>
+                                            <td><strong>Bakso Solo Istimewa</strong></td>
+                                            <td>Bakso sapi halus dengan kuah kaldu sapi pekat ditambah mie dan bihun
+                                            </td>
+                                            <td>Rp 22,000</td>
+                                            <td><span class="badge badge-success">Tersedia</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline"
+                                                    onclick="editMenu('bakso')">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>🍗</td>
+                                            <td><strong>Ayam Geprek Gahar Level 3</strong></td>
+                                            <td>Ayam geprek crispy renyah dibalut sambal bawang merah korek super pedas
+                                            </td>
+                                            <td>Rp 18,000</td>
+                                            <td><span class="badge badge-success">Tersedia</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline"
+                                                    onclick="editMenu('ayam')">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>🥤</td>
+                                            <td><strong>Es Teh Manis Jumbo</strong></td>
+                                            <td>Es teh manis segar berukuran jumbo</td>
+                                            <td>Rp 5,000</td>
+                                            <td><span class="badge badge-success">Tersedia</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline"
+                                                    onclick="editMenu('esteh')">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Add Menu Form Inline Hidden by default -->
+                        <div class="panel-card mt-4 hidden" id="add-menu-form-card">
+                            <div class="panel-header">
+                                <h3>Form Tambah Menu</h3>
+                                <button class="alert-close" onclick="closeAddMenuForm()">&times;</button>
+                            </div>
+                            <form class="admin-form mt-2" onsubmit="addFoodMenuItem(event)">
+                                <div class="grid-2-cols">
+                                    <div class="form-group">
+                                        <label>Nama Makanan / Minuman</label>
+                                        <input type="text" id="new-menu-name" required
+                                            placeholder="Contoh: Nasi Goreng Gila" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Harga (IDR)</label>
+                                        <input type="number" id="new-menu-price" required placeholder="15000"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Deskripsi Menu</label>
+                                    <textarea id="new-menu-desc" rows="2"
+                                        placeholder="Tuliskan komposisi / detail rasa makanan..."
+                                        class="form-control"></textarea>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Kategori</label>
+                                    <select id="new-menu-cat" class="form-control">
+                                        <option value="makanan">Makanan</option>
+                                        <option value="minuman">Minuman</option>
+                                        <option value="cemilan">Cemilan</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success mt-4">Simpan Menu Baru ✔️</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right: Order Management & Sales report -->
+                    <div class="merchant-side-content">
+                        <!-- Queue / Orders -->
+                        <div class="panel-card mb-4">
+                            <div class="panel-header">
+                                <h3>Kelola Antrean Pesanan Masuk</h3>
+                                <span class="badge badge-pulse" id="merchant-active-orders-count">0 Aktif</span>
+                            </div>
+                            <div class="merchant-order-queue" id="merchant-food-orders">
+                                <div class="no-data" id="merchant-food-no-orders">
+                                    Belum ada pesanan aktif dari pelanggan saat ini.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini report -->
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Ringkasan Omset Penjualan</h3>
+                            </div>
+                            <div class="sales-report-summary mt-3">
+                                <div class="flex-between">
+                                    <span>Total Omset Hari Ini:</span>
+                                    <strong>Rp 874,000</strong>
+                                </div>
+                                <div class="flex-between mt-2">
+                                    <span>Total Pesanan Selesai:</span>
+                                    <strong>32 Transaksi</strong>
+                                </div>
+                                <div class="flex-between mt-2 divider-top pt-2">
+                                    <span>Menu Terlaris (1):</span>
+                                    <span class="text-success">Ayam Geprek Level 3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION 5: MERCHANT HEALTH PORTAL -->
+            <section id="merchant-health-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>Merchant Kesehatan Portal (Apotek / Klinik)</h1>
+                        <p class="subtitle">Dasbor pengelolaan persediaan obat-obatan, pemesanan konsultasi dokter, dan
+                            tracking resep obat pasien.</p>
+                    </div>
+                    <div class="merchant-badge health">Merchant Health</div>
+                </header>
+
+                <div class="merchant-grid">
+                    <!-- Left: Products and Services Management -->
+                    <div class="merchant-main-content">
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Kelola Katalog Produk Apotek & Layanan Klinik</h3>
+                                <span class="badge badge-success">Klinik Mitra A+</span>
+                            </div>
+
+                            <div class="tab-selectors mt-3">
+                                <button class="btn btn-sm btn-primary">📦 Persediaan Obat</button>
+                                <button class="btn btn-sm btn-outline ml-2">🩺 Booking Layanan</button>
+                            </div>
+
+                            <div class="menu-table-wrapper mt-3">
+                                <table class="menu-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Kategori</th>
+                                            <th>Nama Produk/Jasa</th>
+                                            <th>Indikasi / Manfaat</th>
+                                            <th>Harga</th>
+                                            <th>Stok</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>💊 Obat Cepat</td>
+                                            <td><strong>Paracetamol 500mg (10 Tab)</strong></td>
+                                            <td>Meredakan demam, sakit kepala, dan nyeri ringan</td>
+                                            <td>Rp 7,500</td>
+                                            <td>180 Box</td>
+                                            <td><span class="badge badge-success">Tersedia</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>🍊 Vitamin</td>
+                                            <td><strong>Multivitamin Booster C+</strong></td>
+                                            <td>Meningkatkan daya tahan tubuh dan kebugaran stamina</td>
+                                            <td>Rp 35,000</td>
+                                            <td>45 Box</td>
+                                            <td><span class="badge badge-success">Tersedia</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>🩺 Layanan</td>
+                                            <td><strong>Konsultasi Dokter Umum</strong></td>
+                                            <td>Pemeriksaan fisik dokter umum via klinik/virtual</td>
+                                            <td>Rp 50,000</td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-success">Aktif</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Orders Queue -->
+                    <div class="merchant-side-content">
+                        <div class="panel-card mb-4">
+                            <div class="panel-header">
+                                <h3>Pesanan Apotek & Booking Masuk</h3>
+                                <span class="badge badge-warning" id="merchant-health-orders-count">0 Aktif</span>
+                            </div>
+                            <div class="merchant-order-queue" id="merchant-health-orders">
+                                <div class="no-data" id="merchant-health-no-orders">
+                                    Belum ada pesanan apotek atau booking klinik aktif.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: OSRM GIS ENGINE -->
+            <section id="osrm-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>OSRM GIS Engine Control Center</h1>
+                        <p class="subtitle">Konfigurasi pemrosesan data OpenStreetMap, custom scripting LUA, optimasi
+                            memori infrastruktur server, dan pengujian API Distance Matrix.</p>
+                    </div>
+                    <div class="admin-badge"
+                        style="background-color: rgba(99, 102, 241, 0.1); color: var(--color-primary); border: 1px solid rgba(99, 102, 241, 0.3); font-weight: 700;">
+                        OSRM Specialist</div>
+                </header>
+
+                <div class="admin-layout-grid">
+                    <!-- Left: OSM Data Pipeline Compiler & Custom Scripting LUA -->
+                    <div class="admin-main-panel">
+                        <!-- LUA Custom Profile Script Editor -->
+                        <div class="panel-card mb-4">
+                            <div class="panel-header">
+                                <h3>Custom Scripting LUA Profile Editor (Rute & Kecepatan)</h3>
+                                <div class="flex-between" style="gap: 10px;">
+                                    <select id="lua-profile-selector" class="form-control form-control-sm"
+                                        style="width: 180px; padding: 4px 8px; font-size: 12px; height: 32px;"
+                                        onchange="changeLuaProfile()">
+                                        <option value="motorcycle">Motorcycle (Lewat Gang Sempit)</option>
+                                        <option value="car">Car Profile (Lewat Jalan Tol)</option>
+                                    </select>
+                                    <button class="btn btn-success btn-sm" onclick="saveLuaProfileScript()">Simpan
+                                        Profil LUA ✔️</button>
+                                </div>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Skrip LUA ini
+                                menentukan kecepatan kendaraan, membatasi akses jalan sempit/gang, serta memprioritaskan
+                                atau menghindari jalan tol berdasarkan metadata tag dari OpenStreetMap (OSM).</p>
+
+                            <!-- Custom Code Editor container -->
+                            <div class="code-editor-wrapper"
+                                style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: #1e1e2e; font-family: monospace;">
+                                <div class="code-editor-header"
+                                    style="background: #181825; padding: 8px 16px; border-bottom: 1px solid var(--border-color); font-size: 11px; color: #a6adc8; display: flex; justify-content: space-between;">
+                                    <span>profile.lua</span>
+                                    <span>Language: LUA</span>
+                                </div>
+                                <textarea id="lua-code-textarea" rows="18"
+                                    style="width: 100%; padding: 16px; background: transparent; border: none; outline: none; color: #cdd6f4; font-family: monospace; font-size: 13px; line-height: 1.5; resize: vertical;"
+                                    spellcheck="false">
+-- Profile Kustom OSRM Go-Super
+-- Menentukan kecepatan dan akses jalan untuk MOTOR
+local find_access_tag = require("lib/access")
+
+function limit_speed(way, speed)
+    local width = way:get_value_by_key("width")
+    local highway = way:get_value_by_key("highway")
+    
+    -- Logika untuk motor: Bisa lewat gang sempit (lebar < 2m)
+    if width and tonumber(width) < 2.0 then
+        if highway == "service" or highway == "alley" or highway == "residential" then
+            speed = 15 -- Kecepatan lambat di gang: 15 km/jam
+        else
+            speed = 0  -- Jalan sempit tidak boleh diakses jenis lain
+        end
+    end
+    return speed
+end
+
+function process_way(profile, way, result)
+    local highway = way:get_value_by_key("highway")
+    local speed = 40 -- Kecepatan standar 40 km/jam
+    
+    if highway == "motorway" then
+        speed = 40 -- Motor dibatasi di jalan tol
+    elseif highway == "trunk" or highway == "primary" then
+        speed = 50
+    elseif highway == "residential" then
+        speed = 30
+    elseif highway == "service" or highway == "alley" then
+        speed = 25 -- Kecepatan motor stabil lewat gang sempit
+    end
+    
+    result.forward_speed = limit_speed(way, speed)
+    result.backward_speed = limit_speed(way, speed)
+end
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <!-- OSRM OSM Data Pipeline Compiler Simulator -->
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>OSM Data Processing Compiler Terminal (osrm-extract, partition, customize)</h3>
+                                <button class="btn btn-primary btn-sm" onclick="runOsmPipelineSimulator()">Jalankan
+                                    Pipeline OSRM ⚙️</button>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Simulasikan
+                                pemrosesan peta mentah `.osm.pbf` Indonesia menjadi struktur graf OSRM terkompresi
+                                menggunakan *Contraction Hierarchies*.</p>
+
+                            <div class="logs-container" id="osrm-compiler-terminal"
+                                style="height: 240px; background: #000; font-family: monospace; padding: 16px; font-size: 12px; color: #33ff33; line-height: 1.5; border-radius: 12px; overflow-y: auto;">
+                                <div style="color: #888888;">[Menunggu perintah] Klik "Jalankan Pipeline OSRM" untuk
+                                    memproses data peta indonesia.osm.pbf</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Infrastructure, RAM Optimization, and Distance Matrix API Tester -->
+                    <div class="admin-side-panel">
+                        <!-- Infrastructure & Server Performance Monitor -->
+                        <div class="panel-card mb-4">
+                            <div class="panel-header">
+                                <h3>Docker Container & RAM Optimization</h3>
+                                <span class="badge badge-success" id="osrm-container-badge">DOCKER ACTIVE</span>
+                            </div>
+
+                            <div class="osrm-performance-metrics"
+                                style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+                                <div class="flex-between">
+                                    <span>Nama Container:</span>
+                                    <strong style="color: #fff;">osrm-backend-indonesia</strong>
+                                </div>
+                                <div class="flex-between">
+                                    <span>Metode Routing:</span>
+                                    <strong style="color: var(--color-success);" id="osrm-method-label">CH (Contraction
+                                        Hierarchies)</strong>
+                                </div>
+                                <div style="border-top: 1px solid var(--border-color); padding-top: 8px;">
+                                    <div class="flex-between">
+                                        <span>Penggunaan RAM Server:</span>
+                                        <strong id="osrm-ram-indicator">1.2 GB / 8.0 GB</strong>
+                                    </div>
+                                    <!-- Custom bar gauge -->
+                                    <div class="ram-gauge-bar"
+                                        style="width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; margin-top: 6px; overflow: hidden;">
+                                        <div id="osrm-ram-fill"
+                                            style="width: 15%; height: 100%; background: var(--color-success); border-radius: 4px; transition: width 0.5s ease;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="border-top: 1px solid var(--border-color); padding-top: 8px;">
+                                    <strong style="color: #fff; font-size: 12px;">Strategi RAM Optimization:</strong>
+                                    <ul
+                                        style="font-size: 11px; color: var(--text-muted); margin-left: 16px; margin-top: 6px; line-height: 1.4; padding-left: 0;">
+                                        <li style="margin-bottom: 4px;">Memuat data peta menggunakan flag `--mmap` untuk
+                                            menghemat alokasi memori heap virtual.</li>
+                                        <li style="margin-bottom: 4px;">Menggunakan algoritma *Multi-Level Dijkstra
+                                            (MLD)* untuk pembaruan waktu tempuh dinamis tanpa re-kalkulasi graf utama.
+                                        </li>
+                                        <li style="margin-bottom: 4px;">Menyimpan cache segment jalan tersering di
+                                            buffer memori L1/L2 container.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Distance Matrix JSON API Tester -->
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>OSRM Distance Matrix API Tester</h3>
+                                <button class="btn btn-outline btn-sm" onclick="sendMockDistanceMatrixRequest()">Test
+                                    API</button>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uji coba
+                                *Distance Matrix API* untuk menghitung jarak dan durasi optimal dari banyak koordinat
+                                sekaligus (NxN Matrix).</p>
+
+                            <div class="form-group">
+                                <label style="font-size: 11px;">Request Koordinat Sumber & Tujuan (JSON)</label>
+                                <textarea id="matrix-request-json" rows="6" class="form-control"
+                                    style="font-family: monospace; font-size: 11px; padding: 8px; background: rgba(0,0,0,0.2); color: #a5b4fc; line-height: 1.3;">
+{
+  "coordinates": [
+    [106.8456, -6.2088], -- Sudirman
+    [106.8272, -6.1754], -- Monas
+    [106.8150, -6.2510]  -- Kemang
+  ],
+  "profile": "motorcycle",
+  "annotations": ["duration", "distance"]
+}
+                                </textarea>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label style="font-size: 11px;">JSON Response OSRM (Output)</label>
+                                <pre id="matrix-response-json"
+                                    style="max-height: 160px; overflow-y: auto; background: #0b0f19; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; font-family: monospace; font-size: 11px; color: #a5b4fc; white-space: pre-wrap; margin: 0; text-align: left;">
+{
+  "status": "idle",
+  "message": "Klik 'Test API' untuk mengirim request ke OSRM."
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: PENJELASAN & KALKULATOR HARGA -->
+            <section id="explanation-portal" class="portal-section">
+                <header class="portal-header">
+                    <div>
+                        <h1>Simulasi Harga & Edukasi GIS</h1>
+                        <p class="subtitle">Kalkulator bagi hasil realtime dan pemetaan kompetensi pengembang OSRM GIS.</p>
+                    </div>
+                    <div class="admin-badge" style="background-color: rgba(16, 185, 129, 0.1); color: var(--color-success); border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700;">
+                        Interactive Guide
+                    </div>
+                </header>
+
+                <div class="admin-layout-grid">
+                    <!-- Left: Interactive Pricing Split Calculator -->
+                    <div class="admin-main-panel">
+                        <div class="panel-card">
+                            <div class="panel-header">
+                                <h3>Kalkulator Simulasi Harga & Distribusi Pendapatan</h3>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+                                Uji bagaimana tarif perjalanan dan pesanan dihitung berdasarkan jarak tempuh nyata dan bagaimana pendapatan dibagi secara otomatis antara Driver, Platform, dan Merchant.
+                            </p>
+
+                            <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                                <!-- Column Left: Inputs -->
+                                <div class="calc-inputs-column" style="display: flex; flex-direction: column; gap: 16px;">
+                                    <div class="form-group">
+                                        <label>Tipe Layanan</label>
+                                        <select id="calc-service-type" class="form-control" onchange="updateCalcFields()">
+                                            <option value="ride">Transportasi (Ride Hailing)</option>
+                                            <option value="food">Pesan Antar Makanan (Go-Food)</option>
+                                            <option value="health">Pesan Antar Obat (Go-Health)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" id="group-calc-distance">
+                                        <label>Estimasi Jarak (KM): <strong id="val-calc-distance">5.0 KM</strong></label>
+                                        <input type="range" id="calc-distance" min="1" max="30" step="0.5" value="5.0" class="form-control" style="padding: 0; background: transparent; border: none;" oninput="runInteractiveCalculation()">
+                                    </div>
+
+                                    <div class="form-group" id="group-calc-product-price" style="display: none;">
+                                        <label>Harga Produk (IDR)</label>
+                                        <input type="number" id="calc-product-price" value="18000" class="form-control" oninput="runInteractiveCalculation()">
+                                    </div>
+
+                                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                        <div class="form-group" id="group-calc-tariff">
+                                            <label>Tarif / KM (Rp)</label>
+                                            <input type="number" id="calc-tariff-per-km" value="2500" class="form-control" oninput="runInteractiveCalculation()">
+                                        </div>
+                                        <div class="form-group" id="group-calc-minfare">
+                                            <label>Min Fare (Rp)</label>
+                                            <input type="number" id="calc-min-fare" value="8000" class="form-control" oninput="runInteractiveCalculation()">
+                                        </div>
+                                    </div>
+
+                                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                        <div class="form-group">
+                                            <label>Biaya Layanan (Rp)</label>
+                                            <input type="number" id="calc-service-fee" value="2000" class="form-control" oninput="runInteractiveCalculation()">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Komisi Platform (%)</label>
+                                            <input type="number" id="calc-platform-commission" value="20" max="100" class="form-control" oninput="runInteractiveCalculation()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Column Right: Output Displays -->
+                                <div class="calc-outputs-column" style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 16px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div>
+                                        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">Rincian Total Biaya</h4>
+                                        <div class="flex-between mt-3">
+                                            <span style="font-size: 14px;">Total Bayar Pelanggan:</span>
+                                            <strong id="out-calc-total" style="font-size: 20px; color: #fff;">Rp 22,500</strong>
+                                        </div>
+                                        
+                                        <!-- Stacked progress bar breakdown -->
+                                        <div style="margin-top: 16px; height: 12px; display: flex; border-radius: 6px; overflow: hidden; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                                            <div id="bar-calc-driver" style="width: 80%; background-color: var(--color-primary); height: 100%; transition: width 0.3s;" title="Bagian Driver"></div>
+                                            <div id="bar-calc-platform" style="width: 20%; background-color: var(--color-success); height: 100%; transition: width 0.3s;" title="Komisi Platform"></div>
+                                            <div id="bar-calc-merchant" style="width: 0%; background-color: var(--color-warning); height: 100%; transition: width 0.3s;" title="Bagian Toko/Resto"></div>
+                                        </div>
+
+                                        <div style="display: flex; gap: 12px; font-size: 10px; margin-top: 10px; color: var(--text-muted); justify-content: center;">
+                                            <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; background: var(--color-primary); border-radius: 2px;"></span> Driver</span>
+                                            <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; background: var(--color-success); border-radius: 2px;"></span> Platform</span>
+                                            <span id="legend-calc-merchant" style="display: none; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; background: var(--color-warning); border-radius: 2px;"></span> Merchant</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="divider-top mt-4 pt-3" style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+                                        <div class="flex-between">
+                                            <span>Bagian Bersih Driver (Budi):</span>
+                                            <strong id="out-calc-driver" style="color: var(--color-primary);">Rp 18,000</strong>
+                                        </div>
+                                        <div class="flex-between">
+                                            <span>Komisi Platform Go-Super:</span>
+                                            <strong id="out-calc-platform" style="color: var(--color-success);">Rp 4,500</strong>
+                                        </div>
+                                        <div class="flex-between" id="row-calc-merchant" style="display: none;">
+                                            <span>Bagian Toko/Restoran (Mitra):</span>
+                                            <strong id="out-calc-merchant" style="color: var(--color-warning);">Rp 0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Developer Competency Map -->
+                    <div class="admin-side-panel">
+                        <div class="panel-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="panel-header">
+                                    <h3>Kesesuaian Kompetensi Developer GIS OSRM</h3>
+                                </div>
+                                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+                                    Bagaimana pilar keterampilan yang diminta dalam proyek Fastwork dipetakan di program ini:
+                                </p>
+
+                                <div class="competency-cards-list" style="display: flex; flex-direction: column; gap: 12px; font-size: 12px;">
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
+                                        <strong style="color: #fff;">1. Pemrosesan Data OSM</strong>
+                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Perintah `osrm-extract`, `partition`, dan `customize` berjalan di compiler terminal (Tab 6).</p>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
+                                        <strong style="color: #fff;">2. Scripting LUA Kustom</strong>
+                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Filter lebar jalan (`width`) & tol untuk membedakan rute motor vs mobil (`LUA_PROFILES`).</p>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
+                                        <strong style="color: #fff;">3. Optimasi Server & RAM</strong>
+                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Simulasi MLD vs CH dan monitor lonjakan RAM saat build peta Indonesia.</p>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
+                                        <strong style="color: #fff;">4. Integrasi Backend / API</strong>
+                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Peta Leaflet terintegrasi Live OSRM Router API & Uji coba Distance Matrix JSON `/table`.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 16px; font-size: 11px; color: var(--text-muted); text-align: center;">
+                                💡 Kode rujukan terperinci ada di <code>app.js</code> & <code>penjelasan_sistem.md</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JS Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>
