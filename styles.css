@@ -1875,3 +1875,123 @@ body.multi-window-mode #explanation-portal {
     display: none !important;
 }
 
+/* Header Mobile & Navigation Styles */
+.mobile-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 20px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 998;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 990;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+}
+
+/* Responsive adjustments for Mobile & Tablets (991px and below) */
+@media(max-width: 991px) {
+    .mobile-header {
+        display: flex;
+    }
+    
+    .sidebar-close-btn {
+        display: block;
+        margin-left: auto;
+    }
+    
+    .logo-area {
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        bottom: 0;
+        height: 100vh;
+        z-index: 999;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.8);
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .main-content {
+        padding: 16px;
+        margin-top: 60px; /* Offset for mobile header */
+        width: 100%;
+    }
+    
+    .app-container {
+        flex-direction: column;
+    }
+}
+
+/* Extra small screens adjustments */
+@media(max-width: 768px) {
+    #explanation-portal .grid-2-cols {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .admin-layout-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+}
+

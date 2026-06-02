@@ -29,16 +29,30 @@
         <button onclick="closeAlert()" class="alert-close">&times;</button>
     </div>
 
+    <!-- Mobile Top Header Bar -->
+    <header class="mobile-header">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="mobile-logo">
+            <span style="font-size: 20px;">🚀</span>
+            <strong style="margin-left: 6px; font-weight: 800; background: linear-gradient(135deg, #a5b4fc, var(--color-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Go-Super</strong>
+        </div>
+        <div style="width: 32px;"></div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
     <!-- Main Container -->
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="logo-area">
                 <div class="logo-icon">🚀</div>
                 <div class="logo-text">
                     <h2>Go-Super</h2>
                     <span>Interactive Prototype</span>
                 </div>
+                <button class="sidebar-close-btn" onclick="toggleSidebar()">&times;</button>
             </div>
 
             <!-- View Mode Switch -->

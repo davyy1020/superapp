@@ -254,6 +254,16 @@ function switchPortal(event, portalId) {
     });
     document.getElementById(portalId).classList.add("active");
 
+    // Close sidebar on mobile/tablet view
+    if (window.innerWidth <= 991) {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        if (sidebar && sidebar.classList.contains("active")) {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        }
+    }
+
     logToSystem(`Beralih tampilan ke: **${portalId.replace('-portal', '').toUpperCase()} PORTAL**`, "info");
 }
 
@@ -1915,6 +1925,16 @@ function runInteractiveCalculation() {
         barDriver.style.width = "0%";
         barPlatform.style.width = "0%";
         barMerchant.style.width = "0%";
+    }
+}
+
+// --- MOBILE SIDEBAR TOGGLER ---
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+    if (sidebar && overlay) {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
     }
 }
 
