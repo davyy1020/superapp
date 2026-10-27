@@ -108,6 +108,52 @@ export default function AdminPortal() {
   const [testSplitResult, setTestSplitResult] = useState(null);
   const [testLogs, setTestLogs] = useState([]);
 
+  // Modals state
+  const [isMerchantModalOpen, setIsMerchantModalOpen] = useState(false);
+  const [newMerchantForm, setNewMerchantForm] = useState({
+    storeName: "",
+    ownerName: "",
+    category: "Food & Fresh Sembako",
+    kabupaten: "Jakarta Selatan",
+    basePriceAvg: 20000,
+    markupPercent: 10,
+  });
+  const [selectedDriverForKyc, setSelectedDriverForKyc] = useState(null);
+  const [selectedPaymentForReconciliation, setSelectedPaymentForReconciliation] = useState(null);
+
+  const handleCreateMerchantSubmit = async (e) => {
+    e.preventDefault();
+    if (!newMerchantForm.storeName || !newMerchantForm.ownerName) {
+      showToast("⚠️ Mohon isi Nama Usaha dan Nama Pemilik.");
+      return;
+    }
+    try {
+      const res = await fetch("/api/v1/admin/merchants", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newMerchantForm),
+      });
+      const data = await res.json();
+      if (data.status === "SUCCESS") {
+        showToast(`🎉 ${data.message}`);
+        setIsMerchantModalOpen(false);
+        setNewMerchantForm({
+          storeName: "",
+          ownerName: "",
+          category: "Food & Fresh Sembako",
+          kabupaten: "Jakarta Selatan",
+          basePriceAvg: 20000,
+          markupPercent: 10,
+        });
+        fetchBackendData();
+      } else {
+        showToast(`❌ ${data.message}`);
+      }
+    } catch (err) {
+      showToast(`❌ Error: ${err.message}`);
+    }
+  };
+
   const addTestLog = (title, data) => {
     setTestLogs((prev) => [
       { id: Date.now(), time: new Date().toLocaleTimeString("id-ID"), title, data },
@@ -1360,11 +1406,18 @@ export default function AdminPortal() {
                           {d.status === "PENDING_KYC" ? (
                             <div style={{ display: "flex", gap: "6px" }}>
                               <button
+                                className="btn-secondary"
+                                style={{ padding: "6px 10px", fontSize: "11.5px" }}
+                                onClick={() => setSelectedDriverForKyc(d)}
+                              >
+                                <Eye size={12} /> Dokumen
+                              </button>
+                              <button
                                 className="btn-primary"
                                 style={{ padding: "6px 10px", fontSize: "11.5px", background: "#10b981" }}
                                 onClick={() => handleApproveDriver(d.id)}
                               >
-                                Loloskan KYC ✅
+                                Loloskan ✅
                               </button>
                               <button
                                 className="btn-secondary"
@@ -1410,7 +1463,7 @@ export default function AdminPortal() {
                     Kelola data merchant kuliner dan mitra kesehatan, persentase komisi, dan rekening pencairan.
                   </p>
                 </div>
-                <button className="btn-primary" onClick={() => showToast("Form tambah merchant baru dibuka.")}>
+                <button className="btn-primary" onClick={() => setIsMerchantModalOpen(true)}>
                   <Plus size={16} /> Tambah Mitra Merchant
                 </button>
               </div>
@@ -1860,6 +1913,165 @@ export default function AdminPortal() {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* MODAL 1: TAMBAH MITRA MERCHANT */}
+          {isMerchantModalOpen && (
+            <div className="modal-overlay" onClick={() => setIsMerchantModalOpen(false)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                  <h3 className="modal-title">➕ Tambah Mitra Merchant & Katalog Baru</h3>
+                  <button className="action-btn" onClick={() => setIsMerchantModalOpen(false)}>
+                    <X size={18} />
+                  </button>
+                </div>
+                <form onSubmit={handleCreateMerchantSubmit}>
+                  <div className="form-group">
+                    <label className="form-label">Nama Usaha / Toko / Resto</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="Contoh: Bebek Goreng Madura Bu Siti"
+                      value={newMerchantForm.storeName}
+                      onChange={(e) => setNewMerchantForm({ ...newMerchantForm, storeName: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Nama Pemilik / Penanggung Jawab</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="Contoh: Ibu Siti Hajar"
+                      value={newMerchantForm.ownerName}
+                      onChange={(e) => setNewMerchantForm({ ...newMerchantForm, ownerName: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                    <div className="form-group">
+                      <label className="form-label">Kategori Layanan</label>
+                      <select
+                        className="form-select"
+                        value={newMerchantForm.category}
+                        onChange={(e) => setNewMerchantForm({ ...newMerchantForm, category: e.target.value })}
+                      >
+                        <option value="Food & Fresh Sembako">Food & Fresh Sembako</option>
+                        <option value="Mitra Sehat & Apotek">Mitra Sehat & Apotek</option>
+                        <option value="Mitra Mart & Ritel">Mitra Mart & Ritel</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">Kabupaten / Kota Wilayah</label>
+                      <input
+                        type="text"
+                        className="form-input"
+                        placeholder="Contoh: Jakarta Selatan"
+                        value={newMerchantForm.kabupaten}
+                        onChange={(e) => setNewMerchantForm({ ...newMerchantForm, kabupaten: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", background: "rgba(37, 99, 235, 0.08)", padding: "12px", borderRadius: "8px", border: "1px dashed rgba(37, 99, 235, 0.3)" }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" style={{ color: "#38bdf8" }}>Rerata Harga Dasar Produk (Rp)</label>
+                      <input
+                        type="number"
+                        className="form-input"
+                        placeholder="20000"
+                        value={newMerchantForm.basePriceAvg}
+                        onChange={(e) => setNewMerchantForm({ ...newMerchantForm, basePriceAvg: Number(e.target.value) })}
+                      />
+                      <span style={{ fontSize: "10.5px", color: "var(--text-muted)" }}>*Rata-rata harga per item katalog</span>
+                    </div>
+
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" style={{ color: "#60a5fa" }}>Markup Platform BISPIRA (%)</label>
+                      <input
+                        type="number"
+                        className="form-input"
+                        placeholder="10"
+                        value={newMerchantForm.markupPercent}
+                        onChange={(e) => setNewMerchantForm({ ...newMerchantForm, markupPercent: Number(e.target.value) })}
+                      />
+                      <span style={{ fontSize: "10.5px", color: "var(--text-muted)" }}>*Ditambahkan ke harga konsumen</span>
+                    </div>
+                  </div>
+
+                  <div className="modal-footer">
+                    <button type="button" className="btn-secondary" onClick={() => setIsMerchantModalOpen(false)}>
+                      Batal
+                    </button>
+                    <button type="submit" className="btn-primary" style={{ background: "#10b981" }}>
+                      <Check size={16} /> Simpan & Daftarkan Merchant
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* MODAL 2: DETAIL KYC & VERIFIKASI DOKUMEN DRIVER */}
+          {selectedDriverForKyc && (
+            <div className="modal-overlay" onClick={() => setSelectedDriverForKyc(null)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                  <div>
+                    <h3 className="modal-title">📄 Verifikasi Berkas KYC Driver #{selectedDriverForKyc.id}</h3>
+                    <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>{selectedDriverForKyc.name} • {selectedDriverForKyc.phone}</p>
+                  </div>
+                  <button className="action-btn" onClick={() => setSelectedDriverForKyc(null)}>
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginBottom: "20px" }}>
+                  <div style={{ background: "var(--bg-card-header)", padding: "14px", borderRadius: "10px", border: "1px solid var(--border-subtle)" }}>
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#38bdf8" }}>KARTU TANDA PENDUDUK (KTP)</div>
+                    <div style={{ fontSize: "14px", fontWeight: "800", marginTop: "4px" }}>NIK: 337405407050003</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>Status: Terverifikasi Dukcapil ✅</div>
+                  </div>
+
+                  <div style={{ background: "var(--bg-card-header)", padding: "14px", borderRadius: "10px", border: "1px solid var(--border-subtle)" }}>
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#38bdf8" }}>SURAT IZIN MENGEMUDI (SIM C/A)</div>
+                    <div style={{ fontSize: "14px", fontWeight: "800", marginTop: "4px" }}>No: {selectedDriverForKyc.sim || "1234-5678-9011"}</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>Masa Berlaku: Aktif s/d 2028 ✅</div>
+                  </div>
+
+                  <div style={{ background: "var(--bg-card-header)", padding: "14px", borderRadius: "10px", border: "1px solid var(--border-subtle)" }}>
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#f59e0b" }}>SURAT TANDA NOMOR KENDARAAN (STNK)</div>
+                    <div style={{ fontSize: "14px", fontWeight: "800", marginTop: "4px" }}>Plat: {selectedDriverForKyc.plate}</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>Pajak Tahunan: Lunas ✅</div>
+                  </div>
+
+                  <div style={{ background: "var(--bg-card-header)", padding: "14px", borderRadius: "10px", border: "1px solid var(--border-subtle)" }}>
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#10b981" }}>SURAT KETERANGAN CATATAN KEPOLISIAN (SKCK)</div>
+                    <div style={{ fontSize: "14px", fontWeight: "800", marginTop: "4px" }}>Status: Bersih / Tanpa Catatan</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>Polda/Polres: Terverifikasi Sah ✅</div>
+                  </div>
+                </div>
+
+                <div className="modal-footer">
+                  <button className="btn-secondary" onClick={() => setSelectedDriverForKyc(null)}>
+                    Tutup
+                  </button>
+                  <button
+                    className="btn-primary"
+                    style={{ background: "#10b981" }}
+                    onClick={() => {
+                      handleApproveDriver(selectedDriverForKyc.id);
+                      setSelectedDriverForKyc(null);
+                    }}
+                  >
+                    <Check size={16} /> Loloskan & Aktifkan Akun Driver
+                  </button>
+                </div>
               </div>
             </div>
           )}
