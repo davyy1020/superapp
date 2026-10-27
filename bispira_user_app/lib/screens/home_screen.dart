@@ -549,20 +549,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 4,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.78,
+                childAspectRatio: 0.76,
                 children: [
-                  SoftNeoServiceTile(emoji: '🛵', label: 'RIDE', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('ride')),
-                  SoftNeoServiceTile(emoji: '🚗', label: 'CAR', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('ride')),
-                  SoftNeoServiceTile(emoji: '🍔', label: 'FOOD', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('food')),
-                  SoftNeoServiceTile(emoji: '📦', label: 'SEND', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('send')),
-                  SoftNeoServiceTile(emoji: '🏥', label: 'HEALTH', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('health')),
-                  SoftNeoServiceTile(emoji: '🎓', label: 'EXPERT', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('jasa')),
-                  SoftNeoServiceTile(emoji: '🎟️', label: 'TICKET', color: NeoColors.brandSoft, onTap: () => widget.onNavigateTab(1)),
-                  SoftNeoServiceTile(emoji: '🏢', label: 'KOST', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('kost')),
-                  SoftNeoServiceTile(emoji: '🤝', label: 'DONATION', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('donasi')),
-                  SoftNeoServiceTile(emoji: '🗳️', label: 'VOTE', color: NeoColors.goldSoft, onTap: () => widget.onNavigateTab(2)),
-                  SoftNeoServiceTile(emoji: '⚡', label: 'EVENT', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('eo')),
-                  SoftNeoServiceTile(emoji: '💵', label: 'TAX', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('tax')),
+                  SoftNeoServiceTile(emoji: '🍔', label: '1. FOOD', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('food')),
+                  SoftNeoServiceTile(emoji: '🎓', label: '2. AHLI', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('jasa')),
+                  SoftNeoServiceTile(emoji: '🏥', label: '3. SEHAT', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('health')),
+                  SoftNeoServiceTile(emoji: '🛵', label: '4. DRIVER', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('ride')),
+                  SoftNeoServiceTile(emoji: '🎟️', label: '5. TIKET', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('tickets')),
+                  SoftNeoServiceTile(emoji: '🏢', label: '6. KOST', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('kost')),
+                  SoftNeoServiceTile(emoji: '📢', label: '7. ADS', color: NeoColors.brandSoft, onTap: () => _showAdsModal(context)),
+                  SoftNeoServiceTile(emoji: '🤝', label: '8. DONASI', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('donasi')),
+                  SoftNeoServiceTile(emoji: '📍', label: '9. VOTE CBG', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('evoting_cabang')),
+                  SoftNeoServiceTile(emoji: '🗳️', label: '10. VOTE PST', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('evoting_pusat')),
+                  SoftNeoServiceTile(emoji: '⚡', label: '11. EO CBG', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('eo_cabang')),
+                  SoftNeoServiceTile(emoji: '🏆', label: '12. EO PST', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('eo_pusat')),
                 ],
               ),
               const SizedBox(height: 24),
@@ -811,4 +811,135 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  void _showAdsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        return Container(
+          padding: const EdgeInsets.all(22),
+          decoration: const BoxDecoration(
+            color: NeoColors.surface,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+            border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Mitra Ads (Sistem Iklan Mandiri) 📢',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(ctx),
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(color: NeoColors.brandSoft, shape: BoxShape.circle),
+                      child: const Icon(Icons.close, size: 18, color: NeoColors.black),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+
+              // Feature 1: Brand Awareness
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: NeoColors.brandSoft,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: NeoColors.black, width: 1.5),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('👑', style: TextStyle(fontSize: 22)),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('1. Brand Awareness', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                          SizedBox(height: 3),
+                          Text(
+                            'Menampilkan profil & brand mitra terverifikasi sesuai kategori produk di papan atas (Top Hero) secara bergantian otomatis.',
+                            style: TextStyle(fontSize: 11, color: NeoColors.black, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Feature 2: Banner Produk & Harga
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: NeoColors.goldSoft,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: NeoColors.black, width: 1.5),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('🏷️', style: TextStyle(fontSize: 22)),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('2. Banner Produk & Harga', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                          SizedBox(height: 3),
+                          Text(
+                            'Spanduk utama (top tier banner) menampilkan foto produk + harga diskon, berputar otomatis (auto-scroll) setiap User membuka aplikasi.',
+                            style: TextStyle(fontSize: 11, color: NeoColors.black, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 18),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Banner Iklan Mandiri Anda Berhasil Diaktifkan di Top Carousel!'),
+                        backgroundColor: NeoColors.brand,
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: NeoColors.brand,
+                    foregroundColor: NeoColors.white,
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      side: const BorderSide(color: NeoColors.black, width: 2),
+                    ),
+                  ),
+                  child: const Text('Pasang Iklan Produk Sekarang 🚀', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
+

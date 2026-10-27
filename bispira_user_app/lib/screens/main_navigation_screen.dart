@@ -16,6 +16,7 @@ import 'tax_screen.dart';
 import 'tickets_screen.dart';
 import 'profile_screen.dart';
 import 'login_screen.dart';
+import 'eo_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({Key? key}) : super(key: key);
@@ -53,12 +54,18 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       bodyContent = HealthScreen(onBackPressed: () => setState(() => _activeSubService = null));
     } else if (_activeSubService == 'jasa' || _activeSubService == 'expert') {
       bodyContent = ExpertScreen(onBackPressed: () => setState(() => _activeSubService = null));
+    } else if (_activeSubService == 'tickets') {
+      bodyContent = TicketsScreen(onBackPressed: () => setState(() => _activeSubService = null));
     } else if (_activeSubService == 'kost') {
       bodyContent = KostScreen(onBackPressed: () => setState(() => _activeSubService = null));
     } else if (_activeSubService == 'donation' || _activeSubService == 'donasi') {
       bodyContent = DonationScreen(onBackPressed: () => setState(() => _activeSubService = null));
-    } else if (_activeSubService == 'vote' || _activeSubService == 'evoting') {
+    } else if (_activeSubService == 'vote' || _activeSubService == 'evoting' || _activeSubService == 'evoting_cabang' || _activeSubService == 'evoting_pusat') {
       bodyContent = EVotingScreen(onBackPressed: () => setState(() => _activeSubService = null));
+    } else if (_activeSubService == 'eo' || _activeSubService == 'eo_cabang') {
+      bodyContent = EOScreen(onBackPressed: () => setState(() => _activeSubService = null), initialIsPusat: false);
+    } else if (_activeSubService == 'eo_pusat') {
+      bodyContent = EOScreen(onBackPressed: () => setState(() => _activeSubService = null), initialIsPusat: true);
     } else if (_activeSubService == 'tax' || _activeSubService == 'pajak') {
       bodyContent = TaxScreen(onBackPressed: () => setState(() => _activeSubService = null));
     } else if (_activeSubService == 'mart' || _activeSubService == 'belanja') {
