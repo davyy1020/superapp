@@ -1995,3 +1995,553 @@ body.multi-window-mode #explanation-portal {
     }
 }
 
+/* ==========================================================================
+   EXPLANATION TABS & PORTAL UPGRADES
+   ========================================================================== */
+
+.explanation-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.explanation-tab-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.explanation-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.explanation-tab-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}
+
+.explanation-tab-content {
+    display: none;
+    animation: tabFade 0.3s ease-in-out forwards;
+}
+
+.explanation-tab-content.active {
+    display: block;
+}
+
+@keyframes tabFade {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RAB Table Styles */
+.rab-table-wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow-x: auto;
+    margin-top: 8px;
+}
+
+.rab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+}
+
+.rab-table th, .rab-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rab-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rab-table td {
+    color: var(--text-main);
+}
+
+.rab-table tr:hover td {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.rab-table tr:last-child td {
+    border-bottom: none;
+}
+
+.rab-table tr.total-row {
+    background: rgba(99, 102, 241, 0.08);
+    font-weight: 700;
+}
+
+.rab-table tr.total-row td {
+    color: #ffffff;
+    border-top: 2px solid var(--color-primary);
+}
+
+/* VPS Infrastructure Grid Styles */
+.infra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.vps-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    height: 100%;
+}
+
+.vps-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.vps-card.popular {
+    border-color: var(--color-success);
+    background: rgba(16, 185, 129, 0.02);
+    position: relative;
+}
+
+.vps-card.popular::before {
+    content: 'RECOMMENDED';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--color-success);
+    color: #0c0f17;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.vps-header {
+    margin-bottom: 12px;
+}
+
+.vps-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.vps-provider {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.vps-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.vps-price.success {
+    color: var(--color-success);
+}
+
+.vps-specs {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 0;
+}
+
+.vps-specs li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vps-specs li strong {
+    color: #ffffff;
+}
+
+.vps-pros-cons {
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.vps-pro { color: var(--color-success); }
+.vps-con { color: var(--color-warning); }
+
+/* BISPIRA SUPERAPP USER MULTI-SERVICES UI STYLES */
+.services-grid.multi-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.armada-selector {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.armada-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.armada-btn.active, .armada-btn:hover {
+    background: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.pill-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.pill-badge.active {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+.ad-tag-badge {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: rgba(99, 102, 241, 0.3);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.vote-pkg-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 6px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.vote-pkg-btn.active {
+    background: #f59e0b;
+    color: #000;
+    border-color: #f59e0b;
+}
+
+.promo-banner-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.promo-banner.hidden-slide {
+    display: none;
+}
+
+.promo-banner.active-slide {
+    display: flex;
+    animation: fadeInSlide 0.4s ease-in-out;
+}
+
+@keyframes fadeInSlide {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.phone-bottom-nav {
+    height: 52px;
+    background: #FFFFFF;
+    border-top: 3.5px solid #000000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    z-index: 90;
+}
+
+.nav-tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #52525B;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-tab-item small {
+    font-size: 9px;
+    margin-top: 2px;
+    font-weight: 800;
+}
+
+.nav-tab-item.active, .nav-tab-item:hover {
+    color: #000000;
+    font-weight: 900;
+}
+
+/* CUTE & VIBRANT LIGHT MODE NEO-BRUTALISM UI DESIGN SYSTEM (FLUTTER & WEB SIMULATOR) */
+.neo-brutal-card {
+    background: #FFFFFF;
+    color: #000000;
+    border: 3.5px solid #000000 !important;
+    border-radius: 18px !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    transition: all 0.15s ease-in-out;
+}
+
+.neo-brutal-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0px #000000 !important;
+}
+
+.neo-brutal-btn {
+    border: 3.5px solid #000000 !important;
+    border-radius: 14px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.neo-brutal-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000 !important;
+}
+
+.neo-badge-tag {
+    border: 2.5px solid #000000 !important;
+    border-radius: 20px !important;
+    font-weight: 900 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+}
+
+/* Exact Figma Neo-Brutalism Swatches (#7DF9FF, #2FFF2F, #FF00F5, #3300FF, #FFFF00, #FF4911) */
+.bg-neo-yellow   { background-color: #FFFF00 !important; color: #000000 !important; }
+.bg-neo-cyan     { background-color: #7DF9FF !important; color: #000000 !important; }
+.bg-neo-green    { background-color: #2FFF2F !important; color: #000000 !important; }
+.bg-neo-pink     { background-color: #FF00F5 !important; color: #FFFFFF !important; }
+.bg-neo-blue     { background-color: #3300FF !important; color: #FFFFFF !important; }
+.bg-neo-orange   { background-color: #FF4911 !important; color: #FFFFFF !important; }
+.bg-neo-mint     { background-color: #2FFF2F !important; color: #000000 !important; }
+.bg-neo-sky      { background-color: #7DF9FF !important; color: #000000 !important; }
+.phone-frame, .phone-screen, .phone-view, .phone-body {
+    background-color: #FFFDF0 !important;
+    color: #000000 !important;
+}
+
+.user-profile-header, .user-greeting {
+    color: #000000 !important;
+}
+
+/* Neo-Brutalism Desktop Window Suite for Bispira Desktop Admin (Matching Mobile Theme) */
+.desktop-window-frame {
+    border: 4px solid #000000 !important;
+    border-radius: 20px !important;
+    background: #FFFDF0 !important;
+    box-shadow: 10px 10px 0px #000000 !important;
+    color: #000000 !important;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.desktop-titlebar {
+    background: #FFFF00 !important;
+    border-bottom: 3.5px solid #000000 !important;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    color: #000000 !important;
+    font-weight: 900;
+}
+
+.desktop-title-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #000000 !important;
+}
+
+.desktop-window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.window-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #000000;
+    display: inline-block;
+}
+
+.window-dot.close { background: #FF4911; }
+.window-dot.minimize { background: #FFFF00; }
+.window-dot.maximize { background: #2FFF2F; }
+
+/* Neo-Brutal Cards inside Desktop Admin */
+.desktop-window-frame .panel-card,
+.desktop-window-frame .stat-card {
+    background: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 16px !important;
+    color: #000000 !important;
+}
+
+.desktop-window-frame .stat-title,
+.desktop-window-frame .stat-footer,
+.desktop-window-frame .panel-header h3,
+.desktop-window-frame .panel-header h4,
+.desktop-window-frame label {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+.desktop-window-frame .stat-value {
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+.desktop-window-frame .form-control {
+    background: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    border-radius: 10px !important;
+}
+
+.desktop-window-frame .input-prefix-group .prefix,
+.desktop-window-frame .input-suffix-group .suffix {
+    background: #FFFF00 !important;
+    border: 3px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+.verif-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.verif-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    text-align: left;
+    border: 3.5px solid #000000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+.verif-table th {
+    background: #7DF9FF !important;
+    color: #000000 !important;
+    padding: 14px;
+    border-bottom: 3.5px solid #000000;
+    border-right: 2.5px solid #000000;
+    font-weight: 900;
+}
+
+.verif-table th:last-child {
+    border-right: none;
+}
+
+.verif-table td {
+    padding: 12px;
+    border-bottom: 2.5px solid #000000;
+    border-right: 2.5px solid #000000;
+    color: #000000 !important;
+    background: #FFFFFF !important;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.verif-table td:last-child {
+    border-right: none;
+}
+
+.verif-table tr:last-child td {
+    border-bottom: none;
+}
+
+.badge-timer {
+    background: #FFFF00 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-weight: 900;
+}
+

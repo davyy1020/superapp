@@ -18,11 +18,23 @@ let state = {
     isDriverOnline: true,
     isDriverSuspended: false,
     
-    // Configurations (Editable by Admin)
+    // Enhanced Business & Payment Configurations (Editable via Desktop Admin)
     tariffPerKm: 2500,
     minFare: 8000,
-    serviceFee: 2000,
-    platformCommission: 20, // 20%
+    appFee: 1000,           // Biaya Aplikasi
+    serviceFee: 2000,       // Biaya Layanan
+    markupPercent: 10,      // Biaya Markup (%)
+    disbursementFee: 1000,   // Biaya Pencairan ke Penjual
+    driverChargeFee: 500,   // Charge Driver per Transaksi (Rp 500)
+    ambulanceAntarFee: 150000, // Biaya Antar Ambulance
+    ambulanceAngkutFee: 50000, // Biaya Angkut Pasien Ambulance
+    profitShareCabang: 30,  // Profit Share Cabang Wilayah (%)
+    uniqueCodeDuration: 30, // Masa Berlaku Kode Unik (Menit)
+    platformCommission: 20, // 20% Komisi
+    
+    // Settlement & Reconciliation Tracking
+    sellerAccumulatedFunds: 450000, // Akumulasi dana penjual (maks 2 hari)
+    pendingPaymentsCount: 1,
     
     // Active orders states
     activeOrder: null, // Stores current order metadata
@@ -316,21 +328,109 @@ function formatIDR(value) {
     }).format(value);
 }
 
-// --- ADMIN FORM HANDLING ---
+// --- DESKTOP ADMIN FORM & FINANCIAL RECONCILIATION ENGINE ---
 function saveTariffSettings(e) {
     e.preventDefault();
-    state.tariffPerKm = Number(document.getElementById("cfg-tariff-per-km").value);
-    state.minFare = Number(document.getElementById("cfg-min-fare").value);
-    state.serviceFee = Number(document.getElementById("cfg-service-fee").value);
-    state.platformCommission = Number(document.getElementById("cfg-platform-commission").value);
+    state.tariffPerKm = Number(document.getElementById("cfg-tariff-per-km").value) || 2500;
+    state.minFare = Number(document.getElementById("cfg-min-fare").value) || 8000;
+    state.appFee = Number(document.getElementById("cfg-app-fee").value) || 1000;
+    state.serviceFee = Number(document.getElementById("cfg-service-fee").value) || 2000;
+    state.markupPercent = Number(document.getElementById("cfg-markup-percent").value) || 10;
+    state.disbursementFee = Number(document.getElementById("cfg-disbursement-fee").value) || 1000;
+    state.driverChargeFee = Number(document.getElementById("cfg-driver-charge").value) || 500;
+    state.ambulanceAntarFee = Number(document.getElementById("cfg-amb-antar").value) || 150000;
+    state.ambulanceAngkutFee = Number(document.getElementById("cfg-amb-angkut").value) || 50000;
+    state.profitShareCabang = Number(document.getElementById("cfg-profit-cabang").value) || 30;
+    state.uniqueCodeDuration = Number(document.getElementById("cfg-unique-code-timer").value) || 30;
     
-    logToSystem(`Tarif diperbarui: Tarif/KM=Rp${state.tariffPerKm}, Min=Rp${state.minFare}, Biaya Layanan=Rp${state.serviceFee}, Komisi=${state.platformCommission}%`, "success");
+    document.getElementById("settlement-fee-display").innerText = `Rp ${formatIDR(state.disbursementFee).replace('Rp ', '')} / seller`;
+
+    logToSystem(`[DESKTOP ADMIN] Parameter disimpam: Tarif/KM=Rp${state.tariffPerKm}, AppFee=Rp${state.appFee}, ServiceFee=Rp${state.serviceFee}, Markup=${state.markupPercent}%, DisbursementFee=Rp${state.disbursementFee}, DriverCharge=Rp${state.driverChargeFee}, AmbulanceAntar=Rp${state.ambulanceAntarFee}, AmbulanceAngkut=Rp${state.ambulanceAngkutFee}, ProfitCabang=${state.profitShareCabang}%, TimerKode=${state.uniqueCodeDuration}m`, "success");
+    
     calculateRideFareSim();
     Swal.fire({
-        title: 'Konfigurasi Disimpan!',
-        text: 'Tarif layanan baru berhasil diperbarui.',
+        title: 'Konfigurasi Desktop Disimpan!',
+        text: 'Seluruh parameter biaya dan aturan finansial BISPIRA berhasil diperbarui.',
         icon: 'success',
-        confirmButtonColor: 'var(--color-indigo)'
+        confirmButtonColor: '#3b82f6'
+    });
+}
+
+// Verifikasi Manual Pembayaran oleh Tim BISPIRA (Tanpa Upload Bukti Bayar)
+function confirmManualPayment(txId) {
+    const row = document.getElementById(`pay-row-${txId.toLowerCase().replace('#', '')}`);
+    if (row) {
+        row.style.background = "rgba(16, 185, 129, 0.2)";
+        row.innerHTML = `
+            <td><strong>#${txId}</strong></td>
+            <td>Davy Wahyu</td>
+            <td>Go-Food (Ayam Geprek)</td>
+            <td><span class="badge" style="background:#10b981; color:#ffffff;">TERVERIFIKASI MUTASI BANK</span></td>
+            <td style="color:#2fff2f; font-weight:bold;">Rp 22.923</td>
+            <td><span class="badge badge-success">LUNAS</span></td>
+            <td><span style="color:#10b981; font-weight:bold; font-size:12px;">✅ Dikonfirmasi Tim BISPIRA</span></td>
+        `;
+    }
+    
+    // Potong Charge Driver Rp 500
+    state.driverWallet = Math.max(0, state.driverWallet - state.driverChargeFee);
+    document.getElementById("driver-wallet-balance").innerText = formatIDR(state.driverWallet);
+    
+    // Akumulasi Saldo Penjual (Harga Dasar Rp 18.000)
+    state.sellerAccumulatedFunds += 18000;
+    document.getElementById("settlement-accumulated").innerText = formatIDR(state.sellerAccumulatedFunds);
+    
+    state.pendingPaymentsCount = 0;
+    document.getElementById("pending-pay-count").innerText = "0 Menunggu Mutasi";
+    document.getElementById("pending-pay-count").className = "badge badge-success";
+    
+    logToSystem(`[DESKTOP ADMIN RECONCILIATION] Pembayaran #${txId} sebesar Rp 22.923 TERVERIFIKASI MANUAL oleh Tim BISPIRA via Mutasi Bank BNI. Driver tercharge Rp ${state.driverChargeFee}. Saldo dasar penjual (+Rp 18.000) diakumulasi untuk batch 17:00 WIB.`, "success");
+    
+    Swal.fire({
+        title: 'Verifikasi Berhasil!',
+        text: `Transaksi #${txId} dikonfirmasi LUNAS dari mutasi bank. Charge Driver Rp ${state.driverChargeFee} dipotong. Saldo penjual diakumulasi.`,
+        icon: 'success',
+        confirmButtonColor: 'var(--color-success)'
+    });
+}
+
+function refreshUniqueCode(txId) {
+    const newCode = Math.floor(100 + Math.random() * 899);
+    logToSystem(`[DESKTOP ADMIN] Kode Unik transaksi #${txId} diperbarui menjadi +${newCode}. Timer 30 menit direset.`, "info");
+    Swal.fire({
+        title: 'Kode Unik Diperbarui!',
+        text: `Kode Unik baru (+${newCode}) berhasil diterbitkan dengan masa berlaku ${state.uniqueCodeDuration} menit.`,
+        icon: 'info',
+        confirmButtonColor: '#3b82f6'
+    });
+}
+
+// Batch Settlement Penjual Pukul 17:00 WIB
+function triggerBatchPayout1700() {
+    if (state.sellerAccumulatedFunds <= 0) {
+        Swal.fire('Tidak Ada Saldo Penjual', 'Belum ada akumulasi transaksi yang perlu dicairkan.', 'info');
+        return;
+    }
+    
+    const gross = state.sellerAccumulatedFunds;
+    const fee = state.disbursementFee;
+    const net = gross - fee;
+    
+    state.sellerAccumulatedFunds = 0;
+    document.getElementById("settlement-accumulated").innerText = "Rp 0";
+    
+    logToSystem(`[BATCH PAYOUT 17:00 WIB] Transfer massal selesai! Total Akumulasi Penjual: ${formatIDR(gross)}. Dipotong Biaya Pencairan: ${formatIDR(fee)}. Transfer Netto ke Penjual: ${formatIDR(net)}. Status: SUKSES.`, "success");
+    
+    Swal.fire({
+        title: 'Batch Payout 17:00 WIB Sukses!',
+        html: `<p>Transfer massal harian ke rekening penjual/mitra selesai diproses:</p>
+               <ul style="text-align:left; margin-top:8px; font-size:13px;">
+                 <li>Total Akumulasi: <b>${formatIDR(gross)}</b></li>
+                 <li>Potongan Biaya Pencairan: <b style="color:red;">-${formatIDR(fee)}</b></li>
+                 <li>Netto Ditransfer ke Penjual: <b style="color:green;">${formatIDR(net)}</b></li>
+               </ul>`,
+        icon: 'success',
+        confirmButtonColor: '#10b981'
     });
 }
 
@@ -1937,5 +2037,432 @@ function toggleSidebar() {
         overlay.classList.toggle("active");
     }
 }
+
+// --- EXPLANATION TAB NAVIGATION ---
+function switchExplanationTab(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll(".explanation-tab-content").forEach(el => {
+        el.classList.remove("active");
+    });
+    // Remove active class from all tab buttons
+    document.querySelectorAll(".explanation-tab-btn").forEach(el => {
+        el.classList.remove("active");
+    });
+    // Show target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.add("active");
+    }
+    // Set active class on the clicked button
+    const btn = Array.from(document.querySelectorAll(".explanation-tab-btn")).find(b => {
+        return b.getAttribute("onclick").includes(tabId);
+    });
+    if (btn) {
+        btn.classList.add("active");
+    }
+}
+
+// --- BISPIRA SUPERAPP USER MULTI-SERVICES JS ENGINE ---
+function openUserView(viewId) {
+    document.querySelectorAll(".phone-frame .phone-view").forEach(view => {
+        view.classList.remove("active");
+    });
+    const target = document.getElementById(viewId);
+    if (target) {
+        target.classList.add("active");
+    }
+
+    // Update bottom nav highlight
+    document.querySelectorAll(".nav-tab-item").forEach(item => item.classList.remove("active"));
+    if (viewId === 'user-home-view') {
+        document.querySelectorAll(".nav-tab-item")[0]?.classList.add("active");
+    } else if (viewId === 'user-tickets-view') {
+        document.querySelectorAll(".nav-tab-item")[1]?.classList.add("active");
+    } else if (viewId === 'user-evoting-view') {
+        document.querySelectorAll(".nav-tab-item")[2]?.classList.add("active");
+    } else if (viewId === 'user-chat-view') {
+        document.querySelectorAll(".nav-tab-item")[3]?.classList.add("active");
+    } else if (viewId === 'user-profile-view') {
+        document.querySelectorAll(".nav-tab-item")[4]?.classList.add("active");
+    }
+}
+
+let selectedArmada = "motor";
+let selectedVotePackagePrice = 1000;
+let selectedVoteCount = 2;
+let candidateVotes = { 1: 1420, 2: 1180 };
+
+
+function selectArmadaType(type) {
+    selectedArmada = type;
+    document.querySelectorAll(".armada-btn").forEach(btn => btn.classList.remove("active"));
+    const activeBtn = document.getElementById(`btn-armada-${type}`);
+    if (activeBtn) activeBtn.classList.add("active");
+    calculateRideFareSim();
+}
+
+function selectVotePackage(price, votes) {
+    selectedVotePackagePrice = price;
+    selectedVoteCount = votes;
+    document.querySelectorAll(".vote-pkg-btn").forEach(btn => btn.classList.remove("active"));
+    if (event && event.target) event.target.classList.add("active");
+}
+
+function castVoteForCandidate(name, id) {
+    if (state.userWallet < selectedVotePackagePrice) {
+        Swal.fire({
+            title: "Saldo Tidak Cukup",
+            text: `Saldo Bank Digital Anda Rp${state.userWallet.toLocaleString('id-ID')} kurang untuk beli Paket Suara Rp${selectedVotePackagePrice.toLocaleString('id-ID')}.`,
+            icon: "warning",
+            confirmButtonColor: "#f59e0b"
+        });
+        return;
+    }
+
+    state.userWallet -= selectedVotePackagePrice;
+    candidateVotes[id] = (candidateVotes[id] || 0) + selectedVoteCount;
+    const voteElem = document.getElementById(`votes-kandidat-${id}`);
+    if (voteElem) voteElem.innerText = `${candidateVotes[id].toLocaleString('id-ID')} Suara`;
+
+    updateUIElements();
+    logToSystem(`E-Voting: Beli paket Rp${selectedVotePackagePrice} (${selectedVoteCount} Suara) untuk ${name}. Total suara: ${candidateVotes[id]}`, "success");
+
+    Swal.fire({
+        title: "Voting Berhasil! 🗳️",
+        html: `Anda memberikan <b>${selectedVoteCount} Suara</b> kepada <b>${name}</b>.<br>E-Tiket Voting tersimpan di dompet digital.`,
+        icon: "success",
+        confirmButtonColor: "#10b981"
+    });
+}
+
+function submitRatingStars(stars) {
+    const starText = [
+        "1 Bintang: Layanan sangat perlu ditingkatkan",
+        "2 Bintang: Layanan perlu ditingkatkan",
+        "3 Bintang: Layanan cukup memuaskan dan aman",
+        "4 Bintang: Layanan memuaskan dan aman",
+        "5 Bintang: Layanan sangat memuaskan dan aman"
+    ];
+
+    Swal.fire({
+        title: `Rating ${stars} ⭐`,
+        text: starText[stars - 1],
+        icon: "success",
+        confirmButtonColor: "var(--color-primary)"
+    });
+    logToSystem(`Penilaian Pelanggan: User memberikan ${stars} bintang. Catatan: ${starText[stars - 1]}`, "info");
+}
+
+function bookJasaExpert(serviceName) {
+    Swal.fire({
+        title: `Booking ${serviceName}`,
+        text: `Apakah Anda ingin mengonfirmasi pendaftaran layanan ${serviceName}?`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Pesan Jasa",
+        confirmButtonColor: "var(--color-primary)"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Berhasil", `Pemesanan ${serviceName} telah diteruskan ke Mitra Ahli. Kode E-Tiket diterbitkan!`, "success");
+            logToSystem(`Mitra Ahli: Booking ${serviceName} berhasil diterbitkan.`, "success");
+        }
+    });
+}
+
+function bookKostRoom(roomName) {
+    Swal.fire({
+        title: `Booking Kost & Space`,
+        text: `Konfirmasi sewa untuk ${roomName}?`,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Sewa Sekarang",
+        confirmButtonColor: "#ec4899"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Berhasil!", `E-Tiket Kunci Kamar & Bukti Pembayaran ${roomName} diterbitkan.`, "success");
+            logToSystem(`Kost & Space: Sewa ${roomName} berhasil.`, "success");
+        }
+    });
+}
+
+function bookMiceTicket(eventName) {
+    Swal.fire({
+        title: `E-Tiket MICE & Wisata`,
+        text: `Beli tiket acara ${eventName}?`,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Beli Tiket",
+        confirmButtonColor: "#0ea5e9"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Berhasil!", `E-Tiket QR Code ${eventName} dikirim ke aplikasi & Email Anda.`, "success");
+            logToSystem(`MICE: E-Tiket ${eventName} berhasil dibeli.`, "success");
+        }
+    });
+}
+
+function submitDonasiAction(programName) {
+    Swal.fire({
+        title: programName,
+        input: "number",
+        inputLabel: "Masukkan Nominal Donasi (Rp)",
+        inputValue: "25000",
+        showCancelButton: true,
+        confirmButtonText: "Kirim E-Donasi",
+        confirmButtonColor: "#22c55e"
+    }).then(res => {
+        if (res.isConfirmed && res.value) {
+            const nominal = parseInt(res.value);
+            if (state.userWallet >= nominal) {
+                state.userWallet -= nominal;
+                updateUIElements();
+                Swal.fire("Donasi Diterima", `Terima kasih! Donasi Rp${nominal.toLocaleString('id-ID')} berhasil disalurkan.`, "success");
+                logToSystem(`Mitra Donasi: Donasi Rp${nominal} untuk ${programName} tercatat.`, "success");
+            } else {
+                Swal.fire("Saldo Kurang", "Saldo dompet digital Anda tidak mencukupi.", "error");
+            }
+        }
+    });
+}
+
+function openDoctorChatModal() {
+    Swal.fire({
+        title: "Dokter Telemedis BISPIRA 🩺",
+        text: "Pilih mode layanan dokter:",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Chat Konsultasi Online",
+        cancelButtonText: "Janji Periksa Klinik"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Telemedis Aktif", "Sesi Chat Medis Online tersambung dengan dr. Ahmad Hidayat, Sp.PD.", "success");
+        } else {
+            Swal.fire("Booking Klinik", "Kunjungan klinik dijadwalkan besok jam 10:00 WIB.", "info");
+        }
+    });
+}
+
+// Auto-rotator for Mitra Ads Banner Carousel (Per 15 Detik / 0.25 Menit)
+let currentAdSlide = 1;
+setInterval(() => {
+    const slide1 = document.getElementById("ad-slide-1");
+    const slide2 = document.getElementById("ad-slide-2");
+    const slide3 = document.getElementById("ad-slide-3");
+
+    if (slide1 && slide2 && slide3) {
+        slide1.classList.remove("active-slide");
+        slide1.classList.add("hidden-slide");
+        slide2.classList.remove("active-slide");
+        slide2.classList.add("hidden-slide");
+        slide3.classList.remove("active-slide");
+        slide3.classList.add("hidden-slide");
+
+        currentAdSlide = (currentAdSlide % 3) + 1;
+        const activeSlide = document.getElementById(`ad-slide-${currentAdSlide}`);
+        if (activeSlide) {
+            activeSlide.classList.remove("hidden-slide");
+            activeSlide.classList.add("active-slide");
+        }
+    }
+}, 15000); // 15 seconds rotation
+
+function bookMitraAdsSlot() {
+    Swal.fire({
+        title: "Pasang Banner Ads Mitra 📣",
+        text: "Sewa slot banner iklan rotasi 15 detik di halaman beranda BISPIRA SuperApp. Tarif Rp 150.000 / Hari.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Sewa Slot Ads Sekarang",
+        confirmButtonColor: "#ef4444"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Pengajuan Diterima!", "Mitra Ads Anda akan ditinjau Admin dalam 1x24 jam.", "success");
+            logToSystem("Mitra Ads: Pengajuan slot iklan baru berhasil didaftarkan.", "info");
+        }
+    });
+}
+
+function bookEoEvent(eventName) {
+    Swal.fire({
+        title: `Pendaftaran ${eventName}`,
+        text: "Daftar sebagai peserta event BISPIRA EO?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Daftar Event",
+        confirmButtonColor: "#f59e0b"
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire("Pendaftaran Berhasil!", `E-Tiket Peserta ${eventName} telah terbit.`, "success");
+            logToSystem(`Bispira EO: Pendaftaran ${eventName} berhasil.`, "success");
+        }
+    });
+}
+
+function transferBankDigital() {
+    Swal.fire({
+        title: "Transfer Bank Digital Bispira ↗️",
+        html: `
+            <div style="text-align: left; font-size: 13px;">
+                <label>Nomor Rekening Tujuan:</label>
+                <input id="swal-input-rek" class="swal2-input" placeholder="8809-XXXX-XXXX" value="8809-9921-4412">
+                <label>Nominal Transfer (Rp):</label>
+                <input id="swal-input-nominal" type="number" class="swal2-input" placeholder="50000" value="25000">
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: "Kirim Uang (Gratis Biaya)",
+        confirmButtonColor: "#6366f1"
+    }).then(res => {
+        if (res.isConfirmed) {
+            const rek = document.getElementById("swal-input-rek").value;
+            const nom = parseInt(document.getElementById("swal-input-nominal").value || 0);
+
+            if (state.userWallet >= nom && nom > 0) {
+                state.userWallet -= nom;
+                updateUIElements();
+                Swal.fire("Transfer Sukses! 💸", `Transfer Rp${nom.toLocaleString('id-ID')} ke rek ${rek} BERHASIL (Gratis Biaya Transfer).`, "success");
+                logToSystem(`Bank Digital: Transfer Rp${nom} ke ${rek} berhasil.`, "success");
+            } else {
+                Swal.fire("Gagal", "Saldo Bank Digital Anda tidak mencukupi.", "error");
+            }
+        }
+    });
+}
+
+function openLiveChatDriver() {
+    Swal.fire({
+        title: "Live Chat Driver 🛵",
+        input: "text",
+        inputPlaceholder: "Tulis pesan untuk Budi Santoso...",
+        showCancelButton: true,
+        confirmButtonText: "Kirim Chat",
+        confirmButtonColor: "var(--color-primary)"
+    }).then(res => {
+        if (res.isConfirmed && res.value) {
+            Swal.fire("Pesan Terkirim", `Pesan "${res.value}" terkirim ke Driver.`, "success");
+            logToSystem(`Live Chat Driver: Pesan terkirim -> "${res.value}"`, "info");
+        }
+    });
+}
+
+function openLiveChatDokter() {
+    Swal.fire({
+        title: "Live Chat Telemedis 🩺",
+        input: "text",
+        inputPlaceholder: "Konsultasikan keluhan medis Anda...",
+        showCancelButton: true,
+        confirmButtonText: "Kirim Konsultasi",
+        confirmButtonColor: "#10b981"
+    }).then(res => {
+        if (res.isConfirmed && res.value) {
+            Swal.fire("Terima Kasih", `Dokter sedang meninjau pertanyaan: "${res.value}"`, "success");
+            logToSystem(`Telemedis Chat: Pertanyaan terkirim -> "${res.value}"`, "info");
+        }
+    });
+}
+
+// --- BISPIRA FOOD INTERACTIVE ENGINE ---
+let foodCart = [
+    { name: "Wagyu Cheese Burger Special", price: 85000, qty: 1, emoji: "🍔" },
+    { name: "Iced Uji Matcha Latte", price: 45000, qty: 1, emoji: "🍵" }
+];
+
+function addFoodToCart(name, price, emoji) {
+    const existing = foodCart.find(i => i.name === name);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        foodCart.push({ name, price, qty: 1, emoji });
+    }
+    updateFoodCartUI();
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: `${name} ditambahkan!`,
+            showConfirmButton: false,
+            timer: 1200
+        });
+    }
+}
+
+function updateFoodCartUI() {
+    const badgeEl = document.getElementById("cart-badge-count");
+    const priceEl = document.getElementById("cart-total-price");
+    
+    let totalQty = 0;
+    let totalPrice = 0;
+    
+    foodCart.forEach(item => {
+        totalQty += item.qty;
+        totalPrice += (item.price * item.qty);
+    });
+    
+    if (badgeEl) badgeEl.innerText = totalQty;
+    if (priceEl) priceEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+}
+
+function checkoutFoodOrderWeb() {
+    let subtotal = 0;
+    let itemsHtml = foodCart.map(i => {
+        subtotal += (i.price * i.qty);
+        return `<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>${i.qty}x ${i.emoji} ${i.name}</span><strong>Rp ${(i.price * i.qty).toLocaleString('id-ID')}</strong></div>`;
+    }).join('');
+    
+    const deliveryFee = 9000;
+    const serviceFee = 2000;
+    const grandTotal = subtotal + deliveryFee + serviceFee;
+
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: "🛒 Checkout BISPIRA Food",
+            html: `
+                <div style="text-align: left; font-size: 12px; color: #0f172a;">
+                    <div style="background: #e6f0ff; padding: 8px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>📍 Lokasi Pengantaran:</strong><br>Sudirman Central Business District (SCBD)
+                    </div>
+                    <strong>Rincian Pesanan:</strong>
+                    ${itemsHtml}
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 8px 0;">
+                    <div style="display:flex; justify-content:space-between;"><span>Ongkos Kirim:</span><span>Rp ${deliveryFee.toLocaleString('id-ID')}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Biaya Layanan:</span><span>Rp ${serviceFee.toLocaleString('id-ID')}</span></div>
+                    <div style="display:flex; justify-content:space-between; font-weight:900; font-size:14px; margin-top:8px; color:#0066ff;"><span>TOTAL BAYAR:</span><span>Rp ${grandTotal.toLocaleString('id-ID')}</span></div>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: "Bayar & Kirim Driver 🛵",
+            confirmButtonColor: "#0066ff"
+        }).then(res => {
+            if (res.isConfirmed) {
+                state.userWallet -= grandTotal;
+                updateUIElements();
+                Swal.fire("Pesanan Diterima! 🍔", "Driver BISPIRA sedang meluncur ke restoran untuk mengambil makanan Anda.", "success");
+                logToSystem(`BISPIRA Food: Order dibuat Rp${grandTotal} (Alamat SCBD). Driver ditugaskan.`, "success");
+            }
+        });
+    }
+}
+
+function filterFoodSearch(query) {
+    const rows = document.querySelectorAll('.food-item-row');
+    query = query.toLowerCase();
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? 'flex' : 'none';
+    });
+}
+
+function filterFoodCategory(cat, el) {
+    document.querySelectorAll('.category-pills .pill-badge').forEach(p => {
+        p.style.background = '#ffffff';
+        p.style.color = '#0f172a';
+    });
+    if (el) {
+        el.style.background = '#0f172a';
+        el.style.color = '#ffffff';
+    }
+}
+
 
 

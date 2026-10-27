@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bispiraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066FF"/>
+      <stop offset="100%" stop-color="#0044CC"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE033"/>
+      <stop offset="100%" stop-color="#FFB800"/>
+    </linearGradient>
+    <filter id="neoShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#0F172A"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer Rounded Container -->
+  <rect x="24" y="24" width="464" height="464" rx="110" fill="url(#goldGrad)" stroke="#0F172A" stroke-width="20" filter="url(#neoShadow)"/>
+  
+  <!-- Stylized Wing & Letter B Emblem -->
+  <path d="M140 120 H280 C340 120 380 150 380 195 C380 230 350 255 310 265 C360 275 390 305 390 350 C390 405 340 432 275 432 H140 V120 Z" fill="url(#bispiraGrad)" stroke="#0F172A" stroke-width="16"/>
+  
+  <!-- Inner Cutouts for B -->
+  <path d="M210 175 H265 C285 175 305 185 305 205 C305 225 285 235 265 235 H210 V175 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="10"/>
+  <path d="M210 300 H275 C300 300 315 312 315 335 C315 358 300 370 275 370 H210 V300 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="10"/>
+  
+  <!-- Lightning SuperApp Bolt Accent -->
+  <polygon points="350,80 290,230 360,230 270,440 330,280 260,280" fill="#FFB800" stroke="#0F172A" stroke-width="12" stroke-linejoin="round"/>
+</svg>

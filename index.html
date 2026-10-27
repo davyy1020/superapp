@@ -136,173 +136,296 @@
 
             <!-- SECTION 1: WEBSITE ADMIN -->
             <section id="admin-portal" class="portal-section active">
-                <header class="portal-header">
-                    <div>
-                        <h1>Website Admin Dashboard</h1>
-                        <p class="subtitle">Pusat kendali operasional, verifikasi, pengaturan tarif, dan monitoring
-                            realtime.</p>
+                <!-- Desktop Window Frame Container -->
+                <div class="desktop-window-frame">
+                    <!-- Desktop Titlebar -->
+                    <div class="desktop-titlebar">
+                        <div class="desktop-title-info">
+                            <span class="desktop-icon">💻</span>
+                            <span>Bispira Desktop Admin Suite v2.4 (Native Application - Windows / macOS / Linux)</span>
+                        </div>
+                        <div class="desktop-window-controls">
+                            <span class="window-dot minimize"></span>
+                            <span class="window-dot maximize"></span>
+                            <span class="window-dot close"></span>
+                        </div>
                     </div>
-                    <div class="admin-badge">Admin System</div>
-                </header>
 
-                <!-- Stats Grid -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Total User Aktif</span>
-                            <span class="stat-trend positive">+12.4%</span>
-                        </div>
-                        <div class="stat-value" id="admin-stat-users">12,450</div>
-                        <div class="stat-footer">Pelanggan terdaftar</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Driver Terverifikasi</span>
-                            <span class="stat-trend positive">+8.2%</span>
-                        </div>
-                        <div class="stat-value" id="admin-stat-drivers">1,840</div>
-                        <div class="stat-footer" id="admin-stat-drivers-online">245 Online saat ini</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Merchant Aktif</span>
-                            <span class="stat-trend positive">+5.1%</span>
-                        </div>
-                        <div class="stat-value" id="admin-stat-merchants">520</div>
-                        <div class="stat-footer">Food & Health</div>
-                    </div>
-                    <div class="stat-card premium-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Total Pendapatan (Platform)</span>
-                            <span class="stat-trend positive">+15.8%</span>
-                        </div>
-                        <div class="stat-value" id="admin-stat-revenue">Rp 48,250,000</div>
-                        <div class="stat-footer">Bulan ini (20% Komisi)</div>
-                    </div>
-                </div>
+                    <div style="padding: 20px;">
+                        <header class="portal-header" style="margin-bottom: 20px;">
+                            <div>
+                                <h1>BISPIRA Desktop Operational & Finance Center</h1>
+                                <p class="subtitle">Pusat kontrol operasional desktop, verifikasi manual mutasi bank (tanpa upload), batch payout 17:00 WIB, dan kustomisasi skema biaya.</p>
+                            </div>
+                            <div class="admin-badge" style="background: #3b82f6; color: #ffffff;">Desktop Native App</div>
+                        </header>
 
-                <div class="admin-layout-grid">
-                    <!-- Left: Live Tracking Map & Logs -->
-                    <div class="admin-main-panel">
-                        <div class="panel-card map-card">
+                        <!-- Stats Grid -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-title">Total User Terdaftar</span>
+                                    <span class="stat-trend positive">+12.4%</span>
+                                </div>
+                                <div class="stat-value" id="admin-stat-users">12,450</div>
+                                <div class="stat-footer">Pelanggan Aktif</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-title">Driver Terverifikasi</span>
+                                    <span class="stat-trend positive">+8.2%</span>
+                                </div>
+                                <div class="stat-value" id="admin-stat-drivers">1,840</div>
+                                <div class="stat-footer" id="admin-stat-drivers-online">245 Online (Rp500/tx charge)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <span class="stat-title">Merchant & Layanan</span>
+                                    <span class="stat-trend positive">+5.1%</span>
+                                </div>
+                                <div class="stat-value" id="admin-stat-merchants">520</div>
+                                <div class="stat-footer">Food, Health & Ambulance</div>
+                            </div>
+                            <div class="stat-card premium-card">
+                                <div class="stat-header">
+                                    <span class="stat-title">Revenue & Netto Platform</span>
+                                    <span class="stat-trend positive">+15.8%</span>
+                                </div>
+                                <div class="stat-value" id="admin-stat-revenue">Rp 48,250,000</div>
+                                <div class="stat-footer">Termasuk Markup & Admin Fee</div>
+                            </div>
+                        </div>
+
+                        <!-- Panel 1: Manual Payment Reconciliation Queue (Tanpa Upload Bukti) -->
+                        <div class="panel-card mb-4 mt-4">
                             <div class="panel-header">
-                                <h3>Peta Live Tracking Driver & Pesanan</h3>
-                                <span class="badge badge-pulse">Realtime OSRM Simulation</span>
+                                <div>
+                                    <h3>🔍 Verifikasi Manual Mutasi Bank (Tanpa Upload Bukti Bayar)</h3>
+                                    <p style="font-size: 12px; color: var(--text-muted);">Pencocokan manual oleh Tim BISPIRA berdasarkan nominal & Kode Unik 3-Digit di mutasi rekening bank BISPIRA.</p>
+                                </div>
+                                <span class="badge badge-warning" id="pending-pay-count">1 Menunggu Mutasi</span>
                             </div>
-                            <div class="map-container">
-                                <!-- Simulated Real OpenStreetMap via Leaflet -->
-                                <div id="leaflet-map"
-                                    style="width: 100%; height: 100%; min-height: 350px; border-radius: 12px; z-index: 1; border: 1px solid var(--border-color);">
-                                </div>
-
-                                <div class="map-overlay-info">
-                                    <div id="osrm-stats">
-                                        <span class="info-tag">OSRM Route</span>
-                                        <span id="osrm-distance">Jarak: - km</span>
-                                        <span id="osrm-duration">Waktu: - mnt</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- System Logs / Realtime events -->
-                        <div class="panel-card mt-4">
-                            <div class="panel-header">
-                                <h3>Log Aktivitas Sistem (Realtime)</h3>
-                                <button class="btn btn-sm btn-outline" onclick="clearLogs()">Hapus Log</button>
-                            </div>
-                            <div class="logs-container" id="admin-logs">
-                                <div class="log-row info">
-                                    <span class="log-time">[23:29:10]</span>
-                                    <span class="log-text">Sistem Go-Super berhasil diinisialisasi. Menghubungkan ke
-                                        database terpadu.</span>
-                                </div>
-                                <div class="log-row success">
-                                    <span class="log-time">[23:29:12]</span>
-                                    <span class="log-text">OSRM Routing Server terhubung di alamat lokal. Kalkulasi rute
-                                        siap digunakan.</span>
-                                </div>
-                                <div class="log-row success">
-                                    <span class="log-time">[23:29:15]</span>
-                                    <span class="log-text">Driver #001 (Budi) mengubah status menjadi ONLINE di
-                                        koordinat (-6.2088, 106.8456).</span>
-                                </div>
+                            <div class="verif-table-container">
+                                <table class="verif-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Transaksi</th>
+                                            <th>Pelanggan</th>
+                                            <th>Layanan</th>
+                                            <th>Rekening Tujuan BISPIRA</th>
+                                            <th>Total Transfer (+Kode Unik)</th>
+                                            <th>Masa Berlaku Kode (30m)</th>
+                                            <th>Aksi Verifikasi Admin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="manual-payment-table-body">
+                                        <tr id="pay-row-tx9901">
+                                            <td><strong>#TX-9901</strong></td>
+                                            <td>Davy Wahyu</td>
+                                            <td>Go-Food (Ayam Geprek)</td>
+                                            <td><span class="badge neo-badge-tag bg-neo-cyan">BNI 1888898006 (a/n BISPIRA)</span></td>
+                                            <td style="color:#000000; font-weight:900; font-size:15px;"><span class="badge neo-badge-tag bg-neo-green">Rp 22.923</span> <small style="color:#000000; font-weight:bold;">(Kode Unik: +123)</small></td>
+                                            <td><span class="badge-timer" id="timer-tx9901">29:45 mnt</span></td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm neo-brutal-btn bg-neo-green" onclick="confirmManualPayment('TX-9901')">✅ Konfirmasi Bayar (Lunas)</button>
+                                                <button class="btn btn-warning btn-sm neo-brutal-btn bg-neo-yellow" onclick="refreshUniqueCode('TX-9901')" title="Diperbarui jika hangus">🔄 Refresh Kode</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Right: Config, Driver Verification & Commision Settings -->
-                    <div class="admin-side-panel">
-                        <!-- Verification Panel -->
+                        <!-- Panel 2: Batch Settlement Penjual (Pukul 17:00 WIB) -->
                         <div class="panel-card mb-4">
                             <div class="panel-header">
-                                <h3>Verifikasi Driver Baru</h3>
-                                <span class="badge badge-warning" id="pending-driver-count">1 Pending</span>
-                            </div>
-                            <div class="verification-list">
-                                <div class="driver-verif-item" id="pending-driver-item">
-                                    <div class="driver-info">
-                                        <h4>Anto Wijaya</h4>
-                                        <p>Honda Vario - B 1234 ABC</p>
-                                    </div>
-                                    <div class="docs-preview">
-                                        <span class="doc-badge" title="KTP Terunggah">🪪 KTP</span>
-                                        <span class="doc-badge" title="SIM C Terunggah">💳 SIM</span>
-                                        <span class="doc-badge" title="STNK Terunggah">📄 STNK</span>
-                                        <span class="doc-badge" title="Foto Kendaraan Terunggah">🛵 Foto</span>
-                                    </div>
-                                    <div class="verif-actions mt-3">
-                                        <button class="btn btn-success btn-sm btn-half"
-                                            onclick="approveDriver()">Setujui</button>
-                                        <button class="btn btn-danger btn-sm btn-half"
-                                            onclick="rejectDriver()">Tolak</button>
-                                    </div>
+                                <div>
+                                    <h3>🏦 Pencairan Dana Penjual / Mitra (Batch Pukul 17:00 WIB)</h3>
+                                    <p style="font-size: 12px; color: #000000; font-weight: 600;">Hasil penjualan diakumulasi maks. 2 hari dan dicairkan setiap 17:00 WIB dipotong Biaya Pencairan.</p>
                                 </div>
-                                <div id="no-pending-drivers" class="no-data hidden">
-                                    Tidak ada driver menunggu verifikasi.
+                                <button class="btn btn-primary btn-sm neo-brutal-btn bg-neo-yellow" onclick="triggerBatchPayout1700()">⚡ Jalankan Batch Payout (17:00 WIB)</button>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 10px;">
+                                <div style="background: #FFFDF0; padding: 14px; border-radius: 12px; border: 3px solid #000000; box-shadow: 4px 4px 0px #000000;">
+                                    <span style="font-size: 12px; color: #000000; font-weight:800;">Saldo Akumulasi Penjual (Maks 2 Hari)</span>
+                                    <div style="font-size: 20px; font-weight: 900; color: #000000;" id="settlement-accumulated">Rp 450,000</div>
+                                </div>
+                                <div style="background: #FFFDF0; padding: 14px; border-radius: 12px; border: 3px solid #000000; box-shadow: 4px 4px 0px #000000;">
+                                    <span style="font-size: 12px; color: #000000; font-weight:800;">Potongan Biaya Pencairan (per Payout)</span>
+                                    <div style="font-size: 20px; font-weight: 900; color: #FF4911;" id="settlement-fee-display">Rp 1,000 / seller</div>
+                                </div>
+                                <div style="background: #FFFDF0; padding: 14px; border-radius: 12px; border: 3px solid #000000; box-shadow: 4px 4px 0px #000000;">
+                                    <span style="font-size: 12px; color: #000000; font-weight:800;">Jadwal Transfer Berikutnya</span>
+                                    <div style="font-size: 16px; font-weight: 900; color: #3300FF;">Hari ini, 17:00 WIB</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Tariff & Commision Configurations -->
-                        <div class="panel-card">
-                            <div class="panel-header">
-                                <h3>Pengaturan Tarif & Komisi</h3>
+                        <div class="admin-layout-grid">
+                            <!-- Left: Live Tracking Map & Logs -->
+                            <div class="admin-main-panel">
+                                <div class="panel-card map-card">
+                                    <div class="panel-header">
+                                        <h3>Peta Live Tracking Driver & Armada Desktop</h3>
+                                        <span class="badge neo-badge-tag bg-neo-cyan">Realtime OSRM GIS Engine</span>
+                                    </div>
+                                    <div class="map-container">
+                                        <div id="leaflet-map"
+                                            style="width: 100%; height: 100%; min-height: 350px; border-radius: 12px; z-index: 1; border: 3px solid #000000; box-shadow: 4px 4px 0px #000000;">
+                                        </div>
+                                        <div class="map-overlay-info">
+                                            <div id="osrm-stats">
+                                                <span class="info-tag">OSRM Route</span>
+                                                <span id="osrm-distance">Jarak: - km</span>
+                                                <span id="osrm-duration">Waktu: - mnt</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- System Logs -->
+                                <div class="panel-card mt-4">
+                                    <div class="panel-header">
+                                        <h3>Desktop Event Audit Log</h3>
+                                        <button class="btn btn-sm neo-brutal-btn bg-neo-yellow" onclick="clearLogs()">Hapus Log</button>
+                                    </div>
+                                    <div class="logs-container" id="admin-logs">
+                                        <div class="log-row info">
+                                            <span class="log-time">[07:35:10]</span>
+                                            <span class="log-text">Bispira Desktop Admin Suite v2.4 berhasil diinisialisasi.</span>
+                                        </div>
+                                        <div class="log-row success">
+                                            <span class="log-time">[07:35:12]</span>
+                                            <span class="log-text">Modul Verifikasi Manual Mutasi Bank aktif dengan Kode Unik 30m.</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <form class="admin-form" onsubmit="saveTariffSettings(event)">
-                                <div class="form-group">
-                                    <label>Tarif per Kilometer (IDR)</label>
-                                    <div class="input-prefix-group">
-                                        <span class="prefix">Rp</span>
-                                        <input type="number" id="cfg-tariff-per-km" value="2500" class="form-control">
+
+                            <!-- Right: Desktop Financial & Fee Customization Form -->
+                            <div class="admin-side-panel">
+                                <!-- Driver Verification Panel -->
+                                <div class="panel-card mb-4">
+                                    <div class="panel-header">
+                                        <h3>Verifikasi Driver Baru</h3>
+                                        <span class="badge neo-badge-tag bg-neo-yellow" id="pending-driver-count">1 Pending</span>
+                                    </div>
+                                    <div class="verification-list">
+                                        <div class="driver-verif-item" id="pending-driver-item" style="border:2.5px solid #000000; border-radius:12px; padding:12px; background:#FFFDF0;">
+                                            <div class="driver-info">
+                                                <h4 style="color:#000000; font-weight:900;">Anto Wijaya</h4>
+                                                <p style="color:#000000; font-weight:700;">Honda Vario - B 1234 ABC</p>
+                                            </div>
+                                            <div class="docs-preview mt-2">
+                                                <span class="doc-badge neo-badge-tag bg-neo-cyan" title="KTP Terunggah">🪪 KTP</span>
+                                                <span class="doc-badge neo-badge-tag bg-neo-yellow" title="SIM C Terunggah">💳 SIM</span>
+                                                <span class="doc-badge neo-badge-tag bg-neo-mint" title="STNK Terunggah">📄 STNK</span>
+                                                <span class="doc-badge neo-badge-tag bg-neo-sky" title="Foto Kendaraan Terunggah">🛵 Foto</span>
+                                            </div>
+                                            <div class="verif-actions mt-3">
+                                                <button class="btn btn-success btn-sm btn-half neo-brutal-btn bg-neo-green"
+                                                    onclick="approveDriver()">Setujui</button>
+                                                <button class="btn btn-danger btn-sm btn-half neo-brutal-btn bg-neo-orange"
+                                                    onclick="rejectDriver()">Tolak</button>
+                                            </div>
+                                        </div>
+                                        <div id="no-pending-drivers" class="no-data hidden">
+                                            Tidak ada driver menunggu verifikasi.
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label>Biaya Minimum Perjalanan (IDR)</label>
-                                    <div class="input-prefix-group">
-                                        <span class="prefix">Rp</span>
-                                        <input type="number" id="cfg-min-fare" value="8000" class="form-control">
+
+                                <!-- Full Tariff & Fee Customization Form -->
+                                <div class="panel-card">
+                                    <div class="panel-header">
+                                        <h3>⚙️ Pengaturan Biaya & Tarif Desktop</h3>
                                     </div>
+                                    <form class="admin-form" onsubmit="saveTariffSettings(event)">
+                                        <div class="form-group">
+                                            <label>Tarif per KM (Ride Hailing)</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-tariff-per-km" value="2500" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Biaya Minimum Perjalanan</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-min-fare" value="8000" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Biaya Aplikasi (Ke Konsumen)</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-app-fee" value="1000" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Biaya Layanan Platform</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-service-fee" value="2000" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Persentase Markup Harga (%)</label>
+                                            <div class="input-suffix-group">
+                                                <input type="number" id="cfg-markup-percent" value="10" class="form-control">
+                                                <span class="suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Biaya Pencairan Penjual (Payout Fee)</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-disbursement-fee" value="1000" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Charge Driver per Transaksi</label>
+                                            <div class="input-prefix-group">
+                                                <span class="prefix">Rp</span>
+                                                <input type="number" id="cfg-driver-charge" value="500" class="form-control">
+                                            </div>
+                                            <span class="help-text" style="color:#000000; font-weight:700;">Dipotong otomatis per order sukses.</span>
+                                        </div>
+                                        <div style="background: #FFFDF0; padding:12px; border-radius:12px; border:3px solid #000000; box-shadow:3px 3px 0px #000000; margin-top:12px;">
+                                            <h4 style="font-size:13px; color:#000000; font-weight:900; margin-bottom:6px;">🚑 Tarif Layanan Ambulance</h4>
+                                            <div class="form-group">
+                                                <label>Biaya Antar Dasar</label>
+                                                <div class="input-prefix-group">
+                                                    <span class="prefix">Rp</span>
+                                                    <input type="number" id="cfg-amb-antar" value="150000" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <label>Biaya Angkut Pasien</label>
+                                                <div class="input-prefix-group">
+                                                    <span class="prefix">Rp</span>
+                                                    <input type="number" id="cfg-amb-angkut" value="50000" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Profit Share Cabang Wilayah (%)</label>
+                                            <div class="input-suffix-group">
+                                                <input type="number" id="cfg-profit-cabang" value="30" class="form-control">
+                                                <span class="suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Masa Berlaku Kode Unik (Menit)</label>
+                                            <div class="input-suffix-group">
+                                                <input type="number" id="cfg-unique-code-timer" value="30" class="form-control">
+                                                <span class="suffix">Mnt</span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-full mt-4 neo-brutal-btn bg-neo-yellow">Simpan Konfigurasi Desktop</button>
+                                    </form>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label>Biaya Layanan Platform (IDR)</label>
-                                    <div class="input-prefix-group">
-                                        <span class="prefix">Rp</span>
-                                        <input type="number" id="cfg-service-fee" value="2000" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label>Pembagian Komisi Platform (%)</label>
-                                    <div class="input-suffix-group">
-                                        <input type="number" id="cfg-platform-commission" value="20"
-                                            class="form-control" max="100">
-                                        <span class="suffix">%</span>
-                                    </div>
-                                    <span class="help-text">Sisa persentase komisi secara otomatis ditugaskan ke Driver
-                                        (80%).</span>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-full mt-4">Simpan Konfigurasi</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,9 +437,9 @@
                 <header class="portal-header">
                     <div>
                         <h1>Aplikasi User (Pelanggan)</h1>
-                        <p class="subtitle">Simulasi antarmuka pemesanan Ride Hailing, Food Delivery, dan Layanan
-                            Kesehatan dalam genggaman handphone pelanggan.</p>
+                        <p class="subtitle">Simulasi antarmuka SuperApp BISPIRA: 12 Vertikal Layanan, E-Voting, Embedded Banking, dan E-Tiket Barcode.</p>
                     </div>
+                    <div class="user-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--color-success); border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 12px;">Bank Digital: e-KYC Verified</div>
                 </header>
 
                 <div class="simulator-layout">
@@ -341,169 +464,344 @@
                                             <span>Halo, Selamat Malam</span>
                                             <h4 id="user-display-name">Davy Pratama</h4>
                                         </div>
-                                        <div class="user-avatar">👤</div>
+                                        <div class="user-avatar" onclick="openUserView('user-tickets-view')" title="Lihat E-Tiket & Riwayat" style="cursor: pointer; position: relative;">
+                                            👤
+                                            <span style="position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; background: var(--color-success); border-radius: 50%; border: 2px solid #18181b;"></span>
+                                        </div>
                                     </div>
 
-                                    <!-- E-wallet Card -->
-                                    <div class="wallet-card">
+                                    <!-- E-wallet Card (Bispira Digital Banking) -->
+                                    <div class="wallet-card neo-brutal-card bg-neo-yellow" style="color: #000; padding: 14px;">
                                         <div class="wallet-left">
-                                            <span>Saldo Go-Pay</span>
-                                            <h3 id="user-wallet-balance">Rp 150,000</h3>
+                                            <span class="neo-badge-tag bg-neo-mint" style="font-size: 10px; color: #000; padding: 2px 8px;">BANK DIGITAL BISPIRA 💳</span>
+                                            <h3 id="user-wallet-balance" style="font-weight: 900; font-size: 24px; color: #000; margin-top: 4px;">Rp 150,000</h3>
+                                            <span style="font-size: 11px; font-weight: 800; color: #000;">Rekening: 8809-1234-9901</span>
                                         </div>
                                         <div class="wallet-actions">
-                                            <button class="wallet-btn" onclick="topupWallet()">➕ Topup</button>
-                                            <button class="wallet-btn">💳 Riwayat</button>
+                                            <button class="wallet-btn neo-brutal-btn" style="background: #000; color: #fff;" onclick="topupWallet()">➕ Topup</button>
+                                            <button class="wallet-btn neo-brutal-btn" style="background: #fff; color: #000;" onclick="openUserView('user-tickets-view')">📜 Tiket 🎟️</button>
                                         </div>
                                     </div>
 
-                                    <!-- Services Grid -->
-                                    <div class="services-title">Layanan Kami</div>
-                                    <div class="services-grid">
+                                    <!-- Mitra Ads Rotational Banner Carousel (15s auto slide) -->
+                                    <div class="promo-banner-carousel mt-3" id="mitra-ads-carousel">
+                                        <div class="promo-banner active-slide neo-brutal-card bg-neo-pink" id="ad-slide-1" style="padding: 12px; color: #000;">
+                                            <div class="promo-content">
+                                                <span class="ad-tag-badge neo-badge-tag" style="background: #000; color: #fff;">PROMO LUCU ✨ DISKON 50%</span>
+                                                <h4 style="font-weight: 900; color: #000;">Ayam Geprek Gahar Sudirman 🍕</h4>
+                                                <p style="font-weight: 700; color: #000;">Promo Sembako & Paket Kenyang Rp 15 Ribu!</p>
+                                            </div>
+                                            <div class="promo-tag neo-badge-tag bg-neo-yellow" style="color: #000;">Kuliner</div>
+                                        </div>
+                                        <div class="promo-banner hidden-slide neo-brutal-card bg-neo-lavender" id="ad-slide-2" style="padding: 12px; color: #000;">
+                                            <div class="promo-content">
+                                                <span class="ad-tag-badge neo-badge-tag" style="background: #000; color: #fff;">E-VOTING 2026 🗳️</span>
+                                                <h4 style="font-weight: 900; color: #000;">Pemilihan Pemuda Kebudayaan 👑</h4>
+                                                <p style="font-weight: 700; color: #000;">Beli Paket Vote Rp 1.000 & Dukung Kandidat!</p>
+                                            </div>
+                                            <div class="promo-tag neo-badge-tag bg-neo-yellow" style="color: #000;">Voting</div>
+                                        </div>
+                                        <div class="promo-banner hidden-slide neo-brutal-card bg-neo-sky" id="ad-slide-3" style="padding: 12px; color: #000;">
+                                            <div class="promo-content">
+                                                <span class="ad-tag-badge neo-badge-tag" style="background: #000; color: #fff;">KOST & SPACE 🏠</span>
+                                                <h4 style="font-weight: 900; color: #000;">Sewa Kos Sudirman Premium 💼</h4>
+                                                <p style="font-weight: 700; color: #000;">Diskon Harian / Bulanan Free High-Speed WiFi!</p>
+                                            </div>
+                                            <div class="promo-tag neo-badge-tag bg-neo-mint" style="color: #000;">Kost</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Services Grid: 12 Full Excel Vertical Services -->
+                                    <div class="services-title flex-between mt-3">
+                                        <span style="font-weight: 900; color: #fff;">12 Ekosistem Layanan 🌈</span>
+                                        <span class="neo-badge-tag bg-neo-pink" style="font-size: 10px; padding: 2px 6px; color: #000;">SUPER CUTE ✨</span>
+                                    </div>
+                                    <div class="services-grid multi-grid">
                                         <div class="service-icon-card" onclick="openUserView('user-ride-view')">
                                             <div class="service-badge-icon ride">🛵</div>
-                                            <span>Ride Hailing</span>
+                                            <span>Transpor & Driver</span>
                                         </div>
                                         <div class="service-icon-card" onclick="openUserView('user-food-view')">
                                             <div class="service-badge-icon food">🍕</div>
-                                            <span>Pesan Makanan</span>
+                                            <span>Food & Sembako</span>
                                         </div>
                                         <div class="service-icon-card" onclick="openUserView('user-health-view')">
                                             <div class="service-badge-icon health">🏥</div>
-                                            <span>Kesehatan</span>
+                                            <span>Kesehatan & Visit</span>
                                         </div>
-                                        <div class="service-icon-card lock-disabled"
-                                            onclick="alert('Fitur segera hadir!')">
-                                            <div class="service-badge-icon more">✨</div>
-                                            <span>Lainnya</span>
+                                        <div class="service-icon-card" onclick="openUserView('user-evoting-view')">
+                                            <div class="service-badge-icon voting" style="background: rgba(245, 158, 11, 0.2); color: var(--color-warning);">🗳️</div>
+                                            <span>Bispira E-Voting</span>
                                         </div>
-                                    </div>
-
-                                    <!-- Promos Carousel Simulated -->
-                                    <div class="services-title mt-4">Promo Menarik Untukmu</div>
-                                    <div class="promo-banner">
-                                        <div class="promo-content">
-                                            <h4>Diskon Hemat 50%</h4>
-                                            <p>Gunakan kode: **MAKANHEMAT**</p>
+                                        <div class="service-icon-card" onclick="openUserView('user-jasa-view')">
+                                            <div class="service-badge-icon ahli" style="background: rgba(168, 85, 247, 0.2); color: #a855f7;">🎓</div>
+                                            <span>Ahli & Privat</span>
                                         </div>
-                                        <div class="promo-tag">Diskon</div>
+                                        <div class="service-icon-card" onclick="openUserView('user-kost-view')">
+                                            <div class="service-badge-icon kost" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">🏠</div>
+                                            <span>Kost & Space</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-mice-view')">
+                                            <div class="service-badge-icon mice" style="background: rgba(14, 165, 233, 0.2); color: #0ea5e9;">🎟️</div>
+                                            <span>Tiket MICE</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-donasi-view')">
+                                            <div class="service-badge-icon donasi" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">🤝</div>
+                                            <span>Mitra Donasi</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-ads-view')">
+                                            <div class="service-badge-icon ads" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">📣</div>
+                                            <span>Lapak Ads</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-eo-view')">
+                                            <div class="service-badge-icon eo" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">⚡</div>
+                                            <span>Bispira EO</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-wallet-view')">
+                                            <div class="service-badge-icon wallet" style="background: rgba(99, 102, 241, 0.2); color: #6366f1;">💳</div>
+                                            <span>Bank Digital</span>
+                                        </div>
+                                        <div class="service-icon-card" onclick="openUserView('user-tickets-view')">
+                                            <div class="service-badge-icon tickets" style="background: rgba(249, 115, 22, 0.2); color: #f97316;">🧾</div>
+                                            <span>E-Tiket & Barcode</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- USER RIDE HAILING VIEW -->
+                                <!-- 1. USER RIDE HAILING & DRIVER VIEW -->
                                 <div id="user-ride-view" class="phone-view">
                                     <div class="view-header">
                                         <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
-                                        <h3>Pesan Perjalanan (Ride)</h3>
+                                        <h3>Bispira Transpor & Driver</h3>
                                     </div>
 
                                     <div class="ride-booking-card">
+                                        <div class="armada-selector flex-between mb-3">
+                                            <button class="armada-btn active" id="btn-armada-motor" onclick="selectArmadaType('motor')">🛵 Motor</button>
+                                            <button class="armada-btn" id="btn-armada-mobil" onclick="selectArmadaType('mobil')">🚗 Mobil</button>
+                                            <button class="armada-btn" id="btn-armada-box" onclick="selectArmadaType('box')">📦 Logistik</button>
+                                            <button class="armada-btn" id="btn-armada-ambulan" onclick="selectArmadaType('ambulan')">🚑 Ambulans</button>
+                                        </div>
+
                                         <div class="form-group">
-                                            <label>Titik Jemput</label>
-                                            <select id="user-ride-pickup" class="form-control"
-                                                onchange="calculateRideFareSim()">
+                                            <label>Titik Penjemputan</label>
+                                            <select id="user-ride-pickup" class="form-control" onchange="calculateRideFareSim()">
                                                 <option value="sudirman">Sudirman Center (Titik A)</option>
                                                 <option value="monas">Monas Park (Titik B)</option>
                                                 <option value="kemang">Kemang Square (Titik C)</option>
                                             </select>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <label>Titik Tujuan</label>
-                                            <select id="user-ride-dest" class="form-control"
-                                                onchange="calculateRideFareSim()">
+                                            <label>Titik Tujuan Pengantaran</label>
+                                            <select id="user-ride-dest" class="form-control" onchange="calculateRideFareSim()">
                                                 <option value="monas" selected>Monas Park (Titik B)</option>
                                                 <option value="sudirman">Sudirman Center (Titik A)</option>
                                                 <option value="kemang">Kemang Square (Titik C)</option>
                                             </select>
                                         </div>
 
+                                        <div class="traffic-adjuster flex-between mt-2 p-2" style="background: rgba(255,255,255,0.03); border-radius: 8px;">
+                                            <label style="font-size: 11px; color: var(--text-muted);">
+                                                <input type="checkbox" id="user-ride-macet" onchange="calculateRideFareSim()"> + Biaya Macet
+                                            </label>
+                                            <label style="font-size: 11px; color: var(--text-muted);">
+                                                <input type="checkbox" id="user-ride-hujan" onchange="calculateRideFareSim()"> + Biaya Hujan
+                                            </label>
+                                        </div>
+
                                         <div class="ride-calc-info mt-3" id="ride-calc-panel">
                                             <div class="flex-between">
-                                                <span>Jarak Estimasi:</span>
+                                                <span>Jarak Estimasi OSRM:</span>
                                                 <strong id="user-ride-distance">8.2 KM</strong>
                                             </div>
                                             <div class="flex-between mt-1">
-                                                <span>Waktu Tempuh:</span>
+                                                <span>Estimasi Waktu:</span>
                                                 <strong id="user-ride-duration">15 Menit</strong>
                                             </div>
+                                            <div class="flex-between mt-1">
+                                                <span>Metode Bayar:</span>
+                                                <select id="user-ride-payment" class="form-control-sm" style="width: auto;">
+                                                    <option value="wallet">Saldo Bispira</option>
+                                                    <option value="qris">QRIS</option>
+                                                    <option value="va">Virtual Account</option>
+                                                    <option value="cash">Tunai</option>
+                                                </select>
+                                            </div>
                                             <div class="flex-between mt-2 divider-top pt-2">
-                                                <span class="text-large">Total Tarif:</span>
-                                                <strong class="text-large text-indigo" id="user-ride-price">Rp
-                                                    22,500</strong>
+                                                <span class="text-large">Total Tarif Resmi:</span>
+                                                <strong class="text-large text-indigo" id="user-ride-price">Rp 22,500</strong>
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-primary btn-full mt-4" id="btn-book-ride"
-                                            onclick="bookRideHailing()">
-                                            Pesan Sekarang 🛵
+                                        <button class="btn btn-primary btn-full mt-3" id="btn-book-ride" onclick="bookRideHailing()">
+                                            Pesan Armada Sekarang 🚀
                                         </button>
                                     </div>
                                 </div>
 
-                                <!-- USER FOOD VIEW -->
-                                <div id="user-food-view" class="phone-view">
-                                    <div class="view-header">
-                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
-                                        <h3>Go-Food Kuliner</h3>
+                                <!-- 2. USER FOOD & FRESH SEMBAKO VIEW -->
+                                <div id="user-food-view" class="phone-view" style="padding-bottom: 90px; background: #f8fafc; color: #0f172a;">
+                                    <!-- Top Header Bar -->
+                                    <div class="food-top-bar" style="background: #ffffff; padding: 12px 14px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                                            <div style="display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden;">
+                                                <button class="back-btn" onclick="openUserView('user-home-view')" style="background: #f1f5f9; color: #0f172a; border-radius: 50%; width: 28px; height: 28px; border: none; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">←</button>
+                                                <div style="font-size: 16px; color: #0066ff;">📍</div>
+                                                <div style="overflow: hidden;">
+                                                    <span style="font-size: 9px; font-weight: 800; color: #64748b; letter-spacing: 0.5px; display: block; line-height: 1;">ANTAR KE</span>
+                                                    <strong style="font-size: 11.5px; color: #0f172a; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">Sudirman Central District...</strong>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <strong style="color: #0066ff; font-weight: 900; font-size: 15px; letter-spacing: 0.5px;">BISPIRA</strong>
+                                                <div style="background: #e6f0ff; color: #0066ff; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; border: 1px solid rgba(0, 102, 255, 0.2);">
+                                                    Rp 250.000
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Search Bar -->
+                                        <div style="background: #f1f5f9; border-radius: 10px; padding: 6px 12px; display: flex; align-items: center; gap: 8px;">
+                                            <span style="color: #94a3b8; font-size: 14px;">🔍</span>
+                                            <input type="text" id="food-search-input" placeholder="Cari sate, martabak, atau kopi..." style="background: transparent; border: none; outline: none; font-size: 11.5px; width: 100%; color: #0f172a; font-weight: 600;" onkeyup="filterFoodSearch(this.value)">
+                                        </div>
                                     </div>
 
-                                    <div class="food-merchant-list">
-                                        <div class="merchant-row-card"
-                                            onclick="openFoodMerchantDetail('Bakso Solo Baru')">
-                                            <span class="merchant-emoji">🍜</span>
-                                            <div class="merchant-desc">
-                                                <h4>Bakso Solo Baru</h4>
-                                                <p>Bakso, Mie Ayam, Minuman • ⭐ 4.8 (1.2k+)</p>
-                                                <span class="delivery-time">🛵 15 mnt • Jarak 1.5 KM</span>
-                                            </div>
+                                    <!-- Category Chips -->
+                                    <div class="category-pills flex-between" style="gap: 6px; overflow-x: auto; padding: 12px 14px 4px 14px; scrollbar-width: none;">
+                                        <span class="pill-badge active" style="background: #0f172a; color: #ffffff; padding: 6px 14px; border-radius: 20px; font-size: 11.5px; font-weight: 800; white-space: nowrap; cursor: pointer;" onclick="filterFoodCategory('all', this)">Semua</span>
+                                        <span class="pill-badge" style="background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 20px; font-size: 11.5px; font-weight: 700; white-space: nowrap; cursor: pointer;" onclick="filterFoodCategory('resto', this)">Resto</span>
+                                        <span class="pill-badge" style="background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 20px; font-size: 11.5px; font-weight: 700; white-space: nowrap; cursor: pointer;" onclick="filterFoodCategory('sembako', this)">Toko Sembako</span>
+                                    </div>
+
+                                    <!-- Restoran Terpopuler Section -->
+                                    <div style="padding: 12px 14px 0 14px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                            <h4 style="font-weight: 900; font-size: 13.5px; color: #0f172a; margin: 0;">Restoran Terpopuler</h4>
+                                            <span style="font-size: 11px; font-weight: 800; color: #0066ff; cursor: pointer;">Lihat Semua</span>
                                         </div>
 
-                                        <div class="merchant-row-card mt-2"
-                                            onclick="openFoodMerchantDetail('Ayam Geprek Gahar')">
-                                            <span class="merchant-emoji">🍗</span>
-                                            <div class="merchant-desc">
-                                                <h4>Ayam Geprek Gahar</h4>
-                                                <p>Ayam Geprek, Ricebox, Sambal • ⭐ 4.7 (800+)</p>
-                                                <span class="delivery-time">🛵 20 mnt • Jarak 2.8 KM</span>
+                                        <div style="display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding-bottom: 6px;">
+                                            <!-- Card 1 -->
+                                            <div style="background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; width: 200px; flex-shrink: 0; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); cursor: pointer;" onclick="openFoodMerchantDetail('Sederhana Lintau - Senopati')">
+                                                <div style="height: 90px; background: linear-gradient(135deg, #e6f0ff, #c7d2fe); display: flex; align-items: center; justify-content: center; position: relative;">
+                                                    <span style="font-size: 40px;">🍱</span>
+                                                    <span style="position: absolute; top: 6px; right: 6px; background: #ffffff; color: #0f172a; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 900; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">⭐ 4.9</span>
+                                                </div>
+                                                <div style="padding: 10px;">
+                                                    <h5 style="font-weight: 900; font-size: 12px; color: #0f172a; margin: 0 0 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sederhana Lintau - Senopati</h5>
+                                                    <p style="font-size: 10px; color: #64748b; margin: 0; font-weight: 600;">🛵 1.2km • 15 min</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 2 -->
+                                            <div style="background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; width: 200px; flex-shrink: 0; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); cursor: pointer;" onclick="openFoodMerchantDetail('Kopi Kenangan SCBD')">
+                                                <div style="height: 90px; background: linear-gradient(135deg, #fff7e6, #fef3c7); display: flex; align-items: center; justify-content: center; position: relative;">
+                                                    <span style="font-size: 40px;">☕</span>
+                                                    <span style="position: absolute; top: 6px; right: 6px; background: #ffffff; color: #0f172a; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 900; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">⭐ 4.8</span>
+                                                </div>
+                                                <div style="padding: 10px;">
+                                                    <h5 style="font-weight: 900; font-size: 12px; color: #0f172a; margin: 0 0 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Kopi Kenangan SCBD</h5>
+                                                    <p style="font-size: 10px; color: #64748b; margin: 0; font-weight: 600;">🛵 0.8km • 10 min</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Cart Float Card -->
-                                    <div class="cart-float-card hidden" id="user-food-cart">
-                                        <div class="flex-between">
-                                            <div>
-                                                <h4 id="cart-item-name">Ayam Geprek Level 3</h4>
-                                                <p id="cart-item-qty">1 Porsi • Rp 18,000</p>
+                                    <!-- Menu Rekomendasi Section -->
+                                    <div style="padding: 14px;">
+                                        <h4 style="font-weight: 900; font-size: 13.5px; color: #0f172a; margin: 0 0 10px 0;">Menu Rekomendasi</h4>
+
+                                        <div class="food-recommended-list" style="display: flex; flex-direction: column; gap: 10px;">
+                                            <!-- Item 1: Wagyu Cheese Burger Special -->
+                                            <div class="food-item-row" style="background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; padding: 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                                <div style="width: 65px; height: 65px; background: #f8fafc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0;">🍔</div>
+                                                <div style="flex: 1; overflow: hidden;">
+                                                    <h5 style="font-weight: 900; font-size: 12px; color: #0f172a; margin: 0 0 2px 0;">Wagyu Cheese Burger Special</h5>
+                                                    <p style="font-size: 10px; color: #64748b; margin: 0 0 6px 0; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Daging Wagyu premium dengan saus keju melt & sayuran segar</p>
+                                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                                        <strong style="font-size: 12px; color: #0f172a;">Rp 85.000</strong>
+                                                        <button class="btn-add-cart" onclick="addFoodToCart('Wagyu Cheese Burger Special', 85000, '🍔')" style="background: #0066ff; color: #ffffff; border: none; padding: 4px 10px; border-radius: 8px; font-weight: 900; font-size: 10.5px; cursor: pointer;">+ Tambah</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <button class="btn btn-success btn-sm" onclick="checkoutFoodOrder()">Pesan
-                                                Makanan</button>
+
+                                            <!-- Item 2: Iced Uji Matcha Latte -->
+                                            <div class="food-item-row" style="background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; padding: 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                                <div style="width: 65px; height: 65px; background: #f8fafc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0;">🍵</div>
+                                                <div style="flex: 1; overflow: hidden;">
+                                                    <h5 style="font-weight: 900; font-size: 12px; color: #0f172a; margin: 0 0 2px 0;">Iced Uji Matcha Latte</h5>
+                                                    <p style="font-size: 10px; color: #64748b; margin: 0 0 6px 0; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Matcha asli dari Kyoto dengan fresh milk & cream lembut</p>
+                                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                                        <strong style="font-size: 12px; color: #0f172a;">Rp 45.000</strong>
+                                                        <button class="btn-add-cart" onclick="addFoodToCart('Iced Uji Matcha Latte', 45000, '🍵')" style="background: #0066ff; color: #ffffff; border: none; padding: 4px 10px; border-radius: 8px; font-weight: 900; font-size: 10.5px; cursor: pointer;">+ Tambah</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Item 3: Nasi Goreng Wagyu Imperial -->
+                                            <div class="food-item-row" style="background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; padding: 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                                <div style="width: 65px; height: 65px; background: #f8fafc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0;">🍛</div>
+                                                <div style="flex: 1; overflow: hidden;">
+                                                    <h5 style="font-weight: 900; font-size: 12px; color: #0f172a; margin: 0 0 2px 0;">Nasi Goreng Wagyu Imperial</h5>
+                                                    <p style="font-size: 10px; color: #64748b; margin: 0 0 6px 0; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Nasi goreng bumbu khas Nusantara dengan potongan wagyu</p>
+                                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                                        <strong style="font-size: 12px; color: #0f172a;">Rp 55.000</strong>
+                                                        <button class="btn-add-cart" onclick="addFoodToCart('Nasi Goreng Wagyu Imperial', 55000, '🍛')" style="background: #0066ff; color: #ffffff; border: none; padding: 4px 10px; border-radius: 8px; font-weight: 900; font-size: 10.5px; cursor: pointer;">+ Tambah</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <!-- STICKY FLOATING CART BAR (MATCHING IMAGE) -->
+                                    <div id="food-sticky-cart" style="position: absolute; bottom: 12px; left: 12px; right: 12px; background: #0c243c; border-radius: 14px; padding: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 20;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <div id="cart-badge-count" style="width: 22px; height: 22px; background: #38bdf8; color: #0c243c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 11px;">2</div>
+                                                <div>
+                                                    <strong style="color: #ffffff; font-size: 11.5px; display: block; line-height: 1.1;">Keranjang Saya</strong>
+                                                    <span style="color: rgba(255,255,255,0.6); font-size: 9px;">Sudah termasuk pajak & biaya</span>
+                                                </div>
+                                            </div>
+                                            <strong id="cart-total-price" style="color: #ffffff; font-size: 13.5px; font-weight: 900;">Rp 99.000</strong>
+                                        </div>
+                                        <button onclick="checkoutFoodOrderWeb()" style="width: 100%; background: #38bdf8; color: #0c243c; border: none; padding: 8px; border-radius: 8px; font-weight: 900; font-size: 12px; cursor: pointer;">Lanjut ke Pembayaran</button>
                                     </div>
                                 </div>
 
-                                <!-- USER HEALTH VIEW -->
+                                <!-- 3. USER KESEHATAN & HOMECARE VIEW -->
                                 <div id="user-health-view" class="phone-view">
                                     <div class="view-header">
                                         <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
-                                        <h3>Go-Health Medis</h3>
+                                        <h3>Kesehatan & Homecare</h3>
                                     </div>
 
                                     <div class="health-categories">
+                                        <div class="h-cat-card" onclick="openDoctorChatModal()">
+                                            <span class="h-emoji">🩺</span>
+                                            <h4>Dokter Telemedis</h4>
+                                            <p>Chat Online / Janji Periksa</p>
+                                        </div>
                                         <div class="h-cat-card" onclick="openApotekCatalog()">
                                             <span class="h-emoji">💊</span>
-                                            <h4>Beli Obat & Vitamin</h4>
+                                            <h4>Beli Obat & Resep</h4>
                                             <p>Apotek Terdekat</p>
                                         </div>
-                                        <div class="h-cat-card" onclick="openClinicBooking()">
-                                            <span class="h-emoji">🩺</span>
-                                            <h4>Booking Klinik</h4>
-                                            <p>Dokter & Laboratorium</p>
+                                        <div class="h-cat-card mt-2" onclick="openHomecareBooking('Bidan & Perawat')">
+                                            <span class="h-emoji">👶</span>
+                                            <h4>Bidan & Homecare</h4>
+                                            <p>Panggil Nakes ke Rumah</p>
+                                        </div>
+                                        <div class="h-cat-card mt-2" onclick="openHomecareBooking('Terapis Spa & Urut')">
+                                            <span class="h-emoji">💆</span>
+                                            <h4>Spa, Pijat & Salon</h4>
+                                            <p>Refleksi & Barbershop</p>
                                         </div>
                                     </div>
 
-                                    <!-- Simulated Apotek catalog -->
                                     <div class="pharmacy-catalog hidden" id="pharmacy-catalog-section">
-                                        <h4>Rekomendasi Apotek Mitra</h4>
+                                        <h4 class="mt-3">Apotek Mitra Terdekat</h4>
                                         <div class="merchant-row-card mt-2" onclick="selectMedicineItem()">
                                             <span class="merchant-emoji">🏪</span>
                                             <div class="merchant-desc">
@@ -512,20 +810,207 @@
                                                 <span class="delivery-time">🛵 10 mnt • 800m</span>
                                             </div>
                                         </div>
-                                        <div class="medicine-item-card hidden" id="med-item-card">
+                                        <div class="medicine-item-card hidden mt-2" id="med-item-card" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 12px; border-radius: 12px;">
                                             <div class="flex-between">
                                                 <div>
                                                     <strong>Multivitamin Booster C+ (10 Tab)</strong>
-                                                    <p>Rp 35,000</p>
+                                                    <p style="color: var(--color-success); font-weight: bold;">Rp 35,000</p>
                                                 </div>
-                                                <button class="btn btn-primary btn-sm"
-                                                    onclick="checkoutHealthOrder()">Beli & Antar 💊</button>
+                                                <button class="btn btn-primary btn-sm" onclick="checkoutHealthOrder()">Beli & Antar 💊</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- USER ORDER TRACKING VIEW (REALTIME SIMULATOR) -->
+                                <!-- 4. USER BISPIRA E-VOTING VIEW -->
+                                <div id="user-evoting-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Bispira E-Voting (Cabang/Pusat)</h3>
+                                    </div>
+
+                                    <div class="voting-header-card p-3 mb-3" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 14px;">
+                                        <span class="badge badge-warning">LIVE E-VOTING 2026</span>
+                                        <h4 class="mt-1" style="color: #fff;">Pemilihan Pemuda Kebudayaan</h4>
+                                        <p style="font-size: 11px; color: var(--text-muted);">Dukung kandidat favoritmu! Realtime Leaderboard.</p>
+                                    </div>
+
+                                    <div class="voting-packages mt-2 mb-3">
+                                        <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pilih Paket Vote:</label>
+                                        <div class="vote-pkg-grid flex-between mt-1" style="gap: 4px;">
+                                            <button class="vote-pkg-btn active" onclick="selectVotePackage(1000, 2)">Rp 1k (2 Vote)</button>
+                                            <button class="vote-pkg-btn" onclick="selectVotePackage(5000, 10)">Rp 5k (10 Vote)</button>
+                                            <button class="vote-pkg-btn" onclick="selectVotePackage(10000, 20)">Rp 10k (20 Vote)</button>
+                                            <button class="vote-pkg-btn" onclick="selectVotePackage(50000, 100)">Rp 50k (100 Vote)</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="candidate-list">
+                                        <div class="candidate-card p-2 mb-2 flex-between" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px;">
+                                            <div class="flex-center" style="gap: 10px;">
+                                                <span class="rank-badge" style="background: #f59e0b; color: #000; font-weight: 800; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">#1</span>
+                                                <div>
+                                                    <h4 style="font-size: 13px; color: #fff;">01. Anisa Rahma</h4>
+                                                    <span style="font-size: 11px; color: var(--text-muted);" id="votes-kandidat-1">1,420 Suara</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-warning btn-sm" onclick="castVoteForCandidate('01. Anisa Rahma', 1)">Vote 🗳️</button>
+                                        </div>
+
+                                        <div class="candidate-card p-2 mb-2 flex-between" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px;">
+                                            <div class="flex-center" style="gap: 10px;">
+                                                <span class="rank-badge" style="background: #94a3b8; color: #000; font-weight: 800; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">#2</span>
+                                                <div>
+                                                    <h4 style="font-size: 13px; color: #fff;">02. Rizky Febian</h4>
+                                                    <span style="font-size: 11px; color: var(--text-muted);" id="votes-kandidat-2">1,180 Suara</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-warning btn-sm" onclick="castVoteForCandidate('02. Rizky Febian', 2)">Vote 🗳️</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 5. USER AHLI, EDUKASI & PRIVAT VIEW -->
+                                <div id="user-jasa-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Mitra Ahli, Edukasi & Hiburan</h3>
+                                    </div>
+
+                                    <div class="jasa-list">
+                                        <div class="merchant-row-card" onclick="bookJasaExpert('Pengacara / Konsultan Hukum')">
+                                            <span class="merchant-emoji">⚖️</span>
+                                            <div class="merchant-desc">
+                                                <h4>Pengacara & Konsultan Hukum</h4>
+                                                <p>Chat Online / Periksa Dokumen</p>
+                                                <span class="delivery-time">Tarif Rp 150.000 / Sesi</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="merchant-row-card mt-2" onclick="bookJasaExpert('Guru Privat Matematika')">
+                                            <span class="merchant-emoji">📚</span>
+                                            <div class="merchant-desc">
+                                                <h4>Guru Privat & Dosen</h4>
+                                                <p>Les Datang ke Rumah / Online</p>
+                                                <span class="delivery-time">Tarif Rp 85.000 / Jam</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="merchant-row-card mt-2" onclick="bookJasaExpert('Master of Ceremony (MC)')">
+                                            <span class="merchant-emoji">🎙️</span>
+                                            <div class="merchant-desc">
+                                                <h4>MC, Singer & Grup Band</h4>
+                                                <p>Pengisi Acara & Pernikahan</p>
+                                                <span class="delivery-time">Tarif Rp 500.000 / Event</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="merchant-row-card mt-2" onclick="bookJasaExpert('Tukang Bangunan & Las')">
+                                            <span class="merchant-emoji">🛠️</span>
+                                            <div class="merchant-desc">
+                                                <h4>Tukang Bangunan & Las Sofa</h4>
+                                                <p>Perbaikan Rumah & Furniture</p>
+                                                <span class="delivery-time">On-Demand Datang Langsung</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 6. USER KOST & WORKING SPACE VIEW -->
+                                <div id="user-kost-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Mitra Kost & Working Space</h3>
+                                    </div>
+
+                                    <div class="merchant-row-card" onclick="bookKostRoom('Kost Eksklusif Sudirman Putra')">
+                                        <span class="merchant-emoji">🏠</span>
+                                        <div class="merchant-desc">
+                                            <h4>Kost Sudirman Putra</h4>
+                                            <p>AC, WiFi, Kamar Mandi Dalam</p>
+                                            <span class="delivery-time" style="color: var(--color-success);">Rp 1.800.000 / Bulan</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="merchant-row-card mt-2" onclick="bookKostRoom('Working Space Meeting Room')">
+                                        <span class="merchant-emoji">💼</span>
+                                        <div class="merchant-desc">
+                                            <h4>Working Space Sudirman</h4>
+                                            <p>Ruang Rapat 10 Orang + Projector</p>
+                                            <span class="delivery-time" style="color: var(--color-success);">Rp 150.000 / Jam</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 7. USER TIKET MICE & WISATA VIEW -->
+                                <div id="user-mice-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Tiket MICE & Wisata</h3>
+                                    </div>
+
+                                    <div class="merchant-row-card" onclick="bookMiceTicket('Seminar Nasional AI & Startup 2026')">
+                                        <span class="merchant-emoji">🎟️</span>
+                                        <div class="merchant-desc">
+                                            <h4>Seminar AI & Startup 2026</h4>
+                                            <p>Sertifikat + E-Tiket Barcode</p>
+                                            <span class="delivery-time">Rp 120.000 / Tiket</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 8. USER DONASI VIEW -->
+                                <div id="user-donasi-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Mitra Donasi Digital</h3>
+                                    </div>
+
+                                    <div class="merchant-row-card" onclick="submitDonasiAction('Donasi Tanggap Bencana Natural')">
+                                        <span class="merchant-emoji">🤝</span>
+                                        <div class="merchant-desc">
+                                            <h4>Donasi Tanggap Bencana</h4>
+                                            <p>Yayasan Bispira Peduli Sesama</p>
+                                            <span class="delivery-time" style="color: var(--color-success);">Nominal Bebas (E-Donasi)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 9. USER E-TIKET & BARCODE VIEW -->
+                                <div id="user-tickets-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Bukti Pembelian & E-Tiket</h3>
+                                    </div>
+
+                                    <div class="ticket-card p-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 16px;">
+                                        <div class="flex-between">
+                                            <span class="badge badge-success">LUNAS • 1x PAKAI</span>
+                                            <span style="font-size: 11px; color: var(--text-muted);">Booking: #BSP-99812</span>
+                                        </div>
+                                        <h4 class="mt-2" style="color: #fff;">Tiket Perjalanan / Layanan BISPIRA</h4>
+                                        <p style="font-size: 12px; color: var(--text-muted);">Sudirman Center ➡️ Monas Park</p>
+                                        
+                                        <!-- Simulated Barcode & QR Code -->
+                                        <div class="barcode-preview text-center my-3 p-2" style="background: #fff; border-radius: 8px; color: #000;">
+                                            <div style="font-family: monospace; letter-spacing: 4px; font-weight: bold; font-size: 16px;">||||| | |||| ||||| ||</div>
+                                            <span style="font-size: 10px;">QR CODE VALIDATION: BSP-88192-2026</span>
+                                        </div>
+
+                                        <div class="rating-box text-center mt-3 pt-2 divider-top">
+                                            <span style="font-size: 11px; color: var(--text-muted);">Beri Bintang Kepuasan:</span>
+                                            <div class="star-rating mt-1" style="font-size: 20px; cursor: pointer;">
+                                                <span onclick="submitRatingStars(1)">⭐</span>
+                                                <span onclick="submitRatingStars(2)">⭐</span>
+                                                <span onclick="submitRatingStars(3)">⭐</span>
+                                                <span onclick="submitRatingStars(4)">⭐</span>
+                                                <span onclick="submitRatingStars(5)">⭐</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 10. USER ORDER TRACKING VIEW (REALTIME SIMULATOR) -->
                                 <div id="user-tracking-view" class="phone-view">
                                     <div class="view-header">
                                         <h3>Pelacakan Pesanan Realtime</h3>
@@ -558,18 +1043,126 @@
                                                 </div>
                                                 <div class="flex-between mt-1">
                                                     <span>Metode Pembayaran:</span>
-                                                    <strong>Go-Pay (E-wallet)</strong>
+                                                    <strong>Bank Digital (E-wallet)</strong>
                                                 </div>
                                                 <div class="flex-between mt-2 pt-2 divider-top">
                                                     <span class="text-large">Total Pembayaran:</span>
-                                                    <strong class="text-large text-indigo" id="tracking-order-price">Rp
-                                                        22,500</strong>
+                                                    <strong class="text-large text-indigo" id="tracking-order-price">Rp 22,500</strong>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                <!-- 11. USER LAPAK ADS VIEW -->
+                                <div id="user-ads-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Mitra Ads & Promo Banner</h3>
+                                    </div>
+                                    <div class="merchant-row-card" onclick="bookMitraAdsSlot()">
+                                        <span class="merchant-emoji">📣</span>
+                                        <div class="merchant-desc">
+                                            <h4>Pasang Banner Ads Mitra</h4>
+                                            <p>Rotasi 15 Detik di Beranda Utama User</p>
+                                            <span class="delivery-time" style="color: var(--color-warning);">Rp 150.000 / Hari</span>
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <!-- 12. USER BISPIRA EO VIEW -->
+                                <div id="user-eo-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Bispira EO & Event Organizer</h3>
+                                    </div>
+                                    <div class="merchant-row-card" onclick="bookEoEvent('Turnamen E-Sports & Lomba Pendidikan')">
+                                        <span class="merchant-emoji">⚡</span>
+                                        <div class="merchant-desc">
+                                            <h4>Turnamen E-Sports & Lomba</h4>
+                                            <p>Kompetisi Tingkat Cabang & Pusat</p>
+                                            <span class="delivery-time">E-Tiket & Pendaftaran Resmi</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 13. USER BANK DIGITAL WALLET VIEW -->
+                                <div id="user-wallet-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Bispira Bank Digital Hub</h3>
+                                    </div>
+                                    <div class="wallet-card mb-3">
+                                        <span>Status e-KYC: <strong style="color: #10b981;">VERIFIED</strong></span>
+                                        <h3 class="mt-1" id="sub-wallet-balance">Rp 150,000</h3>
+                                        <p style="font-size: 10px; opacity: 0.8;">No. Rekening: 8809-1234-9901</p>
+                                    </div>
+                                    <div class="flex-between" style="gap: 8px;">
+                                        <button class="btn btn-primary btn-full" onclick="topupWallet()">➕ Top Up</button>
+                                        <button class="btn btn-secondary btn-full" onclick="transferBankDigital()">↗️ Transfer</button>
+                                    </div>
+                                </div>
+
+                                <!-- 14. USER CHAT ROOM VIEW -->
+                                <div id="user-chat-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Pusat Pesan & Chat</h3>
+                                    </div>
+                                    <div class="merchant-row-card" onclick="openLiveChatDriver()">
+                                        <span class="merchant-emoji">🛵</span>
+                                        <div class="merchant-desc">
+                                            <h4>Driver Budi Santoso</h4>
+                                            <p>"Saya sudah dekat titik jemput ya kak..."</p>
+                                            <span class="delivery-time">2 mnt lalu</span>
+                                        </div>
+                                    </div>
+                                    <div class="merchant-row-card mt-2" onclick="openLiveChatDokter()">
+                                        <span class="merchant-emoji">🩺</span>
+                                        <div class="merchant-desc">
+                                            <h4>dr. Ahmad Hidayat, Sp.PD</h4>
+                                            <p>"Resep multivitamin sudah dikirim ke apotek."</p>
+                                            <span class="delivery-time">10 mnt lalu</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 15. USER PROFILE VIEW -->
+                                <div id="user-profile-view" class="phone-view">
+                                    <div class="view-header">
+                                        <button class="back-btn" onclick="openUserView('user-home-view')">←</button>
+                                        <h3>Profil & Akun Pelanggan</h3>
+                                    </div>
+                                    <div class="profile-card text-center p-3 mb-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 16px;">
+                                        <div style="font-size: 36px;">👤</div>
+                                        <h4 class="mt-2" style="color: #fff;">Davy Pratama</h4>
+                                        <p style="font-size: 11px; color: var(--text-muted);">+62 812-3456-7890 • davy@bispira.id</p>
+                                        <span class="badge badge-success mt-1">Bank Digital e-KYC Level 3</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Phone Bottom Navigation Bar (Tab Bar) -->
+                            <div class="phone-bottom-nav">
+                                <div class="nav-tab-item active" onclick="openUserView('user-home-view')">
+                                    <span>🏠</span>
+                                    <small>Beranda</small>
+                                </div>
+                                <div class="nav-tab-item" onclick="openUserView('user-tickets-view')">
+                                    <span>📜</span>
+                                    <small>Tiket</small>
+                                </div>
+                                <div class="nav-tab-item" onclick="openUserView('user-evoting-view')">
+                                    <span>🗳️</span>
+                                    <small>Voting</small>
+                                </div>
+                                <div class="nav-tab-item" onclick="openUserView('user-chat-view')">
+                                    <span>💬</span>
+                                    <small>Chat</small>
+                                </div>
+                                <div class="nav-tab-item" onclick="openUserView('user-profile-view')">
+                                    <span>👤</span>
+                                    <small>Profil</small>
+                                </div>
                             </div>
 
                             <!-- Phone Home Indicator Button -->
@@ -1234,14 +1827,24 @@ end
                 <header class="portal-header">
                     <div>
                         <h1>Simulasi Harga & Edukasi GIS</h1>
-                        <p class="subtitle">Kalkulator bagi hasil realtime dan pemetaan kompetensi pengembang OSRM GIS.</p>
+                        <p class="subtitle">Kalkulator bagi hasil realtime, Rencana Anggaran Biaya (RAB), asesmen server, dan pemetaan kompetensi.</p>
                     </div>
                     <div class="admin-badge" style="background-color: rgba(16, 185, 129, 0.1); color: var(--color-success); border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700;">
                         Interactive Guide
                     </div>
                 </header>
 
-                <div class="admin-layout-grid">
+                <!-- Explanation Tab Navigation -->
+                <div class="explanation-tabs">
+                    <button class="explanation-tab-btn active" onclick="switchExplanationTab('calc-tab')">🧮 Kalkulator Bagi Hasil</button>
+                    <button class="explanation-tab-btn" onclick="switchExplanationTab('rab-tab')">📋 Rencana Anggaran (RAB)</button>
+                    <button class="explanation-tab-btn" onclick="switchExplanationTab('infra-tab')">🖥️ Infrastruktur Server</button>
+                    <button class="explanation-tab-btn" onclick="switchExplanationTab('competency-tab')">🎓 Kompetensi Developer</button>
+                </div>
+
+                <!-- Tab 1: Calculator -->
+                <div id="calc-tab" class="explanation-tab-content active">
+                    <div class="admin-layout-grid">
                     <!-- Left: Interactive Pricing Split Calculator -->
                     <div class="admin-main-panel">
                         <div class="panel-card">
@@ -1338,40 +1941,290 @@ end
                             </div>
                         </div>
                     </div>
+                </div> <!-- End of .admin-layout-grid and #calc-tab -->
 
-                    <!-- Right: Developer Competency Map -->
-                    <div class="admin-side-panel">
-                        <div class="panel-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Tab 2: Rencana Anggaran (RAB) -->
+                <div id="rab-tab" class="explanation-tab-content">
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Rencana Anggaran Biaya (RAB) Pengembangan Software</h3>
+                            <span class="badge badge-success">Total Anggaran: Rp 9.500.000</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+                            Estimasi biaya dan durasi pengerjaan modul-modul sistem Go-Super secara terperinci untuk peluncuran ekosistem siap produksi:
+                        </p>
+
+                        <div class="rab-table-wrapper">
+                            <table class="rab-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">No</th>
+                                        <th style="width: 25%">Modul / Layanan</th>
+                                        <th style="width: 45%">Cakupan Fitur & Deskripsi</th>
+                                        <th style="width: 12%">Durasi Kerja</th>
+                                        <th style="width: 13%">Biaya Pengembangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><strong>Aplikasi User</strong></td>
+                                        <td>Login/register, ride hailing, food delivery, layanan kesehatan, tracking order basic</td>
+                                        <td>12 Hari</td>
+                                        <td>Rp 1.500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><strong>Aplikasi Driver</strong></td>
+                                        <td>Terima/tolak order, online/offline, navigasi OSRM basic, tracking lokasi</td>
+                                        <td>10 Hari</td>
+                                        <td>Rp 1.500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><strong>Merchant Food Portal</strong></td>
+                                        <td>Kelola menu, harga, stok, terima pesanan</td>
+                                        <td>5 Hari</td>
+                                        <td>Rp 700.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><strong>Merchant Kesehatan Portal</strong></td>
+                                        <td>Kelola layanan kesehatan, transaksi, status order</td>
+                                        <td>5 Hari</td>
+                                        <td>Rp 700.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td><strong>Website Admin Fullstack</strong></td>
+                                        <td>Dashboard admin, monitoring order, kelola user/driver/merchant</td>
+                                        <td>10 Hari</td>
+                                        <td>Rp 1.500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td><strong>Backend API & Database</strong></td>
+                                        <td>REST API, authentication, database integration</td>
+                                        <td>7 Hari</td>
+                                        <td>Rp 800.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td><strong>OSRM GIS Integration</strong></td>
+                                        <td>Routing, estimasi jarak, estimasi tarif, nearby driver basic</td>
+                                        <td>4 Hari</td>
+                                        <td>Rp 400.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td><strong>Security System Core</strong></td>
+                                        <td>Token authentication, anti fake GPS basic, proteksi transaksi dasar</td>
+                                        <td>4 Hari</td>
+                                        <td>Rp 445.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td><strong>Aplikasi Private (Scheduled)</strong></td>
+                                        <td>Penjadwalan pesanan otomatis untuk Merchant Food & Ride Hailing (booking order terjadwal)</td>
+                                        <td>-</td>
+                                        <td>Rp 500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td><strong>Daftar Play Store</strong></td>
+                                        <td>Biaya publish Google Play Store (25 USD × Rp 18.200)</td>
+                                        <td>-</td>
+                                        <td>Rp 455.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td><strong>OSRM Full Setup & Integrasi</strong></td>
+                                        <td>Setup Docker/Linux, integrasi API routing, Distance Matrix, optimasi LUA (motor & mobil), ETA driver</td>
+                                        <td>5 Hari</td>
+                                        <td>Rp 1.000.000</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="3" style="text-align: right; font-weight: 800;">TOTAL ESTIMASI PROYEK</td>
+                                        <td style="font-weight: 800;">62 Hari</td>
+                                        <td style="color: var(--color-success); font-weight: 800;">Rp 9.500.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Server Infrastructure Assessment -->
+                <div id="infra-tab" class="explanation-tab-content">
+                    <!-- Service Architecture Card -->
+                    <div class="panel-card mb-4">
+                        <div class="panel-header">
+                            <h3>Arsitektur Layanan & Kebutuhan Server Produksi</h3>
+                            <span class="badge badge-pulse">Containerized Docker Architecture</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+                            Sistem ini menggunakan arsitektur container terintegrasi yang dijalankan menggunakan Docker di atas VPS Linux. Resource minimum gabungan yang direkomendasikan adalah <strong>8 Core CPU dan 24 - 32 GB RAM</strong>.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px;">
+                            <!-- Resources by components -->
                             <div>
-                                <div class="panel-header">
-                                    <h3>Kesesuaian Kompetensi Developer GIS OSRM</h3>
-                                </div>
-                                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
-                                    Bagaimana pilar keterampilan yang diminta dalam proyek Fastwork dipetakan di program ini:
-                                </p>
-
-                                <div class="competency-cards-list" style="display: flex; flex-direction: column; gap: 12px; font-size: 12px;">
-                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
-                                        <strong style="color: #fff;">1. Pemrosesan Data OSM</strong>
-                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Perintah `osrm-extract`, `partition`, dan `customize` berjalan di compiler terminal (Tab 6).</p>
+                                <h4 style="font-size: 13px; color: #fff; margin-bottom: 12px;">Estimasi Resource per Komponen:</h4>
+                                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+                                    <div class="flex-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                                        <span>Backend API & Workers:</span>
+                                        <strong>2 Core CPU / 4 GB RAM</strong>
                                     </div>
-                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
-                                        <strong style="color: #fff;">2. Scripting LUA Kustom</strong>
-                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Filter lebar jalan (`width`) & tol untuk membedakan rute motor vs mobil (`LUA_PROFILES`).</p>
+                                    <div class="flex-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                                        <span>OSRM Routing Engine:</span>
+                                        <strong>4 - 8 Core CPU / 10 - 16 GB RAM</strong>
                                     </div>
-                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
-                                        <strong style="color: #fff;">3. Optimasi Server & RAM</strong>
-                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Simulasi MLD vs CH dan monitor lonjakan RAM saat build peta Indonesia.</p>
+                                    <div class="flex-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                                        <span>Redis Cache & Tracker:</span>
+                                        <strong>2 Core CPU / 4 - 8 GB RAM</strong>
                                     </div>
-                                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px;">
-                                        <strong style="color: #fff;">4. Integrasi Backend / API</strong>
-                                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Peta Leaflet terintegrasi Live OSRM Router API & Uji coba Distance Matrix JSON `/table`.</p>
+                                    <div class="flex-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                                        <span>Database Spatial (PostGIS):</span>
+                                        <strong>2 - 4 Core CPU / 4 - 8 GB RAM</strong>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Region RAM OSRM -->
+                            <div>
+                                <h4 style="font-size: 13px; color: #fff; margin-bottom: 12px;">Kebutuhan RAM OSRM per Region (Dataset Geofabrik):</h4>
+                                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 11px;">
+                                    <div class="flex-between">
+                                        <span>Jawa (PBF Size: 851 MB)</span>
+                                        <strong>RAM: 4 - 8 GB</strong>
+                                    </div>
+                                    <div class="flex-between">
+                                        <span>Sumatra (PBF Size: 267 MB)</span>
+                                        <strong>RAM: 2 - 4 GB</strong>
+                                    </div>
+                                    <div class="flex-between">
+                                        <span>Nusa Tenggara (PBF Size: 164 MB)</span>
+                                        <strong>RAM: 2 - 4 GB</strong>
+                                    </div>
+                                    <div class="flex-between">
+                                        <span>Sulawesi (PBF Size: 150 MB)</span>
+                                        <strong>RAM: 2 - 4 GB</strong>
+                                    </div>
+                                    <div class="flex-between">
+                                        <span>Kalimantan (PBF Size: 139 MB)</span>
+                                        <strong>RAM: 2 - 4 GB</strong>
+                                    </div>
+                                    <div class="flex-between">
+                                        <span>Papua / Maluku (PBF Size: ~30 MB)</span>
+                                        <strong>RAM: 1 - 2 GB</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 16px; font-size: 11px; color: var(--text-muted); text-align: center;">
-                                💡 Kode rujukan terperinci ada di <code>app.js</code> & <code>penjelasan_sistem.md</code>
+                    <!-- VPS Provider Cards -->
+                    <h3 style="font-size: 15px; color: #fff; margin-bottom: 16px;">Opsi Provider VPS Server:</h3>
+                    <div class="infra-grid">
+                        <!-- Biznet -->
+                        <div class="vps-card">
+                            <div class="vps-header">
+                                <span class="vps-provider">BIZNET GIO</span>
+                                <h4 class="vps-name">Neo Lite Pro ML 24.8</h4>
+                                <div class="vps-price">Rp 1.429.000 <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">/ bln</span></div>
+                            </div>
+                            <ul class="vps-specs">
+                                <li><span>CPU Cores:</span> <strong>8 Cores</strong></li>
+                                <li><span>RAM Memory:</span> <strong>24 GB</strong></li>
+                                <li><span>Storage:</span> <strong>100 GB NVMe SSD</strong></li>
+                                <li><span>Latency (ID):</span> <strong>Sangat Rendah (~5-15ms)</strong></li>
+                            </ul>
+                            <div class="vps-pros-cons">
+                                <div class="vps-pro">✔️ Latency lokal rendah, SSD NVMe sangat cepat, billing Rupiah & CS lokal.</div>
+                                <div class="vps-con">❌ RAM 24 GB terbatas jika OSRM & database digabung dalam satu node.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hetzner -->
+                        <div class="vps-card popular">
+                            <div class="vps-header">
+                                <span class="vps-provider">HETZNER CLOUD</span>
+                                <h4 class="vps-name">Dedicated CCX33</h4>
+                                <div class="vps-price success">$74.59 <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">/ bln (~Rp 1.349.467)</span></div>
+                            </div>
+                            <ul class="vps-specs">
+                                <li><span>CPU Cores:</span> <strong>8 Cores (Dedicated)</strong></li>
+                                <li><span>RAM Memory:</span> <strong>32 GB</strong></li>
+                                <li><span>Storage:</span> <strong>240 GB NVMe SSD</strong></li>
+                                <li><span>Latency (ID):</span> <strong>Sedang (~150-220ms)</strong></li>
+                            </ul>
+                            <div class="vps-pros-cons">
+                                <div class="vps-pro">✔️ Price-to-Performance terbaik, CPU dedicated stabil, RAM 32 GB longgar.</div>
+                                <div class="vps-con">❌ Server di luar Indonesia, harga dipengaruhi kurs Dollar.</div>
+                            </div>
+                        </div>
+
+                        <!-- Rumahweb -->
+                        <div class="vps-card">
+                            <div class="vps-header">
+                                <span class="vps-provider">RUMAHWEB</span>
+                                <h4 class="vps-name">VPS X3L</h4>
+                                <div class="vps-price">Rp 1.875.000 <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">/ bln</span></div>
+                            </div>
+                            <ul class="vps-specs">
+                                <li><span>CPU Cores:</span> <strong>8 Cores</strong></li>
+                                <li><span>RAM Memory:</span> <strong>32 GB</strong></li>
+                                <li><span>Storage:</span> <strong>600 GB Storage</strong></li>
+                                <li><span>Latency (ID):</span> <strong>Sangat Rendah (~10-20ms)</strong></li>
+                            </ul>
+                            <div class="vps-pros-cons">
+                                <div class="vps-pro">✔️ RAM 32 GB besar untuk OSRM & Redis, kapasitas storage melimpah untuk backup.</div>
+                                <div class="vps-con">❌ Biaya bulanan relatif lebih tinggi, kurang ideal untuk scaling horizontal.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Developer Competency Map -->
+                <div id="competency-tab" class="explanation-tab-content">
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Kesesuaian Kompetensi Developer GIS OSRM</h3>
+                            <span class="badge badge-pulse">Fastwork Requirements Map</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+                            Bagaimana pilar keterampilan yang diminta dalam proyek ekosistem superapp & GIS dipetakan di program simulator ini:
+                        </p>
+
+                        <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 13px;">
+                            <div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; margin-bottom: 12px;">
+                                    <strong style="color: #fff; font-size: 14px;">1. Pemrosesan Data OSM</strong>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Eksekusi run command server asli (`osrm-extract`, `osrm-partition`, `osrm-customize`) disimulasikan lengkap dengan visualisasi output terminal saat data peta indonesia.osm.pbf di-extract.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px;">
+                                    <strong style="color: #fff; font-size: 14px;">2. Custom Scripting LUA Profiles</strong>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Dilengkapi code-editor script LUA interaktif untuk memodifikasi kecepatan motor (motorcycle profile - diizinkan masuk gang lebar &lt; 2m) dan mobil (car profile - jalan tol diizinkan, gang diblokir).</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; margin-bottom: 12px;">
+                                    <strong style="color: #fff; font-size: 14px;">3. Optimasi Server & RAM</strong>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Menyediakan visualisasi RAM Monitor yang secara realtime mendeteksi lonjakan memori heap server Linux saat pipeline OSRM berjalan, serta log penjelasan metode caching MLD.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px;">
+                                    <strong style="color: #fff; font-size: 14px;">4. Integrasi Backend & API</strong>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Simulasi matang integrasi map Leaflet dengan project-osrm.org API untuk rute nyata jalan Jakarta, query JSON matriks jarak NxN (Distance Matrix API `/table`), dan callback transaksi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 20px; font-size: 11px; color: var(--text-muted); text-align: center;">
+                            💡 Kode rujukan teknis terperinci dapat dipelajari langsung di file: <code>app.js</code> & <code>penjelasan_sistem.md</code>
+                        </div>
+                    </div>
+                </div>
+            </section>                💡 Kode rujukan terperinci ada di <code>app.js</code> & <code>penjelasan_sistem.md</code>
                             </div>
                         </div>
                     </div>

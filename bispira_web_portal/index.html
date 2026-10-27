@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BISPIRA SuperApp — Platform Ekosistem Serba Bisa Indonesia</title>
+  <meta name="description" content="Platform SuperApp Terpadu Indonesia untuk Transportasi, Kuliner, Belanja, Medevac Ambulance 24 Jam, PPOB, Tiket, dan Jasa Terverifikasi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- AOS (Animate On Scroll) Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="top-announcement">
+    <span>⚡ <strong>#SemuaBisaDenganBISPIRA</strong> — Platform SuperApp Terpadu Indonesia dengan Pencairan Saldo 24 Jam via BI-FAST!</span>
+  </div>
+
+  <!-- STICKY NAVBAR (GOJEK / GRAB CLEAN STYLE) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <img src="logo.png" alt="BISPIRA Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-name">BISPIRA</span>
+          <span class="brand-tag">SuperApp System</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#layanan">Layanan Utama</a>
+        <a href="#showcase">Aplikasi Mobile</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#keunggulan">Mengapa BISPIRA</a>
+        <a href="#mitra">Gabung Mitra</a>
+        <a href="#faq">FAQ</a>
+        <a href="#download" class="btn-nav-primary">Unduh Aplikasi 🚀</a>
+      </nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (ULTRA RICH HERO WITH 100% VISIBILITY GUARANTEE) -->
+  <section class="hero-section">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-container">
+      
+      <!-- HERO LEFT CONTENT -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <img src="logo.png" class="badge-logo" alt="BISPIRA"> INDONESIA'S PREMIER SUPERAPP
+        </div>
+        
+        <h1 class="hero-title">
+          Gak Perlu Ribet,<br>
+          <span class="gradient-text">Satu Aplikasi</span> Untuk<br>
+          Semua Kebutuhanmu
+        </h1>
+        
+        <p class="hero-desc">
+          Dari pesan makanan favorit, ojek & mobil kilat, belanja harian, hingga panggilan darurat Medevac Ambulance 24 Jam dalam satu genggaman.
+        </p>
+
+        <div class="hero-cta-buttons">
+          <a href="#download" class="btn-hero-primary">
+            <span>📱 Unduh User App</span>
+          </a>
+          <a href="#mitra" class="btn-hero-secondary">
+            <span>🛵 Gabung Mitra Driver / Resto</span>
+          </a>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="stat-pill">
+            <span class="stat-num">11+</span>
+            <span class="stat-lbl">Layanan Utama</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-num">95%</span>
+            <span class="stat-lbl">Hak Driver</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-num">100%</span>
+            <span class="stat-lbl">Hak Resto Base</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-num">24/7</span>
+            <span class="stat-lbl">BI-FAST Payout</span>
+          </div>
+        </div>
+
+        <!-- QUICK FARE SIMULATOR WIDGET -->
+        <div class="hero-simulator-box">
+          <div class="sim-header">
+            <span class="pulse"></span> <strong>Estimasi Tarif Transparan BISPIRA</strong>
+          </div>
+          <div class="sim-grid">
+            <div class="sim-item">
+              <span class="sim-icon">🛵</span>
+              <div>
+                <strong>BISPIRA Ride</strong>
+                <p>Rp 2.500 / KM</p>
+              </div>
+            </div>
+            <div class="sim-item">
+              <span class="sim-icon">🍔</span>
+              <div>
+                <strong>BISPIRA Food</strong>
+                <p>Flat Ongkir Rp 3.000</p>
+              </div>
+            </div>
+            <div class="sim-item">
+              <span class="sim-icon">🚑</span>
+              <div>
+                <strong>Medevac Ambulance</strong>
+                <p>Rp 150.000 / Penanganan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO RIGHT VISUAL (ULTRA SLEEK TEXT & ECOSYSTEM SUITE CARD) -->
+      <div class="hero-visual" data-aos="fade-left">
+        <div class="hero-text-card glassmorphic-card">
+          
+          <div class="hero-card-head">
+            <div class="head-brand">
+              <img src="logo.png" alt="BISPIRA Logo" class="card-logo-img">
+              <div>
+                <h3 class="card-head-title">BISPIRA Live Ecosystem Suite</h3>
+                <span class="card-head-sub">Platform Terintegrasi Real-time Indonesia</span>
+              </div>
+            </div>
+            <span class="status-live-pill"><span class="pulse"></span> LIVE</span>
+          </div>
+
+          <div class="hero-card-list">
+            <!-- ITEM 1: USER APP -->
+            <div class="hero-eco-item">
+              <div class="eco-item-left">
+                <span class="eco-icon blue">📱</span>
+                <div>
+                  <strong>BISPIRA User App</strong>
+                  <p>Layanan terpadu Food, Ride, Car, Medevac Ambulance & PPOB</p>
+                </div>
+              </div>
+              <span class="eco-badge green-badge">11+ Services</span>
+            </div>
+
+            <!-- ITEM 2: DRIVER APP -->
+            <div class="hero-eco-item">
+              <div class="eco-item-left">
+                <span class="eco-icon green">🛵</span>
+                <div>
+                  <strong>BISPIRA Driver App</strong>
+                  <p>95% Hak Driver Net tanpa potongan komisi memberatkan</p>
+                </div>
+              </div>
+              <span class="eco-badge green-badge">95% Net Split</span>
+            </div>
+
+            <!-- ITEM 3: MERCHANT APP -->
+            <div class="hero-eco-item">
+              <div class="eco-item-left">
+                <span class="eco-icon gold">🏪</span>
+                <div>
+                  <strong>BISPIRA Merchant App</strong>
+                  <p>100% Hak harga dasar resto aman tanpa markup merugikan</p>
+                </div>
+              </div>
+              <span class="eco-badge gold-badge">100% Base Price</span>
+            </div>
+
+            <!-- ITEM 4: PAYMENT BACKEND -->
+            <div class="hero-eco-item">
+              <div class="eco-item-left">
+                <span class="eco-icon red">⚡</span>
+                <div>
+                  <strong>SNAP BI & BI-FAST Engine</strong>
+                  <p>Pencairan saldo pendapatan 24 jam non-stop ke semua bank</p>
+                </div>
+              </div>
+              <span class="eco-badge blue-badge">Instant 24/7</span>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom-info">
+            <div class="compliance-tag-row">
+              <span>🛡️ SSL Encrypted</span>
+              <span>🔒 SNAP BI Compliant</span>
+              <span>🟢 <strong>12.450+</strong> User Online</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROMO & SPECIAL OFFERS BANNER (GOJEK STYLE BANNER CARDS) -->
+  <section class="promo-banner-section" data-aos="fade-up">
+    <div class="section-container">
+      <div class="promo-card-grid">
+        <div class="promo-card food-promo">
+          <div class="promo-tag">PROMO KULINER 🍔</div>
+          <h3>Diskon 50% BISPIRA Food</h3>
+          <p>Makan enak lebih hemat dengan promo makanan serba setengah harga dari resto favoritmu!</p>
+          <a href="#download" class="btn-promo">Klaim Promo Kuliner</a>
+        </div>
+
+        <div class="promo-card ride-promo">
+          <div class="promo-tag">PROMO PERJALANAN 🛵</div>
+          <h3>Gratis Ongkir & Potongan Ride</h3>
+          <p>Bepergian bebas ribet dengan voucher cashback saldo BISPIRA Pay setiap hari.</p>
+          <a href="#download" class="btn-promo gold">Pakai Voucher Ride</a>
+        </div>
+
+        <div class="promo-card health-promo">
+          <div class="promo-tag">TANGGAP DARURAT 🚑</div>
+          <h3>Ambulance Medevac 24/7</h3>
+          <p>Response rate terpesat untuk keadaan darurat medis keluarga Anda di seluruh kota.</p>
+          <a href="#layanan" class="btn-promo red">Panggil Medevac Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE & IMPACT BANNER (GOJEK STYLE NUMBERS) -->
+  <section class="scale-banner" data-aos="fade-up">
+    <div class="section-container">
+      <div class="scale-grid">
+        <div class="scale-item">
+          <h3>5.000.000+</h3>
+          <p>Transaksi Terproses Sangat Cepat</p>
+        </div>
+        <div class="scale-item">
+          <h3>50.000+</h3>
+          <p>Mitra Driver & Kurir Terverifikasi</p>
+        </div>
+        <div class="scale-item">
+          <h3>25.000+</h3>
+          <p>Mitra Resto & Sembako Terhubung</p>
+        </div>
+        <div class="scale-item">
+          <h3>100+</h3>
+          <p>Wilayah Lisensi Cabang Regional</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE ECOSYSTEM APP SHOWCASE SECTION (SHOWCASE FOR USER, DRIVER, & MERCHANT APPS WITH REAL PHOTOS) -->
+  <section id="showcase" class="showcase-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">TEKNOLOGI APLIKASI BISPIRA</span>
+        <h2 class="section-title">3 Aplikasi Mobile Utama BISPIRA</h2>
+        <p class="section-subtitle">Didesain modern dan responsif untuk Pengguna, Mitra Driver, dan Mitra Resto.</p>
+      </div>
+
+      <div class="showcase-tabs" data-aos="fade-up">
+        <button class="showcase-tab active" onclick="switchShowcaseTab('user')">📱 BISPIRA User App</button>
+        <button class="showcase-tab" onclick="switchShowcaseTab('driver')">🛵 BISPIRA Driver App</button>
+        <button class="showcase-tab" onclick="switchShowcaseTab('merchant')">🏪 BISPIRA Merchant App</button>
+      </div>
+
+      <div class="showcase-display-box glassmorphic-panel" data-aos="fade-up">
+        <!-- USER APP SHOWCASE -->
+        <div id="showcase-user" class="showcase-panel active">
+          <div class="showcase-grid">
+            <div class="showcase-text">
+              <span class="panel-badge">UNTUK KONSUMEN</span>
+              <h3>BISPIRA User App — Aplikasi Serba Bisa</h3>
+              <p>Pesan makanan, ojek motor, mobil, sembako, hingga bayar tagihan listrik & pulsa hanya dalam hitungan detik. Dilengkapi fitur Medevac Ambulance Darurat 24 Jam.</p>
+              <ul class="showcase-features">
+                <li>✅ Top Up Saldo & Pay via QRIS / Bank Transfer</li>
+                <li>✅ Pelacakan Live GPS Driver Real-time</li>
+                <li>✅ Diskon Promo Kuliner & Gratis Ongkir</li>
+                <li>✅ Panggilan Medevac Ambulance 24/7</li>
+              </ul>
+              <a href="#download" class="btn-showcase">Unduh User App APK 📱</a>
+            </div>
+            <div class="showcase-mockup">
+              <div class="real-phone-wrapper">
+                <img src="app_user.jpg" alt="Tampilan BISPIRA User App" class="app-real-img">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRIVER APP SHOWCASE -->
+        <div id="showcase-driver" class="showcase-panel" style="display: none;">
+          <div class="showcase-grid">
+            <div class="showcase-text">
+              <span class="panel-badge green">UNTUK MITRA DRIVER</span>
+              <h3>BISPIRA Driver App — 95% Hak Driver Net</h3>
+              <p>Terima orderan Ride, Food, Send, dan Medevac dengan pembagian hasil 95% untuk Driver. Saldo pendapatan dapat dicairkan 24 jam via BI-FAST.</p>
+              <ul class="showcase-features">
+                <li>✅ Pembagian Hasil 95% Driver Net (Hanya 5% Potongan System)</li>
+                <li>✅ Pencairan Saldo Instant 24 Jam via BI-FAST</li>
+                <li>✅ Navigasi GPS Akurat & Sistem Rute Efisien</li>
+                <li>✅ Mode Panggilan Darurat Medevac Bonus Spesial</li>
+              </ul>
+              <a href="#mitra" class="btn-showcase green">Daftar Mitra Driver 🛵</a>
+            </div>
+            <div class="showcase-mockup">
+              <div class="real-phone-wrapper green-border">
+                <img src="app_driver.jpg" alt="Tampilan BISPIRA Driver App" class="app-real-img">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MERCHANT APP SHOWCASE -->
+        <div id="showcase-merchant" class="showcase-panel" style="display: none;">
+          <div class="showcase-grid">
+            <div class="showcase-text">
+              <span class="panel-badge gold">UNTUK MITRA RESTO</span>
+              <h3>BISPIRA Merchant App — Cashier POS & Menu Manager</h3>
+              <p>Kelola menu resto, terima pesanan otomatis, dan nikmati 100% harga dasar toko tanpa komisi tersembunyi yang merugikan resto Anda.</p>
+              <ul class="showcase-features">
+                <li>✅ 100% Hak Harga Dasar Resto (Zero Base Price Deductions)</li>
+                <li>✅ Sistem Kasir POS Terintegrasi & Cetak Struk Bluetooth</li>
+                <li>✅ Pengaturan Stok & Jam Operasional Real-time</li>
+                <li>✅ Laporan Penjualan Harian & Pencairan Otomatis</li>
+              </ul>
+              <a href="#mitra" class="btn-showcase gold">Daftar Mitra Resto 🏪</a>
+            </div>
+            <div class="showcase-mockup">
+              <div class="real-phone-wrapper gold-border">
+                <img src="app_merchant.jpg" alt="Tampilan BISPIRA Merchant App" class="app-real-img">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 CORE SERVICES SECTION (PILL TABS + RICH CARDS) -->
+  <section id="layanan" class="pillars-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">EKOSISTEM LAYANAN</span>
+        <h2 class="section-title">Eksplorasi Solusi Lengkap BISPIRA</h2>
+        <p class="section-subtitle">Didesain modern untuk memenuhi setiap aspek kebutuhan hidup harian Anda.</p>
+      </div>
+
+      <div class="pillars-tabs" data-aos="fade-up">
+        <button class="pillar-tab active" onclick="filterServices('all')">🌟 Semua Layanan</button>
+        <button class="pillar-tab" onclick="filterServices('transport')">🛵 Transport & Logistik</button>
+        <button class="pillar-tab" onclick="filterServices('food')">🍔 Kuliner & Belanja</button>
+        <button class="pillar-tab" onclick="filterServices('health')">🚑 Kesehatan Darurat</button>
+        <button class="pillar-tab" onclick="filterServices('lifestyle')">⚡ Tagihan & Gaya Hidup</button>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- 1. FOOD -->
+        <div class="service-card cat-food" data-aos="fade-up">
+          <div class="card-accent food-bg"></div>
+          <div class="service-icon-wrapper food">🍔</div>
+          <h3>BISPIRA Food</h3>
+          <p>Pesan makanan & minuman favorit dari ribuan resto terdekat dengan pengiriman kilat.</p>
+          <ul class="feature-list">
+            <li>✓ Transparent 20% Markup Specs</li>
+            <li>✓ Flat Ongkir Express Rp 3.000</li>
+          </ul>
+          <a href="#download" class="card-action-link">Pesan BISPIRA Food ➔</a>
+        </div>
+
+        <!-- 2. RIDE -->
+        <div class="service-card cat-transport" data-aos="fade-up">
+          <div class="card-accent ride-bg"></div>
+          <div class="service-icon-wrapper ride">🛵</div>
+          <h3>BISPIRA Ride</h3>
+          <p>Transportasi ojek motor kilat dengan penjemputan presisi GPS & perlindungan perjalanan.</p>
+          <ul class="feature-list">
+            <li>✓ Tarif Rp 2.500 / KM</li>
+            <li>✓ 95% Hak Driver Net</li>
+          </ul>
+          <a href="#download" class="card-action-link">Pesan BISPIRA Ride ➔</a>
+        </div>
+
+        <!-- 3. CAR -->
+        <div class="service-card cat-transport" data-aos="fade-up">
+          <div class="card-accent car-bg"></div>
+          <div class="service-icon-wrapper car">🚗</div>
+          <h3>BISPIRA Car</h3>
+          <p>Perjalanan mobil aman & nyaman untuk kebutuhan pribadi, keluarga, atau rombongan.</p>
+          <ul class="feature-list">
+            <li>✓ Armada 4 & 6 Seater</li>
+            <li>✓ Driver Profesional Verified</li>
+          </ul>
+          <a href="#download" class="card-action-link">Pesan BISPIRA Car ➔</a>
+        </div>
+
+        <!-- 4. MART -->
+        <div class="service-card cat-food" data-aos="fade-up">
+          <div class="card-accent mart-bg"></div>
+          <div class="service-icon-wrapper mart">🛒</div>
+          <h3>BISPIRA Mart</h3>
+          <p>Belanja sembako, sayur segar, dan kebutuhan rumah tangga langsung dikirim ke rumah.</p>
+          <ul class="feature-list">
+            <li>✓ Pengiriman Instant < 30 Mnt</li>
+            <li>✓ Jaminan Stok Selalu Fresh</li>
+          </ul>
+          <a href="#download" class="card-action-link">Belanja di Mart ➔</a>
+        </div>
+
+        <!-- 5. HEALTH -->
+        <div class="service-card cat-health highlight-card" data-aos="fade-up">
+          <div class="card-accent health-bg"></div>
+          <div class="service-icon-wrapper health">🚑</div>
+          <h3>BISPIRA Health & Medevac</h3>
+          <p>Panggilan darurat Ambulance Medevac 24 Jam & telekonsultasi dokter spesialis.</p>
+          <ul class="feature-list">
+            <li>⚡ Medevac Penanganan (Rp 150k)</li>
+            <li>⚡ Medevac Pengantaran (Rp 250k)</li>
+          </ul>
+          <a href="#download" class="card-action-link red-link">Panggil Medevac 24/7 ➔</a>
+        </div>
+
+        <!-- 6. SEND -->
+        <div class="service-card cat-transport" data-aos="fade-up">
+          <div class="card-accent send-bg"></div>
+          <div class="service-icon-wrapper send">📦</div>
+          <h3>BISPIRA Send</h3>
+          <p>Kirim dokumen penting & paket kilat antar alamat kota dengan kurir terpercaya.</p>
+          <ul class="feature-list">
+            <li>✓ Live GPS Courier Tracking</li>
+            <li>✓ Jaminan Asuransi Barang</li>
+          </ul>
+          <a href="#download" class="card-action-link">Kirim Paket ➔</a>
+        </div>
+
+        <!-- 7. KOST -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent kost-bg"></div>
+          <div class="service-icon-wrapper kost">🏠</div>
+          <h3>BISPIRA Kost</h3>
+          <p>Cari & sewa kamar kost harian, bulanan, atau tahunan dengan verifikasi langsung.</p>
+          <ul class="feature-list">
+            <li>✓ Deposit Aman Terverifikasi</li>
+            <li>✓ Tanpa Biaya Perantara</li>
+          </ul>
+          <a href="#download" class="card-action-link">Cari Kamar Kost ➔</a>
+        </div>
+
+        <!-- 8. TICKET -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent ticket-bg"></div>
+          <div class="service-icon-wrapper ticket">🎟️</div>
+          <h3>BISPIRA Ticket</h3>
+          <p>Pesan tiket pesawat, kereta api, bus intercity, hingga tiket event konser musik.</p>
+          <ul class="feature-list">
+            <li>✓ Instant E-Ticket Check-in</li>
+            <li>✓ Promo Cash Back Saldo</li>
+          </ul>
+          <a href="#download" class="card-action-link">Beli Tiket Perjalanan ➔</a>
+        </div>
+
+        <!-- 9. TAX & PPOB -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent tax-bg"></div>
+          <div class="service-icon-wrapper tax">⚡</div>
+          <h3>BISPIRA Tax & PPOB</h3>
+          <p>Bayar tagihan PLN, PDAM, BPJS Kesehatan, Pajak Daerah PBB, dan paket data.</p>
+          <ul class="feature-list">
+            <li>✓ Resmi SNAP BI Compliant</li>
+            <li>✓ Bebas Antre Real-time</li>
+          </ul>
+          <a href="#download" class="card-action-link">Bayar Tagihan ➔</a>
+        </div>
+
+        <!-- 10. EXPERT -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent expert-bg"></div>
+          <div class="service-icon-wrapper expert">🛠️</div>
+          <h3>BISPIRA Expert</h3>
+          <p>Pemanggilan jasa teknisi AC, kebersihan rumah, pertukangan, dan perawatan.</p>
+          <ul class="feature-list">
+            <li>✓ Teknisi Bersertifikat</li>
+            <li>✓ Garansi Servis 30 Hari</li>
+          </ul>
+          <a href="#download" class="card-action-link">Panggil Teknisi ➔</a>
+        </div>
+
+        <!-- 11. VOTING -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent voting-bg"></div>
+          <div class="service-icon-wrapper voting">🗳️</div>
+          <h3>BISPIRA Voting</h3>
+          <p>E-Voting digital transparan terverifikasi NIK untuk Pilkades & Organisasi.</p>
+          <ul class="feature-list">
+            <li>✓ Verifikasi NIK Resmi</li>
+            <li>✓ Hasil Real-time Transparent</li>
+          </ul>
+          <a href="#download" class="card-action-link">Akses Portal Voting ➔</a>
+        </div>
+
+        <!-- 12. PEDULI -->
+        <div class="service-card cat-lifestyle" data-aos="fade-up">
+          <div class="card-accent peduli-bg"></div>
+          <div class="service-icon-wrapper peduli">💙</div>
+          <h3>BISPIRA Peduli</h3>
+          <p>Salurkan donasi bencana, beasiswa pendidikan, dan program CSR tanpa biaya.</p>
+          <ul class="feature-list">
+            <li>✓ 0% Potongan Administrasi</li>
+            <li>✓ Laporan Penyaluran Transparan</li>
+          </ul>
+          <a href="#download" class="card-action-link">Donasi Sekarang ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS SECTION (3 CARA MUDAH BISPIRA) -->
+  <section id="cara-kerja" class="how-it-works-section" data-aos="fade-up">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">MUDAH & PRAKTIS</span>
+        <h2 class="section-title">3 Langkah Mudah Menggunakan BISPIRA</h2>
+        <p class="section-subtitle">Pesan apapun dalam hitungan detik dengan alur terintegrasi.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card" data-aos="fade-right" data-aos-delay="100">
+          <div class="step-num">1</div>
+          <h3>Pilih Layanan</h3>
+          <p>Buka BISPIRA User App, pilih layanan yang Anda butuhkan (Food, Ride, Send, Ambulance, dll).</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="step-num">2</div>
+          <h3>Pembayaran Transparan</h3>
+          <p>Lihat rincian biaya yang transparan, bayar pakai BISPIRA Pay, QRIS, Transfer Bank, atau Cash.</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-left" data-aos-delay="300">
+          <div class="step-num">3</div>
+          <h3>Driver & Resto Meluncur</h3>
+          <p>Driver terdekat & resto langsung memproses pesanan Anda dengan pelacakan lokasi GPS real-time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE BISPIRA (VALUE PROPOSITION) -->
+  <section id="keunggulan" class="value-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">MENGAPA BISPIRA</span>
+        <h2 class="section-title">Keunggulan Ekosistem BISPIRA</h2>
+        <p class="section-subtitle">Dibuat dengan standar teknologi kelas dunia untuk memberikan keadilan bagi semua pihak.</p>
+      </div>
+
+      <div class="value-grid">
+        <div class="value-card" data-aos="fade-up">
+          <div class="val-icon">⚡</div>
+          <h3>BI-FAST Instant Disbursement</h3>
+          <p>Pencairan saldo pendapatan Mitra Driver & Merchant 24 Jam secara real-time langsung ke rekening bank mana saja.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up">
+          <div class="val-icon">🤝</div>
+          <h3>Bagi Hasil Transparan & Adil</h3>
+          <p>Driver menerima 95% dari ongkir, Resto Merchant menerima 100% harga dasar toko, tanpa potongan tersembunyi.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up">
+          <div class="val-icon">🏢</div>
+          <h3>Pemberdayaan Lisensi Cabang</h3>
+          <p>Setiap daerah dipimpin oleh Pemegang Lisensi Cabang Regional dengan skema profit share 30-40% yang berkelanjutan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS & IMPACT STORIES SECTION (STORIES GRID) -->
+  <section class="testimonials-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">KATA MEREKA</span>
+        <h2 class="section-title">Cerita Sukses Bersama BISPIRA</h2>
+        <p class="section-subtitle">Kisah nyata dari Mitra Driver, Resto, Tim Medevac, dan Pengguna di Indonesia.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card" data-aos="fade-up">
+          <div class="testi-user">
+            <div class="testi-avatar green-avatar">🛵</div>
+            <div>
+              <strong>Pak Ridwan</strong>
+              <span>Mitra Driver Ride & Send (Jakarta)</span>
+            </div>
+          </div>
+          <p class="testi-text">"Sistem 95% hak driver net BISPIRA benar-benar mengubah pendapatan harian saya. Hasil narik utuh masuk dompet & pencairan BI-FAST hitungan detik kapanpun butuh uang."</p>
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="testi-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="testi-user">
+            <div class="testi-avatar orange-avatar">🍳</div>
+            <div>
+              <strong>Ibu Siti Rahma</strong>
+              <span>Pemilik Resto Ayam Geprek (Malang)</span>
+            </div>
+          </div>
+          <p class="testi-text">"Resto kami makin ramai sejak gabung BISPIRA Food. Karena harga dasar 100% tidak dipotong komisi tinggi, kami bisa jual harga bersahabat dan pembeli makin banyak."</p>
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="testi-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="testi-user">
+            <div class="testi-avatar red-avatar">🚑</div>
+            <div>
+              <strong>Dr. Aris Wibowo</strong>
+              <span>Koordinator Medevac Ambulance 24h</span>
+            </div>
+          </div>
+          <p class="testi-text">"Fitur Panggilan Darurat Medevac BISPIRA sangat membantu mempercepat koordinasi penanganan dan pengantaran pasien emergency ke rumah sakit secara cepat."</p>
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER REGISTRATION PORTAL (GOJEK & GRAB MITRA JOIN SHOWCASE) -->
+  <section id="mitra" class="registration-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">TUMBUH BERSAMA BISPIRA</span>
+        <h2 class="section-title">Pendaftaran Mandiri Online Mitra BISPIRA</h2>
+        <p class="section-subtitle">Dapatkan penghasilan harian fleksibel dan kembangkan usaha Anda bersama kami.</p>
+      </div>
+
+      <div class="reg-tab-buttons" data-aos="fade-up">
+        <button class="tab-btn active" onclick="switchRegTab('driver')">🛵 Mitra Driver & Medevac</button>
+        <button class="tab-btn" onclick="switchRegTab('merchant')">🏪 Mitra Resto & Sembako</button>
+        <button class="tab-btn" onclick="switchRegTab('branch')">🏢 Lisensi Cabang HQ</button>
+      </div>
+
+      <!-- FORM 1: DRIVER -->
+      <div id="form-driver" class="reg-form-card" data-aos="fade-up">
+        <h3>Form Pendaftaran Mitra Driver, Kurir & Medevac</h3>
+        <form onsubmit="handleFormSubmit(event, 'Mitra Driver')">
+          <div class="form-grid">
+            <div class="input-field">
+              <label>Nama Lengkap (Sesuai KTP)</label>
+              <input type="text" placeholder="Contoh: Budi Santoso" required>
+            </div>
+            <div class="input-field">
+              <label>Nomor Telepon / WhatsApp Active</label>
+              <input type="tel" placeholder="Contoh: 08123456789" required>
+            </div>
+            <div class="input-field">
+              <label>Pilihan Armada Kendaraan</label>
+              <select required>
+                <option value="motor">Motor (Bispira Ride & Food)</option>
+                <option value="mobil">Mobil (Bispira Car)</option>
+                <option value="send">Kurir Express (Bispira Send)</option>
+                <option value="ambulance">Ambulance Medevac Darurat</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label>Kota Operasional Penjemputan</label>
+              <input type="text" placeholder="Contoh: Jakarta Selatan" required>
+            </div>
+            <div class="input-field">
+              <label>Nomor Plat Kendaraan</label>
+              <input type="text" placeholder="Contoh: B 4982 BSP" required>
+            </div>
+            <div class="input-field">
+              <label>Upload Foto KTP & SIM (PDF/JPG)</label>
+              <input type="file" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Kirim Pendaftaran Driver 🚀</button>
+        </form>
+      </div>
+
+      <!-- FORM 2: MERCHANT -->
+      <div id="form-merchant" class="reg-form-card" style="display: none;">
+        <h3>Form Pendaftaran Mitra Resto & Merchant Toko</h3>
+        <form onsubmit="handleFormSubmit(event, 'Mitra Resto')">
+          <div class="form-grid">
+            <div class="input-field">
+              <label>Nama Outlet / Resto / Toko</label>
+              <input type="text" placeholder="Contoh: Ayam Goreng Pak Bareng" required>
+            </div>
+            <div class="input-field">
+              <label>Nama Pemilik Outlet</label>
+              <input type="text" placeholder="Contoh: Siti Rahmawati" required>
+            </div>
+            <div class="input-field">
+              <label>Kategori Usaha</label>
+              <select required>
+                <option value="food">Kuliner Makanan & Minuman (Bispira Food)</option>
+                <option value="mart">Sembako & Supermarket (Bispira Mart)</option>
+                <option value="expert">Jasa Perbaikan & Servis (Bispira Expert)</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label>Alamat Lengkap Outlet</label>
+              <input type="text" placeholder="Contoh: Jl. SCBD Lot 8, Jakarta Selatan" required>
+            </div>
+            <div class="input-field">
+              <label>Nomor Rekening Bank Resto (Pencairan Saldo)</label>
+              <input type="text" placeholder="Contoh: BNI - 9876543210" required>
+            </div>
+            <div class="input-field">
+              <label>Upload Foto Toko / Dapur</label>
+              <input type="file" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Kirim Pendaftaran Resto 🏪</button>
+        </form>
+      </div>
+
+      <!-- FORM 3: BRANCH -->
+      <div id="form-branch" class="reg-form-card" style="display: none;">
+        <h3>Form Pengajuan Pemegang Lisensi Cabang Regional</h3>
+        <form onsubmit="handleFormSubmit(event, 'Pemegang Lisensi Cabang')">
+          <div class="form-grid">
+            <div class="input-field">
+              <label>Nama Perusahaan / Perorangan</label>
+              <input type="text" placeholder="Contoh: PT Bispira Cabang Malang" required>
+            </div>
+            <div class="input-field">
+              <label>Wilayah Cabang yang Diajukan</label>
+              <input type="text" placeholder="Contoh: Kabupaten Malang / Kota Malang" required>
+            </div>
+            <div class="input-field">
+              <label>Nomor HP / Email Penanggung Jawab</label>
+              <input type="text" placeholder="Contoh: admin@bispira-malang.com" required>
+            </div>
+            <div class="input-field">
+              <label>Skema Profit Share yang Dipilih</label>
+              <select required>
+                <option value="30">30% Profit Share Cabang (Standard)</option>
+                <option value="40">40% Profit Share Cabang (Exclusivity Zone)</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Kirim Pengajuan Cabang 🏢</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FAQ ACCORDION SECTION (WITH PRE-EXPANDED RICH ANSWERS) -->
+  <section id="faq" class="faq-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">PERTANYAAN UMUM</span>
+        <h2 class="section-title">Sering Ditanyakan (FAQ)</h2>
+        <p class="section-subtitle">Temukan jawaban cepat seputar penggunaan aplikasi dan kemitraan BISPIRA.</p>
+      </div>
+
+      <div class="faq-accordion-grid" data-aos="fade-up">
+        <div class="faq-item active">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Apakah BISPIRA dapat digunakan di seluruh kota di Indonesia?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Ya! BISPIRA dirancang untuk ekspansi skala nasional. Setiap wilayah dikelola oleh Pemegang Lisensi Cabang Regional yang memastikan ketersediaan armada driver dan merchant resto di area masing-masing secara aktif.</p>
+          </div>
+        </div>
+
+        <div class="faq-item active">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Berapa skema potongan komisi untuk Mitra Driver & Resto?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Mitra Driver menerima <strong>95% bersih</strong> dari total ongkir per perjalanan (hanya 5% potongan sistem). Bagi Mitra Resto, <strong>100% harga dasar toko</strong> milik resto tetap aman tanpa potongan komisi tersembunyi yang merugikan merchant.</p>
+          </div>
+        </div>
+
+        <div class="faq-item active">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara kerja pencairan saldo pendapatan Mitra?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sistem kami terintegrasi dengan SNAP BI Payment Gateway & BI-FAST Instant Disbursement. Pencairan saldo dapat dilakukan 24 jam non-stop dalam hitungan detik langsung ke rekening bank mana saja di Indonesia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara memesan Ambulance Darurat Medevac 24 Jam?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Buka BISPIRA User App, pilih menu BISPIRA Health / Medevac Ambulance, tekan tombol Panggil Darurat. Tim Medevac terdekat akan langsung dikirim ke lokasi Anda sesuai koordinat GPS.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Bagaimana cara mendaftar Lisensi Cabang Regional BISPIRA?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Pilih tab "Lisensi Cabang HQ" pada formulir pendaftaran mitra di portal ini, isi detail wilayah yang diajukan. Tim Kemitraan HQ akan menghubungi Anda dalam 1x24 jam untuk verifikasi area.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD APPS SECTION (APP SHOWCASE CARDS) -->
+  <section id="download" class="download-section">
+    <div class="section-container">
+      <div class="download-box" data-aos="zoom-in">
+        <h2>Unduh Aplikasi BISPIRA SuperApp Suite</h2>
+        <p>Pilih aplikasi sesuai peran Anda dalam ekosistem BISPIRA.</p>
+
+        <div class="download-grid">
+          <div class="app-dl-card" data-aos="fade-up">
+            <div class="dl-icon">📱</div>
+            <h3>BISPIRA User App</h3>
+            <p>Aplikasi konsumen memesan makanan, ojek, car, tiket, dan bayar tagihan.</p>
+            <a href="#" class="btn-dl" onclick="alert('Download BISPIRA User App APK v2.0!')">Download APK (User)</a>
+          </div>
+
+          <div class="app-dl-card" data-aos="fade-up">
+            <div class="dl-icon">🛵</div>
+            <h3>BISPIRA Driver App</h3>
+            <p>Aplikasi mitra driver ojek, kurir, car, dan ambulance medevac darurat.</p>
+            <a href="#" class="btn-dl gold" onclick="alert('Download BISPIRA Driver App APK v2.0!')">Download APK (Driver)</a>
+          </div>
+
+          <div class="app-dl-card" data-aos="fade-up">
+            <div class="dl-icon">🏪</div>
+            <h3>BISPIRA Merchant App</h3>
+            <p>Aplikasi kasir & pengelola toko untuk mitra resto dan supermarket.</p>
+            <a href="#" class="btn-dl green" onclick="alert('Download BISPIRA Merchant App APK v2.0!')">Download APK (Merchant)</a>
+          </div>
+
+          <div class="app-dl-card" data-aos="fade-up">
+            <div class="dl-icon">💻</div>
+            <h3>BISPIRA Admin HQ</h3>
+            <p>Software Desktop Admin untuk pengelola cabang & super administrator.</p>
+            <a href="#" class="btn-dl dark" onclick="alert('Download BISPIRA Desktop Admin Executable Windows/Mac!')">Download Windows / Mac</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (GOJEK / GRAB MULTI-COLUMN FOOTER) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col" data-aos="fade-right">
+        <div class="brand-logo">
+          <img src="logo.png" alt="BISPIRA Logo" class="brand-logo-img">
+          <div class="brand-text">
+            <span class="brand-name white">BISPIRA</span>
+            <span class="brand-tag">SuperApp System</span>
+          </div>
+        </div>
+        <p class="footer-desc">Platform Ekosistem SuperApp Terpadu Indonesia. Terhubung dengan SNAP BI Payment Gateway & BI-FAST Instant Disbursement.</p>
+      </div>
+
+      <div class="footer-col" data-aos="fade-up">
+        <h4>Aplikasi Ekosistem</h4>
+        <ul>
+          <li><a href="#layanan">BISPIRA Food & Mart</a></li>
+          <li><a href="#layanan">BISPIRA Ride & Car</a></li>
+          <li><a href="#layanan">BISPIRA Medevac Ambulance</a></li>
+          <li><a href="#layanan">BISPIRA PPOB & Tiket</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" data-aos="fade-up">
+        <h4>Mitra & Cabang</h4>
+        <ul>
+          <li><a href="#mitra">Daftar Mitra Driver</a></li>
+          <li><a href="#mitra">Daftar Mitra Resto</a></li>
+          <li><a href="#mitra">Lisensi Cabang Regional</a></li>
+          <li><a href="#keunggulan">Pencairan BI-FAST 24 Jam</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" data-aos="fade-left">
+        <h4>Keamanan & Kepatuhan</h4>
+        <div class="compliance-badge">
+          <span>🔒 SNAP BI Compliant</span>
+          <span>⚡ BI-FAST Realtime</span>
+          <span>🛡️ Encrypted SSL 256-bit</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 PT BISPIRA SuperApp Indonesia. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK DOWNLOAD BAR -->
+  <div class="floating-dl-bar">
+    <span>⚡ <strong>#SemuaBisaDenganBISPIRA</strong> — Dapatkan Aplikasi Resmi di Android & iOS!</span>
+    <a href="#download" class="btn-float-dl">Unduh Sekarang 🚀</a>
+  </div>
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  
+  <script src="app.js"></script>
+</body>
+</html>

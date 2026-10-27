@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "bispira-admin-backend-v1",
+		"name": "BISPIRA Admin Backend API Collection",
+		"description": "Dokumentasi & Postman Collection Resmi Endpoint Admin Backend BISPIRA SuperApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1/admin",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "YOUR_JWT_TOKEN_HERE",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Auth & Admin Session",
+			"item": [
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin.jakarta@bispira.id\",\n  \"password\": \"PasswordSuperRahasia123!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						},
+						"description": "Endpoint login tim Admin (Super Admin Pusat & Admin Cabang Wilayah)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Dynamic Tariff Settings",
+			"item": [
+				{
+					"name": "Get Current Tariff & Fees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/settings/financial",
+							"host": ["{{base_url}}"],
+							"path": ["settings", "financial"]
+						},
+						"description": "Mendapatkan seluruh parameter tarif dan biaya operasional platform yang sedang aktif"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tariff & Fees",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tariffs\": {\n    \"ride_motor_per_km\": 2800,\n    \"service_fee\": 2500,\n    \"driver_charge_per_trip\": 500,\n    \"ambulance_base_fee\": 160000\n  },\n  \"rules\": {\n    \"branch_profit_share_percent\": 35.0,\n    \"unique_code_timer_minutes\": 30\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/settings/financial",
+							"host": ["{{base_url}}"],
+							"path": ["settings", "financial"]
+						},
+						"description": "Mengubah parameter tarif dan biaya operasional secara realtime"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Entity Verification",
+			"item": [
+				{
+					"name": "Get Pending Driver Verification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/drivers/verification-pending",
+							"host": ["{{base_url}}"],
+							"path": ["drivers", "verification-pending"]
+						},
+						"description": "Mengambil antrean pendaftaran driver baru yang memerlukan verifikasi KTP/SIM/STNK/SKCK"
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Driver Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"approval_note\": \"Dokumen KTP, SIM, STNK lengkap dan terverifikasi sah.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/drivers/drv_9921/approve",
+							"host": ["{{base_url}}"],
+							"path": ["drivers", "drv_9921", "approve"]
+						},
+						"description": "Menyetujui pendaftaran driver dan mengaktifkan akun"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Manual Payment Verification (Kode Unik)",
+			"item": [
+				{
+					"name": "Get Pending Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/payments/pending",
+							"host": ["{{base_url}}"],
+							"path": ["payments", "pending"]
+						},
+						"description": "Mengambil antrean pembayaran pending yang menunggu verifikasi kode unik 3-digit"
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bank_mutation_reference\": \"MUTASI_BCA_20260913_0099\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/payments/pay_77210/approve",
+							"host": ["{{base_url}}"],
+							"path": ["payments", "pay_77210", "approve"]
+						},
+						"description": "Mengonfirmasi bahwa dana sudah masuk di mutasi bank"
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reason\": \"Dana tidak ditemukan di mutasi rekening bank setelah dicek.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/payments/pay_77210/reject",
+							"host": ["{{base_url}}"],
+							"path": ["payments", "pay_77210", "reject"]
+						},
+						"description": "Menolak pembayaran jika transfer tidak ditemukan"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. Batch Disbursement (Pukul 17:00 WIB)",
+			"item": [
+				{
+					"name": "Get Upcoming Disbursements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/disbursements/upcoming",
+							"host": ["{{base_url}}"],
+							"path": ["disbursements", "upcoming"]
+						},
+						"description": "Melihat draf pencairan dana merchant batch 17:00 WIB"
+					},
+					"response": []
+				},
+				{
+					"name": "Execute Batch Disbursement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/disbursements/execute-batch",
+							"host": ["{{base_url}}"],
+							"path": ["disbursements", "execute-batch"]
+						},
+						"description": "Mengeksekusi batch pencairan dana merchant"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Realtime Tracking & Emergency",
+			"item": [
+				{
+					"name": "Get Online Drivers Coordinates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracking/drivers-online",
+							"host": ["{{base_url}}"],
+							"path": ["tracking", "drivers-online"]
+						},
+						"description": "Mendapatkan koordinat GPS seluruh driver online untuk peta Leaflet Admin"
+					},
+					"response": []
+				},
+				{
+					"name": "Reassign Order Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"new_driver_id\": \"drv_108\",\n  \"reason\": \"Driver lama kendaraannya mogok di jalan.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/orders/ord_882910/reassign-driver",
+							"host": ["{{base_url}}"],
+							"path": ["orders", "ord_882910", "reassign-driver"]
+						},
+						"description": "Memindahkan orderan ke driver lain secara manual"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7. Security & Anti-Fake GPS",
+			"item": [
+				{
+					"name": "Get Fake GPS Anomaly Reports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/security/fake-gps-reports",
+							"host": ["{{base_url}}"],
+							"path": ["security", "fake-gps-reports"]
+						},
+						"description": "Mendapatkan laporan kecurangan telemetri GPS driver (Tuyul/Fake GPS)"
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reason\": \"Penggunaan aplikasi Fake GPS terdeteksi oleh sistem keamanan.\",\n  \"duration_days\": 30\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/drivers/drv_102/suspend",
+							"host": ["{{base_url}}"],
+							"path": ["drivers", "drv_102", "suspend"]
+						},
+						"description": "Menangguhkan (Suspend) akun driver secara paksa"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8. Dashboard Analytics",
+			"item": [
+				{
+					"name": "Get Executive Summary Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/dashboard/stats",
+							"host": ["{{base_url}}"],
+							"path": ["dashboard", "stats"]
+						},
+						"description": "Mendapatkan statistik finansial dan operasional eksekutif"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

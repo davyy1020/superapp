@@ -1,0 +1,1468 @@
+=== Pengeluaran Pusat (44 lines) ===
+Line 3: Hak Akses
+Line 4: PC | CEO | CEF |  |  | TAHUN | BULAN
+Line 5: v | v | v | NO | CAPITAL EXPENDITURE | .......... | Januari | Februari | Maret | April | Mei | Juni | Juli | Agustus | September | Oktober | November | Desember | Jumlah
+Line 7:  |  |  | A
+Line 8:  |  |  | 1.0
+Line 9:  |  |  | 2.0
+Line 10:  |  |  | 3.0
+Line 11:  |  |  | +
+Line 12:  |  |  | B
+Line 13:  |  |  | 1.0
+Line 14:  |  |  | 2.0
+Line 15:  |  |  | 3.0
+Line 16:  |  |  | +
+Line 17:  |  |  | C
+Line 18:  |  |  | 1.0
+Line 19:  |  |  | 2.0
+Line 20:  |  |  | 3.0
+Line 21:  |  |  | +
+Line 22:  |  |  | D
+Line 23:  |  |  | 1.0
+Line 24:  |  |  | 2.0
+Line 25:  |  |  | 3.0
+Line 26:  |  |  | +
+Line 28:  |  |  |  | Jumlah Total
+Line 29: HAK AKSES
+Line 30: PC | CEO | CFO |  |  | TAHUN | BULAN
+Line 31: v | v | v | No. | OPERASIONAL EXPENDITURE | 2026..... | Januari | Februari | Maret | April | Mei | Juni | Juli | Agustus | September | Oktober | November | Desember | Jumlah
+Line 33:  |  |  | A
+Line 34:  |  |  | 1.0
+Line 35:  |  |  | 2.0
+Line 36:  |  |  | 3.0
+Line 37:  |  |  | +
+Line 38:  |  |  | B
+Line 39:  |  |  | 1.0
+Line 40:  |  |  | 2.0
+Line 41:  |  |  | 3.0
+Line 42:  |  |  | +
+Line 43:  |  |  | C
+Line 44:  |  |  | 1.0
+Line 45:  |  |  | 2.0
+Line 46:  |  |  | 3.0
+Line 47:  |  |  | +
+Line 60:  |  |  | +
+Line 61:  |  |  |  | Jumlah Total
+
+=== Pemasukan Pusat (60 lines) ===
+Line 1: Hak Akses |  |  |  | PEMASUKAN PUSAT
+Line 2: PC | CEO | CFO |  | Pemasukan Pusat | Tahun | Bulan | Satuan | Besaran | Kuantitas | Jumlah Bulanan | Jumlah Tahunan | Asal Dana | Tanggal Bayar | Keterangan
+Line 3:  |  |  |  |  | .......... | ............. | .................. | .................. | ................. | ................ |  |  |  | Sudah bayar | Belum Bayar
+Line 4:  |  |  | A
+Line 5:  |  |  | 1.0
+Line 6:  |  |  | 2.0
+Line 7:  |  |  | 3.0
+Line 8:  |  |  | +
+Line 9:  |  |  | B
+Line 10:  |  |  | 1.0
+Line 11:  |  |  | 2.0
+Line 12:  |  |  | 3.0
+Line 13:  |  |  | +
+Line 14:  |  |  | C
+Line 15:  |  |  | 1.0
+Line 16:  |  |  | 2.0
+Line 17:  |  |  | 3.0
+Line 18:  |  |  | +
+Line 19:  |  |  | D
+Line 20:  |  |  | 1.0
+Line 21:  |  |  | 2.0
+Line 22:  |  |  | 3.0
+Line 23:  |  |  | +
+Line 24:  |  |  | E
+Line 25:  |  |  | 1.0
+Line 26:  |  |  | 2.0
+Line 27:  |  |  | 3.0
+Line 28:  |  |  | +
+Line 29:  |  |  | F
+Line 30:  |  |  | +
+Line 31:  |  |  | E
+Line 32:  |  |  | 1.0
+Line 33:  |  |  | 2.0
+Line 34:  |  |  | 3.0
+Line 35:  |  |  | +
+Line 36:  |  |  | F
+Line 37:  |  |  | 1.0
+Line 38:  |  |  | 2.0
+Line 39:  |  |  | 3.0
+Line 40:  |  |  | +
+Line 41:  |  |  | G
+Line 42:  |  |  | 1.0
+Line 43:  |  |  | 2.0
+Line 44:  |  |  | 3.0
+Line 45:  |  |  | +
+Line 46:  |  |  | H
+Line 47:  |  |  | 1.0
+Line 48:  |  |  | 2.0
+Line 49:  |  |  | 3.0
+Line 50:  |  |  | +
+Line 51:  |  |  | I
+Line 52:  |  |  | 1.0
+Line 53:  |  |  | 2.0
+Line 54:  |  |  | 3.0
+Line 55:  |  |  | +
+Line 56:  |  |  | J
+Line 57:  |  |  | 1.0
+Line 58:  |  |  | 2.0
+Line 59:  |  |  | 3.0
+Line 60:  |  |  | +
+
+=== Pusat Admin Cabang (94 lines) ===
+Line 1: SUPER ADMIN PUSAT
+Line 2: Hak Akses |  login | password | lupa password | reset
+Line 3: PC | CEO | CFO | Admin Pusat | Manager | IT |  |  | sudah | belum beli
+Line 6:  |  |  |  |  |  | Lisensi / Franchise |  | aktif | Sertifikat Lisensi/Franchise | tidak aktif
+Line 7:  |  |  |  |  |  | A | IDENTITAS PEMBELI 1
+Line 8:  |  |  |  |  |  |  | Pencarian |  | Nomor Cabang | Nama Kabupaten | Nama Provinsi
+Line 9:  |  |  |  |  |  | 2026-01-01 00:00:00 | Nomor Cabang | 1.0 | 01,,,,,
+Line 10:  |  |  |  |  |  | 2026-02-01 00:00:00 | Nama Kabupaten / Kota
+Line 11:  |  |  |  |  |  | 2026-03-01 00:00:00 | Nama Provinsi
+Line 12:  |  |  |  |  |  | 2026-04-01 00:00:00 | Nama pemilik cabang
+Line 13:  |  |  |  |  |  | 2026-05-01 00:00:00 | Pemilik/Owner cabang
+Line 14:  |  |  |  |  |  | 2026-06-01 00:00:00 | Tanggal bergabung
+Line 15:  |  |  |  |  |  | 2026-07-01 00:00:00 | Peringatan tanggal berakhir |  | 60 hari s.d 1 hari
+Line 16:  |  |  |  |  |  | 2026-08-01 00:00:00 | Tanggal berakhir
+Line 17:  |  |  |  |  |  | 2026-09-01 00:00:00 | Tanggal Perpanjangan
+Line 18:  |  |  |  |  |  | 2026-10-01 00:00:00 | Masa Pending |  | 56 hari
+Line 19:  |  |  |  |  |  | 1.11 | Masa Putus
+Line 20:  |  |  |  |  |  | 1.12 | Pindah Ke PEMBELI 2 
+Line 21:  |  |  |  |  |  | B | SARANA DAN PRASARANA
+Line 22:  |  |  |  |  |  | 1.0 | Sarana |  | ada / tidak ada | Lampiran Bukti Foto
+Line 23:  |  |  |  |  |  | 2026-01-01 00:00:00 | Tempat/kantor (SOP)
+Line 24:  |  |  |  |  |  | 2026-02-01 00:00:00 | Komputer
+Line 25:  |  |  |  |  |  | 2026-03-01 00:00:00 | Peralatan show event
+Line 26:  |  |  |  |  |  | 2026-04-01 00:00:00 | meja
+Line 27:  |  |  |  |  |  | 2026-05-01 00:00:00 | kursi
+Line 28:  |  |  |  |  |  | 2026-06-01 00:00:00 | meja resepsionis
+Line 29:  |  |  |  |  |  | 2026-07-01 00:00:00 | kursi resepsionis
+Line 30:  |  |  |  |  |  | 2026-08-01 00:00:00 | ruang gudang
+Line 31:  |  |  |  |  |  | 1.9 | Printer
+Line 32:  |  |  |  |  |  | 2.0 | Prasarana
+Line 33:  |  |  |  |  |  | 2026-01-02 00:00:00 | Gaji
+Line 34:  |  |  |  |  |  |  | Manajer
+Line 35:  |  |  |  |  |  |  | ketua tim
+Line 36:  |  |  |  |  |  |  | Marketing/sales
+Line 37:  |  |  |  |  |  |  | Crew Event
+Line 38:  |  |  |  |  |  |  | Admin/CS
+Line 39:  |  |  |  |  |  | 2026-02-02 00:00:00 | media promosi (pamplet, reklame)
+Line 40:  |  |  |  |  |  | 2026-03-02 00:00:00 | Stiker qris
+Line 41:  |  |  |  |  |  | 2026-04-02 00:00:00 | makan siang
+Line 42:  |  |  |  |  |  | 2026-05-02 00:00:00 | minum
+Line 43:  |  |  |  |  |  | 2026-06-02 00:00:00 | listrik
+Line 44:  |  |  |  |  |  | 2026-07-02 00:00:00 | legalitas hukum |  | perorangan, badan hukum
+Line 46:  |  |  |  |  |  | C | PEMASUKAN |  | Tahun |  | Bulan
+Line 47:  |  |  |  |  |  | 1.0 | Bisnis Inti |  | 2026 s.d 20... |  | Januari | Februari | Maret | April | Mei | Juni | Juli | Agustus | September | Oktober | November | Desember
+Line 48:  |  |  |  |  |  |  | Jenis Pelanggan
+Line 49:  |  |  |  |  |  |  | User
+Line 50:  |  |  |  |  |  | 1.0 | User
+Line 51:  |  |  |  |  |  |  | Mitra
+Line 52:  |  |  |  |  |  | 1.0 | Driver
+Line 53:  |  |  |  |  |  | 2.0 | Merchant Food & Fresh Sembako
+Line 54:  |  |  |  |  |  | 3.0 | Mitra Sehat & Homecare
+Line 55:  |  |  |  |  |  | 4.0 | Mitra Ahli, Edukasi & Hiburan 
+Line 56:  |  |  |  |  |  | 5.0 | Mitra MICE & Wisata
+Line 57:  |  |  |  |  |  | 6.0 | Mitra Kost & Working Space
+Line 58:  |  |  |  |  |  | 7.0 | Mitra Ads
+Line 59:  |  |  |  |  |  | 8.0 | Mitra Donasi
+Line 61:  |  |  |  |  |  | 2.0 | Bisnis Tambahan
+Line 62:  |  |  |  |  |  | 02:01:00 | Bispira EO Cabang 
+Line 63:  |  |  |  |  |  | 02:02:01 | Tahun Event | Bulan | Jenis Event | Nama Event | Sasaan | Peran sebagai | Tanggal Acara | Luring | Tempat | Luring
+Line 64:  |  |  |  |  |  |  | 2026.0 | Januari - Desember | MICE s.d kompetisi | 1 s.d 10 | pelajar,mahasiswa,pekerja, masyarakat | peserta/presenter, penonton,pedagang 
+Line 65:  |  |  |  |  |  |  | 2027.0
+Line 66:  |  |  |  |  |  |  | 2028.0
+Line 67:  |  |  |  |  |  |  | +
+Line 68:  |  |  |  |  |  | 02:02:00 | Bispira E-Voting Cabang
+Line 69:  |  |  |  |  |  | 02:03:00 | Bispira EO Provinsi/Nasional
+Line 70:  |  |  |  |  |  | 4.1 | Tahun Event | Bulan | Jenis Event | Nama Event | Sasaan | Peran sebagai | Tanggal Acara | Luring | Tempat | Luring
+Line 71:  |  |  |  |  |  |  | 2026.0 | Januari-Desember | MICE - Kompetisi | 1 s.d 10 | pelajar,mahasiswa,pekerja, masyarakat | peserta/presenter, penonton,pedagang 
+Line 72:  |  |  |  |  |  |  | 2027.0
+Line 73:  |  |  |  |  |  |  | 2028.0
+Line 74:  |  |  |  |  |  |  | +
+Line 75:  |  |  |  |  |  | 02:04:00 | Bisnis EO Pusat
+Line 76:  |  |  |  |  |  | 02:05:00 | Distribusi Atribut Driver
+Line 77:  |  |  |  |  |  |  | Nama Atribut Driver |  | Produk | jumlah |  |  | Nama Driver / No.ID | Keterangan | Waktu diambil
+Line 78:  |  |  |  |  |  |  | Ride Hailing (ride hailing, delivery) |  | Helm | 1.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 79:  |  |  |  |  |  |  | Ride Hailing (ride hailing, delivery) |  | Jaket | 1.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 80:  |  |  |  |  |  |  | Mobil penumpang |  | T-Shirt | 2.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 81:  |  |  |  |  |  |  | Mobii barang/logistik |  | T-Shirt | 2.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 82:  |  |  |  |  |  |  | barang/logistik |  | Stiker | 3.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 84:  |  |  |  |  |  | 4.0 | Komplain
+Line 85:  |  |  |  |  |  | 2026-01-04 00:00:00 | Blokir kendaraan |  | Terima/Tolak Usul aktif Buka Blokir kendaraan dari Cabang | Buka blokir driver
+Line 86:  |  |  |  |  |  |  | 1.0
+Line 87:  |  |  |  |  |  |  | 2.0
+Line 88:  |  |  |  |  |  |  | 3.0
+Line 89:  |  |  |  |  |  |  | +
+Line 92:  |  |  |  |  |  | 2026-02-04 00:00:00 | pembeli |  | masalah | solusi
+Line 93:  |  |  |  |  |  |  | 1.0
+Line 94:  |  |  |  |  |  |  | 2.0
+Line 95:  |  |  |  |  |  |  | 3.0
+Line 96:  |  |  |  |  |  |  | +
+Line 98:  |  |  |  |  |  | 2026-03-04 00:00:00 | Pedagang (sembako, kesehatan,pendidikan, hiburan) |  | masalah | solusi
+Line 99:  |  |  |  |  |  |  | 1.0
+Line 100:  |  |  |  |  |  |  | 2.0
+Line 101:  |  |  |  |  |  |  | 3.0
+Line 102:  |  |  |  |  |  |  | +
+
+=== Pusat Lisensi Cabang (15 lines) ===
+Line 3: DAFTAR NASIONAL FRANCHISE/LISENSI
+Line 4:  PENCARIAN | NAMA LISENSI/FRANCHISE | KABUPATEN | PROVINSI
+Line 5: ............................ | .................................... | .................................... | ....................................
+Line 7: No. | NAMA LISENSI/FRANCHISE | ALAMAT | KONTAK | EMAIL | KABUPATEN | PROVINSI | TANGGAL AKTIF | TANGGAL BERAKHIR | TANGGAL PERPANJANGAN | TANGGAL ALARM 90 HARI | TANGGAL PENDING | AKTIF | BERAKHIR | DIJUAL PIHAK KE 3
+Line 8: 1.0
+Line 9: 2.0
+Line 10: 3.0
+Line 11: 4.0
+Line 12: 5.0
+Line 13: 6.0
+Line 14: 7.0
+Line 15: 8.0
+Line 16: 9.0
+Line 17: 10.0
+Line 18: +
+
+=== Pusat Nasabah (17 lines) ===
+Line 1: DAFTAR  NASABAH NASIONAL
+Line 2:  PENCARIAN |  |  | TAHUN | BULAN |  | FRANCHISE KABUPATEN KOTA
+Line 3: .................................... |  |  | .................................... | .................................... |  | ....................................
+Line 4:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0
+Line 5: No | TAHUN | BULAN | LISENSEE | FRANCHISEE KABUPATEN KOTA | DRIVER | MERCHANT FOOD & FRESH SEMBAKO | MITRA KESEHATAN DAN HOME CARE | MITRA AHLI, EDUKASI & HIBURAN | MITRA MICE | MITRA DONASI | MITRA ADS | MITRA KOST & WORKING SPACE | BISPIRA E-VOTING CABANG | BISPIRA EO CABANG | BISPIRA E-VOTING PUSAT | BISPIRA EO PUSAT
+Line 6: 1.0 |  | Januari
+Line 7: 2.0 |  | Februari
+Line 8: 3.0 |  | Maret
+Line 9: 4.0 |  | April
+Line 10: 5.0 |  | Mei
+Line 11: 6.0 |  | Juni
+Line 12: 7.0 |  | Juli
+Line 13: 8.0 |  | Agustus
+Line 14: 9.0 |  | September
+Line 15: 10.0 |  | Oktober
+Line 16: 11.0 |  | November
+Line 17: 12.0 |  | Desember
+
+=== Pusat User (13 lines) ===
+Line 1:  | DAFTAR USER NASIONAL, PROVINSI DAN KABUPATEN KOTA
+Line 2: NO | NAMA LENGKAP | AKUN | USER NAME | PASSWORD | ID | NOMOR WA | EMAIL | KABUPATEN | PROVINSI
+Line 3: 1.0
+Line 4: 2.0
+Line 5: 3.0
+Line 6: 4.0
+Line 7: 5.0
+Line 8: 6.0
+Line 9: 7.0
+Line 10: 8.0
+Line 11: 9.0
+Line 12: 10.0
+Line 13: +
+
+=== Pusat Merchant Food & Fresh  (39 lines) ===
+Line 1:  | DAFTAR MERCHANT MAKANAN, MINUMAN SEMBAKO NASIONAL, PROVINSI DAN KABUPATEN KOTA
+Line 3: 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 |  |  | 16.0 | 17.0 | 18.0 | 19.0 |  | 20.0 | 21.0 | 22.0 | 23.0 | 24.0 | 25.0 | 26.0 | 27.0 | 28.0 | 29.0 | 30.0 | 31.0 | 32.0 | 33.0 | 34.0 | 35.0 | 36.0 | 37.0 | 38.0 | 39.0 | 40.0 | 41.0 | 42.0 | 43.0 | 44.0 | 45.0 | 46.0 | 47.0 | 48.0 | 49.0 | 50.0 | 51.0 | 52.0
+Line 5:  PENCARIAN | NAMA PEMILIK | NAMA TOKO | NAMA PRODUK |  | NAMA PEMBELI  |  |  | NAMA DRIVER |  | KABUPATEN
+Line 6:  | ........................... | .............................. | ......................... |  | ................ |  |  | .................. |  | ................
+Line 7:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | STATUS KETERANGAN ORDER |  |  |  |  |  |  |  | SUBSCRIBE FEE BULANAN POTONG SALDO |  | SPLIT SETTLEMENT |  |  | KIRIM VIA RIDE HAILING FOOD DAN DELIVERY |  |  |  |  |  |  | KETERANGAN KIRIM RIDE HAILING |  | TRANSAKSI | SPLIT SETTLEMENT |  | JUMLAH TRANSAKSI MERCHANT
+Line 8: NO | NAMA PENJUAL/PEMILIK | NAMA TOKO/WARUNG | ALAMAT TOKO/WARUNG | AKUN | USER NAME | PASSWORD | ID | NOMOR WA | EMAIL | KABUPATEN | PROVINSI | TANGGAL TRANSAKSI HARIAN | JAM TRANSAKSI | ASAL ORDER  | JAM BUKA | JAM TUTUP | NAMA PRODUK  | HARGA PRODUK AWAL | MARK UP | HARGA PRODUK RESMI | HARGA DISKON | BAYAR | ORDER DITERIMA | ORDER DIPROSES | ORDER DIKIRIM KE PEMBELI | JAM KIRIM | SUKSES | PENDING | GAGAL | SELESAI | DOMPET BANK DIGITAL MERCHANT | TOP UP SALOD | KREDIT MODAL KERJA | BAYAR ANGSURAN KREDIT | SUDAH  BAYAR | BELUM BAYAR | DANA PEMBELI | PENJUAL | PLATFORM | NAMA DRIVER | TANGGAL TERIMA ORDER  | TANGGAL AMBIL ORDER | TANGGAL ANTAR ORDER | TUJUAN ORDER | JAM SAMPAI TUJUAN | ORDER DITERIMA PEMBELI | SUKSES | GAGAL | SELESAI | DRIVER | PLATFORM | HARIAN | BULANAN | TAHUN
+Line 9: 1.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 08.00 WIB/WITA/WIT | MISAL 20.00
+Line 10: 2.0 | MERCHANT |  |  |  |  |  |  |  |  |  |  |  |  |  | 24 JAM NON STOP
+Line 11: 3.0 | Bikin Akun | Nomor Hape, email
+Line 12: 4.0 | Buka Rekening | embedded form di aplikasi
+Line 13: 5.0 | top up saldo | Rp.
+Line 14: 6.0 | dompet digital | Rp.
+Line 15: 7.0 | histori  pengeluaran dompet digital | Rp.
+Line 16: 8.0 | transfer ke sesama bank digital (gratis) | Rp.
+Line 17: 9.0 | transfer ke sesama bank digital (gratis) | Rp.
+Line 18: 10.0 | transfer ke rekening bank konvensional (gratis sesuai kuota bulanan) | Rp.
+Line 19: + | Kredit Modal Kerja dari bank digital | Rp.
+Line 20:  | Cicilan dari kredit modal kerja | Rp.
+Line 21:  | upload foto produk
+Line 22:  | lihat produk, pilih produk
+Line 23:  | stok barang
+Line 24:  | barang terjual
+Line 25:  | barang sisa
+Line 26:  | barang habis
+Line 27:  | update barang
+Line 28:  | harga | Rp.
+Line 29:  | update harga | Rp.
+Line 30:  | jam buka
+Line 31:  | jam tutup
+Line 32:  | chat ke pembeli ( jawab chat pembeli)
+Line 33:  | QRIS
+Line 34:  | VA
+Line 35:  | barang terjual/selesai/terima bayaran dari pembeli | Rp.
+Line 36:  | order driver ride hailing (integrasi OSRM)
+Line 37:  | kirim
+Line 38:  | selesai.
+Line 39:  | bayar iuran bulanan ke platfrom | Rp.
+Line 40:  | potong komisi ke platform per transaksi berhasil | Rp.
+Line 41:  | bintang dari user
+
+=== Pusat Bispira EO Cabang (38 lines) ===
+Line 1: DAFTAR MITRA BISPIRA EO  KABUPATEN KOTA 
+Line 3: PENCARIAN | NAMA PEMILIK BISPIRA EO | KABUPATEN
+Line 4: ............................... | ............................... | ...............................
+Line 7: BISPIRA EO
+Line 8: Bikin Akun | Nomor Hape, email
+Line 9: Buka Rekening | embedded form di aplikasi
+Line 10: top up saldo
+Line 11: dompet digital
+Line 12: sisa saldo
+Line 13: histori  pengeluaran dompet digital
+Line 14: transfer ke sesama bank digital (gratis)
+Line 15: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 16: upload foto produk & deskripsi produk
+Line 17: Jenjang lomba atau acara | pelajar,mahasiswa, umum
+Line 18: kelompok lomba atau acara | individu, kelompok
+Line 19: Tingkat lomba atau acara
+Line 20: kecamatan | cabang
+Line 21: kabupaten | cabang
+Line 22: lihat produk
+Line 23: harga tiket
+Line 24: update harga tiket
+Line 25: Jam Buka
+Line 26: Jam Tutup
+Line 27: Tanggal buka pendaftaran | Rp.
+Line 28: tanggal tutup pendaftaran | Rp.
+Line 29: tanggal acara | Rp.
+Line 30: mode acara
+Line 31: off line
+Line 32: online
+Line 33: link dokumen, video,foto
+Line 34: tempat
+Line 35: waktu acara
+Line 36: tiket kode booking
+Line 37: tiket barcode
+Line 38: 1 tiket untuk 1 pembeli , satu kali masuk/pakai
+Line 39: kirim tiket ke email  user
+Line 40: selesai.
+Line 41: bintang dari user
+
+=== Pusat Bispira E-Voting Cabang (42 lines) ===
+Line 1:  |  | DAFTAR MITRA BISPIRA EO  KABUPATEN KOTA 
+Line 3:  | 1.0 |  | PRA E-VOVING | Penjaringan kandidat pendaftaran di Mitra MICE atau Bispira EO  Cabang
+Line 4:  | 2.0 |  | E-VOTING | Nama Event
+Line 5:  | 3.0 |  | NAMA PENYELENGGARA E-VOTING
+Line 6:  | 4.0 |  | Nama Acara E-voting
+Line 7:  |  |  | Durasi waktu | 3 bulan | Tahap penyisihan acara e-voting
+Line 8:  |  |  |  | 1 bulan dan final | Tahap 10 besar
+Line 10:  | 4.0 |  | USER | Lihat kandidat (foto, nama, peringkat saat ini: #5 misal)
+Line 11:  | 5.0 |  |  | pilih kandidat
+Line 12:  | 6.0 |  |  | top up saldo 
+Line 13:  | 7.0 |  |  | beli paket vote | paket 1 Rp. 1000 dapat 2 suara
+Line 14:  |  |  |  |  | paket 2 Rp. 5000 dapat 10 suara
+Line 15:  |  |  |  |  | paket 3 Rp. 10000 dapat  20 suara
+Line 16:  |  |  |  |  | paket 4 Rp. 20000 dapat 40 suara
+Line 17:  |  |  |  |  | paket 5 Rp. 50.000 dapat 100 suara
+Line 19:  | 8.0 |  |  | pakai e-voting
+Line 20:  | 8.1 |  |  | pilihan pakai | 1.  satu per satu ke kandidat pilihan
+Line 21:  | 8.2 |  |  |  | 2. pakai sekaligus ke kandidiat pilihan
+Line 22:  |  |  |  |  | 3. informasi siswa saldo suara
+Line 23:  | 9.0 |  |  | daftar  | pilihan kandidat
+Line 24:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 26:  | 10.0 |  |  | hasil suara | pilihan kandidat
+Line 27:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 28:  | 11.0 |  |  | status kompetisi | babak 50 besar berjalan, (sisa waktu : 7 hari 6 jam)
+Line 29:  | 12.0 |  |  | klasemen tangga juara live board
+Line 32:  | 13.0 |  |  | 🧑‍💻 Hub Admin (Akses Terbatas)
+Line 33:  | 13:01:00 |  |  | Verifikasi Pembayaran: Menyetujui manual top up saldo jika ada kendala bank digital.
+Line 34:  | 13:02:00 |  |  | Monitor Kandidat: Menambah, mengedit, atau mendiskualifikasi peserta.
+Line 35:  | 13:03:00 |  |  | Push Notifikasi: Mengirim pengingat ke WhatsApp/Email pemilih yang masih memiliki sisa saldo suara.
+Line 36:  | 14.0 |  |  | 👑 Hub Super Admin (Kontrol Mutlak)
+Line 37:  | 14:01:00 |  |  | Kontrol Fase Babak: Saklar utama untuk mengubah status kompetisi:
+Line 38:  |  |  |  | [Tombol] Pindahkan ke Babak Penyisihan (Cut-off otomatis di luar 50 besar).
+Line 39:  |  |  |  | [Tombol] Pindahkan ke Babak 20 Besar (Suara di-reset ke 0 atau diakumulasi, sesuai regulasi).
+Line 40:  |  |  |  | [Tombol] Pindahkan ke Babak Final 10 Besar.
+Line 41:  | 14:02:00 |  |  | Manajemen Finansial: Grafik pendapatan kotor dari penjualan paket e-voting.
+Line 42:  | 14:03:00 |  |  | Sponsor Management: Mengubah gambar banner sponsor, link tujuan, dan kode voucher diskon brand awareness.
+Line 46:  |  |  | Space Iklan Brand Awareness
+Line 47:  |  | 1.0 | Sticky premium top header banner
+Line 48:  |  | 2.0 | in between candidates banner advert
+Line 49:  |  | 3.0 | sponsor payment promo
+Line 50:  |  | 4.0 | leaderboard sidebar partner logo
+Line 51:  |  | 5.0 | succes & claim voucher modal pop up
+
+=== Pusat Bispira EO Pusat (39 lines) ===
+Line 1: DAFTAR MITRA BISPIRA EO  KABUPATEN PROVINSI DAN NASIONAL
+Line 3: PENCARIAN | NAMA PEMILIK BISPIRA EO | PROVINSI | NASIONAL
+Line 4: ............................... | ............................... | ............................... | ...............................
+Line 7: BISPIRA EO
+Line 8: Bikin Akun | Nomor Hape, email
+Line 9: Buka Rekening | embedded form di aplikasi
+Line 10: top up saldo
+Line 11: dompet digital
+Line 12: sisa saldo
+Line 13: histori  pengeluaran dompet digital
+Line 14: transfer ke sesama bank digital (gratis)
+Line 15: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 16: Nama Event | Lomba/Kompetisi/Ujian/MICE
+Line 17: upload foto produk & deskripsi produk
+Line 18: Jenjang lomba atau acara | pelajar,mahasiswa, umum
+Line 19: kelompok lomba atau acara | individu, kelompok
+Line 20: Tingkat lomba atau acara
+Line 21: provinsi | pusat
+Line 22: nasional | pusat
+Line 23: lihat produk
+Line 24: harga tiket
+Line 25: update harga tiket
+Line 26: Jam Buka
+Line 27: Jam Tutup
+Line 28: Tanggal buka pendaftaran | Rp.
+Line 29: tanggal tutup pendaftaran | Rp.
+Line 30: tanggal acara | Rp.
+Line 31: mode acara
+Line 32: off line
+Line 33: online
+Line 34: link dokumen, video,foto
+Line 35: tempat
+Line 36: waktu acara
+Line 37: tiket kode booking
+Line 38: tiket barcode
+Line 39: 1 tiket untuk 1 pembeli , satu kali masuk/pakai
+Line 40: kirim tiket ke email  user
+Line 41: selesai.
+Line 42: bintang dari user
+
+=== Pusat Bispira E-Voting Pusat (42 lines) ===
+Line 1:  |  | DAFTAR MITRA BISPIRA EO  PROVINSI NASIONAL
+Line 3:  | 1.0 |  | PRA E-VOVING | Penjaringan kandidat pendaftaran di Mitra MICE atau Bispira EO  Cabang
+Line 4:  | 2.0 |  | E-VOTING | Nama Event
+Line 5:  | 3.0 |  | NAMA PENYELENGGARA E-VOTING
+Line 6:  | 4.0 |  | Nama Acara E-voting
+Line 7:  |  |  | Durasi waktu | 3 bulan | Tahap penyisihan acara e-voting
+Line 8:  |  |  |  | 1 bulan dan final | Tahap 10 besar
+Line 10:  | 4.0 |  | USER | Lihat kandidat (foto, nama, peringkat saat ini: #5 misal)
+Line 11:  | 5.0 |  |  | pilih kandidat
+Line 12:  | 6.0 |  |  | top up saldo 
+Line 13:  | 7.0 |  |  | beli paket vote | paket 1 Rp. 1000 dapat 2 suara
+Line 14:  |  |  |  |  | paket 2 Rp. 5000 dapat 10 suara
+Line 15:  |  |  |  |  | paket 3 Rp. 10000 dapat  20 suara
+Line 16:  |  |  |  |  | paket 4 Rp. 20000 dapat 40 suara
+Line 17:  |  |  |  |  | paket 5 Rp. 50.000 dapat 100 suara
+Line 19:  | 8.0 |  |  | pakai e-voting
+Line 20:  | 8.1 |  |  | pilihan pakai | 1.  satu per satu ke kandidat pilihan
+Line 21:  | 8.2 |  |  |  | 2. pakai sekaligus ke kandidiat pilihan
+Line 22:  |  |  |  |  | 3. informasi siswa saldo suara
+Line 23:  | 9.0 |  |  | daftar  | pilihan kandidat
+Line 24:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 26:  | 10.0 |  |  | hasil suara | pilihan kandidat
+Line 27:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 28:  | 11.0 |  |  | status kompetisi | babak 50 besar berjalan, (sisa waktu : 7 hari 6 jam)
+Line 29:  | 12.0 |  |  | klasemen tangga juara live board
+Line 32:  | 13.0 |  |  | 🧑‍💻 Hub Admin (Akses Terbatas)
+Line 33:  | 13:01:00 |  |  | Verifikasi Pembayaran: Menyetujui manual top up saldo jika ada kendala bank digital.
+Line 34:  | 13:02:00 |  |  | Monitor Kandidat: Menambah, mengedit, atau mendiskualifikasi peserta.
+Line 35:  | 13:03:00 |  |  | Push Notifikasi: Mengirim pengingat ke WhatsApp/Email pemilih yang masih memiliki sisa saldo suara.
+Line 36:  | 14.0 |  |  | 👑 Hub Super Admin (Kontrol Mutlak)
+Line 37:  | 14:01:00 |  |  | Kontrol Fase Babak: Saklar utama untuk mengubah status kompetisi:
+Line 38:  |  |  |  | [Tombol] Pindahkan ke Babak Penyisihan (Cut-off otomatis di luar 50 besar).
+Line 39:  |  |  |  | [Tombol] Pindahkan ke Babak 20 Besar (Suara di-reset ke 0 atau diakumulasi, sesuai regulasi).
+Line 40:  |  |  |  | [Tombol] Pindahkan ke Babak Final 10 Besar.
+Line 41:  | 14:02:00 |  |  | Manajemen Finansial: Grafik pendapatan kotor dari penjualan paket e-voting.
+Line 42:  | 14:03:00 |  |  | Sponsor Management: Mengubah gambar banner sponsor, link tujuan, dan kode voucher diskon brand awareness.
+Line 46:  |  |  | Space Iklan Brand Awareness
+Line 47:  |  | 1.0 | Sticky premium top header banner
+Line 48:  |  | 2.0 | in between candidates banner advert
+Line 49:  |  | 3.0 | sponsor payment promo
+Line 50:  |  | 4.0 | leaderboard sidebar partner logo
+Line 51:  |  | 5.0 | succes & claim voucher modal pop up
+
+=== Pusat Mitra Donasi (35 lines) ===
+Line 1: DAFTAR MITRA DONASI  KABUPATEN KOTA DAN PROVINSI
+Line 2: PENCARIAN | NAMA DRIVER | KABUPATEN | PROVINSI
+Line 3: ............................... | ............................... | ............................... | ...............................
+Line 5: MITRA Donasi
+Line 6: Bikin Akun | Nomor Hape, email
+Line 7: Buka Rekening | embedded form di aplikasi
+Line 8: top up saldo
+Line 9: dompet digital
+Line 10: sisa saldo
+Line 11: histori  pengeluaran dompet digital
+Line 12: transfer ke sesama bank digital (gratis)
+Line 13: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 14: Kredit Modal Kerja dari bank digital | Rp.
+Line 15: Cicilan dari kredit modal kerja | Rp.
+Line 16: histori cicilan
+Line 17: upload foto produk & deskripsi produk
+Line 18: nama yayasan
+Line 19: nama program
+Line 20: lihat produk
+Line 21: pilihan durasi paket program tayang
+Line 22: 1 bulan
+Line 23: 3 bulan
+Line 24: 6 bulan
+Line 25: 9 bulan
+Line 26: 12 bulan
+Line 27: harga paket program
+Line 28: 1 bulan | Rp.
+Line 29: 3 bulan | Rp.
+Line 30: 6 bulan | Rp.
+Line 31: 9 bulan | Rp.
+Line 32: 12 bulan | Rp.
+Line 33: QRIS | Rp.
+Line 34: selesai.
+Line 35: bayar iuran bulanan ke platfrom mengikuti durasi paket  program | Rp.
+Line 36: potong komisi untuk platform dari total pendapatan  | Rp. 5% atau setara nominal
+
+=== Pusat Mitra Ahi,Edukusi&Hiburan (36 lines) ===
+Line 1: DAFTAR MITRA AHLI, EDUKASI & HIBURAN KABUPATEN KOTA DAN PROVINSI
+Line 2:  PENCARIAN | NAMA AHLI EDUKASI / HIBURAN | NAMA TOKO AHLI EDUKASI / HIBURAN | NAMA PRODUK | KABUPATEN | PROVINSI
+Line 3: ............... | ............... | ............... | ............... | ............... | ...............
+Line 5: MITRA JASA AHLI & HIBURAN
+Line 6: Bikin Akun | Nomor Hape, email
+Line 7: Buka Rekening | embedded form di aplikasi
+Line 8: top up saldo
+Line 9: dompet digital
+Line 10: sisa saldo
+Line 11: histori  pengeluaran dompet digital
+Line 12: transfer ke sesama bank digital (gratis)
+Line 13: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 14: Kredit Modal Kerja dari bank digital | Rp.
+Line 15: Cicilan dari kredit modal kerja | Rp.
+Line 16: histori cicilan
+Line 17: upload foto produk & deskripsi produk
+Line 18: lihat produk
+Line 19: jadwal layanan
+Line 20: harga telechat  non konsultan ahli (chat dengan kebutuhan user, setelah user bayar order)
+Line 21: update harga telechat  non konsultan ahli (chat dengan kebutuhan user, setelah user bayar order) | Rp.
+Line 22: harga layanan jasa ahli (guru privat, pelatih olah raga, penceramah agama, pelatih seni)  | Rp.
+Line 23: update harga layanan jasa ahli (guru privat, pelatih olah raga, penceramah agama, pelatih seni)  | Rp.
+Line 24: harga layanan jasa hiburan (badut, penyanyi solo, band, MC)  | Rp.
+Line 25: update harga layanan jasa hiburan (badut, penyanyi solo, band, MC)  | Rp.
+Line 26: jam buka
+Line 27: jam tutup
+Line 28: QRIS | Rp.
+Line 29: VA | Rp.
+Line 30: layanan jasa terjual/selesai/terima bayaran dari user | Rp.
+Line 31: order driver ride hailing (integrasi OSRM) antar jasa ahli & hiburan ke tempat user sesuai jadwal 
+Line 32: kirim
+Line 33: selesai.
+Line 34: bayar iuran bulanan ke platfrom | Rp.
+Line 35: potong komisi ke platform per transaksi berhasil | Rp.
+Line 36: bintang dari user
+Line 37: bintang dari user
+
+=== Pusat Driver (105 lines) ===
+Line 1: DAFTAR MITRA DRIVER  KABUPATEN KOTA DAN PROVINSI 
+Line 2:  | PENCARIAN | NAMA DRIVER | KABUPATEN | PROVINSI
+Line 3:  | .............. | ................................... | ............................ | ...........................
+Line 5:  | Super Admin | Driver | MITRA Driver
+Line 6: 1.0 | v |  | Buat akun |  | Nomor WA Aktif, email
+Line 7: 2.0 | v |  | Buka Rekening bank digital (embedded form), e-KYC |  | Embedded Form
+Line 8: 3.0 | v |  | Top up saldo
+Line 9: 4.0 | v |  | Dompet Digital powered by bank digital
+Line 10: 5.0 | v |  | PIN/Password 
+Line 11: 6.0 | v |  | QRIS
+Line 12: 7.0 | v |  | VA
+Line 13: 8.0 | v |  | Pemasukan
+Line 14: 9.0 | v |  | histori/rekaman pemasukan
+Line 15: 10.0 | v |  | Pengeluaran
+Line 16: 11.0 | v |  | Histori/rekaman pengeluaran
+Line 17: 12.0 | v |  | Transfer ke sesama bank digital (gratis)
+Line 18: 14.0 | v |  | transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 19: 15.0 | v | v | Atribut driver
+Line 20: 16.0 | v | v | bayar lunas | Sudah Beli Atribut Driver | Sudah (jika beli dapat order dan top up saldo) | Belum (jika belum beli tidak dapat order otomatis, top up saldo)
+Line 21: 17.0 | v |  | helm | driver roda 2
+Line 22: 18.0 | v |  | jaket | driver roda 2
+Line 23: 19.0 | v |  | food box | driver roda 2
+Line 24: 20.0 | v |  | t-shirt polo | driver roda 4 (delivery/ride hailing, logistik)
+Line 25: 21.0 | v |  | stiker mobil logistik/box | driver roda 4 (logistik)
+Line 26: 22.0 | v | v | bayar kredit
+Line 27: 23.0 | v | v | DP
+Line 28: 24.0 | v | v | cicilan harian  dari order ke 1  (1 hari 1 kali) ke ..... dari ....
+Line 29: 25.0 | v | v | kredit lunas | Sudah Beli Atribut Driver | Sudah (jika beli dapat order dan top up saldo) | Belum (jika belum beli tidak dapat order otomatis, top up saldo)
+Line 30: 26.0 | v |  | helm | driver roda 2
+Line 31: 27.0 | v |  | jaket | driver roda 2
+Line 32: 28.0 | v |  | food box | driver roda 2
+Line 33: 29.0 | v |  | t-shirt polo | driver roda 4 (delivery/ride hailing, logistik)
+Line 34: 30.0 | v |  | stiker | driver roda 4 (logistik)
+Line 35: 31.0 | v | v | status atribut driver (tempat ambil di kantor cabang) | sudah diambil driver |  | belum diambil driver
+Line 36:  | v |  | waktu pengambilan | tanggal |  | jam
+Line 37: 32.0 | v |  | lokasi  | kabupaten/kota
+Line 38: 33.0 | v |  | tracking lokasi driver terdekat dengan user yang order
+Line 39: 39.0 | v |  | chat dengan user ketik manual atau pilih balasan di library respon
+Line 40: 40.0 | v |  | telelpon dengan user (nomor disamarkan)
+Line 41: 41.0 | v |  | Nearby 
+Line 42: 42.0 | v |  | Estimation Time of Arrival (ETA)
+Line 43: 43.0 | v | v | Tracking
+Line 44: 44.0 | v | v | bayaran driver |  | cash atau dompet digital user
+Line 45: 45.0 | v |  | potong komisi dari dompet digital driver
+Line 46: 46.0 | v | v | kuantitas order per hari
+Line 47: 47.0 | v |  | kuantitas order per minggu
+Line 48: 48.0 | v |  | kuantitas order per bulan
+Line 49: 49.0 | v |  | kuantitas order per tahun
+Line 50: 50.0 | v |  | jumlah komisi diterima per order berhasil |  | cash / Transfer dari user
+Line 51: 51.0 | v | v | jumlah komisi dipotong dari saldo dompet digital per order berhasil, lalu split settlement |  | platform | bantuan asuransi | bantuan hari raya |  |  |  |  | bantuan akhir tahun
+Line 52: 52.0 | v | v |  % |  | % |  % |  % |  |  |  |  |  %
+Line 53: 53.0 |  |  | setara Nominal |  | setara Nominal | setara Nominal | setara Nominal |  |  |  |  | setara Nominal
+Line 54: 54.0 | v | v | iuran bulanan platform
+Line 55: 55.0 | v | v | order masuk
+Line 56: 56.0 | v | v | order berhasil
+Line 57:  | v | v | kredit modal kerja dari bank digital/channeling
+Line 58:  |  |  | bayar cicilan kredit harian ( bayar cicilan 1x dari order ke 2 atau 3 per hari)
+Line 59:  |  |  | status cicilan : belum lunas / lunas
+Line 60:  |  |  | kredit score alternatif (filter kelayakan pengajuran kredit bank digital berdasarkan transaksi per bulan )
+Line 61: 57.0 | v |  | Driver suspensed
+Line 62: 58.0 | v |  | jumlah tolak order perhari
+Line 63: 59.0 | v |  | jumlah tolak order perminggu
+Line 64: 60.0 | v |  | jumlah tolak order perbulan
+Line 65: 61.0 | v |  | jumlah tolak order per tahun
+Line 66: 62.0 | v |  | batal order dari user sudah ketemu/ dekat dengan driver
+Line 67: 63.0 | v |  | tracking aplikasi tuyul
+Line 68: 64.0 | v |  | tracking GPS palsu
+Line 69: 65.0 | v |  | tracking order palsu/fiktif
+Line 70: 66.0 | v | v | Bintang dari user
+Line 73:  |  |  |  |  | Roda 2 & 4 Ride Hailing |  |  |  |  |  |  |  |  | Split Settlement |  |  |  | Biaya Platrom
+Line 74:  |  |  |  | Tarif Normal | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM | Markp per KM | Tarif resmi | Titik Jemput | Titik Tujuan | Total jarak KM | Total Tarif Resmi | Tarif dasar < 3 KM | Total Mark up | Total Tarif Dasar/asli | Total Mark up | Biaya layanan roda 4 | Biaya Aplikasi
+Line 75:  |  |  |  |  | Rp. 8000 (opsional) | ......... | ......... | Rp. 250 opsional | Tarif bawah/atas+markup |  |  |  | Rp. |  |  |  |  | Rp. 5000 (Opsional) | Rp. 1500 (Opsional)
+Line 76:  |  |  | Ikuti Regulasi Zona | wilayah
+Line 77:  |  |  | 1.0 | sumatera, Kalimantan
+Line 78:  |  |  | 2.1 | jabodetabek |  |  | Rp. 3000 (Opsional) |  |  |  |  | KM |  |  |  |  | v | v | v
+Line 79:  |  |  | 2.2 | non jabodetabek pulau jawa
+Line 80:  |  |  | 3.0 | bali, sulawesi, maluku, ntb, papua
+Line 81:  |  |  |  | User | v |  |  |  |  |  |  | v | v |  |  |  |  | v | v
+Line 82:  |  |  |  | Driver  |  |  |  |  |  |  |  |  |  | v |  | v
+Line 83:  |  |  |  | Platform | v | v | v |  |  |  |  | v | v |  | v | v | v | v | v
+Line 84:  |  |  |  |  | Roda 2 & 4 Ride Hailing |  |  |  |  |  |  |  |  | Split Settlement |  |  |  | Biaya Platrom
+Line 85:  |  |  |  | Tarif Macet/ Hujan | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM |  |  | Titik Jemput | Titik Tujuan | Total jarak KM | Total Tarif jarak | Tarif dasar < 3 KM | Total Mark up | Total Tarif Dasar/asli | Total Mark up | Biaya layanan roda 4 | Biaya Aplikasi
+Line 86:  |  |  |  |  | Rp. 20.000 (opsional) | ......... | ......... |  |  |  |  |  | Rp. |  |  |  |  | Rp. 7500 (Opsional) | Rp. 2000 (Opsional)
+Line 87:  |  |  | Ikuti Regulasi Zona | wilayah
+Line 88:  |  |  | 1.0 | sumatera, Kalimantan
+Line 89:  |  |  | 2.1 | jabodetabek |  |  | Rp. 4000 (Opsional) |  |  |  |  |  |  |  |  |  | v | v | v
+Line 90:  |  |  | 2.2 | non jabodetabek pulau jawa
+Line 91:  |  |  | 3.0 | bali, sulawesi, maluku, ntb, papua
+Line 92:  |  |  |  | User | v |  |  |  |  |  |  |  | v |  |  |  |  | v | v
+Line 93:  |  |  |  | Driver  |  |  |  |  |  |  |  |  | v |  |  | v
+Line 94:  |  |  |  | Platform | v | v | v |  |  |  |  | v | v |  |  | v | v | v | v
+Line 95:  |  |  |  |  | Roda 2 & 4 Delivery   1 jam - 1 hari pasti sampai (paket barang) |  |  |  |  |  |  |  |  | Split Settlement |  |  |  | Biaya Platform
+Line 96:  |  |  |  |  | tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM |  |  | Titik Jemput | Titik Tujuan | Total Jarak | Total tarif jarak | Tarif dasar < 3 KM | Total Mark up | Total Tarif Dasar/asli | Total Mark up | Biaya layanan roda 2 | Biaya layanan roda 4 | Biaya Aplikasi
+Line 97:  |  |  |  |  | Rp. 8000 (opsional) | Rp. | Rp. ..... |  |  |  |  | ......KM | Rp.  |  |  | Rp.  | Rp.  | Rp. 3500 (Opsional) | Rp. 5000 (Opsional) | Rp. 2000 (Opsional)
+Line 98:  |  |  |  | User |  |  |  |  |  |  |  | v | v |  |  |  |  | v | v | v
+Line 99:  |  |  |  | Driver  | v |  |  |  |  |  |  | v | v |  |  | v
+Line 100:  |  |  |  | Platform |  | v | v |  |  |  |  | v | v |  |  | v | v | v | v | v
+Line 101:  |  |  |  |  | Roda 4 Logistik |  |  |  |  |  |  |  |  | Split Settlement |  |  |  | Biaya Muatan Barang |  |  | Biaya Platform
+Line 102:  |  |  |  |  | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM |  |  | Titik Jemput | Titik Tujuan | total jarak | Total tarif jarak | Tarif dasar < 3 KM | Total Mark up | Total Tarif Dasar/asli | Total Mark up | Biaya  angkat dan turun dari titik ke kendaraan | Biaya volume 1 kendaraan (P x L x T) | Biaya Packing/Wrapping | Biaya layanan roda 4 | Biaya Aplikasi
+Line 103:  |  |  |  |  | Rp. 25.000 (opsional) | Rp. 3000 | Rp.3200 |  |  |  |  | .........KM | Rp. |  |  |  |  | Rp. 100.000 | Rp.  5000 x luas volume | Rp. 20.000 (Opsional) | Rp. 15.000 (Opsional) | Rp. 2500 (Opsional)
+Line 104:  |  |  |  | User
+Line 105:  |  |  |  | Driver  | v |  |  |  |  |  |  | v | v |  |  | v |  | v | v | v
+Line 106:  |  |  |  | Platform | v | v | v |  |  |  |  | v | v |  |  | v | v | v | v | v | v | v
+Line 109:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | STATUS ORDER
+Line 110:  |  |  |  |  | NAMA DRIVER | TANGGAL TERIMA ORDER |  |  |  | Titik Jemput | Titik Tujuan | Total Jarak | Total Tarif |  |  | ORDER DITERIMA PEMBELI | SUKSES
+
+=== Pusat Mitra Ads (37 lines) ===
+Line 7: DAFTAR MITRA ADS/IKLAN  NASIONAL,  KABUPATEN KOTA DAN PROVINSI 
+Line 8:  PENCARIAN | NAMA PEMILIK | NAMA EO/TOKO | NAMA PRODUK |  |  | NAMA PEMBELI  |  |  | KABUPATEN | PROVINSI
+Line 9:  | ........................... | .............................. | ......................... |  |  | ................ |  |  | ................ | ................
+Line 10:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | TIKET |  | STATUS TIKET |  |  | SPLIT SETTLEMENT |  | Keterangan | JUMLAH TRANSAKSI
+Line 11: NO | NAMA PEMILIK | NAMA EO/TOKO | AKUN | USER NAME | PASSWORD | ID | NOMOR WA | EMAIL | KABUPATEN | PROVINSI | JENIS EVENT MICE TERDAFTAR | TANGGAL ACARA | TANGGAL BUKA | TANGGAL TUTUP | JAM BUKA | JAM TUTUP | TEMPAT ACARA | LURING | LINK | DARING | HARGA TIKET AWAL | MARKUP  | HARGA RESMI PLATFORM | HARGA DISKON | KODE BOOKING | BARCODE | SUSKES | PENDING | GAGAL | MICE | PLATFROM | Dana EO dicairkan H-2 untuk menghindari panita tidak tanggung jawab ke artis, vendor, dan penonton | HARIAN | BULANAN | DOMPET DIGITAL | SUBSCRIBE FEE BULANAN | KREDIT  MODAL KERJA
+Line 22: MITRA Ads
+Line 23: Bikin Akun | Nomor Hape, email
+Line 24: Buka Rekening | embedded form di aplikasi
+Line 25: top up saldo
+Line 26: dompet digital
+Line 27: sisa saldo
+Line 28: histori  pengeluaran dompet digital
+Line 29: transfer ke sesama bank digital (gratis)
+Line 30: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 31: Kredit Modal Kerja dari bank digital | Rp.
+Line 32: Cicilan dari kredit modal kerja | Rp.
+Line 33: histori cicilan
+Line 34: upload foto produk & deskripsi produk
+Line 35: lihat produk
+Line 36: pilihan durasi paket iklan tayang
+Line 37: 1 bulan
+Line 38: 3 bulan
+Line 39: 6 bulan
+Line 40: 9 bulan
+Line 41: 12 bulan
+Line 42: harga paket iklan
+Line 43: 1 bulan | Rp.
+Line 44: 3 bulan | Rp.
+Line 45: 6 bulan | Rp.
+Line 46: 9 bulan | Rp.
+Line 47: 12 bulan | Rp.
+Line 48: Bayar ke platform pakai dompet saldo | Rp.
+Line 49: QRIS | Rp.
+Line 50: VA
+Line 51: kirim ke email pengiklan, transaksi berhasil dan iklan tayang di platform
+Line 52: selesai.
+Line 53: bayar iuran bulanan ke platfrom mengikuti durasi paket  iklan | Rp.
+
+=== Pusat Mitra Kesehatan&Homecare (17 lines) ===
+Line 1:  | DAFTAR MITRA KESEHATAN & HOME CARE KABUPATEN KOTA DAN PROVINSI
+Line 3: 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 |  | 16.0 |  | 17.0 |  |  |  |  |  |  |  |  |  | 24.0 | 35.0 | 36.0 | 37.0 | 29.0 | 30.0 | 31.0 | 32.0 | 33.0 | 34.0 | 35.0 | 36.0 | 37.0
+Line 5:  PENCARIAN | NAMA PEMILIK | NAMA KLINIK/TOKO/RUMAH SAKIT/SALON/SPA/TERAPI | NAMA PRODUK |  | NAMA TENAGA KESEHATAN |  |  | NAMA PEMBELI  |  |  | NAMA DRIVER |  | KABUPATEN
+Line 6:  | ........................... | .............................. | ......................... |  | ...................... |  |  | ................ |  |  | .................. |  | ................ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | PILIHAN
+Line 7:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | HARGA DISKON |  |  |  |  | SPLIT SETTLEMENT |  |  |  |  |  |  | SUBSCRIBE FEE BULANAN OTOMATIS POTONG SALDO MITRA |  | JUMLAH TRANSAKSI MERCHANT |  |  | JALAN SENDIRI KE LOKASI
+Line 8: NO | NAMA PENJUAL/PEMILIK | NAMA KLINIK/TOKO | ALAMAT  | AKUN | USER NAME | PASSWORD | ID | NOMOR WA | EMAIL | KABUPATEN | PROVINSI | TANGGAL TRANSAKSI HARIAN | JAM TRANSAKSI | ASAL ORDER  | NAMA PROFESI | NAMA PRODUK LAYANAN  | DARING/TELEMEDIS | JADWAL OFFLINE | JAM BUKA | JAM TUTUP | HARGA AWAL | HARGA MARKUP | HARGA RESMI PLATFORM | HARGA RESMI PLATFORM NAIKAN 10-100% | HARGA DISKON PLATFORM TURUNKAN 10-100% | BIAYA LAYANAN | BIAYA ADMIN | BAYAR | DANA PEMBELI | PENJUAL | PLATFORM | DOMPET BANK DIGITAL MITRA TENAGA KESEHATAN DAN HOMECARE | TOP UP SALOD | KREDIT MODAL KERJA | BAYAR ANGSURAN KREDIT | SUDAH  BAYAR | BELUM BAYAR | HARIAN | BULANAN | TAHUN | PAKAI BISPIRA ANTAR KE LOKASI
+Line 9: 1.0 |  | KLINIK |  |  |  |  |  |  |  |  |  |  |  |  | DOKTER | CHAT |  |  |  |  | Rp.                           / Jam
+Line 10: 2.0 |  | DOKTER |  |  |  |  |  |  |  |  |  |  |  |  | DOKTER | PERIKSA
+Line 11: 3.0 |  | APOTEK |  |  |  |  |  |  |  |  |  |  |  |  | FISIOTERAPI | TERAPI
+Line 12: 4.0 |  | SPA  |  |  |  |  |  |  |  |  |  |  |  |  | PERAWAT | HOMECARE
+Line 13: 5.0 |  | SALON |  |  |  |  |  |  |  |  |  |  |  |  | BIDAN | PERSALINAN
+Line 14: 6.0 |  | BARBERSHOP |  |  |  |  |  |  |  |  |  |  |  |  | PSIKOLOG | KONSELING
+Line 15: 7.0 |  | THERAPI |  |  |  |  |  |  |  |  |  |  |  |  | PSIKIATER | PSIKIATRI
+Line 16: 8.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | APOTEKER | OBAT APOTEK
+Line 17: 9.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | TERAPIS SPA KECANTIKAN | PERAWATAN KULIT
+Line 18: 10.0 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | BARBERSHOP | POTONG RAMBUT
+Line 19: +
+
+=== Pusat Mitra MICE (17 lines) ===
+Line 1: DAFTAR MITRA MICE   KABUPATEN KOTA DAN PROVINSI 
+Line 2: 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0 | 21.0 | 22.0 | 23.0 | 24.0 | 25.0 | 26.0 | 27.0 | 28.0 | 29.0 | 30.0 | 31.0 | 32.0 | 33.0 | 34.0 | 35.0 | 36.0 | 37.0 | 38.0 | 39.0
+Line 3:  PENCARIAN | NAMA PEMILIK | NAMA EO/TOKO | NAMA PRODUK |  |  | NAMA PEMBELI  |  |  | KABUPATEN | PROVINSI
+Line 4:  | ........................... | .............................. | ......................... |  |  | ................ |  |  | ................ | ................
+Line 5:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | TIKET |  | STATUS TIKET |  |  | SPLIT SETTLEMENT |  | Keterangan | JUMLAH TRANSAKSI
+Line 6: NO | NAMA PEMILIK | NAMA EO/TOKO | AKUN | USER NAME | PASSWORD | ID | NOMOR WA | EMAIL | KABUPATEN | PROVINSI | JENIS EVENT MICE TERDAFTAR | TANGGAL ACARA | TANGGAL BUKA | TANGGAL TUTUP | JAM BUKA | JAM TUTUP | TEMPAT ACARA | LURING | LINK | DARING | HARGA TIKET AWAL | MARKUP  | HARGA RESMI PLATFORM | HARGA DISKON | KODE BOOKING | BARCODE | SUSKES | PENDING | GAGAL | MICE | PLATFROM | Dana EO dicairkan H-2 untuk menghindari panita tidak tanggung jawab ke artis, vendor, dan penonton | HARIAN | BULANAN | DOMPET DIGITAL | SUBSCRIBE FEE BULANAN | KREDIT  MODAL KERJA
+Line 7: 1.0 |  | EO PELATIHAN
+Line 8: 2.0 |  | EO UJIAN
+Line 9: 3.0 |  | EO LOMBA
+Line 10: 4.0 |  | EO SEMINAR
+Line 11: 5.0 |  | EO WORKSHOP
+Line 12: 6.0 |  | EO BIMBEL
+Line 13: 7.0 |  | EO WISATA
+Line 14: 8.0
+Line 15: 9.0
+Line 16: 10.0
+Line 17: +
+
+=== Pusat E-Voting (7 lines) ===
+Line 4:  | 👑 Hub Super Admin (Kontrol Mutlak)
+Line 5:  | Kontrol Fase Babak: Saklar utama untuk mengubah status kompetisi:
+Line 6:  | [Tombol] Pindahkan ke Babak Penyisihan (Cut-off otomatis di luar 50 besar).
+Line 7:  | [Tombol] Pindahkan ke Babak 20 Besar (Suara di-reset ke 0 atau diakumulasi, sesuai regulasi).
+Line 8:  | [Tombol] Pindahkan ke Babak Final 10 Besar.
+Line 9:  | Manajemen Finansial: Grafik pendapatan kotor dari penjualan paket e-voting.
+Line 10:  | Sponsor Management: Mengubah gambar banner sponsor, link tujuan, dan kode voucher diskon brand awareness.
+
+=== Admin Cabang (68 lines) ===
+Line 1: HAK AKSES
+Line 2: Owner | Manager | Admin
+Line 3: v |  |  | A | IDENTITAS
+Line 4:  |  |  | 2026-01-01 00:00:00 | Nomor Cabang | 1.0
+Line 5:  |  |  | 2026-02-01 00:00:00 | Nama Kabupaten / Kota
+Line 6:  |  |  | 2026-03-01 00:00:00 | Nama pemilik cabang
+Line 7:  |  |  | 2026-04-01 00:00:00 | Pemilik/Owner cabang
+Line 8:  |  |  | 2026-05-01 00:00:00 | Tanggal bergabung
+Line 9:  |  |  | 2026-06-01 00:00:00 | Peringatan tanggal berakhir
+Line 10:  |  |  | 2026-07-01 00:00:00 | Tanggal berakhir | 60 hari s.d 1 hari
+Line 11:  |  |  | 2026-08-01 00:00:00 | Tanggal Perpanjang
+Line 12:  |  |  | 2026-09-01 00:00:00 | Masa Pending
+Line 13:  |  |  | 2026-10-01 00:00:00 | Masa Putus
+Line 15:  |  |  | B | SARANA DAN PRASARANA
+Line 16: v | v | v | 1.0 | Sarana
+Line 17:  |  |  | 2026-01-01 00:00:00 | Tempat/kantor (SOP)
+Line 18:  |  |  | 2026-02-01 00:00:00 | Komputer
+Line 19:  |  |  | 2026-03-01 00:00:00 | Peralatan show event
+Line 20:  |  |  | 2026-04-01 00:00:00 | meja
+Line 21:  |  |  | 2026-05-01 00:00:00 | kursi
+Line 22:  |  |  | 2026-06-01 00:00:00 | meja resepsionis
+Line 23:  |  |  | 2026-07-01 00:00:00 | kursi resepsionis
+Line 24:  |  |  | 2026-08-01 00:00:00 | ruang gudang
+Line 26: v | v | v | 2.0 | Prasarana
+Line 27:  |  |  | 2026-01-02 00:00:00 | Gaji
+Line 28:  |  |  |  | Manajer
+Line 29:  |  |  |  | ketua tim
+Line 30:  |  |  |  | Marketing/sales
+Line 31:  |  |  |  | Crew Event
+Line 32:  |  |  |  | Admin/CS
+Line 33:  |  |  | 2026-02-02 00:00:00 | media promosi (pamplet, reklame)
+Line 34:  |  |  | 2026-03-02 00:00:00 | Stiker qris
+Line 35:  |  |  | 2026-04-02 00:00:00 | makan siang
+Line 36:  |  |  | 2026-05-02 00:00:00 | minum
+Line 37:  |  |  | 2026-06-02 00:00:00 | listrik
+Line 38:  |  |  | 2.7 | legalitas hukum |  | perorangan, badan hukum
+Line 40: v | v |  | C | PEMASUKAN |  | Bagi Hasil Netto diterima Cabang |  | Tahun | Bulan
+Line 41:  |  |  | 1.0 | Bisnis Inti |  | Persen | Nominal | 2026 s.d 20... | Januari | Februari | Maret | April | Mei | Juni | Juli  | Agustus | September | Oktober | November | Desember |  |  |  |  |  |  |  |  |  |  |  | Bagi Hasil Netto Diterima
+Line 42:  |  |  |  | Jenis Pelanggan |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Persen | Nominal
+Line 43:  |  |  |  | User
+Line 44:  |  |  |  | Merchant
+Line 45:  |  |  |  | Mitra
+Line 46:  |  |  |  | Driver
+Line 47: v | v | v | 2.0 | Bispira EO Kabupaten/Kota
+Line 48:  |  |  | 2.1 | Tahun Event | Bulan | Jenis Event | Nama Event | Sasaan | Peran sebagai | Tanggal Acara | Luring | Tempat | Luring | Link | Harga Tiket Pokok | Mode bayar (VA / QRIS) | barcode tiket | Target tiket terjual | Realisasi tiket terjual | Bagi Hasil Bruto Diterima Cabang
+Line 49:  |  |  |  | 2026.0 | Januari - Desember | MICE s.d kompetisi | 1 s.d 10 | pelajar,mahasiswa,pekerja, masyarakat | peserta/presenter, penonton,pedagang  |  |  |  |  |  |  |  |  |  |  | Persen | Nominal
+Line 50:  |  |  |  | 2027.0
+Line 51:  |  |  |  | 2028.0
+Line 52:  |  |  |  | +
+Line 53:  |  |  | 3.0 | Bispira E-Voting Cabang | Bulan | Jenis Event | Nama Event | Sasaan | Peran sebagai | Tanggal Acara |  |  |  |  | Harga Paket Vote | Mode bayar (VA / QRIS) | barcode vote | Target tiket terjual | Realisasi tiket terjual | Bagi Hasil Bruto Diterima Cabang
+Line 54:  |  |  |  |  | Januari - Desember | MICE s.d kompetisi | 1 s.d 10 | pelajar,mahasiswa,pekerja, masyarakat | peserta/presenter, penonton,pedagang  |  |  |  |  |  |  |  |  |  |  | Persen | Nominal
+Line 56: v | v | v | 4.0 | Bispira EO Provinsi/Nasional
+Line 57:  |  |  | 4.1 | Tahun Event | Bulan | Jenis Event | Nama Event | Sasaan | Peran sebagai | Tanggal Acara | Luring | Tempat | Luring | Link | harga tiket | Mode bayar (VA / QRIS) | barcode tiket | Target tiket terjual | Realisasi tiket terjual | Bagi Hasil Netto Diterima Cabang
+Line 58:  |  |  |  | 2026.0 | Januari-Desember | MICE - Kompetisi | 1 s.d 10 | pelajar,mahasiswa,pekerja, masyarakat | peserta/presenter, penonton,pedagang  |  |  |  |  |  |  |  |  |  |  | Persen | Nominal
+Line 59:  |  |  |  | 2027.0
+Line 60:  |  |  |  | 2028.0
+Line 61:  |  |  |  | +
+Line 62: v | v | v | 5.0 | Distribusi Atribut Driver
+Line 63:  |  |  | 5.1 | Nama Atribut Driver |  | Produk | jumlah |  |  | Nama Driver / No.ID | Keterangan | Waktu diambil
+Line 64:  |  |  |  | Ride Hailing (ride hailing, delivery) |  | Helm | 1.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 65:  |  |  |  | Ride Hailing (ride hailing, delivery) |  | Jaket | 1.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 66:  |  |  |  | Mobil penumpang |  | T-Shirt | 2.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 67:  |  |  |  | Mobii barang/logistik |  | T-Shirt | 2.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 68:  |  |  |  | barang/logistik |  | Stiker | 3.0 |  |  |  | Sudah bayar lunas, sudah bayar DP, sudah diambil, belum diambil
+Line 70:  | v | v | 6.0 | Komplain
+Line 71:  |  |  | 6.1 | driver |  | Usul aktif Buka Blokir kendaraan
+Line 78:  | v | v | 6.2 | pembeli
+Line 84:  | v | v | 6.3 | Pedagang (sembako, kesehatan,pendidikan, hiburan)
+
+=== User (101 lines) ===
+Line 1:  | USER 
+Line 2:  | Bikin Akun | Nomor Hape, email
+Line 3:  | Buka Rekening | Embedded form di aplikasi
+Line 4:  | Top up saldo
+Line 5:  | Dompet digital
+Line 6:  | Sisa saldo
+Line 7:  | Histori  pengeluaran dompet digital
+Line 8:  | Transfer ke sesama bank digital (gratis)
+Line 9:  | Transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10:  | lihat all menu kelompok produk, lihat kelompok produk, pilih produk | Harga Normal  | Harga diskon
+Line 11:  | Bayar produk/jasa | Rp.
+Line 12:  | Biaya Aplikasi
+Line 13:  | Biaya layanan | Rp.
+Line 14:  | Biaya macet (jika lalu lintas macet roda 2 dan 4 ride hailing) | Ro.
+Line 15:  | Biaya hujan (jika hujan saat jemput dan antar roda 2 dan 4 ride hailing) | Rp.
+Line 16:  | Biaya mencari driver | Rp.
+Line 17:  | Biaya aplikasi | Rp.
+Line 18:  | Bayar total  | Rp.
+Line 19:  | QRIS | Rp.
+Line 20:  | VA  | Rp.
+Line 21:  | Tunai | Rp.
+Line 22:  | Chat ke driver (chat kepastian lokasi jemput), merchant food & fresh (request makanannya), tenaga kesehatan (telemedis)
+Line 23:  | Tiket  Event (kode booking, barcode ke aplikasi user dan email user 1 x pakai)
+Line 24:  | Beri bintang ke merchant,mitra | 1 bintang : layanan sangat perlu ditingkatkan
+Line 25:  |  | 2 bintang : layanan perlu ditingkatkan
+Line 26:  |  | 3 bintang layanan cukup memuaskan dan aman
+Line 27:  |  | 4 bintang layanan memuaskan dan aman
+Line 28:  |  | 5 bintang layanan sangat memuaskan dan aman
+Line 33:  | Lokasi user 
+Line 35: 1.0 | Merchant Food & Fresh Sembako | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 36:  |  | Food & Fresh Sembako |  |  |  |  |  |  | Barang
+Line 38: 2.0 | Mitra MICE & Wisata | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 39:  |  | acara MICE & Wisata |  |  |  |  |  |  | e-Tiket
+Line 41: 3.0 | Mitra Tenaga Kesehatan & Home Care | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 42:  |  | perawatan dan pengobatan |  |  |  |  |  |  | Jasa/Barang obat
+Line 44: 4.0 | Mitra Ahli Edukasi & Hiburan | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 45:  |  | ilmu dan hiburan |  |  |  |  |  |  | e-tiket Jasa
+Line 47: 5.0 | Mitra  Donasi | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 48:  |  | program donasi acara ... | bebas | bebas |  |  |  | e-donasi | donasi tercatat
+Line 50: 6.0 | Mitra Driver | Nama Produk | Harga Resmi Platform per kilometer | kuantitas | titik jemput | titik tuijuan | Total Jarak | Harga Total | OUTPUT
+Line 51:  |  | Ride Hailing (jemput antar) |  |  |  |  |  |  | Jasa Antar orang/barang
+Line 52:  |  | Delivery (jemput antar)
+Line 53:  |  | Logistik (jemput antar)
+Line 54:  |  | Ambulance
+Line 56: 7.0 | Kos/Kamar | Nama Produk | Harga Resmi Platform | Kuantitas |  | Bulanan, | Harga Total | Bayar | OUTPUT
+Line 57:  |  | Kamar Kos+Fasilitas |  | 1 kamar |  | Harian |  |  | e-Tiket kunci kamar kos
+Line 58:  |  |  |  |  |  | Bulanan 
+Line 59:  |  |  |  |  |  | 3 Bulan
+Line 60:  |  |  |  |  |  |  6 Bulanan,
+Line 61:  |  |  |  |  |  | 1 tahun
+Line 63:  |  |  |  |  |  | 3 Bulan
+Line 64:  |  |  |  |  |  | 6 Bulan
+Line 65:  |  |  |  |  |  | 1 Tahun
+Line 67: 8.0 | Mitra Ads | Nama Produk |  | Kuantitas |  | Waktu
+Line 68:  |  | 1. Brand Awareness | ................... |  |  | Bulanan, 3 Bulan, 6 Bulan, 1 tahun
+Line 69:  |  | 2. Brand Produk | Harga Resmi Platform
+Line 72: 9 | Bispira E-Voting Cabang | Nama Produk | Harga Resmi Platform | Kuantitas | Frekuensi | Waktu Bayar | Harga Total | Bayar | OUTPUT
+Line 73:  |  |  program acara e-voting |  |  |  | Harian,  |  |  | tiket e-voting
+Line 75: 10 | Bispira E-Voting Pusat | Nama Produk | Harga Resmi Platform | Kuantitas | Frekuensi | Waktu Bayar | Harga Total | Bayar | OUTPUT
+Line 76:  |  |  program acara e-voting |  |  |  |  |  |  | tiket e-voting
+Line 82: 11.0 | Bispira EO MICE Cabang | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 83:  |  | acara MICE |  |  |  |  |  |  | e-Tiket
+Line 85: 12.0 | Bispira EO MICE Pusat | Nama Produk | Harga Resmi Platform | Kuantitas |  |  | Harga Total | Bayar | OUTPUT
+Line 86:  |  | acara MICE |  |  |  |  |  |  | e-Tiket
+Line 93:  | Merchant Food & Fresh Sembako
+Line 94:  | Mitra Ads Food & Fresh Sembako | Mitra Ads Food & Fresh Sembako | Mitra Ads Food & Fresh Sembako | per 0.25 menit geser, gantian dengan mitra lain (bayar lapak iklan)
+Line 95:  | Mitra Ads Food & Fresh Sembako | Mitra Ads Food & Fresh Sembako | Mitra Ads Food & Fresh Sembako
+Line 97: 1.0 | Merchant Food & Fresh Sembako | lapak biasa (karena tidak bayar lapak iklan)
+Line 98: 2.0 | Merchant Food & Fresh Sembako
+Line 99: 200.0 | Merchant Food & Fresh Sembako
+Line 100: +
+Line 102:  | MICE & Wisata
+Line 103: 1.0 | Mitra Ads MICE & Wisata | Mitra Ads MICE & Wisata | Mitra Ads MICE & Wisata | per 0.25 menit geser, gantian dengan mitra lain
+Line 104:  | Mitra Ads MICE & Wisata | Mitra Ads MICE & Wisata | Mitra Ads MICE & Wisata
+Line 105: 2.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 107:  | Tenaga Kesehatan & Home Care
+Line 108: 1.0 | Mitra ads Tenaga Kesehatan & Home Care | Mitra ads Tenaga Kesehatan & Home Care | Mitra ads Tenaga Kesehatan & Home Care | per 0.25 menit geser, gantian dengan mitra lain
+Line 109:  | Mitra ads Tenaga Kesehatan & Home Care | Mitra ads Tenaga Kesehatan & Home Care | Mitra ads Tenaga Kesehatan & Home Care
+Line 110: 2.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 112:  | Ahli Edukasi & Hiburan
+Line 113: 1.0 | Mitra Ads Ahli Edukasi & Hiburan | Mitra Ads Ahli Edukasi & Hiburan | Mitra Ads Ahli Edukasi & Hiburan | per 0.25 menit geser, gantian dengan mitra lain
+Line 114:  | Mitra Ads Ahli Edukasi & Hiburan | Mitra Ads Ahli Edukasi & Hiburan | Mitra Ads Ahli Edukasi & Hiburan
+Line 115: 2.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 116:  | Donasi
+Line 117:  | Mitra ads donasi | Mitra ads donasi | Mitra ads donasi | per 0.25 menit geser, gantian dengan mitra lain
+Line 118:  | Mitra ads donasi | Mitra ads donasi | Mitra ads donasi
+Line 119: 2.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 120:  | Kos/Kamar
+Line 121:  | Mitra ads Kos/kamar | Mitra ads Kos/kamar | Mitra ads Kos/kamar | per 0.25 menit geser, gantian dengan mitra lain
+Line 122:  | Mitra ads Kos/kamar | Mitra ads Kos/kamar | Mitra ads Kos/kamar
+Line 123: 2.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 125:  | Bispira E-Voting Cabang
+Line 126: 1.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 128:  | Bispira E-Voting Pusat
+Line 129: 1.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 131:  | Bispira EO Cabang
+Line 132: 1.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 134:  | Bispira EO Pusat
+Line 135: 1.0 | Ads logo baris |  |  | per 0.25 menit geser, gantian dengan mitra lain
+Line 152:  | Bispira EO MICE Cabang
+Line 155:  | Bispira EO MICE Pusat
+
+=== Merchant Food & Fresh (32 lines) ===
+Line 1:  | MERCHANT FOOD & FRESH SEMBAKO
+Line 2:  | Bikin Akun | Nomor Hape, email
+Line 3:  | Buka Rekening | embedded form di aplikasi
+Line 4:  | top up saldo | Rp.
+Line 5:  | dompet digital | Rp.
+Line 6:  | histori  pengeluaran dompet digital | Rp.
+Line 7:  | transfer ke sesama bank digital (gratis) | Rp.
+Line 8:  | transfer ke sesama bank digital (gratis) | Rp.
+Line 9:  | transfer ke rekening bank konvensional (gratis sesuai kuota bulanan) | Rp.
+Line 10:  | Kredit Modal Kerja dari bank digital | Rp.
+Line 11:  | Cicilan dari kredit modal kerja | Rp.
+Line 12:  | upload foto produk
+Line 13:  | lihat produk, pilih produk
+Line 14:  | stok barang
+Line 15:  | barang terjual
+Line 16:  | barang sisa
+Line 17:  | barang habis
+Line 18:  | update barang
+Line 19:  | harga | Rp.
+Line 20:  | update harga | Rp.
+Line 21:  | jam buka
+Line 22:  | jam tutup
+Line 23:  | chat ke pembeli ( jawab chat pembeli)
+Line 24:  | QRIS
+Line 25:  | VA
+Line 26:  | barng terjual/selesai/terima bayaran dari pembeli | Rp.
+Line 27:  | order driver ride hailing (integrasi OSRM)
+Line 28:  | kirim
+Line 29:  | selesai.
+Line 30:  | bayar iuran bulanan ke platfrom | Rp.
+Line 31:  | potong komisi ke platform per transaksi berhasil | Rp.
+Line 32:  | bintang dari user
+
+=== Mitra Tenaga kesehatan & Home c (36 lines) ===
+Line 1: MITRA TENAGA KESEHATAN & HOME CARE
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: Kredit Modal Kerja dari bank digital | Rp.
+Line 11: Cicilan dari kredit modal kerja | Rp.
+Line 12: histori cicilan
+Line 13: upload foto produk & deskripsi kompetensi dan pengalaman
+Line 14: lihat produk, pilih produk
+Line 15: jadwal layanan
+Line 16: telemedis (chat dengan user terkait sakitnya)
+Line 17: beri resep obat ke user
+Line 18: resep dokter ke apotek obat untuk user
+Line 19: user terima obat dari apotek lewat driver ride hailing | Rp.
+Line 21: harga layanan kesehatan di tempat praktik | Rp.
+Line 22: update harga layanan kesehatan di tempat praktik | Rp.
+Line 23: harga layanan kesehatan di home care/datang ke rumah user  | Rp.
+Line 24: update harga layanan kesehatan di home care/datang ke rumah user  | Rp.
+Line 25: harga layanan telemedis | Rp.
+Line 26: update harga layanan telemedis | Rp.
+Line 27: jam buka
+Line 28: jam tutup
+Line 29: QRIS | Rp.
+Line 30: VA | Rp.
+Line 31: layanan jasa terjual/selesai/terima bayaran dari user | Rp.
+Line 32: order driver ride hailing (integrasi OSRM) antar user ke tempat praktik tenaga kesehatan 
+Line 33: kirim
+Line 34: selesai.
+Line 35: bayar iuran bulanan ke platfrom | Rp.
+Line 36: potong komisi ke platform per transaksi berhasil | Rp.
+Line 37: bintang dari user
+
+=== Mitra Jasa Ahli & Hiburan (33 lines) ===
+Line 1: MITRA JASA AHLI & HIBURAN
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: Kredit Modal Kerja dari bank digital | Rp.
+Line 11: Cicilan dari kredit modal kerja | Rp.
+Line 12: histori cicilan
+Line 13: upload foto produk & deskripsi kompetensi dan pengalaman
+Line 14: lihat produk
+Line 15: jadwal layanan
+Line 16: harga telechat  non konsultan ahli (chat dengan kebutuhan user, setelah user bayar order)
+Line 17: update harga telechat  non konsultan ahli (chat dengan kebutuhan user, setelah user bayar order) | Rp.
+Line 18: harga layanan jasa ahli (guru privat, pelatih olah raga, penceramah agama, pelatih seni)  | Rp.
+Line 19: update harga layanan jasa ahli (guru privat, pelatih olah raga, penceramah agama, pelatih seni)  | Rp.
+Line 20: harga layanan jasa hiburan (badut, penyanyi solo, band, MC)  | Rp.
+Line 21: update harga layanan jasa hiburan (badut, penyanyi solo, band, MC)  | Rp.
+Line 22: jam buka
+Line 23: jam tutup
+Line 24: QRIS | Rp.
+Line 25: VA | Rp.
+Line 26: layanan jasa terjual/selesai/terima bayaran dari user | Rp.
+Line 27: order driver ride hailing (integrasi OSRM) antar jasa ahli & hiburan ke tempat user sesuai jadwal 
+Line 28: kirim
+Line 29: selesai.
+Line 30: bayar iuran bulanan ke platfrom | Rp.
+Line 31: potong komisi ke platform per transaksi berhasil | Rp.
+Line 32: bintang dari user
+Line 33: bintang dari user
+
+=== Mitra Driver (101 lines) ===
+Line 1:  | Super Admin | Admin Cabang | User | Driver | MITRA Driver
+Line 2: 1.0 |  |  |  |  | Buat akun |  | Nomor WA Aktif, email
+Line 3: 2.0 |  |  |  |  | Buka Rekening bank digital (embedded form), e-KYC |  | Embedded Form
+Line 4: 3.0 |  |  |  |  | Top up saldo
+Line 5: 4.0 |  |  |  |  | Dompet Digital powered by bank digital
+Line 6: 5.0 |  |  |  |  | PIN/Password 
+Line 7: 6.0 |  |  |  |  | QRIS
+Line 8: 7.0 |  |  |  |  | VA
+Line 9: 8.0 |  |  |  |  | Pemasukan
+Line 10: 9.0 |  |  |  |  | histori/rekaman pemasukan
+Line 11: 10.0 |  |  |  |  | Pengeluaran
+Line 12: 11.0 |  |  |  |  | histori/rekaman pengeluaran
+Line 13: 12.0 |  |  |  |  | transfer ke sesama bank digital (gratis)
+Line 14: 13.0 |  |  |  |  | transfer ke sesama bank digital (gratis)
+Line 15: 14.0 |  |  |  |  | transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 16: 15.0 | v | v |  | v | Atribut driver
+Line 17: 16.0 |  |  |  |  | bayar lunas
+Line 18: 17.0 |  |  |  |  | helm |  | driver roda 2
+Line 19: 18.0 |  |  |  |  | jaket |  | driver roda 2
+Line 20: 19.0 |  |  |  |  | food box |  | driver roda 2
+Line 21: 20.0 |  |  |  |  | t-shirt polo |  | driver roda 4 (delivery/ride hailing, logistik)
+Line 22: 21.0 |  |  |  |  | stiker mobil logistik/box |  | driver roda 4 (logistik)
+Line 23: 22.0 | v | v |  | v | bayar kredit
+Line 24: 23.0 |  |  |  |  | DP
+Line 25: 24.0 |  |  |  |  | cicilan harian  dari order ke 1  (1 hari 1 kali) ke ..... dari ....
+Line 26: 25.0 |  |  |  |  | kredit lunas
+Line 27: 26.0 |  |  |  |  | helm |  | driver roda 2
+Line 28: 27.0 |  |  |  |  | jaket |  | driver roda 2
+Line 29: 28.0 |  |  |  |  | food box |  | driver roda 2
+Line 30: 29.0 |  |  |  |  | t-shirt polo |  | driver roda 4 (delivery/ride hailing, logistik)
+Line 31: 30.0 |  |  |  |  | stiker |  | driver roda 4 (logistik)
+Line 32: 31.0 | v | v |  | v | status atribut driver (tempat ambil di kantor cabang) |  | sudah diambil driver | belum diambil driver
+Line 33:  |  |  |  |  | waktu pengambilan |  | tanggal | jam
+Line 34: 32.0 |  |  |  |  | lokasi  |  | kabupaten/kota
+Line 35: 33.0 |  |  |  |  | tracking lokasi driver terdekat dengan user yang order
+Line 36: 39.0 |  |  |  |  | chat dengan user ketik manual atau pilih balasan di library respon
+Line 37: 40.0 |  |  |  |  | telelpon dengan user (nomor disamarkan)
+Line 38: 41.0 |  |  |  |  | Nearby 
+Line 39: 42.0 | v |  | v | v | Estimation Time of Arrival (ETA)
+Line 40: 43.0 | v |  | v | v | Tracking
+Line 41: 44.0 |  |  |  |  | bayaran driver |  | cash atau dompet digital user
+Line 42: 45.0 | v |  |  | v | potong komisi dari dompet digital driver
+Line 43: 46.0 | v |  |  |  | kuantitas order per hari
+Line 44: 47.0 | v |  |  |  | kuantitas order per minggu
+Line 45: 48.0 | v |  |  |  | kuantitas order per bulan
+Line 46: 49.0 | v |  |  |  | kuantitas order per tahun
+Line 47: 50.0 | v |  |  | v | jumlah komisi diterima per order berhasil |  | cash / Transfer dari user
+Line 48: 51.0 | v |  |  | v | jumlah komisi dipotong dari saldo dompet digital per order berhasil, lalu split settlement |  | platform | bantuan asuransi | bantuan hari raya | bantuan akhir tahun
+Line 49: 52.0 |  |  |  |  |  % |  | % |  % |  % |  %
+Line 50: 53.0 |  |  |  |  | setara Nominal |  | setara Nominal | setara Nominal | setara Nominal | setara Nominal
+Line 51: 54.0 | v |  |  | v | iuran bulanan platform
+Line 52: 55.0 | v |  | v | v | order masuk
+Line 53: 56.0 | v |  | v | v | order berhasil
+Line 54:  |  |  |  |  | kredit modal kerja dari bank digital/channeling
+Line 55:  |  |  |  |  | bayar cicilan kredit harian ( bayar cicilan 1x dari order ke 2 atau 3 per hari)
+Line 56:  |  |  |  |  | status cicilan : belum lunas / lunas
+Line 57:  |  |  |  |  | kredit score alternatif (filter kelayakan pengajuran kredit bank digital berdasarkan transaksi per bulan )
+Line 58: 57.0 |  |  |  |  | Driver suspensed
+Line 59: 58.0 | v |  |  |  | jumlah tolak order perhari
+Line 60: 59.0 | v |  |  |  | jumlah tolak order perminggu
+Line 61: 60.0 | v |  |  |  | jumlah tolak order perbulan
+Line 62: 61.0 | v |  |  |  | jumlah tolak order per tahun
+Line 63: 62.0 | v |  |  |  | batal order dari user sudah ketemu/ dekat dengan driver
+Line 64: 63.0 | v |  |  |  | tracking aplikasi tuyul
+Line 65: 64.0 | v |  |  |  | tracking GPS palsu
+Line 66: 65.0 | v |  |  |  | tracking order palsu/fiktif
+Line 67: 66.0 | v |  | v | v | Bintang dari user
+Line 69:  |  |  |  |  |  |  | Roda 2 & 4 Ride Hailing |  |  |  |  | Split Settlement |  |  |  |  |  | Biaya Platrom
+Line 70:  |  |  |  |  |  | Tarif Normal | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM | Total jarak KM | Total Tarif jarak | jumlah komisi driver 95% | jumlah (potong komisi 5%) | platfrom | bantuan asuransi | bantuan hari raya | bantuan akhir tahun | Biaya layanan roda 4 | Biaya Aplikasi
+Line 71:  |  |  |  |  |  |  | Rp. 8000 (opsional) | ......... | ......... |  | Rp. |  |  | 2,5% (setara nominal) | 1% (setara nominal) | 1% (setara nominal) | 0,5% (setara nominal) | Rp. 5000 (Opsional) | Rp. 1500 (Opsional)
+Line 72:  |  |  |  |  | Ikuti Regulasi Zona | wilayah
+Line 73:  |  |  |  |  | 1.0 | sumatera, Kalimantan
+Line 74:  |  |  |  |  | 2.1 | jabodetabek |  |  | Rp. 3000 (Opsional) | KM |  |  | v | v | v | v | v | v | v
+Line 75:  |  |  |  |  | 2.2 | non jabodetabek pulau jawa
+Line 76:  |  |  |  |  | 3.0 | bali, sulawesi, maluku, ntb, papua
+Line 77:  |  |  |  |  |  | User | v |  |  |  | v |  |  |  |  |  |  | v | v
+Line 78:  |  |  |  |  |  | Driver  |  |  |  |  | v | v
+Line 79:  |  |  |  |  |  | Platform | v | v | v | v | v | v | v | v | v | v | v | v | v
+Line 80:  |  |  |  |  |  |  | Roda 2 & 4 Ride Hailing |  |  |  |  | Split Settlement |  |  |  |  |  | Biaya Platrom
+Line 81:  |  |  |  |  |  | Tarif Macet/ Hujan | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM | Total jarak KM | Total Tarif jarak | jumlah komisi driver 95% | jumlah (potong komisi 5%) | platfrom | bantuan asuransi | bantuan hari raya | bantuan akhir tahun | Biaya layanan roda 4 | Biaya Aplikasi
+Line 82:  |  |  |  |  |  |  | Rp. 20.000 (opsional) | ......... | ......... |  | Rp. |  |  | 2,5% (setara nominal) | 1% (setara nominal) | 1% (setara nominal) | 0,5% (setara nominal) | Rp. 7500 (Opsional) | Rp. 2000 (Opsional)
+Line 83:  |  |  |  |  | Ikuti Regulasi Zona | wilayah
+Line 84:  |  |  |  |  | 1.0 | sumatera, Kalimantan
+Line 85:  |  |  |  |  | 2.1 | jabodetabek |  |  | Rp. 4000 (Opsional) |  |  |  | v | v | v | v | v | v | v
+Line 86:  |  |  |  |  | 2.2 | non jabodetabek pulau jawa
+Line 87:  |  |  |  |  | 3.0 | bali, sulawesi, maluku, ntb, papua
+Line 88:  |  |  |  |  |  | User | v |  |  |  | v |  |  |  |  |  |  | v | v
+Line 89:  |  |  |  |  |  | Driver  |  |  |  |  | v | v
+Line 90:  |  |  |  |  |  | Platform | v | v | v | v | v | v | v | v | v | v | v | v | v
+Line 91:  |  |  |  |  |  |  | Roda 2 & 4 Delivery   1 jam - 1 hari pasti sampai (paket barang) |  |  |  |  | Split Settlement |  |  |  |  |  | Biaya Platform
+Line 92:  |  |  |  |  |  |  | tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM | Total Jarak | Total tarif jarak | Jumlah komisi driver 95% | Jumlah (potong komisi 5%) | Platform | bantuan asuransi | bantuan hari raya | bantuan akhir tahun | Biaya layanan roda 2 | Biaya layanan roda 4 | Biaya Aplikasi
+Line 93:  |  |  |  |  |  |  | Rp. 8000 (opsional) | Rp. | Rp. ..... | ......KM | Rp.  | Rp.  | Rp.  | 2,5% (setara nominal) | 1% (setara nominal) | 1% (setara nominal) | 0,5% (setara nominal) | Rp. 3500 (Opsional) | Rp. 5000 (Opsional) | Rp. 2000 (Opsional)
+Line 94:  |  |  |  |  |  | User |  |  |  | v | v |  |  |  |  |  |  | v | v | v
+Line 95:  |  |  |  |  |  | Driver  | v |  |  | v | v | v
+Line 96:  |  |  |  |  |  | Platform |  | v | v | v | v | v | v | v | v | v | v | v | v | v
+Line 97:  |  |  |  |  |  |  | Roda 4 Logistik |  |  |  |  | Split Settlement |  |  |  |  |  | Biaya Muatan Barang |  |  | Biaya Platform
+Line 98:  |  |  |  |  |  |  | Tarif dasar < 3 KM | Tarif Bawah / 1 KM | Tarif Atas / 1 KM | total jarak | Total tarif jarak | Komisi Driver (95%) | Komisi Platform (5%) | Platform | bantuan asuransi | bantuan hari raya | bantuan akhir tahun | Biaya  angkat dan turun dari titik ke kendaraan | Biaya volume 1 kendaraan (P x L x T) | Biaya Packing/Wrapping | Biaya layanan roda 4 | Biaya Aplikasi
+Line 99:  |  |  |  |  |  |  | Rp. 25.000 (opsional) | Rp. 3000 | Rp.3200 | .........KM | Rp. |  |  | 2,5% (setara nominal) | 1% (setara nominal) | 1% (setara nominal) | 0,5% (setara nominal) | Rp. 100.000 | Rp.  5000 x luas volume | Rp. 20.000 (Opsional) | Rp. 15.000 (Opsional) | Rp. 2500 (Opsional)
+Line 100:  |  |  |  |  |  | User
+Line 101:  |  |  |  |  |  | Driver  | v |  |  | v | v | v |  |  |  |  |  | v | v | v
+Line 102:  |  |  |  |  |  | Platform | v | v | v | v | v | v | v | v | v | v | v | v | v | v | v | v
+
+=== Mitra Tiket & Event MICE (42 lines) ===
+Line 1: MITRA  EVENT & TIKET 
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: Kredit Modal Kerja dari bank digital | Rp.
+Line 11: Cicilan dari kredit modal kerja | Rp.
+Line 12: histori cicilan
+Line 13: upload foto produk & deskripsi produk
+Line 14: form MICE |  | formulir biodata individual (nama lengkap, nomor kontak, email, asal instansi)
+Line 15:  |  | formulir biodata kelompok (nama lengkap, nomor kontak, email, asal instansi)
+Line 16: Kompetisi |  | formulir biodata individual (nama lengkap, kelompok usia (pelajar, mahasiswa, umum), asal instansi, nomor kontak, email)
+Line 17:  |  | formulir biodata kelompok (nama lengkap, kelompok usia (pelajar, mahasiswa, umum), asal instansi, nomor kontak, email)
+Line 18: Wisata |  | formulir biodata individual (nama lengkap, nomor kontak, email, asal instansi)
+Line 19:  |  | formulir biodata kelompok (nama lengkap, nomor kontak, email, asal instansi)
+Line 20: lihat produk
+Line 21: harga tiket
+Line 22: update harga tiket
+Line 23: Jam Buka
+Line 24: Jam Tutup
+Line 25: Tanggal buka pendaftaran
+Line 26: tanggal tutup pendaftaran
+Line 27: tanggal acara
+Line 28: mode acara
+Line 29: off line
+Line 30: online
+Line 31: link dokumen, video,foto
+Line 32: tempat
+Line 33: waktu acara
+Line 34: tiket kode booking
+Line 35: tiket barcode
+Line 36: 1 tiket untuk 1 pembeli , satu kali masuk/pakai | Rp.
+Line 37: kirim tiket ke email  user
+Line 38: selesai.
+Line 39: dana penjualan tiket di pecah setelah event selesai h+2 (menghindari EO tidak bayar artis dan vendor lain) | Rp.
+Line 40: bayar iuran bulanan ke platfrom dikenakan pada event ke 1 setiap bulannya | Rp.
+Line 41: potong komisi ke platform per transaksi berhasil | Rp.
+Line 42: bintang dari user
+
+=== Mitra Kost & Working Space (33 lines) ===
+Line 1: 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0
+Line 3:  | Mamikos untung dari beberapa stream (multi-sided platform):
+Line 4:  | 1. Monthly Subscription  Fee dari pemilik
+Line 5:  | 2. Iklan (Bispira-Ads) → Penjualan saldo iklan ke semua mitra.
+Line 6:  | 3. Mengelola Harga kos Platfrom.
+Line 7:  | 4. Biaya Layanan dari penyewa
+Line 8:  | 5. Biaya Aplikasi 
+Line 11:  | Platform : filter pencarian untuk mempercepat penyewa menemukan kamar yang cocok.
+Line 12:  | Pemilik kos
+Line 13:  | 1.      Upload foto-foto kamar, deskripsi
+Line 14:  | 2.      Peta titik lokasi kost
+Line 15:  | 3.      Fasilitas
+Line 16:  | 4.      harga asli,
+Line 17:  | 5.      monthly subscribtion fee,
+Line 18:  | 6.      iklan (untuk tampil di halaman utama sewa kost)
+Line 19:  | Penyewa 
+Line 20:  | 1.      Bayar sesuai harga platform dan durasi waktu tinggal : harian, mingguan, bulanan, triwulan, semesteran dan tahunan
+Line 21:  | 2.      Biaya layanan
+Line 22:  | 3.      Biaya aplikasi
+Line 23:  |  |  |  | cari berdasarkan 
+Line 24:  |  |  | Filter pencarian
+Line 25:  |  |  | kampus, kota/daerah, halte & stasiun, terminal
+Line 26:  |  | 1.0 | Tipe kos : putra, putri, campur
+Line 27:  |  | 2.0 | waktu Bayar : mingguan, bulanan, per tigabulan,  per semester, per tahun
+Line 28:  |  | 3.0 | Cari sesuai kebutuhan : kamar tersedia
+Line 29:  |  | 4.0 | Harga : mulai dari harga minimal – harga maksimal
+Line 30:  |  | 5.0 | urutkan harga : harga terendah, harga tertinggi
+Line 31:  |  | 6.0 | Aturan kos :
+Line 32:  |  |  | 24 jam, boleh pasutri, maksimal 2 orang/kamar, boleh bawa hewan, khusus karyawan, boleh bawa anak
+Line 33:  |  | 7.0 | Fasilitas kamar
+Line 34:  |  |  | kamar mandi dalam/luar, TV, Kulkas, kloset duduk/jongkok, air panas, lemari, tv, kipas angin, ac, kasur, kursi, meja,jendela, termasuk listrik
+Line 35:  |  | 8.0 | Fasilitas umum : wifi,mesin cuci, penjaga kos, mushola, dispenser, kulkas, laundry, tv, r. Keluarga, dapur, parkir, mushola, jemuran, kendaraan, dapur, laudry, kulkas,ruang keluarga.
+Line 45:  | Fasilitas dijamin sesuai iklan, jika tidak garansi refund. Penanganan profesional dari tim Mamikos selama ngekos.
+
+=== Mitra Ads (38 lines) ===
+Line 1: MITRA Ads |  |  |  | MITRA BANNER PROMOSI PRODUK
+Line 2: BRAND AWARENESS |  |  |  | BANNER PROMOSI PRODUK 
+Line 3: Bikin Akun | Nomor Hape, email
+Line 4: Buka Rekening | embedded form di aplikasi
+Line 5: top up saldo
+Line 6: dompet digital
+Line 7: sisa saldo
+Line 8: histori  pengeluaran dompet digital
+Line 9: transfer ke sesama bank digital (gratis)
+Line 10: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 11: Kredit Modal Kerja dari bank digital | Rp.
+Line 12: Cicilan dari kredit modal kerja | Rp.
+Line 13: histori cicilan
+Line 14: upload foto merek  |  |  |  | upload foto banner promosi produk
+Line 15: lihat produk |  |  |  | lihat produk
+Line 16: pilihan durasi paket iklan tayang |  |  |  | pilihan durasi paket iklan tayang
+Line 17: 1 bulan |  |  |  | 1 bulan
+Line 18: 3 bulan |  |  |  | 3 bulan
+Line 19: 6 bulan |  |  |  | 6 bulan
+Line 20: 9 bulan |  |  |  | 9 bulan
+Line 21: 12 bulan |  |  |  | 12 bulan
+Line 22: harga paket brand awareness  |  |  |  | harga paket banner promosi
+Line 23: 1 bulan | Rp. |  |  | 1 bulan | Rp.
+Line 24: 3 bulan | Rp. |  |  | 3 bulan | Rp.
+Line 25: 6 bulan | Rp. |  |  | 6 bulan | Rp.
+Line 26: 9 bulan | Rp. |  |  | 9 bulan | Rp.
+Line 27: 12 bulan | Rp. |  |  | 12 bulan | Rp.
+Line 28: Bayar ke platform pakai dompet saldo | Rp. |  |  | Bayar ke platform pakai dompet saldo | Rp.
+Line 29: Norek bank digital | Rp. |  |  | Norek bank digital | Rp.
+Line 30: QRIS | Rp. |  |  | QRIS | Rp.
+Line 31: VA | Rp. |  |  | VA | Rp.
+Line 32: kirim ke email pengiklan, transaksi berhasil dan iklan tayang di platform |  |  |  | kirim ke email pengiklan, transaksi berhasil dan banner promosi produk tayang di platform
+Line 33: selesai. |  |  |  | selesai.
+Line 34: bayar iuran bulanan ke platfrom mengikuti durasi paket  iklan | Rp. |  |  | bayar iuran bulanan ke platfrom mengikuti durasi paket  iklan | Rp.
+Line 38:  |  |  |  | Produk iklan  : penempatan dan distribusi di  bagian atas bersama produk lain yang sudah bayar banner promosi sesuai pengelompokan menu di user
+Line 39: Produk iklan  : penempatan dan distribusi di setiap menu-menu di user |  |  |  | Banner Promosi produk 
+Line 40: brand awareness |  |  |  | foto produk, harga, nama toko 
+Line 41: brand awareness + kontak+promo
+
+=== Mitra Donasi (32 lines) ===
+Line 1: MITRA Donasi
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: Kredit Modal Kerja dari bank digital | Rp.
+Line 11: Cicilan dari kredit modal kerja | Rp.
+Line 12: histori cicilan
+Line 13: upload foto produk & deskripsi produk
+Line 14: nama yayasan
+Line 15: nama program
+Line 16: lihat produk
+Line 17: pilihan durasi paket program tayang
+Line 18: 1 bulan
+Line 19: 3 bulan
+Line 20: 6 bulan
+Line 21: 9 bulan
+Line 22: 12 bulan
+Line 23: harga paket program
+Line 24: 1 bulan | Rp.
+Line 25: 3 bulan | Rp.
+Line 26: 6 bulan | Rp.
+Line 27: 9 bulan | Rp.
+Line 28: 12 bulan | Rp.
+Line 29: QRIS | Rp.
+Line 30: selesai.
+Line 31: bayar iuran bulanan ke platfrom mengikuti durasi paket  program | Rp.
+Line 32: potong komisi untuk platform dari total pendapatan  | Rp. 5% atau setara nominal
+
+=== Bispira E-Voting Cabang (41 lines) ===
+Line 2:  | 1.0 |  | PRA E-VOVING | Penjaringan kandidat pendaftaran di Mitra MICE atau Bispira EO  Cabang
+Line 3:  | 2.0 |  | E-VOTING | Nama Event
+Line 4:  | 3.0 |  | NAMA PENYELENGGARA E-VOTING
+Line 5:  | 4.0 |  | Nama Acara E-voting
+Line 6:  |  |  | Durasi waktu | 3 bulan | Tahap penyisihan acara e-voting
+Line 7:  |  |  |  | 1 bulan dan final | Tahap 10 besar
+Line 9:  | 4.0 |  | USER | Lihat kandidat (foto, nama, peringkat saat ini: #5 misal)
+Line 10:  | 5.0 |  |  | pilih kandidat
+Line 11:  | 6.0 |  |  | top up saldo 
+Line 12:  | 7.0 |  |  | beli paket vote | paket 1 Rp. 1000 dapat 2 suara
+Line 13:  |  |  |  |  | paket 2 Rp. 5000 dapat 10 suara
+Line 14:  |  |  |  |  | paket 3 Rp. 10000 dapat  20 suara
+Line 15:  |  |  |  |  | paket 4 Rp. 20000 dapat 40 suara
+Line 16:  |  |  |  |  | paket 5 Rp. 50.000 dapat 100 suara
+Line 18:  | 8.0 |  |  | pakai e-voting
+Line 19:  | 8.1 |  |  | pilihan pakai | 1.  satu per satu ke kandidat pilihan
+Line 20:  | 8.2 |  |  |  | 2. pakai sekaligus ke kandidiat pilihan
+Line 21:  |  |  |  |  | 3. informasi siswa saldo suara
+Line 22:  | 9.0 |  |  | daftar  | pilihan kandidat
+Line 23:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 25:  | 10.0 |  |  | hasil suara | pilihan kandidat
+Line 26:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 27:  | 11.0 |  |  | status kompetisi | babak 50 besar berjalan, (sisa waktu : 7 hari 6 jam)
+Line 28:  | 12.0 |  |  | klasemen tangga juara live board
+Line 31:  | 13.0 |  |  | 🧑‍💻 Hub Admin (Akses Terbatas)
+Line 32:  | 13:01:00 |  |  | Verifikasi Pembayaran: Menyetujui manual top up saldo jika ada kendala bank digital.
+Line 33:  | 13:02:00 |  |  | Monitor Kandidat: Menambah, mengedit, atau mendiskualifikasi peserta.
+Line 34:  | 13:03:00 |  |  | Push Notifikasi: Mengirim pengingat ke WhatsApp/Email pemilih yang masih memiliki sisa saldo suara.
+Line 35:  | 14.0 |  |  | 👑 Hub Super Admin (Kontrol Mutlak)
+Line 36:  | 14:01:00 |  |  | Kontrol Fase Babak: Saklar utama untuk mengubah status kompetisi:
+Line 37:  |  |  |  | [Tombol] Pindahkan ke Babak Penyisihan (Cut-off otomatis di luar 50 besar).
+Line 38:  |  |  |  | [Tombol] Pindahkan ke Babak 20 Besar (Suara di-reset ke 0 atau diakumulasi, sesuai regulasi).
+Line 39:  |  |  |  | [Tombol] Pindahkan ke Babak Final 10 Besar.
+Line 40:  | 14:02:00 |  |  | Manajemen Finansial: Grafik pendapatan kotor dari penjualan paket e-voting.
+Line 41:  | 14:03:00 |  |  | Sponsor Management: Mengubah gambar banner sponsor, link tujuan, dan kode voucher diskon brand awareness.
+Line 45:  |  |  | Space Iklan Brand Awareness
+Line 46:  |  | 1.0 | Sticky premium top header banner
+Line 47:  |  | 2.0 | in between candidates banner advert
+Line 48:  |  | 3.0 | sponsor payment promo
+Line 49:  |  | 4.0 | leaderboard sidebar partner logo
+Line 50:  |  | 5.0 | succes & claim voucher modal pop up
+
+=== Bispira EO Cabang (35 lines) ===
+Line 1: BISPIRA EO
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: upload foto produk & deskripsi produk
+Line 11: Jenjang lomba atau acara | pelajar,mahasiswa, umum
+Line 12: kelompok lomba atau acara | individu, kelompok
+Line 13: Tingkat lomba atau acara
+Line 14: kecamatan | cabang
+Line 15: kabupaten | cabang
+Line 16: lihat produk
+Line 17: harga tiket
+Line 18: update harga tiket
+Line 19: Jam Buka
+Line 20: Jam Tutup
+Line 21: Tanggal buka pendaftaran | Rp.
+Line 22: tanggal tutup pendaftaran | Rp.
+Line 23: tanggal acara | Rp.
+Line 24: mode acara
+Line 25: off line
+Line 26: online
+Line 27: link dokumen, video,foto
+Line 28: tempat
+Line 29: waktu acara
+Line 30: tiket kode booking
+Line 31: tiket barcode
+Line 32: 1 tiket untuk 1 pembeli , satu kali masuk/pakai
+Line 33: kirim tiket ke email  user
+Line 34: selesai.
+Line 35: bintang dari user
+
+=== Bispira E-Voting Pusat (41 lines) ===
+Line 2:  | 1.0 |  | PRA E-VOVING | Penjaringan kandidat pendaftaran di Mitra MICE atau Bispira EO  Cabang
+Line 3:  | 2.0 |  | E-VOTING | Nama Event
+Line 4:  | 3.0 |  | NAMA PENYELENGGARA E-VOTING
+Line 5:  | 4.0 |  | Nama Acara E-voting
+Line 6:  |  |  | Durasi waktu | 3 bulan | Tahap penyisihan acara e-voting
+Line 7:  |  |  |  | 1 bulan dan final | Tahap 10 besar
+Line 9:  | 4.0 |  | USER | Lihat kandidat (foto, nama, peringkat saat ini: #5 misal)
+Line 10:  | 5.0 |  |  | pilih kandidat
+Line 11:  | 6.0 |  |  | top up saldo 
+Line 12:  | 7.0 |  |  | beli paket vote | paket 1 Rp. 1000 dapat 2 suara
+Line 13:  |  |  |  |  | paket 2 Rp. 5000 dapat 10 suara
+Line 14:  |  |  |  |  | paket 3 Rp. 10000 dapat  20 suara
+Line 15:  |  |  |  |  | paket 4 Rp. 20000 dapat 40 suara
+Line 16:  |  |  |  |  | paket 5 Rp. 50.000 dapat 100 suara
+Line 18:  | 8.0 |  |  | pakai e-voting
+Line 19:  | 8.1 |  |  | pilihan pakai | 1.  satu per satu ke kandidat pilihan
+Line 20:  | 8.2 |  |  |  | 2. pakai sekaligus ke kandidiat pilihan
+Line 21:  |  |  |  |  | 3. informasi siswa saldo suara
+Line 22:  | 9.0 |  |  | daftar  | pilihan kandidat
+Line 23:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 25:  | 10.0 |  |  | hasil suara | pilihan kandidat
+Line 26:  |  |  |  |  | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 | 10.0 | 11.0 | 12.0 | 13.0 | 14.0 | 15.0 | 16.0 | 17.0 | 18.0 | 19.0 | 20.0
+Line 27:  | 11.0 |  |  | status kompetisi | babak 50 besar berjalan, (sisa waktu : 7 hari 6 jam)
+Line 28:  | 12.0 |  |  | klasemen tangga juara live board
+Line 31:  | 13.0 |  |  | 🧑‍💻 Hub Admin (Akses Terbatas)
+Line 32:  | 13:01:00 |  |  | Verifikasi Pembayaran: Menyetujui manual top up saldo jika ada kendala bank digital.
+Line 33:  | 13:02:00 |  |  | Monitor Kandidat: Menambah, mengedit, atau mendiskualifikasi peserta.
+Line 34:  | 13:03:00 |  |  | Push Notifikasi: Mengirim pengingat ke WhatsApp/Email pemilih yang masih memiliki sisa saldo suara.
+Line 35:  | 14.0 |  |  | 👑 Hub Super Admin (Kontrol Mutlak)
+Line 36:  | 14:01:00 |  |  | Kontrol Fase Babak: Saklar utama untuk mengubah status kompetisi:
+Line 37:  |  |  |  | [Tombol] Pindahkan ke Babak Penyisihan (Cut-off otomatis di luar 50 besar).
+Line 38:  |  |  |  | [Tombol] Pindahkan ke Babak 20 Besar (Suara di-reset ke 0 atau diakumulasi, sesuai regulasi).
+Line 39:  |  |  |  | [Tombol] Pindahkan ke Babak Final 10 Besar.
+Line 40:  | 14:02:00 |  |  | Manajemen Finansial: Grafik pendapatan kotor dari penjualan paket e-voting.
+Line 41:  | 14:03:00 |  |  | Sponsor Management: Mengubah gambar banner sponsor, link tujuan, dan kode voucher diskon brand awareness.
+Line 45:  |  |  | Space Iklan Brand Awareness
+Line 46:  |  | 1.0 | Sticky premium top header banner
+Line 47:  |  | 2.0 | in between candidates banner advert
+Line 48:  |  | 3.0 | sponsor payment promo
+Line 49:  |  | 4.0 | leaderboard sidebar partner logo
+Line 50:  |  | 5.0 | succes & claim voucher modal pop up
+
+=== Bispira EO Pusat (35 lines) ===
+Line 1: BISPIRA EO
+Line 2: Bikin Akun | Nomor Hape, email
+Line 3: Buka Rekening | embedded form di aplikasi
+Line 4: top up saldo
+Line 5: dompet digital
+Line 6: sisa saldo
+Line 7: histori  pengeluaran dompet digital
+Line 8: transfer ke sesama bank digital (gratis)
+Line 9: transfer ke rekening bank konvensional (gratis sesuai kuota bulanan)
+Line 10: upload foto produk & deskripsi produk
+Line 11: Jenjang lomba atau acara | pelajar,mahasiswa, umum
+Line 12: kelompok lomba atau acara | individu, kelompok
+Line 13: Tingkat lomba atau acara
+Line 14: provinsi | pusat
+Line 15: nasional | pusat
+Line 16: lihat produk
+Line 17: harga tiket
+Line 18: update harga tiket
+Line 19: Jam Buka
+Line 20: Jam Tutup
+Line 21: Tanggal buka pendaftaran | Rp.
+Line 22: tanggal tutup pendaftaran | Rp.
+Line 23: tanggal acara | Rp.
+Line 24: mode acara
+Line 25: off line
+Line 26: online
+Line 27: link dokumen, video,foto
+Line 28: tempat
+Line 29: waktu acara
+Line 30: tiket kode booking
+Line 31: tiket barcode
+Line 32: 1 tiket untuk 1 pembeli , satu kali masuk/pakai
+Line 33: kirim tiket ke email  user
+Line 34: selesai.
+Line 35: bintang dari user
+
+=== PENULISAN HARGA (14 lines) ===
+Line 1: 1.0 | Harga Dasar/Asli dari penjual
+Line 2:  | Nominal
+Line 3:  | .......
+Line 4: 2.0 | Markup  harga Pakai
+Line 5:  | Nominal |  | Persen
+Line 6:  | on | off | on | off
+Line 7:  | ........... | ........ | ........ | ...........
+Line 9: 3.0 | Diskon/Promo
+Line 10:  | Nominal |  | Persen
+Line 11:  | on | off | on | off
+Line 12:  | ........... | ........ | ........ | ...........
+Line 15: 4.0 | Harga Resmi Platform
+Line 16:  | Nominal
+Line 17:  | .........
+
+=== Member Mitra,Merchant (21 lines) ===
+Line 2:  | PENJUAL/PEDAGANG
+Line 3:  | 1.0 |  | 2.0 |  | 3.0 |  |  | 4.0 | 5.0 |  | 6.0 | 7.0 | 8.0 |  | 9.0 | 10.0 | 11.0 | 12.0 |  |  |  |  |  |  | Buat Akun
+Line 4:  | Mitra Food& Fresh |  | Mitra Kesehatan & Homecare |  | Mitra Ahli, Edukasi & Hiburan |  |  | Mitra Driver | Mitra MICE & Wisata |  | Mitra Donasi | Mitra Ads | Mitra Kost & Working Space |  | Bispira E-Voting Cabang | Bispira EO Cabang | Bispira E-Voting Pusat | Bispira EO Pusat | OUTPUT BUKTI PEMBELIAN per tiket transaksi |  |  |  |  |  | Login
+Line 5:  | Mitra Food& Fresh | Fresh | Kesehatan | Homecare | Ahli | Edukasi | Hiburan | Driver | MICE | Wisata | Donasi | Ads | Kost | Working Space | All Cabang | All Cabang | Pusat | Pusat | Tiket food sembako | Tiket acara | Tiket Periksa | Tiket edukasi | Driver |  | lupa password
+Line 6:  | Makanan | Sayur hijau | *Dokter (chat on line, off line) | Perawat Bayi | *Konsultan Hukum (chat on line) | Pelatih  | Master of Ceremony | Ojek orang | Pelatihan | Pemilik Wisata | Yayasan | All Mitra | Pemilik Kost | Ruang Rapat | Cabang | Cabang | Pusat | Pusat | Barcode / QR Code | Barcode / QR Code | Barcode / QR Code | Barcode / QR Code |  |  | reset
+Line 7:  | Minuman | Daging segar (ayam, sapi, kerbau,kambing, Ikan) | Perawat  | Tukang urut | *Pengacara (chat on line, off line) | Guru Privat | Penyanyi | ojek barang (delivery) | Seminar | Pengelola Wisata |  |  | Pengelola Kost | Ruang kerja |  |  |  |  | Kode Booking | Kode Booking | Kode Booking | Kode Booking
+Line 8:  | Jajan | Sembako (telor, minyak, gas, tepung, tahu tempe,bumbu dapur) | Psikiater  | Tukang pijet | Akuntan  | Tutor | Grup Band | mobil orang | Workshop | Pemancingan |  |  |  |  |  |  |  |  | Nama Toko | Nama Acara | Nama Klinik | Nama Klinik | Nama Driver
+Line 9:  | Buah |  | Psikolog  | Perawat | Motivator | Tentor |  | mobil barang (logistik) | Pameran |  |  |  |  |  |  |  |  |  | Lokasi pengambilan | Pemilik Acara | Nama Nakes | Nama ahli/educator/hiburan | Jenis Armada
+Line 10:  | Catering |  | *Apotek (chat on line,off line) | Caregiver | Penceramah Agama | Dosen |  | ambulance | Konferensi |  |  |  |  |  |  |  |  |  | Nama Pembeli | Ketegori tiket | Jadwal | Jadwal
+Line 11:  |  |  | Konselor  | Child Care | Konsultan Keluarga | Widyaiswara |  |  | Wisata |  |  |  |  |  |  |  |  |  | Daftar komoditas Sembako | nomor kursi | nomor kursi | nomor kursi
+Line 12:  |  |  | Fisioterapis  | Baby Sitter | Konsultan Pendidikan | Trainer |  |  |  |  |  |  |  |  |  |  |  |  |  | informasi pemilik | informasi pemilik | informasi pemilik | Informasi Pemilik
+Line 13:  |  |  | Bidan  | Asisten Rumah  | Konsultan Bisnis | Instruktur |  |  |  |  |  |  |  |  |  |  |  |  | status bayar | status bayar | status bayar | status bayar | Status Bayar
+Line 14:  |  |  | Terapis Spa  |  | Notaris
+Line 15:  |  |  | Barbershop  |  | Tukang Cat
+Line 16:  |  |  |  |  | tukang bangunan
+Line 17:  |  |  |  |  | tukang kayu
+Line 18:  |  |  |  |  | tukang las
+Line 19:  |  |  |  |  | tukang kursi sofa
+Line 20:  |  |  |  |  | +
+Line 22:  |  |  | * chat online & off line |  | * chat online & off line
+Line 23:  |  |  | yang lain off line |  | yang lain off line
+
