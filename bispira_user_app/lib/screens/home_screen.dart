@@ -319,13 +319,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 18),
 
-              // 3. 💳 ELECTRIC BLUE BISPIRA PAY BALANCE CARD
+              // 3. 💳 SISTEM PEMBAYARAN: TRANSFER BANK (KODE UNIK) & QRIS (CEK MANUAL ADMIN)
               SoftNeoCard(
                 backgroundColor: NeoColors.brand,
                 borderColor: NeoColors.black,
                 shadowOffset: 4.5,
                 padding: const EdgeInsets.all(18),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -334,43 +335,64 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Text(
-                              'BISPIRA Pay Saldo',
-                              style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w600),
+                              'Metode Pembayaran Resmi',
+                              style: TextStyle(color: Colors.white70, fontSize: 11.5, fontWeight: FontWeight.w600),
                             ),
                             SizedBox(height: 3),
                             Text(
-                              'Rp 250.000',
-                              style: TextStyle(color: NeoColors.white, fontSize: 25, fontWeight: FontWeight.w900),
+                              'Transfer Bank & QRIS',
+                              style: TextStyle(color: NeoColors.white, fontSize: 20, fontWeight: FontWeight.w900),
                             ),
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
                             color: NeoColors.gold,
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: NeoColors.black, width: 1.8),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: NeoColors.black, width: 1.5),
                             boxShadow: const [
                               BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0),
                             ],
                           ),
                           child: const Text(
-                            '⭐ 1.250 Poin',
-                            style: TextStyle(color: NeoColors.black, fontWeight: FontWeight.w900, fontSize: 11.5),
+                            '🛡️ Verifikasi Manual Admin',
+                            style: TextStyle(color: NeoColors.black, fontWeight: FontWeight.w900, fontSize: 10.5),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    Container(height: 1, color: Colors.white.withOpacity(0.18)),
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white24, width: 1),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.info_outline_rounded, color: NeoColors.gold, size: 18),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'BISPIRA tidak menyimpan saldo dompet. Pembayaran via Transfer Bank + Kode Unik atau QRIS diverifikasi tim Admin.',
+                              style: TextStyle(color: NeoColors.white, fontSize: 10.5, fontWeight: FontWeight.w600, height: 1.25),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 14),
+                    Container(height: 1, color: Colors.white.withOpacity(0.18)),
+                    const SizedBox(height: 12),
                     // Quick Action Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _brandWalletBtn('💸', 'Bayar'),
-                        _brandWalletBtn('➕', 'Top Up'),
-                        _brandWalletBtn('🚀', 'Transfer'),
+                        _brandWalletBtn('🏦', 'Transfer', onTap: () => _showBankAccountsModal(context)),
+                        _brandWalletBtn('📱', 'QRIS Pay', onTap: () => _showQrisModal(context)),
+                        _brandWalletBtn('🔍', 'Cek Mutasi', onTap: () => _showVerificationStatusModal(context)),
                         _brandWalletBtn('📜', 'Riwayat', onTap: () => widget.onNavigateTab(1)),
                       ],
                     ),
@@ -941,5 +963,230 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
+  void _showBankAccountsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        padding: const EdgeInsets.all(22),
+        decoration: const BoxDecoration(
+          color: NeoColors.surface,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Rekening Transfer Resmi BISPIRA 🏦', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black)),
+                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(ctx)),
+              ],
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'Setiap pembayaran wajib menyertakan 3 digit kode unik agar diverifikasi oleh Admin BISPIRA.',
+              style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 14),
+            _bankRow('BCA', '8840-192-381', 'PT BISPIRA DIGITAL NUSANTARA'),
+            const SizedBox(height: 10),
+            _bankRow('MANDIRI', '136-00-9821-4401', 'PT BISPIRA DIGITAL NUSANTARA'),
+            const SizedBox(height: 10),
+            _bankRow('BRI', '0012-01-002938-501', 'PT BISPIRA DIGITAL NUSANTARA'),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: NeoColors.brand,
+                foregroundColor: NeoColors.white,
+                minimumSize: const Size(double.infinity, 46),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(color: NeoColors.black, width: 1.8),
+                ),
+              ),
+              child: const Text('Mengerti 👍', style: TextStyle(fontWeight: FontWeight.w900)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _bankRow(String bank, String accNo, String holder) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: NeoColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: NeoColors.black, width: 1.6),
+        boxShadow: const [BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0)],
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: NeoColors.brand,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(bank, style: const TextStyle(fontWeight: FontWeight.w900, color: NeoColors.white, fontSize: 11)),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(accNo, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14, color: NeoColors.black, letterSpacing: 0.5)),
+                Text(holder, style: const TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showQrisModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        padding: const EdgeInsets.all(22),
+        decoration: const BoxDecoration(
+          color: NeoColors.surface,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('QRIS Standar Pembayaran 📱', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black)),
+                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(ctx)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: NeoColors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: NeoColors.black, width: 2),
+                boxShadow: const [BoxShadow(color: NeoColors.black, offset: Offset(3, 3), blurRadius: 0)],
+              ),
+              child: Column(
+                children: [
+                  const Text('QRIS BISPIRA SUPERAPP', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                  const SizedBox(height: 4),
+                  const Text('NMID: ID1026904288190', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                  const SizedBox(height: 12),
+                  const Icon(Icons.qr_code_2_rounded, size: 160, color: NeoColors.black),
+                  const SizedBox(height: 8),
+                  const Text('BCA • Mandiri • BRI • BNI • GoPay • OVO • Dana • ShopeePay', style: TextStyle(fontSize: 9.5, fontWeight: FontWeight.w800, color: NeoColors.brand)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Setelah scan QRIS, admin BISPIRA akan memverifikasi mutasi Anda.',
+              style: TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 14),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: NeoColors.brand,
+                foregroundColor: NeoColors.white,
+                minimumSize: const Size(double.infinity, 46),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(color: NeoColors.black, width: 1.8),
+                ),
+              ),
+              child: const Text('Tutup QRIS 👍', style: TextStyle(fontWeight: FontWeight.w900)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showVerificationStatusModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        padding: const EdgeInsets.all(22),
+        decoration: const BoxDecoration(
+          color: NeoColors.surface,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Status Verifikasi Mutasi Bank 🔍', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black)),
+                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(ctx)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF0FDF4),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFF22C55E), width: 1.8),
+              ),
+              child: Row(
+                children: const [
+                  Icon(Icons.verified_rounded, color: Color(0xFF16A34A), size: 28),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Mutasi Terverifikasi', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Color(0xFF166534))),
+                        Text('Order #BSP-8812 • Rp 34.439 (Kode Unik 439) telah disetujui Admin BISPIRA.', style: TextStyle(fontSize: 11, color: Color(0xFF166534), fontWeight: FontWeight.w600)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: NeoColors.brand,
+                foregroundColor: NeoColors.white,
+                minimumSize: const Size(double.infinity, 46),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(color: NeoColors.black, width: 1.8),
+                ),
+              ),
+              child: const Text('Tutup 👍', style: TextStyle(fontWeight: FontWeight.w900)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
+
 

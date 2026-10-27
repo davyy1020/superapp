@@ -40,8 +40,8 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   LatLng _dropoffLocation = const LatLng(-6.9903, 110.4229); // Simpang Lima Semarang
 
   int _selectedServiceIndex = 0; // 0 = Motor, 1 = Kurir, 2 = Kargo, 3 = Ambulance
-  String _paymentMethod = 'BISPIRA Pay';
-  int _userBalance = 250000;
+  String _paymentMethod = 'Transfer Bank (Kode Unik)';
+  final int _uniqueCode = 247;
   bool _isLoadingSearch = false;
 
   // OSRM GIS Routing State
@@ -322,7 +322,11 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   int _calculateServiceFee() => 3000;
 
   int _calculateGrandTotal() {
-    return _calculateBasePrice() + _calculateServiceFee();
+    int total = _calculateBasePrice() + _calculateServiceFee();
+    if (_paymentMethod.contains('Transfer')) {
+      total += _uniqueCode;
+    }
+    return total;
   }
 
   String _formatPrice(int amount) {
@@ -422,20 +426,20 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                     ],
                   ),
 
-                  // Balance Pill Box
+                  // Payment Mode Badge
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: NeoColors.surface,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: NeoColors.brand, width: 1.8),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: NeoColors.brand, width: 1.6),
                     ),
-                    child: Text(
-                      'Rp ${_formatPrice(_userBalance)}',
-                      style: const TextStyle(
+                    child: const Text(
+                      '🏦 Transfer / QRIS',
+                      style: TextStyle(
                         color: NeoColors.brand,
                         fontWeight: FontWeight.w900,
-                        fontSize: 12,
+                        fontSize: 11,
                       ),
                     ),
                   ),
@@ -1077,53 +1081,32 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                 ),
                 const SizedBox(height: 14),
 
-                // Payment & Promo Cards
-                Row(
+                // PAYMENT METHOD SELECTOR (NO EWALLET / NO BISPIRA PAY SALDO)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: NeoColors.surface,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: NeoColors.black, width: 1.8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          'PILIH METODE PEMBAYARAN',
+                          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11, letterSpacing: 0.8, color: NeoColors.textMuted),
                         ),
-                        child: Row(
-                          children: const [
-                            Icon(Icons.account_balance_wallet_rounded, color: NeoColors.brand, size: 18),
-                            SizedBox(width: 6),
-                            Expanded(
-                              child: Text(
-                                'BISPIRA Pay',
-                                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11.5, color: NeoColors.black),
-                              ),
-                            ),
-                          ],
+                        Text(
+                          'Verifikasi Manual Admin 🛡️',
+                          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 10, color: NeoColors.brand),
                         ),
-                      ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: NeoColors.surface,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: NeoColors.black, width: 1.8),
-                        ),
-                        child: Row(
-                          children: const [
-                            Icon(Icons.confirmation_number_rounded, color: NeoColors.gold, size: 18),
-                            SizedBox(width: 6),
-                            Expanded(
-                              child: Text(
-                                'Gunakan Voucher',
-                                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11.5, color: NeoColors.black),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        _buildPaymentTile('🏦 Transfer', 'Kode Unik', 'Transfer Bank (Kode Unik)'),
+                        const SizedBox(width: 8),
+                        _buildPaymentTile('📱 QRIS', 'BCA/Dana', 'QRIS (BCA/Dana/GoPay)'),
+                        const SizedBox(width: 8),
+                        _buildPaymentTile('💵 Tunai', 'Ke Driver', 'Tunai / Cash'),
+                      ],
                     ),
                   ],
                 ),
@@ -1214,6 +1197,16 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                           ],
                         ),
                       ),
+                      if (_paymentMethod.contains('Transfer')) ...[
+                        const SizedBox(height: 4),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('3-Digit Kode Unik (Verifikasi)', style: TextStyle(fontSize: 12, color: NeoColors.brand, fontWeight: FontWeight.w700)),
+                            Text('+ Rp $_uniqueCode', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.brand)),
+                          ],
+                        ),
+                      ],
                       const SizedBox(height: 12),
 
                       Row(
@@ -1221,7 +1214,7 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                         children: [
                           const Text('Total Bayar', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13.5, color: NeoColors.black)),
                           Text(
-                            'Rp ${_formatPrice(_calculateBasePrice() + 3000)}',
+                            'Rp ${_formatPrice(_calculateGrandTotal())}',
                             style: const TextStyle(color: NeoColors.brand, fontWeight: FontWeight.w900, fontSize: 17),
                           ),
                         ],
@@ -1236,27 +1229,196 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                             context: context,
                             builder: (ctx) => AlertDialog(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(24),
                                 side: const BorderSide(color: NeoColors.black, width: 2.5),
                               ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(selectedService['emoji'] as String, style: const TextStyle(fontSize: 48)),
-                                  const SizedBox(height: 10),
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: NeoColors.brandSoft,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: NeoColors.black, width: 2),
+                                    ),
+                                    child: Center(
+                                      child: Text(selectedService['emoji'] as String, style: const TextStyle(fontSize: 32)),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
                                   Text(
                                     'Pemesanan ${selectedService['name']} Berhasil!',
+                                    textAlign: TextAlign.center,
                                     style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
                                   ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    'Driver BISPIRA sedang dalam perjalanan ke: ${_pickupController.text}\nTotal: Rp ${_formatPrice(grandTotal)}',
+                                  const SizedBox(height: 4),
+                                  const Text(
+                                    'Mitra Driver BISPIRA telah menerima pesanan Anda',
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w600),
+                                    style: TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w600),
                                   ),
-                                  const SizedBox(height: 16),
+                                  const SizedBox(height: 14),
+
+                                  // ADDRESS VALIDATION CARD
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: NeoColors.surface,
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(color: NeoColors.black, width: 1.8),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(Icons.my_location_rounded, color: NeoColors.brand, size: 18),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text('Titik Jemput:', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                                                  Text(
+                                                    _pickupController.text,
+                                                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        const Divider(color: NeoColors.black, height: 1, thickness: 1),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(Icons.location_on_rounded, color: Colors.redAccent, size: 18),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text('Titik Tujuan:', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                                                  Text(
+                                                    _dropoffController.text,
+                                                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+
+                                  // PAYMENT INSTRUCTION CARD (TRANSFER BANK MANUAL OR QRIS)
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: _paymentMethod.contains('Transfer')
+                                          ? const Color(0xFFEFF6FF)
+                                          : const Color(0xFFF0FDF4),
+                                      borderRadius: BorderRadius.circular(14),
+                                      border: Border.all(
+                                        color: _paymentMethod.contains('Transfer') ? NeoColors.brand : const Color(0xFF22C55E),
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              _paymentMethod.contains('Transfer') ? '🏦 Instruksi Transfer Bank' : '📱 Pembayaran QRIS / Tunai',
+                                              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11.5, color: NeoColors.black),
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                              decoration: BoxDecoration(
+                                                color: NeoColors.gold,
+                                                borderRadius: BorderRadius.circular(6),
+                                              ),
+                                              child: const Text('Cek Manual Admin', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: NeoColors.black)),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 6),
+                                        if (_paymentMethod.contains('Transfer')) ...[
+                                          Text(
+                                            'Transfer tepat: Rp ${_formatPrice(grandTotal)} (Kode Unik: $_uniqueCode)',
+                                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: NeoColors.brand),
+                                          ),
+                                          const SizedBox(height: 2),
+                                          const Text(
+                                            'BCA: 8840-192-381 • Mandiri: 136-00-9821-4401\na/n PT BISPIRA DIGITAL NUSANTARA',
+                                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: NeoColors.black),
+                                          ),
+                                        ] else if (_paymentMethod.contains('QRIS')) ...[
+                                          Text(
+                                            'Total Bayar: Rp ${_formatPrice(grandTotal)}',
+                                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: Color(0xFF166534)),
+                                          ),
+                                          const Text(
+                                            'Scan QRIS via BCA/Mandiri/GoPay/Dana. Mutasi akan dicek Admin Bispira.',
+                                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF166534)),
+                                          ),
+                                        ] else ...[
+                                          Text(
+                                            'Total Bayar Tunai: Rp ${_formatPrice(grandTotal)}',
+                                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: NeoColors.black),
+                                          ),
+                                          const Text('Bayar langsung ke driver saat sampai di tujuan.', style: TextStyle(fontSize: 10, color: NeoColors.textMuted)),
+                                        ],
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+
+                                  // ROUTE STATS
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          const Text('Jarak OSRM', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                                          Text(
+                                            '${effectiveDistKm.toStringAsFixed(1)} km',
+                                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.brand),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          const Text('Estimasi Tiba', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                                          Text(
+                                            '~$effectiveMinutes mnt',
+                                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          const Text('Status Mutasi', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                                          const Text(
+                                            'Menunggu Verifikasi',
+                                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11, color: Colors.orange),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+
                                   SoftNeoButton(
-                                    text: 'Selesai 👍',
+                                    text: 'Saya Sudah Transfer / Pantau Driver 👍',
                                     backgroundColor: NeoColors.brand,
                                     textColor: NeoColors.white,
                                     onPressed: () => Navigator.pop(ctx),
@@ -1307,4 +1469,51 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
       ],
     );
   }
+
+  Widget _buildPaymentTile(String title, String sub, String value) {
+    final bool isSelected = _paymentMethod == value;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => setState(() => _paymentMethod = value),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+          decoration: BoxDecoration(
+            color: isSelected ? NeoColors.brandSoft : NeoColors.surface,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isSelected ? NeoColors.brand : NeoColors.black,
+              width: isSelected ? 2 : 1.4,
+            ),
+            boxShadow: isSelected
+                ? const [BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0)]
+                : null,
+          ),
+          child: Column(
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 10.5,
+                  color: isSelected ? NeoColors.brand : NeoColors.black,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                sub,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w700,
+                  color: isSelected ? NeoColors.brand : NeoColors.textMuted,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
+
