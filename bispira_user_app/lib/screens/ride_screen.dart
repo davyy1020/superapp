@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import '../theme/neo_theme.dart';
 import '../widgets/neo_widgets.dart';
+import '../services/api_service.dart';
 
 enum RideStep { pickup, destination, checkout }
 
@@ -42,6 +43,50 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   String _paymentMethod = 'BISPIRA Pay';
   int _userBalance = 250000;
   bool _isLoadingSearch = false;
+
+  // OSRM GIS Routing State
+  List<LatLng> _osrmPolylinePoints = [];
+  bool _isLoadingRoute = false;
+  double _osrmDistanceKm = 0.0;
+  int _osrmDurationMin = 0;
+  Map<String, dynamic>? _osrmFareData;
+
+  Future<void> _fetchOsrmRouteAndFare() async {
+    setState(() => _isLoadingRoute = true);
+    try {
+      final serviceType = _serviceOptions[_selectedServiceIndex]['id'] as String;
+      final result = await ApiService.getOsrmRoute(
+        originLat: _pickupLocation.latitude,
+        originLng: _pickupLocation.longitude,
+        destLat: _dropoffLocation.latitude,
+        destLng: _dropoffLocation.longitude,
+        serviceType: serviceType,
+      );
+
+      final route = result['route'] as Map<String, dynamic>?;
+      final fare = result['fare'] as Map<String, dynamic>?;
+
+      if (route != null && mounted) {
+        final List rawPolyline = route['polylinePoints'] ?? [];
+        final List<LatLng> points = rawPolyline.map((pt) {
+          if (pt is List && pt.length >= 2) {
+            return LatLng((pt[0] as num).toDouble(), (pt[1] as num).toDouble());
+          }
+          return _pickupLocation;
+        }).toList();
+
+        setState(() {
+          _osrmPolylinePoints = points;
+          _osrmDistanceKm = (route['distanceKm'] as num?)?.toDouble() ?? _calculateDistanceInKm();
+          _osrmDurationMin = (route['durationMinutes'] as num?)?.toInt() ?? 15;
+          _osrmFareData = fare;
+          _isLoadingRoute = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _isLoadingRoute = false);
+    }
+  }
 
   Map<String, dynamic>? _selectedVoucher = {
     'code': 'BISPIRASUPER',
@@ -298,6 +343,9 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
         _dropoffLocation = LatLng(loc['lat'] as double, loc['lng'] as double);
         _dropoffController.text = loc['name'] as String;
         _currentStep = RideStep.checkout;
+
+        // Fetch real OSRM routing and fare breakdown
+        _fetchOsrmRouteAndFare();
 
         // Fit both markers on screen
         _mapController.move(
@@ -785,52 +833,93 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   // ============================================================
   Widget _buildStep3CheckoutView() {
     final double distKm = _calculateDistanceInKm();
+    final double effectiveDistKm = _osrmDistanceKm > 0 ? _osrmDistanceKm : distKm;
     final int estimatedMinutes = (distKm * 1.5).round();
+    final int effectiveMinutes = _osrmDurationMin > 0 ? _osrmDurationMin : estimatedMinutes;
     final selectedService = _serviceOptions[_selectedServiceIndex];
 
     return Column(
       children: [
-        // Live Interactive Map (Top Half)
+        // Live Interactive Map with OSRM Routing (Top Half)
         SizedBox(
           height: 200,
-          child: FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              initialCenter: LatLng(
-                (_pickupLocation.latitude + _dropoffLocation.latitude) / 2,
-                (_pickupLocation.longitude + _dropoffLocation.longitude) / 2,
-              ),
-              initialZoom: 12.0,
-            ),
+          child: Stack(
             children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.bispira.userapp',
-              ),
-              PolylineLayer(
-                polylines: [
-                  Polyline(
-                    points: [_pickupLocation, _dropoffLocation],
-                    strokeWidth: 4.5,
-                    color: NeoColors.brand,
+              FlutterMap(
+                mapController: _mapController,
+                options: MapOptions(
+                  initialCenter: LatLng(
+                    (_pickupLocation.latitude + _dropoffLocation.latitude) / 2,
+                    (_pickupLocation.longitude + _dropoffLocation.longitude) / 2,
+                  ),
+                  initialZoom: 12.0,
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.bispira.userapp',
+                  ),
+                  PolylineLayer(
+                    polylines: [
+                      Polyline(
+                        points: _osrmPolylinePoints.isNotEmpty ? _osrmPolylinePoints : [_pickupLocation, _dropoffLocation],
+                        strokeWidth: 5.0,
+                        color: NeoColors.brand,
+                      ),
+                    ],
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: _pickupLocation,
+                        width: 32,
+                        height: 32,
+                        child: const Icon(Icons.my_location_rounded, color: NeoColors.brand, size: 26),
+                      ),
+                      Marker(
+                        point: _dropoffLocation,
+                        width: 32,
+                        height: 32,
+                        child: const Icon(Icons.location_on_rounded, color: Colors.redAccent, size: 28),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              MarkerLayer(
-                markers: [
-                  Marker(
-                    point: _pickupLocation,
-                    width: 32,
-                    height: 32,
-                    child: const Icon(Icons.my_location_rounded, color: NeoColors.brand, size: 26),
+              Positioned(
+                top: 10,
+                left: 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: NeoColors.surface,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: NeoColors.black, width: 1.8),
+                    boxShadow: const [
+                      BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0),
+                    ],
                   ),
-                  Marker(
-                    point: _dropoffLocation,
-                    width: 32,
-                    height: 32,
-                    child: const Icon(Icons.location_on_rounded, color: Colors.redAccent, size: 28),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: _isLoadingRoute ? Colors.orange : const Color(0xFF00C853),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        _isLoadingRoute
+                            ? 'Menghitung rute OSRM...'
+                            : 'OSRM: ${effectiveDistKm.toStringAsFixed(1)} km (~$effectiveMinutes mnt)',
+                        style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 10.5, color: NeoColors.black),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),
@@ -1063,8 +1152,8 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Jarak Tempuh', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
-                          Text('${distKm.toStringAsFixed(1)} km', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                          const Text('Jarak Tempuh (OSRM)', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('${effectiveDistKm.toStringAsFixed(1)} km', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -1072,7 +1161,7 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Estimasi Tiba', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
-                          Text('$estimatedMinutes min', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                          Text('$effectiveMinutes min', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
                         ],
                       ),
                       const SizedBox(height: 8),

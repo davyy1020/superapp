@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../providers/driver_provider.dart';
 import '../theme/neo_theme.dart';
 import '../utils/maps_launcher.dart';
+import '../utils/osrm_service.dart';
 
 class ActiveTripScreen extends StatefulWidget {
   const ActiveTripScreen({Key? key}) : super(key: key);
@@ -17,6 +18,38 @@ class ActiveTripScreen extends StatefulWidget {
 class _ActiveTripScreenState extends State<ActiveTripScreen> {
   final MapController _mapController = MapController();
   final currencyFmt = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+
+  List<LatLng> _osrmRoutePoints = [];
+  bool _isLoadingRoute = false;
+  String _osrmSource = 'OSRM Engine';
+  double _routeDistanceKm = 0.0;
+  int _routeDurationMin = 0;
+  String? _lastOrderId;
+
+  void _loadOsrmRoute(DriverOrder order) async {
+    _lastOrderId = order.id;
+    setState(() => _isLoadingRoute = true);
+    try {
+      final res = await OsrmRoutingService.fetchRoute(
+        originLat: order.pickupLat,
+        originLng: order.pickupLng,
+        destLat: order.dropoffLat,
+        destLng: order.dropoffLng,
+        serviceType: order.serviceName.toLowerCase().contains('mobil') ? 'mobil' : 'motor',
+      );
+      if (mounted) {
+        setState(() {
+          _osrmRoutePoints = (res['points'] as List<LatLng>?) ?? [];
+          _osrmSource = res['source'] ?? 'OSRM Engine';
+          _routeDistanceKm = (res['distanceKm'] as num?)?.toDouble() ?? order.distanceKm;
+          _routeDurationMin = (res['durationMinutes'] as num?)?.toInt() ?? 15;
+          _isLoadingRoute = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _isLoadingRoute = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +79,10 @@ class _ActiveTripScreenState extends State<ActiveTripScreen> {
 
     final LatLng pickupLatLng = LatLng(order.pickupLat, order.pickupLng);
     final LatLng dropoffLatLng = LatLng(order.dropoffLat, order.dropoffLng);
+
+    if (_lastOrderId != order.id) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _loadOsrmRoute(order));
+    }
 
     return Scaffold(
       backgroundColor: NeoColors.bg,
@@ -97,8 +134,8 @@ class _ActiveTripScreenState extends State<ActiveTripScreen> {
               PolylineLayer(
                 polylines: [
                   Polyline(
-                    points: [pickupLatLng, dropoffLatLng],
-                    strokeWidth: 4.5,
+                    points: _osrmRoutePoints.isNotEmpty ? _osrmRoutePoints : [pickupLatLng, dropoffLatLng],
+                    strokeWidth: 5.5,
                     color: NeoColors.brand,
                   ),
                 ],
@@ -120,6 +157,56 @@ class _ActiveTripScreenState extends State<ActiveTripScreen> {
                 ],
               ),
             ],
+          ),
+
+          // FLOATING OSRM GIS ENGINE STATUS PILL
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: NeoColors.surface,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: NeoColors.black, width: 2),
+                boxShadow: const [
+                  BoxShadow(color: NeoColors.black, offset: Offset(2.5, 2.5), blurRadius: 0),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: _isLoadingRoute ? Colors.orange : const Color(0xFF00C853),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          const Text('OSRM GIS Engine', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11, color: NeoColors.black)),
+                          if (_isLoadingRoute) ...[
+                            const SizedBox(width: 6),
+                            const SizedBox(width: 10, height: 10, child: CircularProgressIndicator(strokeWidth: 2)),
+                          ],
+                        ],
+                      ),
+                      Text(
+                        '${_routeDistanceKm > 0 ? _routeDistanceKm.toStringAsFixed(1) : order.distanceKm.toStringAsFixed(1)} km • ~${_routeDurationMin > 0 ? _routeDurationMin : (order.distanceKm * 2.5).round()} mnt',
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 10, color: NeoColors.textMuted),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
 
           // FLOATING GOOGLE MAPS NAVIGATION BUTTON
