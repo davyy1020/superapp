@@ -122,3 +122,4 @@ with open('bispira_admin_web/lib/data/sheet12_pendapatan_superadmin_matrix.json'
     json.dump(data, f, indent=2, ensure_ascii=False)
 
 print(f"Generated Sheet 12 JSON successfully with {len(rows)} cluster rows.")
+
