@@ -1822,73 +1822,192 @@ function renderSheet12(data, search, fmt) {
     const q = search.toLowerCase();
     return (
       (m.bidang_cluster && m.bidang_cluster.toLowerCase().includes(q)) ||
-      (m.penjual && m.penjual.toLowerCase().includes(q))
+      (m.penjual && m.penjual.toLowerCase().includes(q)) ||
+      (m.harga_dasar && m.harga_dasar.toLowerCase().includes(q))
     );
   });
 
   return (
     <div>
-      <div style={{ marginBottom: "16px", padding: "14px 18px", background: "rgba(16, 185, 129, 0.1)", borderRadius: "12px", border: "1px solid rgba(16, 185, 129, 0.25)" }}>
-        <div style={{ fontWeight: "800", color: "#34d399", fontSize: "13px" }}>
-          📊 Pedoman Pendapatan Superadmin Per Transaksi & Peta Split Bagi Hasil (Sheet Pendapatan Superadmin)
-        </div>
-        <div style={{ fontSize: "11.5px", color: "var(--text-muted)", marginTop: "4px" }}>
-          Pedoman 16 cluster pendapatan intermediasi: markup, biaya layanan, biaya aplikasi reguler/premium, kode unik bank, komisi, biaya pencairan, dan peta bagi hasil pusat & daerah (75:25, 100:0, 20:80, 60:40).
+      {/* HEADER BANNER UTAMA */}
+      <div style={{ marginBottom: "16px", padding: "16px 20px", background: "linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(14, 165, 233, 0.12))", borderRadius: "14px", border: "1.5px solid rgba(16, 185, 129, 0.3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+          <div>
+            <div style={{ fontWeight: "900", color: "#10b981", fontSize: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span>📑</span> SHEET: PENDAPATAN SUPERADMIN&BAGIHASIL
+              <span className="badge badge-success" style={{ fontSize: "10px", padding: "2px 8px" }}>EXCEL ASLI</span>
+            </div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>
+              PEDOMAN PENDAPATAN SUPERADMIN Per Transaksi (7 Pilar) & PETA BAGI HASIL NET PROFIT PUSAT DAN DAERAH (5 Skema Bagi Hasil).
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "8px", background: "#059669", color: "#ffffff", fontWeight: "800" }}>
+              16 Bidang Cluster
+            </span>
+            <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "8px", background: "#2563eb", color: "#ffffff", fontWeight: "800" }}>
+              7 Pilar Intermediasi
+            </span>
+            <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "8px", background: "#7c3aed", color: "#ffffff", fontWeight: "800" }}>
+              5 Skema Net Profit
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="table-wrapper" style={{ overflowX: "auto", maxHeight: "650px" }}>
-        <table style={{ minWidth: "1350px", fontSize: "12px" }}>
+      {/* 7 PILAR PENDAPATAN SUPERADMIN SUMMARY CHIPS */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "10px", marginBottom: "18px" }}>
+        {[
+          { no: "1", title: "MARKUP", val: "10%", color: "#f59e0b", desc: "Harga dasar mitra" },
+          { no: "2", title: "BIAYA LAYANAN", val: "Rp 500", color: "#06b6d4", desc: "Bisa diatur per cluster" },
+          { no: "3", title: "APLIKASI REGULER", val: "Rp 500", color: "#10b981", desc: "Per order reguler" },
+          { no: "4", title: "APLIKASI PREMIUM", val: "Rp 15.000", color: "#a855f7", desc: "30 hari, fleksibel order ramai" },
+          { no: "5", title: "KODE UNIK BANK", val: "000-999", color: "#ec4899", desc: "3 digit verifikasi otomatis" },
+          { no: "6", title: "KOMISI MITRA", val: "1% - 7.5%", color: "#3b82f6", desc: "Donasi 8% akhir dana" },
+          { no: "7", title: "BIAYA PENCAIRAN", val: "Rp 1.000", color: "#64748b", desc: "Akumulasi merchant & driver" },
+        ].map((p) => (
+          <div key={p.no} style={{ padding: "10px 14px", background: "var(--bg-card)", borderRadius: "10px", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${p.color}` }}>
+            <div style={{ fontSize: "10px", fontWeight: "800", color: p.color }}>PILAR #{p.no} • {p.title}</div>
+            <div style={{ fontSize: "14px", fontWeight: "900", color: "var(--text-main)", marginTop: "2px" }}>{p.val}</div>
+            <div style={{ fontSize: "10px", color: "var(--text-muted)", marginTop: "2px" }}>{p.desc}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 5 SKEMA PETA BAGI HASIL CHIPS */}
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
+        {[
+          { name: "KERJASAMA", ratio: "Pusat 75% : Daerah 25%", bg: "rgba(16, 185, 129, 0.15)", border: "#10b981", text: "#10b981" },
+          { name: "TANPA KERJASAMA", ratio: "Pusat 100% : Daerah 0%", bg: "rgba(59, 130, 246, 0.15)", border: "#3b82f6", text: "#3b82f6" },
+          { name: "EVENT MANDIRI DAERAH", ratio: "Pusat 20% : Daerah 80%", bg: "rgba(245, 158, 11, 0.15)", border: "#f59e0b", text: "#f59e0b" },
+          { name: "EVOTING KERJASAMA", ratio: "Pusat 60% : Daerah 40%", bg: "rgba(168, 85, 247, 0.15)", border: "#a855f7", text: "#a855f7" },
+          { name: "EVOTING PUSAT", ratio: "Pusat 100% : Daerah 0%", bg: "rgba(236, 72, 153, 0.15)", border: "#ec4899", text: "#ec4899" },
+        ].map((s) => (
+          <div key={s.name} style={{ padding: "6px 12px", borderRadius: "8px", background: s.bg, border: `1px solid ${s.border}`, fontSize: "11px", fontWeight: "700" }}>
+            <span style={{ color: "var(--text-main)" }}>{s.name}: </span>
+            <strong style={{ color: s.text }}>{s.ratio}</strong>
+          </div>
+        ))}
+      </div>
+
+      {/* SPREADSHEET TABLE 21 KOLOM DENGAN TAMPILAN AUTENTIK EXCEL */}
+      <div className="table-wrapper" style={{ overflowX: "auto", maxHeight: "680px", borderRadius: "12px", border: "1.5px solid var(--border-subtle)" }}>
+        <table style={{ minWidth: "1950px", fontSize: "11.5px", borderCollapse: "collapse", width: "100%" }}>
           <thead>
-            <tr style={{ background: "var(--bg-card-header)", borderBottom: "2px solid var(--border-subtle)" }}>
-              <th style={{ width: "40px" }}>No</th>
-              <th>Bidang Cluster</th>
-              <th>Entitas Penjual</th>
-              <th>Markup</th>
-              <th style={{ textAlign: "right" }}>Biaya Layanan</th>
-              <th style={{ textAlign: "right" }}>Aplikasi Reguler</th>
-              <th style={{ textAlign: "right", color: "#a855f7" }}>Aplikasi Premium</th>
-              <th style={{ textAlign: "center" }}>Komisi Platform</th>
-              <th style={{ textAlign: "right" }}>Biaya Pencairan</th>
-              <th style={{ textAlign: "center", color: "#10b981", fontWeight: "800" }}>Pusat (Kerjasama)</th>
-              <th style={{ textAlign: "center", color: "#f59e0b", fontWeight: "800" }}>Daerah (Kerjasama)</th>
-              <th style={{ textAlign: "center", color: "#38bdf8" }}>Split Event Mandiri</th>
+            {/* ROW 1: HEADER SECTION BESAR (A1:J1 & M1:V1) */}
+            <tr style={{ background: "#2e1065", color: "#ffffff", borderBottom: "1.5px solid #4c1d95" }}>
+              <th colSpan={11} style={{ textAlign: "center", padding: "10px 14px", fontSize: "13px", fontWeight: "900", letterSpacing: "0.5px", background: "#1e1b4b" }}>
+                PEDOMAN PENDAPATAN SUPERADMIN Per Transaksi (7 Pilar Intermediasi)
+              </th>
+              <th colSpan={10} style={{ textAlign: "center", padding: "10px 14px", fontSize: "13px", fontWeight: "900", letterSpacing: "0.5px", background: "#064e3b" }}>
+                PETA BAGI HASIL NET PROFIT PUSAT DAN DAERAH (5 Skema)
+              </th>
+            </tr>
+
+            {/* ROW 2: NOMOR PILAR PENDAPATAN & SUB-GRUP BAGI HASIL */}
+            <tr style={{ background: "#3b0764", color: "#fef08a", fontSize: "10.5px", fontWeight: "900", borderBottom: "1px solid #581c87" }}>
+              <th style={{ width: "35px" }}></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th style={{ textAlign: "center", background: "rgba(234, 179, 8, 0.2)" }}>1</th>
+              <th style={{ textAlign: "center", background: "rgba(6, 182, 212, 0.2)" }}>2</th>
+              <th style={{ textAlign: "center", background: "rgba(16, 185, 129, 0.2)" }}>3</th>
+              <th style={{ textAlign: "center", background: "rgba(168, 85, 247, 0.2)" }}>4</th>
+              <th style={{ textAlign: "center", background: "rgba(236, 72, 153, 0.2)" }}>5</th>
+              <th style={{ textAlign: "center", background: "rgba(59, 130, 246, 0.2)" }}>6</th>
+              <th style={{ textAlign: "center", background: "rgba(100, 116, 139, 0.2)" }}>7</th>
+              {/* BAGI HASIL GROUP LABELS */}
+              <th colSpan={2} style={{ textAlign: "center", background: "#047857", color: "#ffffff" }}>KERJASAMA</th>
+              <th colSpan={2} style={{ textAlign: "center", background: "#1d4ed8", color: "#ffffff" }}>TIDAK ADA KERJASAMA</th>
+              <th colSpan={2} style={{ textAlign: "center", background: "#b45309", color: "#ffffff" }}>EVENT MANDIRI DAERAH</th>
+              <th colSpan={2} style={{ textAlign: "center", background: "#7e22ce", color: "#ffffff" }}>EVOTING KERJASAMA</th>
+              <th colSpan={2} style={{ textAlign: "center", background: "#be185d", color: "#ffffff" }}>EVOTING PUSAT</th>
+            </tr>
+
+            {/* ROW 3: DETIL NAMA KOLOM */}
+            <tr style={{ background: "#4a154b", color: "#ffffff", borderBottom: "2px solid #6b21a8" }}>
+              <th style={{ width: "35px", textAlign: "center" }}>No</th>
+              <th style={{ width: "190px" }}>BIDANG CLUSTER</th>
+              <th style={{ width: "100px" }}>PENJUAL</th>
+              <th style={{ width: "140px" }}>HARGA DASAR</th>
+              <th style={{ textAlign: "center", width: "70px", color: "#fef08a" }}>MARKUP</th>
+              <th style={{ textAlign: "right", width: "95px" }}>BIAYA LAYANAN</th>
+              <th style={{ textAlign: "right", width: "95px" }}>APLIKASI REGULER</th>
+              <th style={{ textAlign: "right", width: "130px", color: "#d8b4fe" }}>APLIKASI PREMIUM (30hr)</th>
+              <th style={{ textAlign: "center", width: "95px" }}>KODE UNIK</th>
+              <th style={{ textAlign: "center", width: "110px", color: "#93c5fd" }}>KOMISI</th>
+              <th style={{ textAlign: "right", width: "110px" }}>BIAYA PENCAIRAN</th>
+              {/* SUB COLS BAGI HASIL */}
+              <th style={{ textAlign: "center", width: "65px", background: "#065f46" }}>PUSAT</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#065f46" }}>DAERAH</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#1e40af" }}>PUSAT</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#1e40af" }}>DAERAH</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#92400e" }}>PUSAT</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#92400e" }}>DAERAH</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#6b21a8" }}>PUSAT</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#6b21a8" }}>DAERAH</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#9d174d" }}>PUSAT</th>
+              <th style={{ textAlign: "center", width: "65px", background: "#9d174d" }}>DAERAH</th>
             </tr>
           </thead>
           <tbody>
             {matrix.map((m, idx) => (
-              <tr key={m.no || idx} style={{ borderBottom: "1px solid var(--border-subtle)" }}>
-                <td>{m.no}</td>
-                <td style={{ fontWeight: "700" }}>{m.bidang_cluster}</td>
+              <tr key={m.no || idx} style={{ borderBottom: "1px solid var(--border-subtle)", background: idx % 2 === 0 ? "transparent" : "rgba(255, 255, 255, 0.02)" }}>
+                <td style={{ textAlign: "center", fontWeight: "800", color: "var(--text-muted)" }}>{m.no}</td>
+                <td style={{ fontWeight: "700", color: "var(--text-main)" }}>{m.bidang_cluster}</td>
                 <td>
-                  <span className="badge badge-info">{m.penjual || "Mitra Bispira"}</span>
+                  <span className={`badge ${m.penjual === "Ride Hailing" ? "badge-warning" : m.penjual === "Merchant" ? "badge-info" : "badge-secondary"}`}>
+                    {m.penjual || "-"}
+                  </span>
                 </td>
-                <td style={{ fontWeight: "700", color: "#f59e0b" }}>
-                  {typeof m.markup === "number" ? `${(m.markup * 100).toFixed(0)}%` : m.markup || "10%"}
+                <td style={{ color: "var(--text-muted)", fontSize: "11px" }}>{m.harga_dasar || "-"}</td>
+                <td style={{ textAlign: "center", fontWeight: "800", color: "#f59e0b" }}>{m.markup_label || "10%"}</td>
+                <td style={{ textAlign: "right" }}>{m.biaya_layanan || "-"}</td>
+                <td style={{ textAlign: "right" }}>{m.biaya_aplikasi_reguler || "-"}</td>
+                <td style={{ textAlign: "right", fontWeight: "700", color: "#a855f7" }}>{m.biaya_aplikasi_premium_30hari || "-"}</td>
+                <td style={{ textAlign: "center", color: "#ec4899", fontWeight: "700" }}>{m.kode_unik_bank || "-"}</td>
+                <td style={{ textAlign: "center", fontWeight: "800", color: "#3b82f6" }}>{m.komisi_label || m.komisi || "-"}</td>
+                <td style={{ textAlign: "right", color: "var(--text-muted)" }}>{m.biaya_pencairan || "Rp. 1.000"}</td>
+                
+                {/* BAGI HASIL KERJASAMA (75:25) */}
+                <td style={{ textAlign: "center", fontWeight: "800", color: "#10b981", background: "rgba(16, 185, 129, 0.05)" }}>
+                  {typeof m.bagi_hasil_kerjasama?.pusat === "number" ? `${(m.bagi_hasil_kerjasama.pusat * 100).toFixed(0)}%` : "-"}
                 </td>
-                <td style={{ textAlign: "right" }}>{m.biaya_layanan}</td>
-                <td style={{ textAlign: "right" }}>{m.biaya_aplikasi_reguler}</td>
-                <td style={{ textAlign: "right", fontWeight: "700", color: "#a855f7" }}>
-                  {m.biaya_aplikasi_premium_30hari}
+                <td style={{ textAlign: "center", fontWeight: "800", color: "#34d399", background: "rgba(16, 185, 129, 0.05)" }}>
+                  {typeof m.bagi_hasil_kerjasama?.daerah === "number" ? `${(m.bagi_hasil_kerjasama.daerah * 100).toFixed(0)}%` : "-"}
                 </td>
-                <td style={{ textAlign: "center", fontWeight: "800", color: "#38bdf8" }}>
-                  {typeof m.komisi === "number" ? `${(m.komisi * 100).toFixed(1)}%` : m.komisi}
+
+                {/* TANPA KERJASAMA (100:0) */}
+                <td style={{ textAlign: "center", fontWeight: "800", color: "#3b82f6", background: "rgba(59, 130, 246, 0.05)" }}>
+                  {typeof m.bagi_hasil_tanpa_kerjasama?.pusat === "number" ? `${(m.bagi_hasil_tanpa_kerjasama.pusat * 100).toFixed(0)}%` : "-"}
                 </td>
-                <td style={{ textAlign: "right" }}>{m.biaya_pencairan}</td>
-                <td style={{ textAlign: "center", fontWeight: "800", color: "#10b981" }}>
-                  {typeof m.bagi_hasil_kerjasama?.pusat === "number"
-                    ? `${(m.bagi_hasil_kerjasama.pusat * 100).toFixed(0)}%`
-                    : m.bagi_hasil_kerjasama?.pusat}
+                <td style={{ textAlign: "center", color: "var(--text-muted)", background: "rgba(59, 130, 246, 0.05)" }}>
+                  {typeof m.bagi_hasil_tanpa_kerjasama?.daerah === "number" ? `${(m.bagi_hasil_tanpa_kerjasama.daerah * 100).toFixed(0)}%` : "-"}
                 </td>
-                <td style={{ textAlign: "center", fontWeight: "800", color: "#f59e0b" }}>
-                  {typeof m.bagi_hasil_kerjasama?.daerah === "number"
-                    ? `${(m.bagi_hasil_kerjasama.daerah * 100).toFixed(0)}%`
-                    : m.bagi_hasil_kerjasama?.daerah}
+
+                {/* EVENT MANDIRI DAERAH (20:80) */}
+                <td style={{ textAlign: "center", color: m.bagi_hasil_event_mandiri?.pusat != null ? "#f59e0b" : "var(--text-muted)" }}>
+                  {m.bagi_hasil_event_mandiri?.pusat != null ? `${(m.bagi_hasil_event_mandiri.pusat * 100).toFixed(0)}%` : "-"}
                 </td>
-                <td style={{ textAlign: "center", fontWeight: "700", color: "#38bdf8" }}>
-                  {typeof m.bagi_hasil_event_mandiri?.pusat === "number"
-                    ? `${(m.bagi_hasil_event_mandiri.pusat * 100).toFixed(0)}% : ${(m.bagi_hasil_event_mandiri.daerah * 100).toFixed(0)}%`
-                    : "20% : 80%"}
+                <td style={{ textAlign: "center", fontWeight: "800", color: m.bagi_hasil_event_mandiri?.daerah != null ? "#fbbf24" : "var(--text-muted)" }}>
+                  {m.bagi_hasil_event_mandiri?.daerah != null ? `${(m.bagi_hasil_event_mandiri.daerah * 100).toFixed(0)}%` : "-"}
+                </td>
+
+                {/* EVOTING KERJASAMA (60:40) */}
+                <td style={{ textAlign: "center", color: m.bagi_hasil_evoting_kerjasama?.pusat != null ? "#a855f7" : "var(--text-muted)" }}>
+                  {m.bagi_hasil_evoting_kerjasama?.pusat != null ? `${(m.bagi_hasil_evoting_kerjasama.pusat * 100).toFixed(0)}%` : "-"}
+                </td>
+                <td style={{ textAlign: "center", fontWeight: "800", color: m.bagi_hasil_evoting_kerjasama?.daerah != null ? "#c084fc" : "var(--text-muted)" }}>
+                  {m.bagi_hasil_evoting_kerjasama?.daerah != null ? `${(m.bagi_hasil_evoting_kerjasama.daerah * 100).toFixed(0)}%` : "-"}
+                </td>
+
+                {/* EVOTING PUSAT (100:0) */}
+                <td style={{ textAlign: "center", fontWeight: "800", color: m.bagi_hasil_evoting_pusat?.pusat != null ? "#ec4899" : "var(--text-muted)" }}>
+                  {m.bagi_hasil_evoting_pusat?.pusat != null ? `${(m.bagi_hasil_evoting_pusat.pusat * 100).toFixed(0)}%` : "-"}
+                </td>
+                <td style={{ textAlign: "center", color: "var(--text-muted)" }}>
+                  {m.bagi_hasil_evoting_pusat?.daerah != null ? `${(m.bagi_hasil_evoting_pusat.daerah * 100).toFixed(0)}%` : "-"}
                 </td>
               </tr>
             ))}

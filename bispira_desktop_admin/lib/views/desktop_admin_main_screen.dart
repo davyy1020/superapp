@@ -19,6 +19,7 @@ import 'tabs/driver_master_tab.dart';
 import 'tabs/merchant_master_tab.dart';
 import 'tabs/user_master_tab.dart';
 import 'tabs/fee_customization_tab.dart';
+import 'tabs/pendapatan_superadmin_tab.dart';
 import 'tabs/gis_tracking_tab.dart';
 
 class DesktopAdminMainScreen extends StatefulWidget {
@@ -56,6 +57,7 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
     MerchantMasterTab(),
     UserMasterTab(),
     FeeCustomizationTab(),
+    PendapatanSuperadminTab(),
     GisTrackingTab(),
   ];
 
@@ -76,6 +78,7 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
     _NavItemData(Icons.storefront_rounded, '10-11. Merchant & Katalog Ekosistem', 'Katalog No. 10'),
     _NavItemData(Icons.people_alt_rounded, 'Pusat User & Nasabah', 'User'),
     _NavItemData(Icons.tune_rounded, '9. Pengaturan Tarif & Fees', 'Tarif No. 9'),
+    _NavItemData(Icons.analytics_rounded, '12. Pendapatan Superadmin & Split', 'Pendapatan No. 12'),
     _NavItemData(Icons.map_rounded, 'Peta GIS Live Tracking', 'GIS'),
   ];
 

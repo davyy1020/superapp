@@ -96,3 +96,4 @@ class MasterPembeliFrontendData {{
 with open('bispira_desktop_admin/lib/data/pembeli_frontend_data.dart', 'w', encoding='utf-8') as f:
     f.write(dart_code)
 print("Saved bispira_desktop_admin/lib/data/pembeli_frontend_data.dart")
+
