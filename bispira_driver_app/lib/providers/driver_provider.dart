@@ -58,6 +58,12 @@ class DriverProvider with ChangeNotifier {
   int _walletBalance = 450000;
   int _acceptanceRate = 98;
 
+  // Status Keanggotaan Sesuai Excel Sheet 9 (Charge Driver: Reguler Rp 500 / order vs Premium Rp 15.000 / 30 Hari)
+  bool _isPremiumMember = false;
+  final int _chargeRegulerPerOrder = 500; // Rp 500 / Transaksi (Excel Sheet 9 Kolom F)
+  final int _biayaPremium30Hari = 15000; // Rp 15.000 / 30 Hari (Excel Sheet 9 Kolom G)
+  String _statusLangganan = 'Reguler (Potongan Rp 500 / order)';
+
   // 4 Pilar Mutasi Saldo Driver Sesuai Excel Sheet 3 (3. Saldo Wallet Driver)
   int _totalTopUp = 300000;
   int _potonganCicilan = 0;
@@ -128,6 +134,30 @@ class DriverProvider with ChangeNotifier {
   int get potonganCicilan => _potonganCicilan;
   int get potonganOrderCash => _potonganOrderCash;
   int get komisiPenghasilan => _komisiPenghasilan;
+  
+  // Getters Keanggotaan & Charge Driver (Excel Sheet 9)
+  bool get isPremiumMember => _isPremiumMember;
+  int get chargePerTransaksi => _isPremiumMember ? 0 : _chargeRegulerPerOrder;
+  int get biayaPremium30Hari => _biayaPremium30Hari;
+  String get statusLangganan => _statusLangganan;
+
+  // Method Berlangganan Premium 30 Hari Sesuai Sheet 9
+  bool subscribePremium() {
+    if (_walletBalance < _biayaPremium30Hari) return false;
+    _walletBalance -= _biayaPremium30Hari;
+    _isPremiumMember = true;
+    _statusLangganan = 'Premium 30 Hari Aktif (Bebas Potongan Per Order)';
+    _transactionHistory.insert(0, {
+      'id': 'SUB-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+      'title': 'Aktivasi Driver Premium 30 Hari (Excel Sheet 9)',
+      'time': 'Baru Saja',
+      'type': 'outflow',
+      'amount': -_biayaPremium30Hari,
+      'note': 'Bebas biaya charge Rp 500 per transaksi selama 30 hari',
+    });
+    notifyListeners();
+    return true;
+  }
   
   // Getters Formulir C1
   String get nikKtp => _nikKtp;
@@ -322,6 +352,19 @@ class DriverProvider with ChangeNotifier {
           'amount': _activeOrder!.netDriverEarning,
           'note': 'Net 95% Split Settlement Driver',
         });
+
+        // Potongan Charge Driver per Transaksi Sesuai Sheet 9 (Reguler: Rp 500, Premium: Bebas Biaya)
+        if (!_isPremiumMember) {
+          _walletBalance -= _chargeRegulerPerOrder;
+          _transactionHistory.insert(0, {
+            'id': 'CHG-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+            'title': 'Biaya Charge Driver Reguler (Sheet 9)',
+            'time': 'Baru Saja',
+            'type': 'outflow',
+            'amount': -_chargeRegulerPerOrder,
+            'note': 'Charge Rp 500 / transaksi reguler',
+          });
+        }
 
         _activeOrder = null;
       }

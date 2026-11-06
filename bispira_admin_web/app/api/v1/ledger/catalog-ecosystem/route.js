@@ -8,7 +8,10 @@ export async function GET() {
       success: true,
       message: 'Katalog Produk Ekosistem Front End & Back End (Sheet 10 & 11) berhasil diambil.',
       sheet: '10.PRODUK PENJUAL BACK END & 11. PEMBELI FRONT END',
-      data: db.catalogEcosystem,
+      data: {
+        ...db.catalogEcosystem,
+        sheet10_backend: db.productsBackend,
+      },
     });
   } catch (error) {
     return NextResponse.json({ status: 'ERROR', success: false, error: error.message }, { status: 500 });

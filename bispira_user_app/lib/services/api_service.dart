@@ -241,9 +241,11 @@ class ApiService {
 
           final polylinePoints = coords.map((c) => [(c[1] as num).toDouble(), (c[0] as num).toDouble()]).toList();
 
-          // Formula tarif
-          final tripFare = 10000 + (distKm > 3 ? ((distKm - 3) * 2500).round() : 0);
-          final driverShare = (tripFare * 0.95).round();
+          // Formula tarif Sheet 9: Pengaturan Tarif & Fees Revisi
+          final baseFare = distKm <= 3.0 ? 8000 : (8000 + ((distKm - 3.0) * 2500)).round();
+          final markup = (baseFare * 0.10).round();
+          final tripFare = baseFare + markup;
+          final driverShare = (baseFare * 0.95).round();
           final platformFee = tripFare - driverShare;
 
           return {
@@ -259,10 +261,10 @@ class ApiService {
               'tripFare': tripFare,
               'driverShare': driverShare,
               'platformFee': platformFee,
-              'taxPph': (tripFare * 0.005).round(),
-              'appFee': 2000,
-              'serviceFee': 1000,
-              'grandTotal': tripFare + 3000,
+              'taxPph': (baseFare * 0.005).round(),
+              'appFee': 500,
+              'serviceFee': 500,
+              'grandTotal': tripFare + 1000,
             }
           };
         }
@@ -271,6 +273,9 @@ class ApiService {
 
     // 3. Fallback straight interpolation
     final distKm = 7.5;
+    final fallbackBase = (8000 + ((distKm - 3.0) * 2500)).round(); // 19250
+    final fallbackMarkup = (fallbackBase * 0.10).round(); // 1925
+    final fallbackTotalTrip = fallbackBase + fallbackMarkup; // 21175
     return {
       'route': {
         'source': 'OSRM_FALLBACK',
@@ -285,13 +290,13 @@ class ApiService {
       'fare': {
         'serviceName': 'Bispira Ride',
         'distanceKm': distKm,
-        'tripFare': 21250,
-        'driverShare': 20188,
-        'platformFee': 1062,
-        'taxPph': 106,
-        'appFee': 2000,
-        'serviceFee': 1000,
-        'grandTotal': 24250,
+        'tripFare': fallbackTotalTrip,
+        'driverShare': (fallbackBase * 0.95).round(),
+        'platformFee': fallbackTotalTrip - (fallbackBase * 0.95).round(),
+        'taxPph': (fallbackBase * 0.005).round(),
+        'appFee': 500,
+        'serviceFee': 500,
+        'grandTotal': fallbackTotalTrip + 1000,
       }
     };
   }

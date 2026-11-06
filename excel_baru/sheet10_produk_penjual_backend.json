@@ -1,0 +1,170 @@
+{
+  "sheet_name": "10.PRODUK PENJUAL BACK END",
+  "title": "SEBARAN PRODUK INDUK DAN ANAK (BACK END)",
+  "columns_count": 13,
+  "clusters": [
+    {
+      "col_index": 1,
+      "no": 1,
+      "category_name": "FOOD & FRESH",
+      "items": [
+        "Makanan",
+        "Minuman",
+        "Sayuran",
+        "Buah",
+        "Telor",
+        "Daging (sapi, kambing, ayam)",
+        "Ikan"
+      ]
+    },
+    {
+      "col_index": 2,
+      "no": 2,
+      "category_name": "TIKET EVENT & WISATA",
+      "items": [
+        "Event MICE (apasaja)",
+        "Wisata"
+      ]
+    },
+    {
+      "col_index": 3,
+      "no": 3,
+      "category_name": "HEALTH & HOMECARE",
+      "items": [
+        "HEALTH",
+        "Dokter (Telemedis Chat dan Tatap Muka)",
+        "Psikiater",
+        "Bidan",
+        "Fisioterapi",
+        "Psikolog",
+        "Apoteker/Apotek",
+        "HOMECARE",
+        "Perawat",
+        "Caregiver",
+        "Child care",
+        "Baby sitter",
+        "Asisten rumah tangga",
+        "BEUTY",
+        "SPA",
+        "BARBERSHOP"
+      ]
+    },
+    {
+      "col_index": 4,
+      "no": 4,
+      "category_name": "RIDE HAILING",
+      "items": [
+        "ANTAR JEMPUT",
+        "Motor (Penumpang, Delivery)",
+        "Mobil (Penumpang)",
+        "Mobil Logistik (Delivery)",
+        "Mobil Ambulance",
+        "ATRIBUT DRIVER",
+        "Helm",
+        "Jaket",
+        "StIcker",
+        "T-Shirt Polo"
+      ]
+    },
+    {
+      "col_index": 5,
+      "no": 5,
+      "category_name": "SEWA PROPERTY",
+      "items": [
+        "Kost",
+        "Kontrakan",
+        "Working space",
+        "Pakaian Event"
+      ]
+    },
+    {
+      "col_index": 6,
+      "no": 6,
+      "category_name": "EDUKASI & ENTERTAINMENT, SERVICE",
+      "items": [
+        "EDUKASI",
+        "Tutor/Guru Les Privat Pelajaran",
+        "Trainer let privat pelatihan",
+        "Penceramah keagamaan",
+        "ENTERTAINMENT",
+        "MC",
+        "Penyanyi",
+        "Group Band",
+        "SERVICE",
+        "Teknisi AC",
+        "Teknisi Barang Elektronik",
+        "Montir"
+      ]
+    },
+    {
+      "col_index": 7,
+      "no": 7,
+      "category_name": "DONASI",
+      "items": [
+        "Program kegiatan yayasan sosial",
+        "Program kegiatan yayasan Keagamaan"
+      ]
+    },
+    {
+      "col_index": 8,
+      "no": 8,
+      "category_name": "IKLAN",
+      "items": [
+        "Pasang Iklan Banner",
+        "Pasang iklan Produk"
+      ]
+    },
+    {
+      "col_index": 9,
+      "no": 9,
+      "category_name": "BISPIRA EVENT DAERAH",
+      "items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 10,
+      "no": 10,
+      "category_name": "BISPIRA E-VOTING DAERAH",
+      "items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 11,
+      "no": 11,
+      "category_name": "BISPIRA EVENT PUSAT/ PROVINSI",
+      "items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian",
+        "Pelatihan",
+        "Sertifikasi Profesi"
+      ]
+    },
+    {
+      "col_index": 12,
+      "no": 12,
+      "category_name": "BISPIRA E-VOTING PUSAT",
+      "items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 13,
+      "no": null,
+      "category_name": "PAJAK PENJUAL  (Bulanan/Tahunan)",
+      "items": []
+    }
+  ]
+}

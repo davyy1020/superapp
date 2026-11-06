@@ -81,13 +81,18 @@ class MerchantProvider with ChangeNotifier {
   final String _lokasiGps = '-6.2255, 106.8098 (Peta Digital Terverifikasi)';
   final bool _persetujuanKetentuan = true;
 
-  // Financial & Bank Account Settings Sesuai Excel Sheet 2, 4, 5, 6
+  // Financial & Bank Account Settings Sesuai Excel Sheet 2, 4, 5, 6 & Sheet 9
   String _bankOperasional = 'BCA';
   String _nomorRekening = '1026629629';
   String _namaPemilik = 'Bpk/Ibu Bareng';
   final String _payoutSchedule = 'Senin & Kamis (17.00 - 23.59 WIB)';
   final int _biayaLayananPerTrx = 500; // Sheet 2 & 5: Rp 500 / Trx
   final int _biayaPencairanPerBatch = 1000; // Sheet 5: Rp 1.000 / Batch transfer
+
+  // Status Keanggotaan Sesuai Excel Sheet 9 (Charge Merchant: Reguler Rp 500 vs Premium Rp 15.000 / 30 Hari)
+  bool _isPremiumMerchant = false;
+  final int _biayaPremium30Hari = 15000;
+  String _statusLangganan = 'Reguler (Potongan Rp 500 / order)';
 
   // Catalog Items
   final List<MerchantProduct> _products = [
@@ -174,6 +179,21 @@ class MerchantProvider with ChangeNotifier {
   bool get persetujuanKetentuan => _persetujuanKetentuan;
   List<MerchantProduct> get products => List.unmodifiable(_products);
   List<MerchantOrder> get orders => List.unmodifiable(_orders);
+
+  // Getters Keanggotaan Merchant (Sheet 9)
+  bool get isPremiumMerchant => _isPremiumMerchant;
+  int get chargePerTransaksi => _isPremiumMerchant ? 0 : 500;
+  int get biayaPremium30Hari => _biayaPremium30Hari;
+  String get statusLangganan => _statusLangganan;
+
+  bool subscribePremium() {
+    if (_walletBalance < _biayaPremium30Hari) return false;
+    _walletBalance -= _biayaPremium30Hari;
+    _isPremiumMerchant = true;
+    _statusLangganan = 'Premium 30 Hari Aktif (Bebas Potongan Per Order)';
+    notifyListeners();
+    return true;
+  }
 
   void updateBankAccount(String bank, String rekening, String pemilik) {
     _bankOperasional = bank;

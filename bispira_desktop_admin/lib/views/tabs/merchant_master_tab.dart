@@ -4,6 +4,7 @@ import '../../models/admin_models.dart';
 import '../../providers/admin_provider.dart';
 import '../../theme/neo_brutal_theme.dart';
 import '../../widgets/bispira_charts.dart';
+import '../../data/produk_penjual_backend_data.dart';
 
 class MerchantMasterTab extends StatefulWidget {
   const MerchantMasterTab({Key? key}) : super(key: key);
@@ -432,6 +433,166 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
     );
   }
 
+  void _showSheet10Dialog(BuildContext context, bool isDark) {
+    final clusters = MasterProdukPenjualBackendData.clusters;
+    showDialog(
+      context: context,
+      builder: (ctx) => Dialog(
+        backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Colors.black, width: 2.5),
+        ),
+        child: Container(
+          width: 960,
+          height: 650,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: const Color(0xFF6366F1), width: 1.5),
+                        ),
+                        child: const Icon(Icons.inventory_2_rounded, color: Color(0xFF6366F1), size: 24),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            MasterProdukPenjualBackendData.sheetTitle,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Excel Sheet 10: 12 Cluster Sebaran Produk Induk & Anak (Back End Penjual)',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded, size: 24),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Divider(color: Colors.black, thickness: 1.5),
+              const SizedBox(height: 10),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: clusters.map((c) {
+                        return Container(
+                          width: 220,
+                          margin: const EdgeInsets.only(right: 12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFEF08A),
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(color: const Color(0xFFCA8A04)),
+                                ),
+                                child: Text(
+                                  '${c.no}. ${c.categoryName}',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w900,
+                                    color: Color(0xFF854D0E),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              ...c.backendItems.map((item) {
+                                final isSub = [
+                                  'HEALTH', 'HOMECARE', 'BEUTY', 'ANTAR JEMPUT',
+                                  'ATRIBUT DRIVER', 'EDUKASI', 'ENTERTAINMENT',
+                                  'SERVICE', 'KOMPETISI', 'E-VOTING'
+                                ].contains(item.trim().toUpperCase());
+                                return Container(
+                                  margin: const EdgeInsets.only(bottom: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                                  decoration: isSub
+                                      ? BoxDecoration(
+                                          color: Colors.red.withValues(alpha: 0.12),
+                                          borderRadius: BorderRadius.circular(4),
+                                        )
+                                      : null,
+                                  child: Text(
+                                    isSub ? '🔴 $item' : '• $item',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: isSub ? FontWeight.w800 : FontWeight.w500,
+                                      color: isSub
+                                          ? Colors.redAccent
+                                          : (isDark ? Colors.white70 : const Color(0xFF334155)),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  NeoBrutalButton(
+                    label: 'Tutup Katalog Back End',
+                    onPressed: () => Navigator.pop(ctx),
+                    bgColor: NeoBrutalTheme.bispiraBlue,
+                    fontSize: 13,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _showEditMarkupDialog(BuildContext context, AdminProvider provider, MerchantModel merchant, bool isDark) {
     final markupCtrl = TextEditingController(text: merchant.markupPercent.toInt().toString());
 
@@ -537,9 +698,16 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
                 Row(
                   children: [
                     NeoBrutalBadge(text: '${filteredMerchants.length} Merchant Tampil', bgColor: NeoBrutalTheme.bispiraBlue),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 10),
                     NeoBrutalButton(
-                      label: '📋 Panduan 22 Formulir Penjual',
+                      label: '📦 10. Sebaran Produk Back End',
+                      onPressed: () => _showSheet10Dialog(context, isDark),
+                      bgColor: const Color(0xFF6366F1),
+                      fontSize: 13,
+                    ),
+                    const SizedBox(width: 10),
+                    NeoBrutalButton(
+                      label: '📋 22 Formulir Penjual',
                       onPressed: () => _showFormulirPenjualDialog(context, isDark),
                       bgColor: NeoBrutalTheme.neoYellow,
                       fontSize: 13,

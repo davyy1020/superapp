@@ -1065,14 +1065,58 @@ function renderSheet8(data, search, fmt) {
 }
 
 // -------------------------------------------------------------
-// SHEET 9: PENGATURAN TARIF & FEES REVISI (5 PARAMETER ARMADA)
+// SHEET 9: PENGATURAN TARIF & FEES REVISI (5 PARAMETER ARMADA & LIVE SIMULATOR)
 // -------------------------------------------------------------
-function renderSheet9(data, search, fmt) {
+function Sheet9RendererComponent({ data, search, fmt }) {
+  const [simKm, setSimKm] = React.useState(5);
+  const [simArmada, setSimArmada] = React.useState("r2_passenger");
+  const [simProductBase, setSimProductBase] = React.useState(50000);
+  const [simEventType, setSimEventType] = React.useState("cabang_mandiri"); // 'cabang_mandiri' (80:20), 'pusat_nasional' (10:90), 'merchant' (30% cabang)
+
   if (!data) return null;
-  const rideHailing = data.ride_hailing || [];
-  const merchant = data.merchant_settings || {};
-  const fees = data.consumer_and_ecosystem_fees || {};
-  const sharing = data.regional_branch_profit_sharing || {};
+  const rideHailing = data.section_a_ride_hailing || data.ride_hailing || [];
+  const merchant = data.section_b_merchant || data.merchant_settings || {};
+  const fees = data.section_c_biaya_layanan_konsumen_ekosistem || data.consumer_and_ecosystem_fees || {};
+  const sharing = data.section_d_bagi_hasil_cabang || data.regional_branch_profit_sharing || {};
+
+  // Selected armada calculation
+  const curArmada = rideHailing.find((r) => r.id === simArmada) || rideHailing[0] || {};
+  const baseTariffPerKm = curArmada.tarif_per_km || curArmada.biaya_antar_dasar_per_km || 2500;
+  const minFare = curArmada.biaya_min_perjalanan_3km || curArmada.biaya_min_perjalanan_4km || 8000;
+  const extraJasa = curArmada.biaya_angkut_medis_pasien || curArmada.biaya_angkut_barang || 0;
+  const driverCutPct = curArmada.driver_share_percent || 95.0;
+
+  const rawFare = simKm * baseTariffPerKm;
+  const baseTripFare = rawFare < minFare ? minFare : rawFare;
+  const markupAmount = Math.round(baseTripFare * 0.10);
+  const appFee = fees.biaya_aplikasi_konsumen || 500;
+  const serviceFee = fees.biaya_layanan_platform || 500;
+  const uniqueCodeSim = 247;
+  const totalConsumerPay = baseTripFare + extraJasa + markupAmount + appFee + serviceFee + uniqueCodeSim;
+
+  const driverNetTrip = Math.round(baseTripFare * (driverCutPct / 100)) + Math.round(extraJasa * 0.99);
+  const platformGross = (totalConsumerPay - driverNetTrip - uniqueCodeSim);
+  const branchTripShare = Math.round(platformGross * 0.25);
+  const hqTripNet = platformGross - branchTripShare;
+
+  // Product simulator calculation
+  const prodMarkup = Math.round(simProductBase * 0.10);
+  const prodTotalConsumer = simProductBase + prodMarkup + appFee + serviceFee + uniqueCodeSim;
+  let prodMerchantNet = Math.round(simProductBase * 0.95);
+  let prodPlatformGross = prodTotalConsumer - prodMerchantNet - uniqueCodeSim;
+  let prodBranchShare = 0;
+  let prodHqNet = 0;
+
+  if (simEventType === 'cabang_mandiri') {
+    prodBranchShare = Math.round(prodPlatformGross * 0.80);
+    prodHqNet = prodPlatformGross - prodBranchShare;
+  } else if (simEventType === 'pusat_nasional') {
+    prodBranchShare = Math.round(prodPlatformGross * 0.10);
+    prodHqNet = prodPlatformGross - prodBranchShare;
+  } else {
+    prodBranchShare = Math.round(prodPlatformGross * 0.30);
+    prodHqNet = prodPlatformGross - prodBranchShare;
+  }
 
   return (
     <div>
@@ -1081,22 +1125,22 @@ function renderSheet9(data, search, fmt) {
         <div className="stat-card">
           <div className="stat-label">Biaya Aplikasi Konsumen</div>
           <div className="stat-value" style={{ color: "#38bdf8" }}>{fmt(fees.biaya_aplikasi_konsumen || 500)}</div>
-          <div className="stat-sub">Flat per transaksi (Kolom N Sheet 1)</div>
+          <div className="stat-sub">Biaya Aplikasi Resmi (Kolom C Sheet 9)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Biaya Layanan Platform</div>
           <div className="stat-value" style={{ color: "#10b981" }}>{fmt(fees.biaya_layanan_platform || 500)}</div>
-          <div className="stat-sub">Flat per transaksi (Kolom N Sheet 1)</div>
+          <div className="stat-sub">Biaya Layanan Resmi (Kolom C Sheet 9)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Markup Konsumen Resmi</div>
-          <div className="stat-value" style={{ color: "#f59e0b" }}>{merchant.markup_persen || 10}%</div>
-          <div className="stat-sub">Harga Dasar × 1.10 (Kolom L Sheet 1)</div>
+          <div className="stat-value" style={{ color: "#f59e0b" }}>{merchant.markup_harga_dasar_persen || merchant.markup_persen || 10}%</div>
+          <div className="stat-sub">Harga Dasar × 1.10 (Kolom A, B & L Sheet 1)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Biaya Pencairan (Payout)</div>
-          <div className="stat-value" style={{ color: "#ec4899" }}>{fmt(fees.biaya_pencairan_payout_fee || 1000)}</div>
-          <div className="stat-sub">Per transfer pencairan mitra (Sheet 5)</div>
+          <div className="stat-value" style={{ color: "#ec4899" }}>{fmt(fees.biaya_pencairan_penjual_payout_fee || fees.biaya_pencairan_payout_fee || 1000)}</div>
+          <div className="stat-sub">Per transfer pencairan mitra (Kolom C Sheet 9)</div>
         </div>
       </div>
 
@@ -1111,7 +1155,7 @@ function renderSheet9(data, search, fmt) {
               <th>Layanan Armada</th>
               <th style={{ textAlign: "right" }}>Tarif Dasar</th>
               <th style={{ textAlign: "right" }}>Minimum Order</th>
-              <th style={{ width: "220px" }}>Regulasi Wilayah / Zona</th>
+              <th style={{ width: "260px" }}>Regulasi Wilayah / Zona</th>
               <th style={{ textAlign: "center", color: "#10b981" }}>Hak Driver</th>
               <th style={{ textAlign: "center", color: "#38bdf8" }}>Komisi Platform</th>
               <th style={{ textAlign: "center" }}>Charge Reguler</th>
@@ -1123,19 +1167,27 @@ function renderSheet9(data, search, fmt) {
               <tr key={rh.id || idx} style={{ borderBottom: "1px solid var(--border-subtle)" }}>
                 <td style={{ fontWeight: "700" }}>{rh.name}</td>
                 <td style={{ textAlign: "right", fontWeight: "800", color: "#38bdf8" }}>
-                  {rh.tarif_per_km ? `${fmt(rh.tarif_per_km)} / KM` : `${fmt(rh.biaya_antar_dasar)} dasar`}
+                  {rh.tarif_per_km ? `${fmt(rh.tarif_per_km)} / KM` : `${fmt(rh.biaya_antar_dasar_per_km || rh.biaya_antar_dasar)} / KM`}
                 </td>
                 <td style={{ textAlign: "right", fontWeight: "700" }}>
                   {fmt(rh.biaya_min_perjalanan_3km || rh.biaya_min_perjalanan_4km || rh.biaya_min_perjalanan_5km)}
                 </td>
                 <td style={{ fontSize: "11px", color: "var(--text-muted)" }}>
-                  {rh.wilayah_i_tarif ? (
+                  {rh.zonasi_wilayah && rh.zonasi_wilayah.length > 0 ? (
+                    <div>
+                      {rh.zonasi_wilayah.map((z, zi) => (
+                        <div key={zi} style={{ marginBottom: "2px" }}>
+                          • <strong>{z.zona}</strong>: {fmt(z.batas_bawah)} - {fmt(z.batas_atas)}
+                        </div>
+                      ))}
+                    </div>
+                  ) : rh.wilayah_i_tarif ? (
                     <div>
                       <div>• {rh.wilayah_i_tarif}</div>
                       <div>• {rh.wilayah_ii_tarif}</div>
                     </div>
                   ) : (
-                    <span>Tarif Seragam Nasional</span>
+                    <span>Tarif Seragam Nasional (Jasa Angkut: {fmt(rh.biaya_angkut_medis_pasien || rh.biaya_angkut_barang || 50000)})</span>
                   )}
                 </td>
                 <td style={{ textAlign: "center", fontWeight: "800", color: "#10b981" }}>
@@ -1156,17 +1208,235 @@ function renderSheet9(data, search, fmt) {
         </table>
       </div>
 
+      {/* LIVE CALCULATOR SIMULASI (KOLOM 9 & 10 SHEET 9 EXCEL) */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: "18px", marginBottom: "24px" }}>
+        {/* 1. LIVE TRIP CALCULATOR */}
+        <div style={{ background: "var(--bg-card)", padding: "20px", borderRadius: "14px", border: "1px solid rgba(56, 189, 248, 0.3)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
+            <div style={{ fontWeight: "800", fontSize: "14px", color: "#38bdf8" }}>
+              🧮 Live Trip Calculator (0 - 100 KM)
+            </div>
+            <span className="badge badge-info">{simKm} KM Perjalanan</span>
+          </div>
+          
+          <div style={{ marginBottom: "14px" }}>
+            <label style={{ fontSize: "12px", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>Pilih Moda Armada:</label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              {rideHailing.map((rh) => (
+                <button
+                  key={rh.id}
+                  onClick={() => setSimArmada(rh.id)}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "8px",
+                    border: simArmada === rh.id ? "1px solid #38bdf8" : "1px solid var(--border-subtle)",
+                    background: simArmada === rh.id ? "rgba(56, 189, 248, 0.2)" : "rgba(255,255,255,0.03)",
+                    color: simArmada === rh.id ? "#38bdf8" : "var(--text-muted)",
+                    fontSize: "11px",
+                    cursor: "pointer",
+                    fontWeight: simArmada === rh.id ? "700" : "500",
+                  }}
+                >
+                  {rh.name.split(" ")[0]} {rh.name.includes("roda 2") ? "🛵 R2" : rh.name.includes("roda 4") ? "🚗 R4" : rh.name.includes("Ambulance") ? "🚑 Medis" : "📦 Box"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "16px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: "4px" }}>
+              <span style={{ color: "var(--text-muted)" }}>Simulasi Jarak:</span>
+              <strong style={{ color: "#38bdf8" }}>{simKm} KM</strong>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="100"
+              value={simKm}
+              onChange={(e) => setSimKm(Number(e.target.value))}
+              style={{ width: "100%", accentColor: "#38bdf8" }}
+            />
+          </div>
+
+          {/* SIMULATION BREAKDOWN */}
+          <div style={{ background: "rgba(0,0,0,0.25)", padding: "14px", borderRadius: "10px", fontSize: "12px", lineHeight: "1.8" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>Tarif Jarak Dasar:</span>
+              <strong>{fmt(baseTripFare)}</strong>
+            </div>
+            {extraJasa > 0 && (
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#f59e0b" }}>
+                <span>Biaya Angkut / Porter:</span>
+                <strong>{fmt(extraJasa)}</strong>
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "space-between", color: "#f59e0b" }}>
+              <span>Markup Platform (10%):</span>
+              <strong>{fmt(markupAmount)}</strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-muted)" }}>
+              <span>Biaya Aplikasi + Layanan:</span>
+              <span>{fmt(appFee)} + {fmt(serviceFee)} = {fmt(appFee + serviceFee)}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", color: "#a855f7" }}>
+              <span>Nominal Kode Unik:</span>
+              <span>+{fmt(uniqueCodeSim)}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid var(--border-subtle)", paddingTop: "8px", marginTop: "8px", fontSize: "13px" }}>
+              <span style={{ fontWeight: "800", color: "#38bdf8" }}>Total Bayar Konsumen:</span>
+              <span style={{ fontWeight: "900", color: "#38bdf8" }}>{fmt(totalConsumerPay)}</span>
+            </div>
+            <div style={{ marginTop: "10px", padding: "10px", background: "rgba(16, 185, 129, 0.1)", borderRadius: "8px", border: "1px solid rgba(16, 185, 129, 0.2)" }}>
+              <div style={{ fontWeight: "700", color: "#10b981", marginBottom: "4px" }}>💰 Distribusi Bagi Hasil (Split Settlement):</div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Driver ({driverCutPct}% Dasar + Jasa):</span>
+                <strong style={{ color: "#10b981" }}>{fmt(driverNetTrip)}</strong>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Pusat HQ Netto (75% Margin):</span>
+                <strong style={{ color: "#38bdf8" }}>{fmt(hqTripNet)}</strong>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Cabang Wilayah (25% Margin):</span>
+                <strong style={{ color: "#f59e0b" }}>{fmt(branchTripShare)}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. LIVE PRODUCT & EVENT CALCULATOR */}
+        <div style={{ background: "var(--bg-card)", padding: "20px", borderRadius: "14px", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
+            <div style={{ fontWeight: "800", fontSize: "14px", color: "#10b981" }}>
+              🛍️ Live Produk & Event Calculator (Merchant / MICE)
+            </div>
+            <span className="badge badge-success">Ekosistem Bispira</span>
+          </div>
+
+          <div style={{ marginBottom: "14px" }}>
+            <label style={{ fontSize: "12px", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>Jenis Skema Produk:</label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              <button
+                onClick={() => setSimEventType("cabang_mandiri")}
+                style={{
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  border: simEventType === "cabang_mandiri" ? "1px solid #10b981" : "1px solid var(--border-subtle)",
+                  background: simEventType === "cabang_mandiri" ? "rgba(16, 185, 129, 0.2)" : "rgba(255,255,255,0.03)",
+                  color: simEventType === "cabang_mandiri" ? "#34d399" : "var(--text-muted)",
+                  fontSize: "11px",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                }}
+              >
+                Event Mandiri Daerah (80% Daerah : 20% Pusat)
+              </button>
+              <button
+                onClick={() => setSimEventType("pusat_nasional")}
+                style={{
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  border: simEventType === "pusat_nasional" ? "1px solid #38bdf8" : "1px solid var(--border-subtle)",
+                  background: simEventType === "pusat_nasional" ? "rgba(56, 189, 248, 0.2)" : "rgba(255,255,255,0.03)",
+                  color: simEventType === "pusat_nasional" ? "#38bdf8" : "var(--text-muted)",
+                  fontSize: "11px",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                }}
+              >
+                Event Nasional Pusat (10% Daerah : 90% Pusat)
+              </button>
+              <button
+                onClick={() => setSimEventType("merchant")}
+                style={{
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  border: simEventType === "merchant" ? "1px solid #f59e0b" : "1px solid var(--border-subtle)",
+                  background: simEventType === "merchant" ? "rgba(245, 158, 11, 0.2)" : "rgba(255,255,255,0.03)",
+                  color: simEventType === "merchant" ? "#fbbf24" : "var(--text-muted)",
+                  fontSize: "11px",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                }}
+              >
+                Merchant Toko (30% Daerah : 70% Pusat)
+              </button>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "16px" }}>
+            <label style={{ fontSize: "12px", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>Harga Barang Dasar:</label>
+            <input
+              type="number"
+              step="5000"
+              value={simProductBase}
+              onChange={(e) => setSimProductBase(Math.max(1000, Number(e.target.value)))}
+              style={{
+                width: "100%",
+                padding: "8px 12px",
+                borderRadius: "8px",
+                background: "rgba(0,0,0,0.3)",
+                border: "1px solid var(--border-subtle)",
+                color: "white",
+                fontSize: "13px",
+                fontWeight: "700",
+              }}
+            />
+          </div>
+
+          {/* PRODUCT BREAKDOWN */}
+          <div style={{ background: "rgba(0,0,0,0.25)", padding: "14px", borderRadius: "10px", fontSize: "12px", lineHeight: "1.8" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>Harga Barang Dasar:</span>
+              <strong>{fmt(simProductBase)}</strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", color: "#f59e0b" }}>
+              <span>Markup Platform (10%):</span>
+              <strong>{fmt(prodMarkup)}</strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-muted)" }}>
+              <span>Biaya Aplikasi + Layanan:</span>
+              <span>{fmt(appFee)} + {fmt(serviceFee)} = {fmt(appFee + serviceFee)}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", color: "#a855f7" }}>
+              <span>Nominal Kode Unik:</span>
+              <span>+{fmt(uniqueCodeSim)}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid var(--border-subtle)", paddingTop: "8px", marginTop: "8px", fontSize: "13px" }}>
+              <span style={{ fontWeight: "800", color: "#10b981" }}>Total Bayar Konsumen:</span>
+              <span style={{ fontWeight: "900", color: "#10b981" }}>{fmt(prodTotalConsumer)}</span>
+            </div>
+            <div style={{ marginTop: "10px", padding: "10px", background: "rgba(56, 189, 248, 0.1)", borderRadius: "8px", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
+              <div style={{ fontWeight: "700", color: "#38bdf8", marginBottom: "4px" }}>💰 Distribusi Bagi Hasil (Split Settlement):</div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Merchant (95% Barang Dasar):</span>
+                <strong style={{ color: "#10b981" }}>{fmt(prodMerchantNet)}</strong>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Pusat HQ Netto:</span>
+                <strong style={{ color: "#38bdf8" }}>{fmt(prodHqNet)}</strong>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Cabang Wilayah:</span>
+                <strong style={{ color: "#f59e0b" }}>{fmt(prodBranchShare)}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* INFORMASI KEBIJAKAN MERCHANT & KODE UNIK (SECTIONS B, C, D) */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px", marginBottom: "20px" }}>
         <div style={{ background: "var(--bg-card)", padding: "18px", borderRadius: "14px", border: "1px solid var(--border-subtle)" }}>
           <div style={{ fontWeight: "800", fontSize: "13px", color: "#10b981", marginBottom: "10px" }}>
             🏪 Merchant & Toko (Section B Excel Sheet 9)
           </div>
           <div style={{ fontSize: "12px", lineHeight: "1.7", color: "var(--text-muted)" }}>
-            <div>• <strong>Markup Konsumen:</strong> {merchant.markup_persen || 10}% dari harga dasar toko</div>
+            <div>• <strong>Markup Konsumen:</strong> {merchant.markup_harga_dasar_persen || merchant.markup_persen || 10}% dari harga dasar toko</div>
             <div>• <strong>Komisi Penjualan:</strong> {merchant.komisi_penjualan_persen || 5}% (Hak Bersih Toko 95%)</div>
             <div>• <strong>Biaya Transaksi Reguler:</strong> {fmt(merchant.charge_merchant_reguler || 500)} / order</div>
             <div>• <strong>Opsi Akun Premium:</strong> {fmt(merchant.charge_merchant_premium_30hari || 15000)} / 30 hari</div>
+            <div>• <strong>Porsi Bagi Hasil Cabang:</strong> {merchant.porsi_cabang_wilayah_persen || 30}% dari margin platform</div>
           </div>
         </div>
 
@@ -1175,10 +1445,11 @@ function renderSheet9(data, search, fmt) {
             🔑 Kode Unik & Verifikasi (Section C Excel Sheet 9)
           </div>
           <div style={{ fontSize: "12px", lineHeight: "1.7", color: "var(--text-muted)" }}>
-            <div>• <strong>Rentang Kode Unik:</strong> {fees.nominal_kode_unik || "000-999"}</div>
+            <div>• <strong>Rentang Kode Unik:</strong> {fees.nominal_kode_unik_range || fees.nominal_kode_unik || "000-999"}</div>
             <div>• <strong>Masa Berlaku:</strong> {fees.masa_berlaku_kode_unik_menit || 30} Menit</div>
-            <div>• <strong>Payout Fee:</strong> {fmt(fees.biaya_pencairan_payout_fee || 1000)} per batch penarikan</div>
-            <div>• <strong>Threshold Top Up Driver:</strong> Minimal Rp 50.000</div>
+            <div>• <strong>Payout Fee:</strong> {fmt(fees.biaya_pencairan_penjual_payout_fee || fees.biaya_pencairan_payout_fee || 1000)} per batch penarikan</div>
+            <div>• <strong>Komisi Driver R4:</strong> {fees.biaya_komisi_driver_r4_persen || 7.5}% / Transaksi</div>
+            <div>• <strong>Komisi Driver R2 & Merchant:</strong> {fees.biaya_komisi_driver_r2_merchant_persen || 5.0}% / Transaksi</div>
           </div>
         </div>
 
@@ -1194,16 +1465,61 @@ function renderSheet9(data, search, fmt) {
           </div>
         </div>
       </div>
+
+      {/* MATRIX ARUS PENDAPATAN (ROW 140 - 142 EXCEL SHEET 9) */}
+      <div style={{ background: "var(--bg-card)", padding: "18px", borderRadius: "14px", border: "1px solid var(--border-subtle)" }}>
+        <div style={{ fontWeight: "800", fontSize: "13px", color: "#e2e8f0", marginBottom: "12px" }}>
+          📊 Ringkasan Arus Pendapatan Platform (Row 140 - 142 Excel Sheet 9)
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "14px" }}>
+          <div style={{ padding: "14px", borderRadius: "10px", background: "rgba(56, 189, 248, 0.08)", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
+            <div style={{ fontWeight: "800", color: "#38bdf8", fontSize: "13px", marginBottom: "6px" }}>1. Pembeli</div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: "1.6" }}>
+              <div>• <strong>Markup:</strong> 10% dari harga dasar (ongkir perjalanan & harga barang toko)</div>
+              <div>• <strong>Biaya Layanan:</strong> Biaya Layanan ({fmt(fees.biaya_layanan_platform || 500)}) + Biaya Aplikasi ({fmt(fees.biaya_aplikasi_konsumen || 500)})</div>
+            </div>
+          </div>
+          <div style={{ padding: "14px", borderRadius: "10px", background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.2)" }}>
+            <div style={{ fontWeight: "800", color: "#10b981", fontSize: "13px", marginBottom: "6px" }}>2. Penjual (Driver & Merchant)</div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: "1.6" }}>
+              <div>• <strong>Komisi:</strong> 5.0% (Driver Roda 2 & Merchant), 7.5% (Driver Roda 4), 1.0% (Jasa Angkut Pasien/Barang)</div>
+              <div>• <strong>Transaksi:</strong> Reguler ({fmt(fees.charge_driver_merchant_reguler || 500)} / transaksi) atau Opsi Premium ({fmt(fees.charge_driver_merchant_premium_30hari || 15000)} / 30 hari)</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
+function renderSheet9(data, search, fmt) {
+  return <Sheet9RendererComponent data={data} search={search} fmt={fmt} />;
+}
+
 // -------------------------------------------------------------
-// SHEET 10 & 11: KATALOG EKOSISTEM (12 CLUSTER PRODUK)
+// SHEET 10 & 11: PRODUK PENJUAL BACK END & PEMBELI FRONT END
 // -------------------------------------------------------------
-function renderSheet10(data, search) {
+function Sheet10RendererComponent({ data, search }) {
+  const [viewMode, setViewMode] = React.useState("excel_grid"); // 'excel_grid' or 'comparison_cards'
+
   if (!data) return null;
-  const clusters = (data.clusters || []).filter((c) => {
+  const backendClusters = (data.sheet10_backend?.clusters || []).map((c) => {
+    return {
+      no: c.no,
+      category_name: c.category_name,
+      items: c.items || [],
+    };
+  });
+
+  // If backendClusters empty, fallback to data.clusters
+  const clusters = backendClusters.length > 0 ? backendClusters : (data.clusters || []).map((c) => ({
+    no: c.cluster_no,
+    category_name: c.cluster_name,
+    items: c.backend_items || [],
+    frontend_items: c.frontend_items || [],
+  }));
+
+  const compClusters = (data.clusters || []).filter((c) => {
     if (!search) return true;
     const q = search.toLowerCase();
     const matchName = c.cluster_name && c.cluster_name.toLowerCase().includes(q);
@@ -1212,79 +1528,222 @@ function renderSheet10(data, search) {
     return matchName || matchFE || matchBE;
   });
 
+  // Helper to detect subheader items like in Excel screenshot (colored red/amber)
+  const isSubheader = (val) => {
+    const s = String(val).trim().toUpperCase();
+    return [
+      'HEALTH', 'HOMECARE', 'BEUTY', 'ANTAR JEMPUT', 'ATRIBUT DRIVER',
+      'EDUKASI', 'ENTERTAINMENT', 'SERVICE', 'KOMPETISI', 'E-VOTING', 'PROGRAM'
+    ].includes(s);
+  };
+
+  // Find max row count across all clusters for grid view
+  const maxRows = Math.max(...clusters.map((c) => (c.items || []).length), 17);
+
   return (
     <div>
-      <div style={{ marginBottom: "16px", padding: "14px 18px", background: "rgba(37, 99, 235, 0.1)", borderRadius: "12px", border: "1px solid rgba(37, 99, 235, 0.25)" }}>
-        <div style={{ fontWeight: "800", color: "#60a5fa", fontSize: "13px" }}>
-          📦 Katalog Sebaran Produk Induk dan Anak Hyperlocal Bispira (Sheet 10 & 11)
+      {/* 4 KPI SUMMARY CARDS */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "14px", marginBottom: "20px" }}>
+        <div className="stat-card">
+          <div className="stat-label">Total Cluster Induk</div>
+          <div className="stat-value" style={{ color: "#38bdf8" }}>13 Cluster</div>
+          <div className="stat-sub">12 Layanan + Pajak Penjual (Sheet 10)</div>
         </div>
-        <div style={{ fontSize: "11.5px", color: "var(--text-muted)", marginTop: "4px" }}>
-          Memetakan 12 kategori cluster layanan: integrasi tampilan <strong>Front End Pembeli (Sheet 11)</strong> dan otorisasi <strong>Back End Penjual & Merchant (Sheet 10)</strong>.
+        <div className="stat-card">
+          <div className="stat-label">Total Item Back End</div>
+          <div className="stat-value" style={{ color: "#f59e0b" }}>54 Layanan</div>
+          <div className="stat-sub">Katalog Input Formulir Penjual</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Item Front End</div>
+          <div className="stat-value" style={{ color: "#10b981" }}>52 Tampilan</div>
+          <div className="stat-sub">Katalog Tampilan User App (Sheet 11)</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Model Bisnis Ekosistem</div>
+          <div className="stat-value" style={{ color: "#a855f7" }}>Hyperlocal</div>
+          <div className="stat-sub">Terpadu Ride, Mart, MICE & Jasa</div>
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "16px" }}>
-        {clusters.map((c) => (
-          <div key={c.cluster_no} style={{ background: "var(--bg-card)", padding: "18px", borderRadius: "14px", border: "1px solid var(--border-subtle)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-              <div style={{ fontWeight: "800", fontSize: "13.5px", color: "#38bdf8" }}>
-                {c.cluster_no}. {c.cluster_name}
-              </div>
-              <span className="badge badge-info">{c.frontend_items.length} Layanan</span>
-            </div>
+      {/* VIEW MODE TOGGLE BUTTONS */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            onClick={() => setViewMode("excel_grid")}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "10px",
+              border: viewMode === "excel_grid" ? "1px solid #38bdf8" : "1px solid var(--border-subtle)",
+              background: viewMode === "excel_grid" ? "rgba(56, 189, 248, 0.2)" : "var(--bg-card)",
+              color: viewMode === "excel_grid" ? "#38bdf8" : "var(--text-muted)",
+              fontWeight: "700",
+              fontSize: "12px",
+              cursor: "pointer",
+            }}
+          >
+            📊 Grid Asli Excel (10. PRODUK PENJUAL BACK END)
+          </button>
+          <button
+            onClick={() => setViewMode("comparison_cards")}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "10px",
+              border: viewMode === "comparison_cards" ? "1px solid #10b981" : "1px solid var(--border-subtle)",
+              background: viewMode === "comparison_cards" ? "rgba(16, 185, 129, 0.2)" : "var(--bg-card)",
+              color: viewMode === "comparison_cards" ? "#34d399" : "var(--text-muted)",
+              fontWeight: "700",
+              fontSize: "12px",
+              cursor: "pointer",
+            }}
+          >
+            📱 Komparasi Front End (Sheet 11) vs Back End (Sheet 10)
+          </button>
+        </div>
+        <span style={{ fontSize: "11.5px", color: "var(--text-muted)" }}>
+          {viewMode === "excel_grid" ? "Tampilan tabular persis seperti lembar kerja Excel Sheet 10" : "Perbandingan visual antarmuka pembeli vs input penjual"}
+        </span>
+      </div>
 
-            {/* FRONT END ITEMS */}
-            <div style={{ marginBottom: "12px" }}>
-              <div style={{ fontSize: "11px", fontWeight: "700", color: "#10b981", textTransform: "uppercase", marginBottom: "6px" }}>
-                📱 Front End Pembeli (Sheet 11):
-              </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                {(c.frontend_items || []).map((fi, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      fontSize: "11px",
-                      padding: "3px 8px",
-                      borderRadius: "6px",
-                      background: "rgba(16, 185, 129, 0.12)",
-                      color: "#34d399",
-                      border: "1px solid rgba(16, 185, 129, 0.25)",
-                    }}
-                  >
-                    {fi}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* BACK END ITEMS */}
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: "700", color: "#f59e0b", textTransform: "uppercase", marginBottom: "6px" }}>
-                ⚙️ Back End Penjual & Merchant (Sheet 10):
-              </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                {(c.backend_items || []).map((bi, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      fontSize: "11px",
-                      padding: "3px 8px",
-                      borderRadius: "6px",
-                      background: "rgba(245, 158, 11, 0.12)",
-                      color: "#fbbf24",
-                      border: "1px solid rgba(245, 158, 11, 0.25)",
-                    }}
-                  >
-                    {bi}
-                  </span>
-                ))}
-              </div>
-            </div>
+      {/* MODE 1: EXCEL SPREADSHEET GRID VIEW */}
+      {viewMode === "excel_grid" ? (
+        <div className="table-wrapper" style={{ overflowX: "auto", marginBottom: "24px" }}>
+          <div style={{ padding: "14px 18px", background: "#fef08a", borderBottom: "2px solid #ca8a04", color: "#854d0e", fontWeight: "900", fontSize: "13px" }}>
+            📑 SEBARAN PRODUK INDUK DAN ANAK (BACK END) - SHEET 10 EXCEL
           </div>
-        ))}
-      </div>
+          <table style={{ minWidth: "1600px", fontSize: "11.5px", borderCollapse: "collapse" }}>
+            <thead>
+              {/* Row 2: Cluster Numbers */}
+              <tr style={{ background: "#fef9c3", borderBottom: "1px solid #eab308" }}>
+                {clusters.map((c, idx) => (
+                  <th key={idx} style={{ textAlign: "center", color: "#854d0e", fontWeight: "900", padding: "6px", borderRight: "1px solid rgba(0,0,0,0.1)" }}>
+                    {c.no || idx + 1}
+                  </th>
+                ))}
+              </tr>
+              {/* Row 3: Cluster Category Titles */}
+              <tr style={{ background: "#fef08a", borderBottom: "2px solid #ca8a04" }}>
+                {clusters.map((c, idx) => (
+                  <th
+                    key={idx}
+                    style={{
+                      padding: "10px 8px",
+                      textAlign: "center",
+                      color: "#713f12",
+                      fontWeight: "900",
+                      fontSize: "11px",
+                      borderRight: "1px solid rgba(0,0,0,0.1)",
+                      whiteSpace: "normal",
+                      minWidth: "130px",
+                    }}
+                  >
+                    {c.category_name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: maxRows }).map((_, rIdx) => (
+                <tr key={rIdx} style={{ borderBottom: "1px solid var(--border-subtle)", background: rIdx % 2 === 0 ? "rgba(255,255,255,0.01)" : "transparent" }}>
+                  {clusters.map((c, cIdx) => {
+                    const item = (c.items || [])[rIdx];
+                    if (!item) {
+                      return <td key={cIdx} style={{ padding: "7px 10px", borderRight: "1px solid var(--border-subtle)" }}></td>;
+                    }
+
+                    const isHead = isSubheader(item);
+                    return (
+                      <td
+                        key={cIdx}
+                        style={{
+                          padding: "7px 10px",
+                          borderRight: "1px solid var(--border-subtle)",
+                          fontWeight: isHead ? "900" : "500",
+                          color: isHead ? "#ef4444" : "var(--text-main)",
+                          background: isHead ? "rgba(239, 68, 68, 0.08)" : "transparent",
+                          fontSize: isHead ? "11px" : "11.5px",
+                        }}
+                      >
+                        {isHead ? `🔴 ${item}` : item}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        /* MODE 2: COMPARISON CARDS (FRONT END VS BACK END) */
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "16px" }}>
+          {compClusters.map((c) => (
+            <div key={c.cluster_no || c.no} style={{ background: "var(--bg-card)", padding: "18px", borderRadius: "14px", border: "1px solid var(--border-subtle)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                <div style={{ fontWeight: "800", fontSize: "13.5px", color: "#38bdf8" }}>
+                  {c.cluster_no || c.no}. {c.cluster_name || c.category_name}
+                </div>
+                <span className="badge badge-info">{(c.frontend_items || []).length} Layanan</span>
+              </div>
+
+              {/* FRONT END ITEMS */}
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "11px", fontWeight: "700", color: "#10b981", textTransform: "uppercase", marginBottom: "6px" }}>
+                  📱 Front End Pembeli (Sheet 11):
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  {(c.frontend_items || []).map((fi, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: "11px",
+                        padding: "3px 8px",
+                        borderRadius: "6px",
+                        background: isSubheader(fi) ? "rgba(239, 68, 68, 0.15)" : "rgba(16, 185, 129, 0.12)",
+                        color: isSubheader(fi) ? "#f87171" : "#34d399",
+                        border: isSubheader(fi) ? "1px solid rgba(239, 68, 68, 0.3)" : "1px solid rgba(16, 185, 129, 0.25)",
+                        fontWeight: isSubheader(fi) ? "800" : "500",
+                      }}
+                    >
+                      {fi}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* BACK END ITEMS */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "700", color: "#f59e0b", textTransform: "uppercase", marginBottom: "6px" }}>
+                  ⚙️ Back End Penjual & Merchant (Sheet 10):
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  {(c.backend_items || c.items || []).map((bi, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: "11px",
+                        padding: "3px 8px",
+                        borderRadius: "6px",
+                        background: isSubheader(bi) ? "rgba(239, 68, 68, 0.15)" : "rgba(245, 158, 11, 0.12)",
+                        color: isSubheader(bi) ? "#f87171" : "#fbbf24",
+                        border: isSubheader(bi) ? "1px solid rgba(239, 68, 68, 0.3)" : "1px solid rgba(245, 158, 11, 0.25)",
+                        fontWeight: isSubheader(bi) ? "800" : "500",
+                      }}
+                    >
+                      {bi}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
+}
+
+function renderSheet10(data, search) {
+  return <Sheet10RendererComponent data={data} search={search} />;
 }
 
 // -------------------------------------------------------------

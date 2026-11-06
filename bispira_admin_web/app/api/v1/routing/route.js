@@ -4,84 +4,96 @@ export async function OPTIONS() {
   return handleOptions();
 }
 
-// Service fare matrices per agreement
+// Service fare matrices per agreement (Sheet 9: Pengaturan Tarif & Fees Revisi)
 const FARE_RULES = {
   motor: {
     name: 'Bispira Ride (Motor)',
-    baseFare: 10000,
+    baseFare: 8000,
     baseKm: 3.0,
     perKm: 2500,
+    markupPercent: 0.10,
     driverSharePercent: 0.95,
     platformSharePercent: 0.05,
-    appFee: 2000,
-    serviceFee: 1000,
+    appFee: 500,
+    serviceFee: 500,
   },
   mobil: {
     name: 'Bispira Car (Mobil)',
-    baseFare: 18000,
+    baseFare: 15000,
     baseKm: 3.0,
-    perKm: 4500,
-    driverSharePercent: 0.95,
-    platformSharePercent: 0.05,
-    appFee: 2500,
-    serviceFee: 1000,
+    perKm: 4000,
+    markupPercent: 0.10,
+    driverSharePercent: 0.90,
+    platformSharePercent: 0.10,
+    appFee: 500,
+    serviceFee: 500,
   },
   kurir: {
-    name: 'Bispira Send (Kurir Instan)',
-    baseFare: 12000,
+    name: 'Bispira Send (Food & Kurir Instan)',
+    baseFare: 10000,
     baseKm: 3.0,
     perKm: 3000,
+    markupPercent: 0.10,
     driverSharePercent: 0.95,
     platformSharePercent: 0.05,
-    appFee: 2000,
-    serviceFee: 1000,
-  },
-  kargo: {
-    name: 'Bispira Kargo (Logistik Besar)',
-    baseFare: 60000,
-    baseKm: 5.0,
-    perKm: 8000,
-    driverSharePercent: 0.95,
-    platformSharePercent: 0.05,
-    appFee: 5000,
-    serviceFee: 2000,
+    appFee: 500,
+    serviceFee: 500,
   },
   ambulance: {
     name: 'Bispira Ambulance Darurat',
-    baseFare: 120000,
-    baseKm: 10.0,
-    perKm: 6000,
-    driverSharePercent: 0.95,
-    platformSharePercent: 0.05,
-    appFee: 0,
-    serviceFee: 0,
+    baseFare: 50000,
+    baseKm: 4.0,
+    perKm: 5000,
+    extraJasa: 50000,
+    markupPercent: 0.10,
+    driverSharePercent: 0.925,
+    platformSharePercent: 0.075,
+    appFee: 500,
+    serviceFee: 500,
+  },
+  kargo: {
+    name: 'Bispira Kargo (Logistik Besar)',
+    baseFare: 50000,
+    baseKm: 4.0,
+    perKm: 4000,
+    extraJasa: 50000,
+    markupPercent: 0.10,
+    driverSharePercent: 0.925,
+    platformSharePercent: 0.075,
+    appFee: 500,
+    serviceFee: 500,
   },
 };
 
 function calculateFare(serviceType, distanceKm) {
   const rule = FARE_RULES[serviceType] || FARE_RULES.motor;
   
-  let tripFare = rule.baseFare;
+  let baseTripFare = rule.baseFare;
   if (distanceKm > rule.baseKm) {
     const extraKm = distanceKm - rule.baseKm;
-    tripFare += Math.round(extraKm * rule.perKm);
+    baseTripFare += Math.round(extraKm * rule.perKm);
   }
 
-  // 95% driver net earning, 5% platform fee
-  const driverShare = Math.round(tripFare * rule.driverSharePercent);
-  const platformFee = tripFare - driverShare;
+  const extraJasa = rule.extraJasa || 0;
+  const markupAmount = Math.round(baseTripFare * rule.markupPercent);
+  
+  // Driver net earning
+  const driverShare = Math.round(baseTripFare * rule.driverSharePercent) + Math.round(extraJasa * 0.99);
+  const platformFee = Math.round(baseTripFare * rule.platformSharePercent) + Math.round(extraJasa * 0.01) + markupAmount;
   
   // Tax PPh 0.5% based on PMK 37/2025
-  const taxPph = Math.round(tripFare * 0.005);
+  const taxPph = Math.round(baseTripFare * 0.005);
   
   const appFee = rule.appFee;
   const serviceFee = rule.serviceFee;
-  const grandTotal = tripFare + appFee + serviceFee;
+  const grandTotal = baseTripFare + extraJasa + markupAmount + appFee + serviceFee;
 
   return {
     serviceName: rule.name,
     distanceKm: parseFloat(distanceKm.toFixed(2)),
-    tripFare,
+    tripFare: baseTripFare,
+    extraJasa,
+    markupAmount,
     driverShare,
     platformFee,
     taxPph,

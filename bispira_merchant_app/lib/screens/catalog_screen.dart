@@ -62,8 +62,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // PILIHAN FORMULIR EXCEL (B1 - B4)
-                    const Text('KATEGORI SPESIFIKASI FORMULIR (EXCEL)',
+                    // PILIHAN CLUSTER PRODUK BACK END SESUAI EXCEL SHEET 10
+                    const Text('CLUSTER PRODUK PENJUAL (SHEET 10 EXCEL)',
                         style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
                     const SizedBox(height: 4),
                     Container(
@@ -78,10 +78,16 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           value: selectedCluster,
                           isExpanded: true,
                           items: const [
-                            DropdownMenuItem(value: 'B1. Food & Resto', child: Text('🍲 Sheet B1: Food & Resto')),
-                            DropdownMenuItem(value: 'B2. Fresh Fruit', child: Text('🍎 Sheet B2: Fresh Fruit / Buah')),
-                            DropdownMenuItem(value: 'B3. Sembako Mart', child: Text('🌾 Sheet B3: Sembako & Bahan Pokok')),
-                            DropdownMenuItem(value: 'B4. Apotek & Farmasi', child: Text('💊 Sheet B4: Apotek & Obat')),
+                            DropdownMenuItem(value: 'B1. Food & Resto', child: Text('🍲 1. Food & Fresh (Resto/Sayur/Daging)')),
+                            DropdownMenuItem(value: 'B2. Fresh Fruit', child: Text('🍎 1. Fresh Fruit / Buah & Telor')),
+                            DropdownMenuItem(value: 'B3. Sembako Mart', child: Text('🌾 1. Sembako & Bahan Pokok')),
+                            DropdownMenuItem(value: 'B4. Apotek & Farmasi', child: Text('💊 3. Health & Farmasi / Apotek')),
+                            DropdownMenuItem(value: 'C1. Tiket Wisata', child: Text('🎟️ 2. Tiket Event MICE & Wisata')),
+                            DropdownMenuItem(value: 'C2. Homecare & Beauty', child: Text('💆 3. Homecare, Perawat, SPA & Barbershop')),
+                            DropdownMenuItem(value: 'D1. Sewa Property', child: Text('🏢 5. Sewa Kost, Kontrakan & Working Space')),
+                            DropdownMenuItem(value: 'D2. Edukasi & Service', child: Text('🛠️ 6. Edukasi, MC/Band & Teknisi Service')),
+                            DropdownMenuItem(value: 'E1. Donasi & Iklan', child: Text('🤝 7 & 8. Program Donasi & Pasang Iklan')),
+                            DropdownMenuItem(value: 'E2. Event & E-Voting', child: Text('🗳️ 9-12. Bispira Event & E-Voting')),
                           ],
                           onChanged: (val) {
                             if (val != null) {
@@ -91,6 +97,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                 else if (val.contains('B2')) portionUnit = 'Kg';
                                 else if (val.contains('B3')) portionUnit = 'Bungkus / Kemasan';
                                 else if (val.contains('B4')) portionUnit = 'Strip / Botol';
+                                else if (val.contains('C1')) portionUnit = 'Tiket';
+                                else if (val.contains('C2')) portionUnit = 'Sesi / Jam';
+                                else if (val.contains('D1')) portionUnit = 'Bulan / Hari';
+                                else if (val.contains('D2')) portionUnit = 'Layanan / Jam';
+                                else portionUnit = 'Paket';
                               });
                             }
                           },

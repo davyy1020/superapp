@@ -12,6 +12,7 @@ import sheet7Data from './data/sheet7_bagi_hasil_pusat_daerah.json';
 import sheet8Data from './data/sheet8_profil_lisensi_daerah.json';
 import sheet9Data from './data/sheet9_pengaturan_tarif_fees.json';
 import sheet1011Data from './data/sheet10_11_produk_katalog_ekosistem.json';
+import sheet10BackendData from './data/sheet10_produk_penjual_backend.json';
 import sheet12Data from './data/sheet12_pendapatan_superadmin_matrix.json';
 import formulirPenjualMaster from './data/formulir_penjual_master.json';
 
@@ -33,12 +34,15 @@ if (!globalForDb._bispiraDb) {
         driver_charge_per_trip: 500,
         driver_charge_premium_30hari: 15000,
         driver_min_wallet_balance: 10000,
-        ambulance_base_fee: 120000,
-        ambulance_per_km: 10000,
+        ambulance_base_fee: 50000,
+        ambulance_min_fare: 50000,
+        ambulance_per_km: 5000,
         ambulance_angkut_fee: 50000,
-        logistik_per_km: 5000,
+        ambulance_angkut_commission_percent: 1.0,
+        logistik_per_km: 4000,
         logistik_min_fare: 50000,
         logistik_angkut_fee: 50000,
+        logistik_angkut_commission_percent: 1.0,
         truk_l300_base_fee: 100000,
         default_markup_percent: 10.0,
         car_commission_percent: 7.5,
@@ -485,6 +489,10 @@ if (!globalForDb._bispiraDb.tariffAndFeesSettings) {
 
 if (!globalForDb._bispiraDb.catalogEcosystem) {
   globalForDb._bispiraDb.catalogEcosystem = sheet1011Data;
+}
+
+if (!globalForDb._bispiraDb.productsBackend) {
+  globalForDb._bispiraDb.productsBackend = sheet10BackendData;
 }
 
 if (!globalForDb._bispiraDb.revenueSharingMatrix) {

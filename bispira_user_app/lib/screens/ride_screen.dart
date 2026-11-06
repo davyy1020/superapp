@@ -98,35 +98,35 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   Timer? _debounceTimer;
   Timer? _mapMoveTimer;
 
-  // 4 ARMADA TERSEDIA (WITH RESPONSIVE FIT TO PREVENT ANY BOTTOM OVERFLOW!)
+  // 4 ARMADA TERSEDIA (SESUAI EXCEL SHEET 9: PENGATURAN TARIF & FEES REVISI)
   final List<Map<String, dynamic>> _serviceOptions = [
     {
       'id': 'motor',
       'name': 'Motor',
-      'sub': '3-5 Menit',
+      'sub': 'Rp 2.500/KM • Min Rp 8rb',
       'emoji': '🛵',
-      'basePrice': 15000,
+      'basePrice': 8000,
     },
     {
       'id': 'kurir',
       'name': 'Kurir',
-      'sub': 'Logistik Instan',
+      'sub': 'Rp 3.000/KM • Min Rp 10rb',
       'emoji': '📦',
-      'basePrice': 20000,
+      'basePrice': 10000,
     },
     {
       'id': 'kargo',
       'name': 'Kargo',
-      'sub': 'Muatan Besar',
+      'sub': 'Rp 4.000/KM • Min Rp 50rb',
       'emoji': '🚚',
-      'basePrice': 65000,
+      'basePrice': 50000,
     },
     {
       'id': 'ambulance',
       'name': 'Ambulance',
-      'sub': 'Darurat 24/7',
+      'sub': 'Rp 5.000/KM • Min Rp 50rb',
       'emoji': '🚑',
-      'basePrice': 120000,
+      'basePrice': 50000,
     },
   ];
 
@@ -321,9 +321,35 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   double _deg2rad(double deg) => deg * (math.pi / 180);
 
   int _calculateBasePrice() {
-    final double dist = _calculateDistanceInKm();
+    final double dist = _osrmDistanceKm > 0 ? _osrmDistanceKm : _calculateDistanceInKm();
+    final serviceId = _serviceOptions[_selectedServiceIndex]['id'] as String;
+
+    // Sesuai Sheet 9: Pengaturan Tarif & Fees Revisi
+    if (serviceId == 'motor') {
+      const minFare = 8000;
+      const perKm = 2500;
+      final tripFare = dist <= 3.0 ? minFare : (minFare + ((dist - 3.0) * perKm)).round();
+      return (tripFare * 1.10).round(); // Markup konsumen 10%
+    } else if (serviceId == 'kurir') {
+      const minFare = 10000;
+      const perKm = 3000;
+      final tripFare = dist <= 3.0 ? minFare : (minFare + ((dist - 3.0) * perKm)).round();
+      return (tripFare * 1.10).round();
+    } else if (serviceId == 'kargo') {
+      const minFare = 50000;
+      const perKm = 4000;
+      const jasaAngkut = 50000;
+      final tripFare = dist <= 4.0 ? minFare : (minFare + ((dist - 4.0) * perKm)).round();
+      return ((tripFare * 1.10) + jasaAngkut).round();
+    } else if (serviceId == 'ambulance') {
+      const minFare = 50000;
+      const perKm = 5000;
+      const jasaMedis = 50000;
+      final tripFare = dist <= 4.0 ? minFare : (minFare + ((dist - 4.0) * perKm)).round();
+      return ((tripFare * 1.10) + jasaMedis).round();
+    }
     final int base = _serviceOptions[_selectedServiceIndex]['basePrice'] as int;
-    return base + (dist * 2000).round();
+    return base + (dist * 2500).round();
   }
 
   int _calculateServiceFee() => 1000; // Biaya Aplikasi Rp 500 + Biaya Layanan Rp 500 (Excel Sheet 1 & 9)
