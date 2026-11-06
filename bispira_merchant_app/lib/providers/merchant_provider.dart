@@ -5,8 +5,17 @@ class MerchantProduct {
   String name;
   String category;
   String emoji;
-  int basePriceMerchant; // Harga Toko
+  int basePriceMerchant; // Harga Toko Dasar
   bool isAvailable;
+
+  // Spesifikasi Kolom Berdasarkan FORMULIR PENJUAL.xlsx (Sheet B1, B2, B3, B4)
+  String portionUnit; // Porsi, bungkus, botol, kotak, kg, dll
+  int prepTimeMinutes; // Waktu persiapan makanan/barang (menit)
+  String weightVolume; // Berat/volume (gram, kg, ml, liter)
+  String variantOptions; // Pilihan ukuran / rasa / varietas
+  String qualityGrade; // Grade A/B/C (Buah/Sembako)
+  String bpomLicense; // No BPOM / Izin Edar (Apotek)
+  bool requiresPrescription; // Resep dokter (Apotek)
 
   MerchantProduct({
     required this.id,
@@ -15,10 +24,17 @@ class MerchantProduct {
     required this.emoji,
     required this.basePriceMerchant,
     this.isAvailable = true,
+    this.portionUnit = 'Porsi',
+    this.prepTimeMinutes = 15,
+    this.weightVolume = '350 gram',
+    this.variantOptions = 'Pedas / Sedang',
+    this.qualityGrade = 'Grade A',
+    this.bpomLicense = '-',
+    this.requiresPrescription = false,
   });
 
-  // Excel 20% Markup calculation for consumer app display
-  int get consumerPrice => (basePriceMerchant * 1.20).round();
+  // Excel Sheet 1 & 9: Mark Up 10% calculation for consumer app display
+  int get consumerPrice => (basePriceMerchant * 1.10).round();
   int get platformMarkupAmount => consumerPrice - basePriceMerchant;
 }
 
@@ -52,6 +68,26 @@ class MerchantProvider with ChangeNotifier {
   int _todaySalesAmount = 680000;
   int _todayOrdersCount = 14;
   int _walletBalance = 1250000;
+
+  // 18 Kolom Formulir A - Pendaftaran Merchant (FORMULIR PENJUAL.xlsx)
+  final String _namaPemilikUsaha = 'H. Ahmad Bareng';
+  final String _nikKtp = '3324081985010002';
+  final String _nomorHp = '0812-9876-5432 (OTP Terverifikasi)';
+  final String _email = 'resto.bareng@bispira.id';
+  final String _kategoriUsaha = 'B1. Merchant Food – Makanan dan Minuman';
+  final String _deskripsiUsaha = 'Kuliner Tradisional Rempah Pilihan khas Nusantara dengan standar higienis.';
+  final String _jamOperasional = 'Senin - Minggu (08:00 - 22:00 WIB)';
+  final String _dokumenLegalitas = 'NIB: 9120003418291 • PIRT/BPOM Terdaftar';
+  final String _lokasiGps = '-6.2255, 106.8098 (Peta Digital Terverifikasi)';
+  final bool _persetujuanKetentuan = true;
+
+  // Financial & Bank Account Settings Sesuai Excel Sheet 2, 4, 5, 6
+  String _bankOperasional = 'BCA';
+  String _nomorRekening = '1026629629';
+  String _namaPemilik = 'Bpk/Ibu Bareng';
+  final String _payoutSchedule = 'Senin & Kamis (17.00 - 23.59 WIB)';
+  final int _biayaLayananPerTrx = 500; // Sheet 2 & 5: Rp 500 / Trx
+  final int _biayaPencairanPerBatch = 1000; // Sheet 5: Rp 1.000 / Batch transfer
 
   // Catalog Items
   final List<MerchantProduct> _products = [
@@ -120,8 +156,31 @@ class MerchantProvider with ChangeNotifier {
   int get todaySalesAmount => _todaySalesAmount;
   int get todayOrdersCount => _todayOrdersCount;
   int get walletBalance => _walletBalance;
+  String get bankOperasional => _bankOperasional;
+  String get nomorRekening => _nomorRekening;
+  String get namaPemilik => _namaPemilik;
+  String get payoutSchedule => _payoutSchedule;
+  int get biayaLayananPerTrx => _biayaLayananPerTrx;
+  int get biayaPencairanPerBatch => _biayaPencairanPerBatch;
+  String get namaPemilikUsaha => _namaPemilikUsaha;
+  String get nikKtp => _nikKtp;
+  String get nomorHp => _nomorHp;
+  String get email => _email;
+  String get kategoriUsaha => _kategoriUsaha;
+  String get deskripsiUsaha => _deskripsiUsaha;
+  String get jamOperasional => _jamOperasional;
+  String get dokumenLegalitas => _dokumenLegalitas;
+  String get lokasiGps => _lokasiGps;
+  bool get persetujuanKetentuan => _persetujuanKetentuan;
   List<MerchantProduct> get products => List.unmodifiable(_products);
   List<MerchantOrder> get orders => List.unmodifiable(_orders);
+
+  void updateBankAccount(String bank, String rekening, String pemilik) {
+    _bankOperasional = bank;
+    _nomorRekening = rekening;
+    _namaPemilik = pemilik;
+    notifyListeners();
+  }
 
   void toggleStoreStatus() {
     _isStoreOpen = !_isStoreOpen;
@@ -136,7 +195,19 @@ class MerchantProvider with ChangeNotifier {
     }
   }
 
-  void addProduct(String name, String category, String emoji, int basePrice) {
+  void addProduct(
+    String name,
+    String category,
+    String emoji,
+    int basePrice, {
+    String portionUnit = 'Porsi',
+    int prepTimeMinutes = 15,
+    String weightVolume = '350 gram',
+    String variantOptions = 'Normal / Standar',
+    String qualityGrade = 'Grade A',
+    String bpomLicense = '-',
+    bool requiresPrescription = false,
+  }) {
     _products.add(
       MerchantProduct(
         id: 'PRD-${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}',
@@ -145,6 +216,13 @@ class MerchantProvider with ChangeNotifier {
         emoji: emoji,
         basePriceMerchant: basePrice,
         isAvailable: true,
+        portionUnit: portionUnit,
+        prepTimeMinutes: prepTimeMinutes,
+        weightVolume: weightVolume,
+        variantOptions: variantOptions,
+        qualityGrade: qualityGrade,
+        bpomLicense: bpomLicense,
+        requiresPrescription: requiresPrescription,
       ),
     );
     notifyListeners();

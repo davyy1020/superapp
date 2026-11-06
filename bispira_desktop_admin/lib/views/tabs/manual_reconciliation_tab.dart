@@ -15,6 +15,13 @@ class ManualReconciliationTab extends StatefulWidget {
 
 class _ManualReconciliationTabState extends State<ManualReconciliationTab> {
   String _searchQuery = '';
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
   void _showAddTxDialog(BuildContext context, AdminProvider provider, bool isDark) {
     final nameCtrl = TextEditingController();
@@ -376,10 +383,15 @@ class _ManualReconciliationTabState extends State<ManualReconciliationTab> {
                 ),
                 const SizedBox(height: 20),
 
-                // Data Table
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
+                // Data Table with Interactive Horizontal Scrollbar
+                Scrollbar(
+                  controller: _horizontalScrollController,
+                  thumbVisibility: true,
+                  trackVisibility: true,
+                  child: SingleChildScrollView(
+                    controller: _horizontalScrollController,
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
                     headingRowColor: WidgetStateProperty.all(isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC)),
                     horizontalMargin: 16,
                     columnSpacing: 20,
@@ -491,6 +503,8 @@ class _ManualReconciliationTabState extends State<ManualReconciliationTab> {
                     }).toList(),
                   ),
                 ),
+              ),
+              const SizedBox(height: 10),
               ],
             ),
           ),

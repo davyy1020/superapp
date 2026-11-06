@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../theme/neo_theme.dart';
-import '../widgets/neo_widgets.dart';
 
 class MartScreen extends StatefulWidget {
   final VoidCallback? onBackPressed;
@@ -15,7 +14,6 @@ class MartScreen extends StatefulWidget {
 }
 
 class _MartScreenState extends State<MartScreen> {
-  int _userBalance = 250000;
   int _selectedCategoryIndex = 0;
   Map<int, int> _cartItems = {}; // productId -> quantity
 
@@ -146,155 +144,284 @@ class _MartScreenState extends State<MartScreen> {
 
   void _showCheckoutModal() {
     if (_cartItems.isEmpty) return;
+    String selectedPayment = 'transfer';
+    final int uniqueCode = 100 + (DateTime.now().millisecond % 899);
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) {
-        return Container(
-          padding: const EdgeInsets.all(22),
-          decoration: const BoxDecoration(
-            color: NeoColors.surface,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-            border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Checkout BISPIRA Mart 🛒',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(ctx),
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(color: NeoColors.brandSoft, shape: BoxShape.circle),
-                      child: const Icon(Icons.close, size: 18, color: NeoColors.black),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 14),
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            const int deliveryFee = 8000;
+            const int appFee = 500;
+            const int serviceFee = 500;
+            final int baseTotal = _totalCartPrice + deliveryFee + appFee + serviceFee;
+            final int grandTotal = (selectedPayment == 'transfer') ? baseTotal + uniqueCode : baseTotal;
 
-              // Delivery Address Info
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: NeoColors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: NeoColors.black, width: 1.5),
-                ),
-                child: Row(
-                  children: const [
-                    Icon(Icons.location_on_rounded, color: NeoColors.brand, size: 22),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Alamat Pengantaran (Instant 15 Mins)', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: NeoColors.black)),
-                          SizedBox(height: 2),
-                          Text('Kost Menteng Heritage, Unit 402B • Jakarta Pusat', style: TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w600)),
+            return Container(
+              padding: const EdgeInsets.all(22),
+              decoration: const BoxDecoration(
+                color: NeoColors.surface,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                border: Border(top: BorderSide(color: NeoColors.black, width: 2.5)),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Checkout BISPIRA Mart 🛒',
+                          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
+                        ),
+                        GestureDetector(
+                          onTap: () => Navigator.pop(ctx),
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(color: NeoColors.brandSoft, shape: BoxShape.circle),
+                            child: const Icon(Icons.close, size: 18, color: NeoColors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Delivery Address Info
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: NeoColors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: NeoColors.black, width: 1.5),
+                      ),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.location_on_rounded, color: NeoColors.brand, size: 22),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Alamat Pengantaran (Kurir Motor 15 Mnt)', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: NeoColors.black)),
+                                SizedBox(height: 2),
+                                Text('Kost Menteng Heritage, Unit 402B • Jakarta Pusat', style: TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Item Summary
+                    const Text('Ringkasan Belanja', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                    const SizedBox(height: 8),
+
+                    ..._cartItems.entries.map((entry) {
+                      final product = _products.firstWhere((p) => p['id'] == entry.key);
+                      final itemTotal = (product['price'] as int) * entry.value;
+
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${entry.value}x  ${product['name']}',
+                              style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.black),
+                            ),
+                            Text(
+                              'Rp ${_formatPrice(itemTotal)}',
+                              style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.black),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+
+                    const Divider(color: NeoColors.black, thickness: 1.2),
+                    const SizedBox(height: 6),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('Ongkos Kirim Instant (Kurir Motor)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: NeoColors.black)),
+                        Text('Rp 8.000', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800, color: NeoColors.black)),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Biaya Aplikasi (Excel):', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted)),
+                        Text('Rp 500', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800)),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Biaya Layanan (Excel):', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted)),
+                        Text('Rp 500', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800)),
+                      ],
+                    ),
+                    if (selectedPayment == 'transfer') ...[
+                      const SizedBox(height: 3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('3 Digit Kode Unik Rekonsiliasi:', style: TextStyle(fontSize: 11.5, color: NeoColors.brand, fontWeight: FontWeight.w800)),
+                          Text('+$uniqueCode', style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.brand)),
+                        ],
+                      ),
+                    ],
+                    const Divider(height: 14),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Total Pembayaran', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: NeoColors.black)),
+                        Text(
+                          'Rp ${_formatPrice(grandTotal)}',
+                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: NeoColors.brand),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+
+                    // METODE PEMBAYARAN
+                    const Text('PILIH METODE PEMBAYARAN PEMBELI:', style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                    const SizedBox(height: 8),
+
+                    GestureDetector(
+                      onTap: () => setModalState(() => selectedPayment = 'transfer'),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 6),
+                        decoration: BoxDecoration(
+                          color: selectedPayment == 'transfer' ? NeoColors.brandSoft : NeoColors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: selectedPayment == 'transfer' ? NeoColors.brand : NeoColors.black, width: 1.5),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.account_balance_rounded, color: NeoColors.brand, size: 20),
+                            const SizedBox(width: 8),
+                            const Expanded(child: Text('Transfer ATM / M-Banking (+Kode Unik)', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5))),
+                            Radio<String>(value: 'transfer', groupValue: selectedPayment, onChanged: (v) => setModalState(() => selectedPayment = v!)),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => setModalState(() => selectedPayment = 'qris'),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 6),
+                        decoration: BoxDecoration(
+                          color: selectedPayment == 'qris' ? NeoColors.brandSoft : NeoColors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: selectedPayment == 'qris' ? NeoColors.brand : NeoColors.black, width: 1.5),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.qr_code_2_rounded, color: NeoColors.brand, size: 20),
+                            const SizedBox(width: 8),
+                            const Expanded(child: Text('QRIS Dinamis (BCA/GoPay/OVO)', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5))),
+                            Radio<String>(value: 'qris', groupValue: selectedPayment, onChanged: (v) => setModalState(() => selectedPayment = v!)),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => setModalState(() => selectedPayment = 'cash'),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration: BoxDecoration(
+                          color: selectedPayment == 'cash' ? NeoColors.brandSoft : NeoColors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: selectedPayment == 'cash' ? NeoColors.brand : NeoColors.black, width: 1.5),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.payments_rounded, color: NeoColors.greenDark, size: 20),
+                            const SizedBox(width: 8),
+                            const Expanded(child: Text('Tunai kepada Driver Kurir (Auto-Potong Driver)', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5))),
+                            Radio<String>(value: 'cash', groupValue: selectedPayment, onChanged: (v) => setModalState(() => selectedPayment = v!)),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    if (selectedPayment == 'transfer')
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: NeoColors.goldSoft,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: NeoColors.orange, width: 1.2),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.warning_amber_rounded, color: NeoColors.orange, size: 18),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                '⚠️ Mohon masukkan nominal sampai tiga angka terakhir secara benar saat transfer agar otomatis terverifikasi sistem.',
+                                style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: NeoColors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    // Confirm Button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(ctx);
+                        setState(() {
+                          _cartItems.clear();
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Pesanan Mart Berhasil Dipesan via ${selectedPayment.toUpperCase()}! Kurir BISPIRA Segera Antar 🛵💨'),
+                            backgroundColor: NeoColors.brand,
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF10B981),
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: NeoColors.black, width: 2),
+                          boxShadow: const [
+                            BoxShadow(color: NeoColors.black, offset: Offset(2.5, 2.5), blurRadius: 0),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Pesan Sekarang • Rp ${_formatPrice(grandTotal)} 🛒',
+                            style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 13.5),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 14),
-
-              // Item Summary
-              const Text('Ringkasan Belanja', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
-              const SizedBox(height: 8),
-
-              ..._cartItems.entries.map((entry) {
-                final product = _products.firstWhere((p) => p['id'] == entry.key);
-                final itemTotal = (product['price'] as int) * entry.value;
-
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${entry.value}x  ${product['name']}',
-                        style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.black),
-                      ),
-                      Text(
-                        'Rp ${_formatPrice(itemTotal)}',
-                        style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.black),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-
-              const Divider(color: NeoColors.black, thickness: 1.2),
-              const SizedBox(height: 6),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Ongkos Kirim Instant', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: NeoColors.black)),
-                  Text('Rp 8.000', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800, color: NeoColors.black)),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Total Pembayaran', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: NeoColors.black)),
-                  Text(
-                    'Rp ${_formatPrice(_totalCartPrice + 8000)}',
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: NeoColors.brand),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // Confirm Button
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(ctx);
-                  final grandTotal = _totalCartPrice + 8000;
-                  setState(() {
-                    _userBalance -= grandTotal;
-                    _cartItems.clear();
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Pesanan Mart Berhasil Dipesan! Kurir Instan BISPIRA sedang Meluncur 🛵💨'),
-                      backgroundColor: NeoColors.brand,
-                    ),
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF10B981),
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: NeoColors.black, width: 2),
-                    boxShadow: const [
-                      BoxShadow(color: NeoColors.black, offset: Offset(2.5, 2.5), blurRadius: 0),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Pesan Sekarang • Rp ${_formatPrice(_totalCartPrice + 8000)} 🛒',
-                      style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 13.5),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -350,18 +477,18 @@ class _MartScreenState extends State<MartScreen> {
                         ],
                       ),
 
-                      // Balance Pill
+                      // Delivery Badge Pill
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                         decoration: BoxDecoration(
-                          color: NeoColors.brandSoft,
+                          color: NeoColors.green.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: NeoColors.brand, width: 1.5),
+                          border: Border.all(color: NeoColors.green, width: 1.5),
                         ),
-                        child: Text(
-                          '💳 Rp ${_formatPrice(_userBalance)}',
-                          style: const TextStyle(
-                            color: NeoColors.brand,
+                        child: const Text(
+                          '🛵 Kurir Siap Antar',
+                          style: TextStyle(
+                            color: NeoColors.greenDark,
                             fontWeight: FontWeight.w900,
                             fontSize: 11.5,
                           ),

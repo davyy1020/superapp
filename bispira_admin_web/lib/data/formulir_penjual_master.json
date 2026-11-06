@@ -1,0 +1,4065 @@
+{
+  "PENDAFTARAN MERCHANT": {
+    "sheet_name": "PENDAFTARAN MERCHANT",
+    "total_rows": 21,
+    "rows": [
+      [
+        "1. Formulir A – Pendaftaran merchant"
+      ],
+      [
+        "1. Formulir A – Pendaftaran merchant"
+      ],
+      [
+        "No.",
+        "Nama kolom",
+        "Jenis input",
+        "Keterangan"
+      ],
+      [
+        1,
+        "Nama pemilik usaha",
+        "Teks",
+        "Sesuai identitas"
+      ],
+      [
+        2,
+        "NIK/KTP",
+        "Teks/unggah",
+        "Verifikasi identitas"
+      ],
+      [
+        3,
+        "Foto pemilik",
+        "Unggah foto",
+        "Foto profil"
+      ],
+      [
+        4,
+        "Nomor HP",
+        "Nomor/OTP",
+        "Verifikasi akun"
+      ],
+      [
+        5,
+        "Email",
+        "Email",
+        "Identitas akun"
+      ],
+      [
+        6,
+        "Nama toko/usaha",
+        "Teks",
+        "Nama yang tampil di marketplace"
+      ],
+      [
+        7,
+        "Logo toko",
+        "Unggah gambar",
+        "Identitas merchant"
+      ],
+      [
+        8,
+        "Foto toko/tempat usaha",
+        "Unggah gambar",
+        "Minimal satu foto"
+      ],
+      [
+        9,
+        "Deskripsi usaha",
+        "Teks panjang",
+        "Profil usaha"
+      ],
+      [
+        10,
+        "Kategori usaha",
+        "Dropdown",
+        "Food, sembako, apotek, dan lainnya"
+      ],
+      [
+        11,
+        "Alamat usaha",
+        "Teks",
+        "Alamat lengkap"
+      ],
+      [
+        12,
+        "Lokasi usaha",
+        "GPS/peta",
+        "Titik lokasi"
+      ],
+      [
+        13,
+        "Jam operasional",
+        "Pilihan waktu",
+        "Hari dan jam buka"
+      ],
+      [
+        14,
+        "Dokumen legalitas",
+        "Unggah file",
+        "Sesuai jenis usaha"
+      ],
+      [
+        15,
+        "Nama bank",
+        "Dropdown",
+        "Rekening pencairan"
+      ],
+      [
+        16,
+        "Nomor rekening",
+        "Teks",
+        "Rekening merchant"
+      ],
+      [
+        17,
+        "Nama pemilik rekening",
+        "Teks",
+        "Verifikasi penerima dana"
+      ],
+      [
+        18,
+        "Persetujuan ketentuan",
+        "Checkbox",
+        "Syarat dan ketentuan Bispira"
+      ]
+    ]
+  },
+  "FOOD": {
+    "sheet_name": "FOOD",
+    "total_rows": 22,
+    "rows": [
+      [
+        "B. Formulir penjual produk barang"
+      ],
+      [
+        "B1. Merchant Food – Makanan dan Minuman"
+      ],
+      [
+        "Kategori: Makanan dan minuman"
+      ],
+      [
+        "Integrasi transportasi: Motor antar Food dan Mobil antar Barang Kecil."
+      ],
+      [
+        "Karakteristik: Produk siap santap, makanan olahan, minuman, makanan kemasan."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto produk utama",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Foto produk tambahan",
+        "Unggah foto"
+      ],
+      [
+        3,
+        "Nama makanan/minuman",
+        "Teks"
+      ],
+      [
+        4,
+        "Kategori produk",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Deskripsi produk",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Komposisi/bahan",
+        "Teks"
+      ],
+      [
+        7,
+        "Berat produk",
+        "Gram/kg"
+      ],
+      [
+        8,
+        "Volume minuman",
+        "ml/liter"
+      ],
+      [
+        9,
+        "Pilihan ukuran",
+        "Dropdown/varian"
+      ],
+      [
+        10,
+        "Pilihan rasa",
+        "Dropdown/varian"
+      ],
+      [
+        11,
+        "Harga dasar penjual",
+        "Rupiah"
+      ],
+      [
+        12,
+        "Stok tersedia",
+        "Angka"
+      ],
+      [
+        13,
+        "Satuan penjualan",
+        "Porsi, bungkus, botol, kotak"
+      ],
+      [
+        14,
+        "Waktu persiapan",
+        "Menit"
+      ],
+      [
+        15,
+        "Masa kedaluwarsa",
+        "Tanggal"
+      ],
+      [
+        16,
+        "Status produk",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "FRESH FRUIT": {
+    "sheet_name": "FRESH FRUIT",
+    "total_rows": 18,
+    "rows": [
+      [
+        "B2. Merchant Fresh Fruit – Buah Segar"
+      ],
+      [
+        "Kategori: Buah segar"
+      ],
+      [
+        "Integrasi transportasi: Motor antar Food dan Mobil antar Barang Kecil."
+      ],
+      [
+        "Karakteristik: Produk berdasarkan berat, satuan, kualitas, dan tingkat kematangan."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto buah",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama buah",
+        "Teks"
+      ],
+      [
+        3,
+        "Jenis/varietas",
+        "Teks"
+      ],
+      [
+        4,
+        "Deskripsi buah",
+        "Teks panjang"
+      ],
+      [
+        5,
+        "Kualitas",
+        "Grade A/B/C"
+      ],
+      [
+        6,
+        "Tingkat kematangan",
+        "Pilihan"
+      ],
+      [
+        7,
+        "Berat bersih",
+        "Gram/kg"
+      ],
+      [
+        8,
+        "Satuan jual",
+        "Kg, gram, buah, ikat"
+      ],
+      [
+        9,
+        "Harga dasar",
+        "Rupiah/satuan"
+      ],
+      [
+        10,
+        "Stok",
+        "Angka"
+      ],
+      [
+        11,
+        "Asal buah",
+        "Teks"
+      ],
+      [
+        12,
+        "Kondisi penyimpanan",
+        "Teks"
+      ],
+      [
+        13,
+        "Status ketersediaan",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "SEMBAKO": {
+    "sheet_name": "SEMBAKO",
+    "total_rows": 18,
+    "rows": [
+      [
+        "B3. Merchant Sembako"
+      ],
+      [
+        "Kategori: Beras, minyak, sayuran, daging, ikan, telur, dan kebutuhan pokok lainnya."
+      ],
+      [
+        "Integrasi transportasi: Motor antar Barang Kecil dan Mobil antar Barang Kecil."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto produk",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama produk",
+        "Teks"
+      ],
+      [
+        3,
+        "Kategori sembako",
+        "Dropdown"
+      ],
+      [
+        4,
+        "Merek",
+        "Teks"
+      ],
+      [
+        5,
+        "Deskripsi",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Berat/volume",
+        "Gram, kg, ml, liter"
+      ],
+      [
+        7,
+        "Satuan penjualan",
+        "Kg, liter, ikat, butir, bungkus"
+      ],
+      [
+        8,
+        "Harga dasar penjual",
+        "Rupiah"
+      ],
+      [
+        9,
+        "Stok",
+        "Angka"
+      ],
+      [
+        10,
+        "Minimum pembelian",
+        "Angka"
+      ],
+      [
+        11,
+        "Maksimum pembelian",
+        "Angka"
+      ],
+      [
+        12,
+        "Kondisi produk",
+        "Segar, kering, beku, kemasan"
+      ],
+      [
+        13,
+        "Tanggal kedaluwarsa",
+        "Tanggal, jika relevan"
+      ],
+      [
+        14,
+        "Status produk",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "APOTEK": {
+    "sheet_name": "APOTEK",
+    "total_rows": 22,
+    "rows": [
+      [
+        "B4. Merchant Apotek"
+      ],
+      [
+        "Kategori: Obat umum, suplemen, dan obat sesuai resep dokter."
+      ],
+      [
+        "Integrasi transportasi: Motor antar Barang Kecil dan Mobil antar Barang Kecil, dengan pembatasan sesuai jenis produk."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto produk",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama obat/produk",
+        "Teks"
+      ],
+      [
+        3,
+        "Merek",
+        "Teks"
+      ],
+      [
+        4,
+        "Kategori obat",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Komposisi",
+        "Teks"
+      ],
+      [
+        6,
+        "Bentuk sediaan",
+        "Tablet, kapsul, sirup, salep, dan lainnya"
+      ],
+      [
+        7,
+        "Kekuatan/dosis pada kemasan",
+        "Teks"
+      ],
+      [
+        8,
+        "Berat/volume",
+        "Gram, mg, ml"
+      ],
+      [
+        9,
+        "Nomor izin edar",
+        "Teks"
+      ],
+      [
+        10,
+        "Nomor batch",
+        "Teks"
+      ],
+      [
+        11,
+        "Tanggal kedaluwarsa",
+        "Tanggal"
+      ],
+      [
+        12,
+        "Harga dasar penjual",
+        "Rupiah"
+      ],
+      [
+        13,
+        "Satuan penjualan",
+        "Strip, tablet, botol, kotak"
+      ],
+      [
+        14,
+        "Stok",
+        "Angka"
+      ],
+      [
+        15,
+        "Klasifikasi obat",
+        "Dropdown"
+      ],
+      [
+        16,
+        "Memerlukan resep dokter?",
+        "Ya/tidak"
+      ],
+      [
+        17,
+        "Foto resep dokter",
+        "Unggah, jika diperlukan"
+      ],
+      [
+        18,
+        "Status produk",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "TRANSPORTASI ON LINE": {
+    "sheet_name": "TRANSPORTASI ON LINE",
+    "total_rows": 47,
+    "rows": [
+      [
+        "C. Formulir penjual jasa transportasi online (driver)"
+      ],
+      [
+        "C1. Formulir pendaftaran driver"
+      ],
+      [
+        "No.",
+        "Kolom",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Nama lengkap",
+        "Teks"
+      ],
+      [
+        2,
+        "Foto profil",
+        "Unggah foto"
+      ],
+      [
+        3,
+        "NIK/KTP",
+        "Teks/unggah"
+      ],
+      [
+        4,
+        "Nomor HP",
+        "OTP"
+      ],
+      [
+        5,
+        "Alamat",
+        "Teks"
+      ],
+      [
+        6,
+        "Jenis kendaraan",
+        "Dropdown"
+      ],
+      [
+        7,
+        "Merek kendaraan",
+        "Teks"
+      ],
+      [
+        8,
+        "Tipe kendaraan",
+        "Teks"
+      ],
+      [
+        9,
+        "Tahun kendaraan",
+        "Angka"
+      ],
+      [
+        10,
+        "Nomor polisi",
+        "Teks"
+      ],
+      [
+        11,
+        "Warna kendaraan",
+        "Teks"
+      ],
+      [
+        12,
+        "Foto kendaraan",
+        "Unggah foto"
+      ],
+      [
+        13,
+        "SIM",
+        "Unggah dokumen"
+      ],
+      [
+        14,
+        "STNK",
+        "Unggah dokumen"
+      ],
+      [
+        15,
+        "Kapasitas kendaraan",
+        "Angka/kg/orang"
+      ],
+      [
+        16,
+        "Wilayah operasional",
+        "Peta/district"
+      ],
+      [
+        17,
+        "Rekening bank",
+        "Teks"
+      ],
+      [
+        18,
+        "Persetujuan ketentuan",
+        "Checkbox"
+      ],
+      [
+        "C2. Aktivasi jenis layanan driver"
+      ],
+      [
+        null,
+        "Jenis layanan",
+        "Kendaraan",
+        "Fungsi"
+      ],
+      [
+        null,
+        "Motor antar Orang",
+        "Sepeda motor",
+        "Mengantar penumpang"
+      ],
+      [
+        null,
+        "Motor antar Food",
+        "Sepeda motor",
+        "Mengantar makanan/minuman"
+      ],
+      [
+        null,
+        "Motor antar Barang Kecil",
+        "Sepeda motor",
+        "Barang kecil, sembako, buah, dan pesanan apotek yang memenuhi ketentuan"
+      ],
+      [
+        null,
+        "Mobil antar Orang",
+        "Mobil penumpang",
+        "Mengantar penumpang"
+      ],
+      [
+        null,
+        "Mobil antar Barang Kecil",
+        "Mobil kecil",
+        "Food, sembako, apotek, buah, dan paket kecil"
+      ],
+      [
+        null,
+        "Mobil antar Barang Sedang",
+        "Mobil sesuai kapasitas",
+        "Barang berukuran sedang"
+      ],
+      [
+        null,
+        "Ambulance antar Orang Sakit",
+        "Ambulans sesuai standar",
+        "Transportasi pasien dengan kebutuhan medis"
+      ],
+      [
+        null,
+        "Ambulance Jenazah",
+        "Kendaraan jenazah",
+        "Transportasi jenazah"
+      ],
+      [
+        null,
+        "Truk L300 antar Barang Besar",
+        "L300/pickup sesuai spesifikasi",
+        "Pengiriman barang besar"
+      ],
+      [
+        "C3. Formulir transaksi pengantaran"
+      ],
+      [
+        "No.",
+        "Kolom",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Nomor pesanan",
+        "Otomatis"
+      ],
+      [
+        2,
+        "Jenis layanan",
+        "Otomatis"
+      ],
+      [
+        3,
+        "Nama barang/pesanan",
+        "Otomatis"
+      ],
+      [
+        4,
+        "Foto barang",
+        "Otomatis/unggah"
+      ],
+      [
+        5,
+        "Berat barang",
+        "Gram/kg"
+      ],
+      [
+        6,
+        "Dimensi barang",
+        "Panjang × lebar × tinggi"
+      ],
+      [
+        7,
+        "Lokasi penjemputan",
+        "GPS"
+      ],
+      [
+        8,
+        "Lokasi pengantaran",
+        "GPS"
+      ],
+      [
+        9,
+        "Biaya transportasi",
+        "Sistem"
+      ],
+      [
+        10,
+        "Metode pembayaran",
+        "Transfer/QRIS/tunai"
+      ],
+      [
+        11,
+        "Bukti penjemputan",
+        "Foto/QR"
+      ],
+      [
+        12,
+        "Bukti penerimaan",
+        "Foto/QR/OTP"
+      ],
+      [
+        13,
+        "Status pengantaran",
+        "Otomatis"
+      ]
+    ]
+  },
+  "TENAGA KESEHATAN": {
+    "sheet_name": "TENAGA KESEHATAN",
+    "total_rows": 31,
+    "rows": [
+      [
+        "D. Formulir penjual jasa kesehatan"
+      ],
+      [
+        "D1. Tenaga kesehatan profesional"
+      ],
+      [
+        "Kategori: Perawat, bidan, psikolog, fisioterapis, Konselor"
+      ],
+      [
+        "Model layanan: Temu janji di tempat praktik atau kunjungan ke rumah pasien."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto tenaga profesional",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama tenaga profesional",
+        "Teks"
+      ],
+      [
+        3,
+        "Profesi",
+        "Dropdown"
+      ],
+      [
+        4,
+        "Gelar/pendidikan",
+        "Teks"
+      ],
+      [
+        5,
+        "Deskripsi layanan",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Pengalaman kerja",
+        "Angka/tahun"
+      ],
+      [
+        7,
+        "STR/SIP atau dokumen sesuai profesi",
+        "Unggah dokumen"
+      ],
+      [
+        8,
+        "Sertifikat kompetensi",
+        "Unggah dokumen"
+      ],
+      [
+        9,
+        "Tempat praktik",
+        "Alamat/peta"
+      ],
+      [
+        10,
+        "Jenis layanan",
+        "Praktik/kunjungan rumah"
+      ],
+      [
+        11,
+        "Durasi pertemuan",
+        "Menit/jam"
+      ],
+      [
+        12,
+        "Harga jasa per pertemuan",
+        "Rupiah"
+      ],
+      [
+        13,
+        "Biaya transportasi berangkat",
+        "Rupiah"
+      ],
+      [
+        14,
+        "Biaya transportasi pulang",
+        "Rupiah"
+      ],
+      [
+        15,
+        "Harga dasar total",
+        "Otomatis"
+      ],
+      [
+        16,
+        "Jadwal layanan",
+        "Kalender"
+      ],
+      [
+        17,
+        "Kapasitas pasien",
+        "Angka"
+      ],
+      [
+        18,
+        "Wilayah layanan",
+        "Peta"
+      ],
+      [
+        19,
+        "Status layanan",
+        "Aktif/nonaktif"
+      ],
+      [
+        "Rumus harga dasar kunjungan rumah:"
+      ],
+      [
+        "A = B + C + D"
+      ],
+      [
+        "Keterangan:"
+      ],
+      [
+        "A : harga dasar penjual."
+      ],
+      [
+        "B : biaya jasa per pertemuan."
+      ],
+      [
+        "C : transportasi berangkat."
+      ],
+      [
+        "D : transportasi pulang."
+      ]
+    ]
+  },
+  "PERAWATSAKIT, ART": {
+    "sheet_name": "PERAWATSAKIT, ART",
+    "total_rows": 19,
+    "rows": [
+      [
+        "D2. Perawat orang sakit dan asisten rumah tangga"
+      ],
+      [
+        "Kategori: Perawat pendamping pasien, caregiver, dan asisten rumah tangga."
+      ],
+      [
+        "Model layanan: Kunjungan rumah sesuai durasi dan jadwal yang disepakati."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto penyedia jasa",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama penyedia jasa",
+        "Teks"
+      ],
+      [
+        3,
+        "Jenis pekerjaan",
+        "Dropdown"
+      ],
+      [
+        4,
+        "Deskripsi pekerjaan",
+        "Teks panjang"
+      ],
+      [
+        5,
+        "Pengalaman",
+        "Teks"
+      ],
+      [
+        6,
+        "Sertifikat/pelatihan",
+        "Unggah dokumen"
+      ],
+      [
+        7,
+        "Durasi kerja",
+        "Jam/shift/hari/bulan"
+      ],
+      [
+        8,
+        "Harga jasa dasar",
+        "Rupiah"
+      ],
+      [
+        9,
+        "Transportasi berangkat",
+        "Rupiah"
+      ],
+      [
+        10,
+        "Transportasi pulang",
+        "Rupiah"
+      ],
+      [
+        11,
+        "Total harga dasar",
+        "Otomatis"
+      ],
+      [
+        12,
+        "Wilayah pelayanan",
+        "Peta"
+      ],
+      [
+        13,
+        "Jadwal ketersediaan",
+        "Kalender"
+      ],
+      [
+        14,
+        "Kapasitas layanan",
+        "Angka"
+      ],
+      [
+        15,
+        "Status layanan",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "TEKNISI SERVICE": {
+    "sheet_name": "TEKNISI SERVICE",
+    "total_rows": 22,
+    "rows": [
+      [
+        "E. Formulir penjual jasa service, teknisi, pendidikan, dan entertainment"
+      ],
+      [
+        "E1. Jasa teknisi dan service"
+      ],
+      [
+        "Kategori: Teknisi listrik, AC, elektronik, komputer, perbaikan rumah, dan jasa teknis lainnya."
+      ],
+      [
+        "Model layanan: Penyedia jasa datang ke rumah konsumen."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto teknisi",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Foto portofolio pekerjaan",
+        "Unggah foto"
+      ],
+      [
+        3,
+        "Nama jasa",
+        "Teks"
+      ],
+      [
+        4,
+        "Kategori jasa",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Deskripsi layanan",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Keahlian/sertifikasi",
+        "Teks/unggah"
+      ],
+      [
+        7,
+        "Model pembayaran",
+        "Per kunjungan/jam/proyek"
+      ],
+      [
+        8,
+        "Durasi pengerjaan",
+        "Jam/hari"
+      ],
+      [
+        9,
+        "Harga dasar jasa",
+        "Rupiah"
+      ],
+      [
+        10,
+        "Transportasi berangkat",
+        "Rupiah"
+      ],
+      [
+        11,
+        "Transportasi pulang",
+        "Rupiah"
+      ],
+      [
+        12,
+        "Total harga dasar",
+        "Otomatis"
+      ],
+      [
+        13,
+        "Material termasuk harga?",
+        "Ya/tidak"
+      ],
+      [
+        14,
+        "Wilayah layanan",
+        "Peta"
+      ],
+      [
+        15,
+        "Jadwal layanan",
+        "Kalender"
+      ],
+      [
+        16,
+        "Status layanan",
+        "Aktif/nonaktif"
+      ],
+      [
+        "Bila material atau suku cadang belum termasuk harga, biaya tambahan harus diinformasikan dan mendapat persetujuan pembeli sebelum pekerjaan dilakukan."
+      ]
+    ]
+  },
+  "BIMBELPRIVAT": {
+    "sheet_name": "BIMBELPRIVAT",
+    "total_rows": 21,
+    "rows": [
+      [
+        "Pendidikan dan les privat"
+      ],
+      [
+        "Kategori: Les privat, bimbingan belajar, bahasa, komputer, musik, dan keterampilan."
+      ],
+      [
+        "Model layanan: Guru datang ke rumah konsumen atau layanan daring jika disediakan."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto pengajar",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama pengajar",
+        "Teks"
+      ],
+      [
+        3,
+        "Mata pelajaran",
+        "Dropdown"
+      ],
+      [
+        4,
+        "Jenjang pendidikan",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Deskripsi layanan",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Pendidikan/kualifikasi",
+        "Teks"
+      ],
+      [
+        7,
+        "Sertifikat",
+        "Unggah dokumen"
+      ],
+      [
+        8,
+        "Model pembelajaran",
+        "Tatap muka/online"
+      ],
+      [
+        9,
+        "Lokasi pembelajaran",
+        "Rumah siswa/online"
+      ],
+      [
+        10,
+        "Durasi pertemuan",
+        "60/90/120 menit"
+      ],
+      [
+        11,
+        "Harga jasa per pertemuan",
+        "Rupiah"
+      ],
+      [
+        12,
+        "Transportasi berangkat",
+        "Rupiah"
+      ],
+      [
+        13,
+        "Transportasi pulang",
+        "Rupiah"
+      ],
+      [
+        14,
+        "Total harga dasar",
+        "Otomatis"
+      ],
+      [
+        15,
+        "Jadwal pengajaran",
+        "Kalender"
+      ],
+      [
+        16,
+        "Kapasitas siswa",
+        "Angka"
+      ],
+      [
+        17,
+        "Status layanan",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "ENTERTAINMENT": {
+    "sheet_name": "ENTERTAINMENT",
+    "total_rows": 20,
+    "rows": [
+      [
+        "Entertainment"
+      ],
+      [
+        "Kategori: Musik, MC, penyanyi, band, fotografer, videografer, penari, dan hiburan acara."
+      ],
+      [
+        "Model layanan: Penyedia jasa datang ke lokasi konsumen."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto penyedia jasa",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Video portofolio",
+        "Unggah video"
+      ],
+      [
+        3,
+        "Nama jasa/kelompok",
+        "Teks"
+      ],
+      [
+        4,
+        "Kategori entertainment",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Deskripsi penampilan",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Jumlah personel",
+        "Angka"
+      ],
+      [
+        7,
+        "Durasi pertunjukan",
+        "Jam"
+      ],
+      [
+        8,
+        "Harga jasa dasar",
+        "Rupiah"
+      ],
+      [
+        9,
+        "Transportasi berangkat",
+        "Rupiah"
+      ],
+      [
+        10,
+        "Transportasi pulang",
+        "Rupiah"
+      ],
+      [
+        11,
+        "Total harga dasar",
+        "Otomatis"
+      ],
+      [
+        12,
+        "Peralatan termasuk harga",
+        "Ya/tidak"
+      ],
+      [
+        13,
+        "Wilayah layanan",
+        "Peta"
+      ],
+      [
+        14,
+        "Jadwal tersedia",
+        "Kalender"
+      ],
+      [
+        15,
+        "Ketentuan pembatalan",
+        "Teks"
+      ],
+      [
+        16,
+        "Status layanan",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "SEWA PROPERTY": {
+    "sheet_name": "SEWA PROPERTY",
+    "total_rows": 26,
+    "rows": [
+      [
+        "F. Formulir sewa properti dan sewa baju"
+      ],
+      [
+        "F1. Sewa kost, rumah, apartemen, dan working space"
+      ],
+      [
+        "Cove Proklamasi: Kost di Jakarta Pusat dengan Fasilitas Kolam Renang!"
+      ],
+      [
+        "Sewa Rumah Buah Batu Bandung & Kontrakan Bulanan Tahunan Murah Tanpa Perantara Pemilik Langsung (Direct Owner)"
+      ],
+      [
+        "Property Details"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto properti utama",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Foto properti tambahan",
+        "Unggah foto"
+      ],
+      [
+        3,
+        "Video properti",
+        "Unggah video"
+      ],
+      [
+        4,
+        "Nama properti",
+        "Teks"
+      ],
+      [
+        5,
+        "Jenis properti",
+        "Dropdown"
+      ],
+      [
+        6,
+        "Deskripsi properti",
+        "Teks panjang"
+      ],
+      [
+        7,
+        "Alamat lengkap",
+        "Teks"
+      ],
+      [
+        8,
+        "Lokasi GPS",
+        "Peta"
+      ],
+      [
+        9,
+        "Luas bangunan/tanah",
+        "m²"
+      ],
+      [
+        10,
+        "Jumlah kamar",
+        "Angka"
+      ],
+      [
+        11,
+        "Kapasitas penghuni",
+        "Orang"
+      ],
+      [
+        12,
+        "Fasilitas",
+        "Checklist"
+      ],
+      [
+        13,
+        "Kondisi furnitur",
+        "Dropdown"
+      ],
+      [
+        14,
+        "Harga sewa dasar",
+        "Rupiah"
+      ],
+      [
+        15,
+        "Satuan sewa",
+        "Hari/minggu/bulan/tahun"
+      ],
+      [
+        16,
+        "Deposit/jaminan",
+        "Rupiah"
+      ],
+      [
+        17,
+        "Jumlah unit tersedia",
+        "Angka"
+      ],
+      [
+        18,
+        "Kalender ketersediaan",
+        "Kalender"
+      ],
+      [
+        19,
+        "Aturan penyewaan",
+        "Teks panjang"
+      ],
+      [
+        20,
+        "Status properti",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "SEWA BAJU": {
+    "sheet_name": "SEWA BAJU",
+    "total_rows": 19,
+    "rows": [
+      [
+        "F2. Sewa baju event"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto pakaian",
+        "Unggah foto"
+      ],
+      [
+        2,
+        "Nama pakaian",
+        "Teks"
+      ],
+      [
+        3,
+        "Kategori pakaian",
+        "Dropdown"
+      ],
+      [
+        4,
+        "Deskripsi",
+        "Teks panjang"
+      ],
+      [
+        5,
+        "Warna",
+        "Teks"
+      ],
+      [
+        6,
+        "Bahan",
+        "Teks"
+      ],
+      [
+        7,
+        "Ukuran",
+        "XS/S/M/L/XL/custom"
+      ],
+      [
+        8,
+        "Berat pakaian",
+        "Gram/kg, opsional"
+      ],
+      [
+        9,
+        "Jumlah stok",
+        "Angka"
+      ],
+      [
+        10,
+        "Kondisi pakaian",
+        "Baru/baik/perlu perawatan"
+      ],
+      [
+        11,
+        "Harga sewa dasar",
+        "Rupiah"
+      ],
+      [
+        12,
+        "Durasi sewa",
+        "Hari"
+      ],
+      [
+        13,
+        "Deposit",
+        "Rupiah"
+      ],
+      [
+        14,
+        "Biaya keterlambatan",
+        "Rupiah"
+      ],
+      [
+        15,
+        "Kalender ketersediaan",
+        "Kalender"
+      ],
+      [
+        16,
+        "Ketentuan kerusakan",
+        "Teks"
+      ],
+      [
+        17,
+        "Status produk",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "IKLAN": {
+    "sheet_name": "IKLAN",
+    "total_rows": 26,
+    "rows": [
+      [
+        "G. Formulir penjual iklan Bispira"
+      ],
+      [
+        "Iklan hanya dapat dibeli oleh merchant/penjual."
+      ],
+      [
+        "G1. Iklan banner"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Foto produk",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama toko",
+        "Otomatis dari profil merchant"
+      ],
+      [
+        3,
+        "Pesan promosi",
+        "Teks"
+      ],
+      [
+        4,
+        "Harga produk",
+        "Rupiah"
+      ],
+      [
+        5,
+        "Deskripsi iklan",
+        "Teks"
+      ],
+      [
+        6,
+        "Link tujuan",
+        "URL produk/toko"
+      ],
+      [
+        7,
+        "Lokasi penayangan",
+        "Dropdown"
+      ],
+      [
+        8,
+        "Durasi tayang",
+        "1/3/6/12 bulan"
+      ],
+      [
+        9,
+        "Tanggal mulai",
+        "Kalender"
+      ],
+      [
+        10,
+        "Harga dasar iklan",
+        "Rupiah"
+      ],
+      [
+        11,
+        "Status persetujuan",
+        "Otomatis"
+      ],
+      [
+        "G2. Iklan logo merek  Dibuat menu khusus kumpulan logo iklan"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Gambar logo",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama merek",
+        "Teks"
+      ],
+      [
+        3,
+        "Deskripsi merek",
+        "Teks"
+      ],
+      [
+        4,
+        "Link toko/produk",
+        "URL"
+      ],
+      [
+        5,
+        "Lokasi penayangan",
+        "Dropdown"
+      ],
+      [
+        6,
+        "Durasi tayang",
+        "1/3/6/12 bulan"
+      ],
+      [
+        7,
+        "Tanggal mulai",
+        "Kalender"
+      ],
+      [
+        8,
+        "Harga dasar iklan",
+        "Rupiah"
+      ],
+      [
+        9,
+        "Status persetujuan",
+        "Otomatis"
+      ]
+    ]
+  },
+  "DONASI": {
+    "sheet_name": "DONASI",
+    "total_rows": 21,
+    "rows": [
+      [
+        "DONASI "
+      ],
+      [
+        "Kategori: Program yayasan sosial dan yayasan keagamaan."
+      ],
+      [
+        "Karakteristik: Dana dikumpulkan untuk program atau kegiatan tertentu, bukan transaksi jual beli barang biasa."
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Logo yayasan",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama yayasan",
+        "Teks"
+      ],
+      [
+        3,
+        "Dokumen legalitas yayasan",
+        "Unggah file"
+      ],
+      [
+        4,
+        "Nama program donasi",
+        "Teks"
+      ],
+      [
+        5,
+        "Foto program",
+        "Unggah gambar"
+      ],
+      [
+        6,
+        "Video program",
+        "Unggah video"
+      ],
+      [
+        7,
+        "Deskripsi kegiatan",
+        "Teks panjang"
+      ],
+      [
+        8,
+        "Tujuan penggalangan",
+        "Teks"
+      ],
+      [
+        9,
+        "Target dana",
+        "Rupiah"
+      ],
+      [
+        10,
+        "Nominal donasi minimum",
+        "Rupiah"
+      ],
+      [
+        11,
+        "Pilihan nominal donasi",
+        "Pilihan nominal"
+      ],
+      [
+        12,
+        "Donasi nominal bebas",
+        "Ya/tidak"
+      ],
+      [
+        13,
+        "Tanggal mulai",
+        "Kalender"
+      ],
+      [
+        14,
+        "Tanggal berakhir",
+        "Kalender"
+      ],
+      [
+        15,
+        "Rekening terverifikasi",
+        "Data rekening"
+      ],
+      [
+        16,
+        "Laporan penggunaan dana",
+        "Unggah dokumen"
+      ],
+      [
+        17,
+        "Status program",
+        "Aktif/selesai"
+      ]
+    ]
+  },
+  "MICE": {
+    "sheet_name": "MICE",
+    "total_rows": 20,
+    "rows": [
+      [
+        "Formulir MICE dan event"
+      ],
+      [
+        "Merchant/Event Organizer MICE"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Logo penyelenggara",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama event organizer",
+        "Teks"
+      ],
+      [
+        3,
+        "Nama event",
+        "Teks"
+      ],
+      [
+        4,
+        "Poster event",
+        "Unggah gambar"
+      ],
+      [
+        5,
+        "Foto/video event",
+        "Unggah media"
+      ],
+      [
+        6,
+        "Kategori event",
+        "Konser/MICE/kompetisi/wisata"
+      ],
+      [
+        7,
+        "Deskripsi event",
+        "Teks panjang"
+      ],
+      [
+        8,
+        "Lokasi/venue",
+        "Alamat/peta"
+      ],
+      [
+        9,
+        "Tanggal dan waktu",
+        "Kalender"
+      ],
+      [
+        10,
+        "Kategori tiket",
+        "Dropdown"
+      ],
+      [
+        11,
+        "Foto tiket/benefit",
+        "Unggah gambar"
+      ],
+      [
+        12,
+        "Harga dasar tiket",
+        "Rupiah"
+      ],
+      [
+        13,
+        "Kuota tiket",
+        "Angka"
+      ],
+      [
+        14,
+        "Masa penjualan",
+        "Kalender"
+      ],
+      [
+        15,
+        "Ketentuan masuk",
+        "Teks"
+      ],
+      [
+        16,
+        "Kebijakan pembatalan",
+        "Teks"
+      ],
+      [
+        17,
+        "Status event",
+        "Aktif/nonaktif"
+      ]
+    ]
+  },
+  "SERTIFIKASI PROFESI": {
+    "sheet_name": "SERTIFIKASI PROFESI",
+    "total_rows": 42,
+    "rows": [
+      [
+        "Formulir khusus penyelenggara ujian sertifikasi profesi"
+      ],
+      [
+        "Tujuan: Memfasilitasi lembaga penyelenggara ujian sertifikasi profesi, lembaga sertifikasi, asosiasi profesi, atau mitra pelaksana yang memiliki kewenangan dan pengakuan sesuai skema sertifikasinya."
+      ],
+      [
+        "Bagian ini memerlukan verifikasi lebih ketat daripada seminar dan workshop karena berkaitan dengan klaim kompetensi profesional."
+      ],
+      [
+        "No.",
+        "Nama kolom",
+        "Jenis input",
+        "Keterangan"
+      ],
+      [
+        1,
+        "Nama ujian sertifikasi",
+        "Teks",
+        "Nama resmi sertifikasi"
+      ],
+      [
+        2,
+        "Bidang profesi",
+        "Dropdown",
+        "Bidang sertifikasi"
+      ],
+      [
+        3,
+        "Nama lembaga sertifikasi",
+        "Teks",
+        "Lembaga penerbit/penyelenggara"
+      ],
+      [
+        4,
+        "Logo lembaga",
+        "Unggah gambar",
+        "Identitas lembaga"
+      ],
+      [
+        5,
+        "Nomor legalitas",
+        "Teks",
+        "Identitas lembaga"
+      ],
+      [
+        6,
+        "Dokumen kewenangan/akreditasi/pengakuan",
+        "Unggah PDF",
+        "Sesuai skema dan aturan"
+      ],
+      [
+        7,
+        "Nama skema sertifikasi",
+        "Teks",
+        "Nama skema"
+      ],
+      [
+        8,
+        "Kode skema",
+        "Teks",
+        "Jika tersedia"
+      ],
+      [
+        9,
+        "Deskripsi sertifikasi",
+        "Teks panjang",
+        "Ruang lingkup sertifikasi"
+      ],
+      [
+        10,
+        "Unit kompetensi",
+        "Teks/unggah",
+        "Daftar unit kompetensi"
+      ],
+      [
+        11,
+        "Persyaratan calon peserta",
+        "Teks panjang",
+        "Pendidikan, pengalaman, prasyarat"
+      ],
+      [
+        12,
+        "Dokumen persyaratan",
+        "Unggah PDF",
+        "Formulir dan dokumen pendukung"
+      ],
+      [
+        13,
+        "Metode ujian",
+        "Dropdown",
+        "Tulis, praktik, wawancara, CBT, observasi"
+      ],
+      [
+        14,
+        "Mode pelaksanaan",
+        "Dropdown",
+        "Offline/online/hybrid"
+      ],
+      [
+        15,
+        "Tempat ujian",
+        "Alamat/peta",
+        "Jika offline"
+      ],
+      [
+        16,
+        "Platform ujian",
+        "URL/teks",
+        "Jika online"
+      ],
+      [
+        17,
+        "Jadwal ujian",
+        "Kalender",
+        "Tanggal dan sesi"
+      ],
+      [
+        18,
+        "Durasi ujian",
+        "Jam",
+        "Lama ujian"
+      ],
+      [
+        19,
+        "Kuota ujian",
+        "Angka",
+        "Kapasitas"
+      ],
+      [
+        20,
+        "Nama asesor/penguji",
+        "Teks",
+        "Petugas penilai"
+      ],
+      [
+        21,
+        "Kualifikasi asesor",
+        "Teks/unggah",
+        "Dokumen kompetensi"
+      ],
+      [
+        22,
+        "Mekanisme penilaian",
+        "Teks panjang",
+        "Kriteria dan proses"
+      ],
+      [
+        23,
+        "Mekanisme remediasi/ujian ulang",
+        "Teks",
+        "Jika tersedia"
+      ],
+      [
+        24,
+        "Penerbit sertifikat",
+        "Teks",
+        "Lembaga yang berwenang"
+      ],
+      [
+        25,
+        "Bentuk sertifikat",
+        "Dropdown",
+        "Digital/cetak"
+      ],
+      [
+        26,
+        "Masa berlaku sertifikat",
+        "Teks",
+        "Jika berlaku"
+      ],
+      [
+        27,
+        "Harga dasar ujian",
+        "Rupiah",
+        "Harga dari penyelenggara"
+      ],
+      [
+        28,
+        "Kuota penjualan",
+        "Angka",
+        "Jumlah pendaftaran"
+      ],
+      [
+        29,
+        "Masa pendaftaran",
+        "Kalender",
+        "Awal dan akhir"
+      ],
+      [
+        30,
+        "Ketentuan pembatalan/refund",
+        "Teks panjang",
+        "Aturan peserta"
+      ],
+      [
+        31,
+        "Dokumen panduan ujian",
+        "Unggah PDF",
+        "Petunjuk pelaksanaan"
+      ],
+      [
+        "Pilihan paket pendaftaran yang dapat dibuat penyelenggara:"
+      ],
+      [
+        null,
+        "Paket",
+        "Komponen yang dapat dicantumkan"
+      ],
+      [
+        1,
+        "Ujian sertifikasi",
+        "Biaya pelaksanaan asesmen"
+      ],
+      [
+        2,
+        "Ujian + bahan persiapan",
+        "Asesmen dan bahan belajar"
+      ],
+      [
+        3,
+        "Pelatihan + ujian",
+        "Pelatihan dan asesmen"
+      ],
+      [
+        4,
+        "Ujian ulang",
+        "Biaya asesmen ulang, jika diperbolehkan"
+      ],
+      [
+        "Penting: Bispira perlu membedakan penyelenggara ujian, lembaga sertifikasi yang berwenang, asesor, dan penerbit sertifikat. Tidak semua EO atau lembaga pelatihan berwenang menerbitkan sertifikat kompetensi profesi. Superadmin harus memverifikasi klaim kewenangan tersebut sebelum kegiatan dipublikasikan."
+      ]
+    ]
+  },
+  "BISPIRA EVENT KOMPETISI DAERAH ": {
+    "sheet_name": "BISPIRA EVENT KOMPETISI DAERAH ",
+    "total_rows": 24,
+    "rows": [
+      [
+        "I2. Bispira Event Daerah"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Logo penyelenggara",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama penyelenggara",
+        "Teks"
+      ],
+      [
+        3,
+        "Nama event",
+        "Teks"
+      ],
+      [
+        4,
+        "Poster kegiatan",
+        "Unggah gambar"
+      ],
+      [
+        5,
+        "Foto kegiatan",
+        "Unggah gambar"
+      ],
+      [
+        6,
+        "Tingkat event",
+        "Kabupaten/kota/provinsi"
+      ],
+      [
+        7,
+        "Kategori kompetisi",
+        "Pendidikan/kesenian/kebudayaan"
+      ],
+      [
+        8,
+        "Metode kompetisi",
+        "Offline/online/e-voting"
+      ],
+      [
+        9,
+        "Lokasi kegiatan",
+        "Alamat/peta"
+      ],
+      [
+        10,
+        "Tanggal pendaftaran",
+        "Kalender"
+      ],
+      [
+        11,
+        "Tanggal pelaksanaan",
+        "Kalender"
+      ],
+      [
+        12,
+        "Syarat peserta",
+        "Teks"
+      ],
+      [
+        13,
+        "Kategori tiket penonton",
+        "Teks"
+      ],
+      [
+        14,
+        "Harga dasar tiket penonton",
+        "Rupiah"
+      ],
+      [
+        15,
+        "Kuota penonton",
+        "Angka"
+      ],
+      [
+        16,
+        "Kategori tiket peserta",
+        "Teks"
+      ],
+      [
+        17,
+        "Harga dasar tiket peserta",
+        "Rupiah"
+      ],
+      [
+        18,
+        "Kuota peserta",
+        "Angka"
+      ],
+      [
+        19,
+        "Sistem penilaian",
+        "Teks"
+      ],
+      [
+        20,
+        "Sistem e-voting",
+        "Ya/tidak"
+      ],
+      [
+        21,
+        "Hadiah dan sertifikat",
+        "Teks"
+      ],
+      [
+        22,
+        "Jadwal pengumuman",
+        "Kalender"
+      ]
+    ]
+  },
+  "BISPIRA EVENT KOMPETISI PUSAT": {
+    "sheet_name": "BISPIRA EVENT KOMPETISI PUSAT",
+    "total_rows": 24,
+    "rows": [
+      [
+        "Bispira Event Pusat/Nasional"
+      ],
+      [
+        "No.",
+        "Kolom formulir",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Logo penyelenggara",
+        "Unggah gambar"
+      ],
+      [
+        2,
+        "Nama penyelenggara",
+        "Teks"
+      ],
+      [
+        3,
+        "Nama event nasional",
+        "Teks"
+      ],
+      [
+        4,
+        "Poster event",
+        "Unggah gambar"
+      ],
+      [
+        5,
+        "Deskripsi kegiatan",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Tingkat kegiatan",
+        "Nasional"
+      ],
+      [
+        7,
+        "Bidang kompetisi",
+        "Pendidikan/kesenian/kebudayaan"
+      ],
+      [
+        8,
+        "Metode",
+        "Offline/online/e-voting"
+      ],
+      [
+        9,
+        "Lokasi atau tautan online",
+        "Alamat/URL"
+      ],
+      [
+        10,
+        "Jadwal pendaftaran",
+        "Kalender"
+      ],
+      [
+        11,
+        "Jadwal kompetisi",
+        "Kalender"
+      ],
+      [
+        12,
+        "Persyaratan peserta",
+        "Teks"
+      ],
+      [
+        13,
+        "Tiket penonton",
+        "Harga dan kuota"
+      ],
+      [
+        14,
+        "Tiket peserta",
+        "Harga dan kuota"
+      ],
+      [
+        15,
+        "Sistem unggah karya",
+        "File/URL"
+      ],
+      [
+        16,
+        "Nomor peserta",
+        "Otomatis"
+      ],
+      [
+        17,
+        "Verifikasi peserta",
+        "OTP/QR"
+      ],
+      [
+        18,
+        "Sistem penilaian",
+        "Teks"
+      ],
+      [
+        19,
+        "Sistem e-voting",
+        "Ya/tidak"
+      ],
+      [
+        20,
+        "Sertifikat dan hadiah",
+        "Teks"
+      ],
+      [
+        21,
+        "Pengumuman hasil",
+        "Kalender"
+      ],
+      [
+        "Ketentuan tiket: Tiket penonton dan tiket peserta lomba wajib menjadi dua produk yang berbeda. Keduanya memiliki harga, kuota, persyaratan, barcode, dan status penggunaan masing-masing."
+      ]
+    ]
+  },
+  "E-VOTING BISPIRA DAERAH": {
+    "sheet_name": "E-VOTING BISPIRA DAERAH",
+    "total_rows": 56,
+    "rows": [
+      [
+        "Formulir khusus penyelenggara e-voting"
+      ],
+      [
+        "Tujuan: Memfasilitasi penyelenggara pemilihan atau pemungutan suara digital, baik untuk kompetisi, penghargaan, pemilihan organisasi, maupun kegiatan publik."
+      ],
+      [
+        "No.",
+        "Nama kolom",
+        "Jenis input",
+        "Keterangan"
+      ],
+      [
+        1,
+        "Nama kegiatan e-voting",
+        "Teks",
+        "Nama resmi"
+      ],
+      [
+        2,
+        "Logo kegiatan",
+        "Unggah gambar",
+        "Identitas kegiatan"
+      ],
+      [
+        3,
+        "Poster e-voting",
+        "Unggah gambar",
+        "Promosi"
+      ],
+      [
+        4,
+        "Deskripsi kegiatan",
+        "Teks panjang",
+        "Penjelasan"
+      ],
+      [
+        5,
+        "Tujuan pemungutan suara",
+        "Teks panjang",
+        "Tujuan e-voting"
+      ],
+      [
+        6,
+        "Jenis e-voting",
+        "Dropdown",
+        "Kompetisi, penghargaan, pemilihan organisasi, lainnya"
+      ],
+      [
+        7,
+        "Penyelenggara",
+        "Otomatis",
+        "Profil penyelenggara"
+      ],
+      [
+        8,
+        "Wilayah pemilihan",
+        "Dropdown",
+        "Lokal, kabupaten/kota, provinsi, nasional"
+      ],
+      [
+        9,
+        "Kategori pemilihan",
+        "Teks",
+        "Contoh: kategori peserta terbaik"
+      ],
+      [
+        10,
+        "Foto kandidat/nomine",
+        "Unggah gambar",
+        "Satu foto per kandidat"
+      ],
+      [
+        11,
+        "Nama kandidat/nomine",
+        "Teks",
+        "Nama yang ditampilkan"
+      ],
+      [
+        12,
+        "Profil kandidat",
+        "Teks panjang",
+        "Deskripsi kandidat"
+      ],
+      [
+        13,
+        "Nomor urut kandidat",
+        "Angka",
+        "Otomatis/manual"
+      ],
+      [
+        14,
+        "Jumlah kandidat",
+        "Angka",
+        "Total kandidat"
+      ],
+      [
+        15,
+        "Foto pendukung kandidat",
+        "Unggah gambar",
+        "Opsional"
+      ],
+      [
+        16,
+        "Video kandidat",
+        "Unggah video",
+        "Opsional"
+      ],
+      [
+        17,
+        "Jadwal mulai voting",
+        "Kalender/jam",
+        "Waktu mulai"
+      ],
+      [
+        18,
+        "Jadwal tutup voting",
+        "Kalender/jam",
+        "Waktu berakhir"
+      ],
+      [
+        19,
+        "Metode hak suara",
+        "Dropdown",
+        "Satu akun satu suara, bobot suara, atau metode lain"
+      ],
+      [
+        20,
+        "Persyaratan pemilih",
+        "Teks panjang",
+        "Ketentuan pemilih"
+      ],
+      [
+        21,
+        "Mekanisme verifikasi",
+        "Dropdown",
+        "OTP, akun terverifikasi, kode unik"
+      ],
+      [
+        22,
+        "Batas suara per pemilih",
+        "Angka",
+        "Sesuai aturan"
+      ],
+      [
+        23,
+        "Gratis/berbayar",
+        "Dropdown",
+        "Pengaturan model kegiatan"
+      ],
+      [
+        24,
+        "Harga dasar akses voting",
+        "Rupiah",
+        "Jika berbayar"
+      ],
+      [
+        25,
+        "Kuota akses",
+        "Angka",
+        "Jika dibatasi"
+      ],
+      [
+        26,
+        "Metode penghitungan",
+        "Dropdown",
+        "Otomatis/manual terverifikasi"
+      ],
+      [
+        27,
+        "Jadwal pengumuman",
+        "Kalender",
+        "Waktu hasil"
+      ],
+      [
+        28,
+        "Metode publikasi hasil",
+        "Dropdown",
+        "Real-time/akhir periode"
+      ],
+      [
+        29,
+        "Mekanisme keberatan",
+        "Teks panjang",
+        "Penanganan sengketa"
+      ],
+      [
+        30,
+        "Dokumen aturan voting",
+        "Unggah PDF",
+        "Peraturan resmi"
+      ],
+      [
+        "F1. Formulir pengelolaan kandidat/nomine"
+      ],
+      [
+        "Penyelenggara dapat menambahkan kandidat sebanyak yang diperlukan."
+      ],
+      [
+        "No.",
+        "Kolom kandidat",
+        "Jenis input"
+      ],
+      [
+        1,
+        "Nama kandidat",
+        "Teks"
+      ],
+      [
+        2,
+        "Foto kandidat",
+        "Unggah gambar"
+      ],
+      [
+        3,
+        "Nomor urut",
+        "Angka"
+      ],
+      [
+        4,
+        "Kategori kandidat",
+        "Dropdown"
+      ],
+      [
+        5,
+        "Deskripsi profil",
+        "Teks panjang"
+      ],
+      [
+        6,
+        "Video profil",
+        "Unggah video"
+      ],
+      [
+        7,
+        "Status kandidat",
+        "Aktif/nonaktif"
+      ],
+      [
+        "F2. Pengaturan keamanan e-voting"
+      ],
+      [
+        "Fitur yang perlu disediakan superadmin:"
+      ],
+      [
+        "Verifikasi identitas pemilih."
+      ],
+      [
+        "Pembatasan jumlah suara."
+      ],
+      [
+        "Pencegahan suara ganda."
+      ],
+      [
+        "Catatan waktu dan aktivitas voting."
+      ],
+      [
+        "Pengamanan perubahan data kandidat."
+      ],
+      [
+        "Audit log administrator."
+      ],
+      [
+        "Penguncian hasil setelah periode berakhir."
+      ],
+      [
+        "Rekapitulasi dan ekspor hasil."
+      ],
+      [
+        "Mekanisme keberatan dan pemeriksaan suara."
+      ],
+      [
+        "Perlindungan data pribadi pemilih."
+      ],
+      [
+        "Untuk pemilihan yang berdampak hukum atau menentukan jabatan resmi, Bispira perlu melakukan kajian kepatuhan dan keamanan yang lebih ketat. Sistem e-voting untuk kompetisi publik tidak boleh otomatis dianggap memenuhi standar pemilihan resmi."
+      ]
+    ]
+  },
+  "E-VOTING BISPIRA PUSAT": {
+    "sheet_name": "E-VOTING BISPIRA PUSAT",
+    "total_rows": 228,
+    "rows": [
+      [
+        null,
+        "FORMULIR PENGELOLAAN EVENT E-VOTING"
+      ],
+      [
+        null,
+        "SUPERADMIN BISPIRA HYPERLOCAL ECOSYSTEM"
+      ],
+      [
+        null,
+        "PT Sitekun Academy Perdasa"
+      ],
+      [
+        null,
+        "A. INFORMASI EVENT"
+      ],
+      [
+        null,
+        "1. ID Event: (otomatis oleh sistem)"
+      ],
+      [
+        null,
+        "2. Nama event/kompetisi:"
+      ],
+      [
+        null,
+        "3. Kategori event:"
+      ],
+      [
+        null,
+        "a.",
+        "Pemilihan Pemuda-Pemudi Daerah"
+      ],
+      [
+        null,
+        "b.",
+        "Pemilihan Putra-Putri Daerah"
+      ],
+      [
+        null,
+        "c",
+        "Duta Wisata"
+      ],
+      [
+        null,
+        "d",
+        "Duta Pendidikan"
+      ],
+      [
+        null,
+        "e",
+        "Duta Budaya"
+      ],
+      [
+        null,
+        "f",
+        "Kompetisi popularitas sekolah/kampus"
+      ],
+      [
+        null,
+        "g",
+        "Kompetisi popularitas komunitas"
+      ],
+      [
+        null,
+        "h",
+        "Kreator favorit"
+      ],
+      [
+        null,
+        "i",
+        "Artis/penampil favorit"
+      ],
+      [
+        null,
+        "j",
+        "Kompetisi popularitas lainnya"
+      ],
+      [
+        null,
+        "4. Tingkat kompetisi:"
+      ],
+      [
+        null,
+        "Desa/Kelurahan"
+      ],
+      [
+        null,
+        "Kecamatan"
+      ],
+      [
+        null,
+        "Kabupaten/Kota"
+      ],
+      [
+        null,
+        "Provinsi"
+      ],
+      [
+        null,
+        "Nasional"
+      ],
+      [
+        null,
+        "Internasional"
+      ],
+      [
+        null,
+        "5. Logo event:"
+      ],
+      [
+        null,
+        "6. Poster/banner event:"
+      ],
+      [
+        null,
+        "7. Tema event:"
+      ],
+      [
+        null,
+        "8. Deskripsi event:"
+      ],
+      [
+        null,
+        "9. Tujuan event:"
+      ],
+      [
+        null,
+        "10. Lokasi penyelenggaraan:"
+      ],
+      [
+        null,
+        "11. Penyelenggara:"
+      ],
+      [
+        null,
+        "12. Penanggung jawab:"
+      ],
+      [
+        null,
+        "13. Kontak penyelenggara:"
+      ],
+      [
+        null,
+        "B. PENGATURAN PENYELENGGARA"
+      ],
+      [
+        null,
+        "1. ID Mitra/Penyelenggara:"
+      ],
+      [
+        null,
+        "2. Nama organisasi/EO:"
+      ],
+      [
+        null,
+        "3. Nama penanggung jawab:"
+      ],
+      [
+        null,
+        "4. Nomor HP:"
+      ],
+      [
+        null,
+        "5. Email:"
+      ],
+      [
+        null,
+        "6. Dokumen legalitas:"
+      ],
+      [
+        null,
+        "7. Status verifikasi:"
+      ],
+      [
+        null,
+        "Belum diperiksa"
+      ],
+      [
+        null,
+        "Terverifikasi"
+      ],
+      [
+        null,
+        "Perlu perbaikan"
+      ],
+      [
+        null,
+        "Ditolak"
+      ],
+      [
+        null,
+        "C. PENGATURAN KANDIDAT/PESERTA"
+      ],
+      [
+        null,
+        "1. Jumlah kandidat:"
+      ],
+      [
+        null,
+        "2. Kategori kandidat:"
+      ],
+      [
+        null,
+        "Putra"
+      ],
+      [
+        null,
+        "Putri"
+      ],
+      [
+        null,
+        "Campuran"
+      ],
+      [
+        null,
+        "Kategori lainnya"
+      ],
+      [
+        null,
+        "3. Sistem penomoran kandidat:"
+      ],
+      [
+        null,
+        "4. Data setiap kandidat:"
+      ],
+      [
+        null,
+        "Nomor urut"
+      ],
+      [
+        null,
+        "Nama lengkap"
+      ],
+      [
+        null,
+        "Nama publik"
+      ],
+      [
+        null,
+        "Asal daerah"
+      ],
+      [
+        null,
+        "Foto profil"
+      ],
+      [
+        null,
+        "Video profil"
+      ],
+      [
+        null,
+        "Deskripsi kandidat"
+      ],
+      [
+        null,
+        "Persetujuan penggunaan foto/video"
+      ],
+      [
+        null,
+        "Status kandidat"
+      ],
+      [
+        null,
+        "5. Ketentuan penambahan kandidat:"
+      ],
+      [
+        null,
+        "6. Ketentuan penggantian atau diskualifikasi kandidat:"
+      ],
+      [
+        null,
+        "D. PENGATURAN MEKANISME E-VOTING"
+      ],
+      [
+        null,
+        "1. Jenis voting:",
+        null,
+        "Voting berbayar"
+      ],
+      [
+        null,
+        "2. Tujuan voting:",
+        null,
+        "People's Choice Award/Juara Favorit"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Kandidat Terpopuler"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Penghargaan popularitas lainnya"
+      ],
+      [
+        null,
+        "3. Mekanisme pemberian suara:",
+        null,
+        "Pembelian paket vote"
+      ],
+      [
+        null,
+        "4. Alokasi paket:",
+        null,
+        "Seluruh vote dalam satu paket diberikan kepada satu kandidat."
+      ],
+      [
+        null,
+        null,
+        null,
+        "Pembelian beberapa paket diperbolehkan."
+      ],
+      [
+        null,
+        null,
+        null,
+        "Pembelian untuk kandidat berbeda diperbolehkan melalui transaksi terpisah."
+      ],
+      [
+        null,
+        "5. Metode verifikasi pemilih:",
+        null,
+        "Akun Bispira"
+      ],
+      [
+        null,
+        null,
+        null,
+        "OTP nomor HP"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Verifikasi identitas"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Kode undangan"
+      ],
+      [
+        null,
+        "6. Batas pembelian:",
+        null,
+        "Maksimal paket per akun:"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Maksimal vote per akun:"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Maksimal transaksi per hari:"
+      ],
+      [
+        null,
+        "7. Periode voting:",
+        null,
+        "Tanggal mulai:"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Jam mulai:"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Tanggal selesai:"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Jam selesai:"
+      ],
+      [
+        null,
+        "8. Hasil voting:",
+        null,
+        "Ditampilkan secara langsung"
+      ],
+      [
+        null,
+        "E. PENGATURAN PAKET DAN HARGA VOTE"
+      ],
+      [
+        null,
+        "No.",
+        "Nama Paket",
+        "Jumlah Vote",
+        "Harga"
+      ],
+      [
+        null,
+        1,
+        "Basic",
+        10,
+        "Rp.5000"
+      ],
+      [
+        null,
+        2,
+        "Silver",
+        25,
+        "Rp.12.500"
+      ],
+      [
+        null,
+        3,
+        "Gold",
+        50,
+        "Rp. 25.000"
+      ],
+      [
+        null,
+        4,
+        "Platinum",
+        100,
+        "Rp.50.000"
+      ],
+      [
+        null,
+        5,
+        "Custom",
+        null,
+        "Rp..."
+      ],
+      [
+        null,
+        "Pengaturan tambahan:"
+      ],
+      [
+        null,
+        "1. Harga paket ditetapkan oleh penyelenggara dan disetujui Superadmin."
+      ],
+      [
+        null,
+        "2. Masa berlaku paket: selama periode voting atau sesuai ketentuan event."
+      ],
+      [
+        null,
+        "3. Vote hanya dikreditkan setelah pembayaran terverifikasi."
+      ],
+      [
+        null,
+        "4. Setiap transaksi memiliki ID unik."
+      ],
+      [
+        null,
+        "5. Satu transaksi hanya dapat menghasilkan vote satu kali."
+      ],
+      [
+        null,
+        "6. Perubahan harga setelah event diterbitkan harus melalui persetujuan dan pemberitahuan kepada pengguna."
+      ],
+      [
+        null,
+        "F. PENGATURAN PEMBAYARAN DAN PENDAPATAN"
+      ],
+      [
+        null,
+        "1. Metode pembayaran:",
+        null,
+        "Transfer bank"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Mobile banking"
+      ],
+      [
+        null,
+        null,
+        null,
+        "QRIS"
+      ],
+      [
+        null,
+        "2. Nama rekening penyelenggara:"
+      ],
+      [
+        null,
+        "3. Nama bank:"
+      ],
+      [
+        null,
+        "4. Nomor rekening:"
+      ],
+      [
+        null,
+        "5. Skema pendapatan:",
+        null,
+        "Persentase pembagian hasil"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Biaya layanan tetap"
+      ],
+      [
+        null,
+        null,
+        null,
+        "Skema kerja sama khusus"
+      ],
+      [
+        null,
+        "6. Persentase/besaran hak Bispira:"
+      ],
+      [
+        null,
+        "7. Persentase/besaran hak penyelenggara:"
+      ],
+      [
+        null,
+        "8. Biaya transaksi/payment gateway:"
+      ],
+      [
+        null,
+        "9. Ketentuan refund:"
+      ],
+      [
+        null,
+        "10. Jadwal settlement:",
+        null,
+        null,
+        "Senin"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        "Kamis"
+      ],
+      [
+        null,
+        "G. PENGATURAN PENILAIAN DAN HASIL"
+      ],
+      [
+        null,
+        "1. Voting digunakan untuk:"
+      ],
+      [
+        null,
+        "Menentukan Juara Favorit"
+      ],
+      [
+        null,
+        "Menentukan Kandidat Terpopuler"
+      ],
+      [
+        null,
+        "Menjadi komponen penilaian juara utama"
+      ],
+      [
+        null,
+        "2. Penilaian juri:"
+      ],
+      [
+        null,
+        "Ada"
+      ],
+      [
+        null,
+        "Tidak ada"
+      ],
+      [
+        null,
+        "3. Jika penilaian digabung:"
+      ],
+      [
+        null,
+        "Bobot voting: ...%"
+      ],
+      [
+        null,
+        "Bobot juri: ...%"
+      ],
+      [
+        null,
+        "4. Nama kategori penghargaan:"
+      ],
+      [
+        null,
+        "5. Tanggal pengumuman hasil:"
+      ],
+      [
+        null,
+        "6. Mekanisme keberatan:"
+      ],
+      [
+        null,
+        "7. Ketentuan apabila terjadi hasil seri:"
+      ],
+      [
+        null,
+        "8. Dokumen resmi penetapan pemenang:"
+      ],
+      [
+        null,
+        "H. PENGATURAN KEAMANAN DAN AUDIT"
+      ],
+      [
+        null,
+        "1. Sistem mencegah transaksi ganda."
+      ],
+      [
+        null,
+        "2. Sistem mencegah vote ganda akibat notifikasi pembayaran berulang."
+      ],
+      [
+        null,
+        "3. Sistem menyimpan waktu dan ID transaksi."
+      ],
+      [
+        null,
+        "4. Sistem menyimpan riwayat perubahan data kandidat."
+      ],
+      [
+        null,
+        "5. Sistem mencatat aktivitas administrator."
+      ],
+      [
+        null,
+        "6. Sistem menyediakan rekonsiliasi pembayaran dan jumlah vote."
+      ],
+      [
+        null,
+        "7. Sistem menyediakan mekanisme pembekuan event apabila ditemukan indikasi manipulasi."
+      ],
+      [
+        null,
+        "8. Sistem menyediakan laporan hasil akhir dan riwayat koreksi."
+      ],
+      [
+        null,
+        "I. PUBLIKASI DAN STATUS EVENT"
+      ],
+      [
+        null,
+        "Status event:"
+      ],
+      [
+        null,
+        "Draft"
+      ],
+      [
+        null,
+        "Menunggu verifikasi"
+      ],
+      [
+        null,
+        "Perlu perbaikan"
+      ],
+      [
+        null,
+        "Disetujui"
+      ],
+      [
+        null,
+        "Terjadwal"
+      ],
+      [
+        null,
+        "Sedang berlangsung"
+      ],
+      [
+        null,
+        "Ditangguhkan"
+      ],
+      [
+        null,
+        "Selesai"
+      ],
+      [
+        null,
+        "Dibatalkan"
+      ],
+      [
+        null,
+        "Pengaturan publikasi:"
+      ],
+      [
+        null,
+        "Tampilkan di halaman utama Bispira"
+      ],
+      [
+        null,
+        "Tampilkan di kategori event daerah"
+      ],
+      [
+        null,
+        "Tampilkan di halaman e-voting"
+      ],
+      [
+        null,
+        "Izinkan pembagian tautan event"
+      ],
+      [
+        null,
+        "Aktifkan notifikasi kepada pengguna"
+      ],
+      [
+        null,
+        "J. PERSETUJUAN SUPERADMIN"
+      ],
+      [
+        null,
+        "Saya menyatakan bahwa event telah diperiksa berdasarkan kelengkapan identitas penyelenggara, aturan kompetisi, data kandidat, mekanisme voting, harga paket, pembayaran, keamanan sistem, dan ketentuan yang berlaku."
+      ],
+      [
+        null,
+        "Nama Superadmin:"
+      ],
+      [
+        null,
+        "ID Administrator:"
+      ],
+      [
+        null,
+        "Tanggal pemeriksaan:"
+      ],
+      [
+        null,
+        "Catatan:"
+      ],
+      [
+        null,
+        "Status keputusan:"
+      ],
+      [
+        null,
+        "Disetujui untuk diterbitkan"
+      ],
+      [
+        null,
+        "Dikembalikan untuk perbaikan"
+      ],
+      [
+        null,
+        "Ditolak"
+      ],
+      [
+        null,
+        "SUPERADMIN —  BISPIRA PUSAT PENYELENGGARA E-VOTING "
+      ],
+      [
+        null,
+        1,
+        "Dashboard E-Voting",
+        null,
+        "Ringkasan seluruh event, transaksi, dan jumlah vote."
+      ],
+      [
+        null,
+        2,
+        "Manajemen Penyelenggara",
+        null,
+        "Verifikasi dan pengelolaan mitra penyelenggara."
+      ],
+      [
+        null,
+        3,
+        "Manajemen Event",
+        null,
+        "Membuat, mengedit, menyetujui, dan menerbitkan event."
+      ],
+      [
+        null,
+        4,
+        "Manajemen Kandidat",
+        null,
+        "Menambah, memeriksa, mengubah, dan menonaktifkan kandidat."
+      ],
+      [
+        null,
+        5,
+        "Paket dan Harga Vote",
+        null,
+        "Mengatur jumlah vote, harga, dan batas pembelian."
+      ],
+      [
+        null,
+        6,
+        "Transaksi dan Pembayaran",
+        null,
+        "Memeriksa pembayaran, refund, dan rekonsiliasi."
+      ],
+      [
+        null,
+        7,
+        "Monitoring Voting",
+        null,
+        "Memantau perolehan vote secara real time."
+      ],
+      [
+        null,
+        8,
+        "Hasil dan Pemenang",
+        null,
+        "Rekapitulasi, validasi, dan penguncian hasil."
+      ],
+      [
+        null,
+        9,
+        "Settlement",
+        null,
+        "Mengelola pencairan dana kepada penyelenggara."
+      ],
+      [
+        null,
+        10,
+        "Audit dan Laporan",
+        null,
+        "Riwayat transaksi, perubahan, dan aktivitas admin."
+      ],
+      [
+        null,
+        "2. Contoh alur kerja Superadmin"
+      ],
+      [
+        null,
+        "1. Menerima pengajuan event",
+        null,
+        null,
+        null,
+        "Penyelenggara mengajukan event e-voting."
+      ],
+      [
+        null,
+        "2. Memverifikasi penyelenggara",
+        null,
+        null,
+        null,
+        "Memeriksa identitas, legalitas, dan kewenangan penyelenggara."
+      ],
+      [
+        null,
+        "3. Membuat event",
+        null,
+        null,
+        null,
+        "Superadmin memasukkan data event dan mengatur kategori."
+      ],
+      [
+        null,
+        "4. Mengelola kandidat",
+        null,
+        null,
+        null,
+        "Memeriksa data, foto, profil, dan persetujuan kandidat."
+      ],
+      [
+        null,
+        "5. Menentukan paket vote",
+        null,
+        null,
+        null,
+        "Memasukkan harga dan jumlah vote sesuai kesepakatan."
+      ],
+      [
+        null,
+        "6. Menguji sistem",
+        null,
+        null,
+        null,
+        "Memeriksa transaksi uji, perhitungan vote, keamanan, dan tampilan."
+      ],
+      [
+        null,
+        "7. Menerbitkan event",
+        null,
+        null,
+        null,
+        "Event tampil di aplikasi dan website Bispira."
+      ],
+      [
+        null,
+        "8. Mengawasi dan menutup voting",
+        null,
+        null,
+        null,
+        "Memantau transaksi, mengunci voting, mengaudit, dan menerbitkan hasil."
+      ],
+      [
+        null,
+        "9. Menyelesaikan settlement",
+        null,
+        null,
+        null,
+        "Memproses hak penyelenggara sesuai perjanjian dan ketentuan pencairan."
+      ],
+      [
+        null,
+        "3. Rekomendasi desain database"
+      ],
+      [
+        null,
+        "Agar sistem tidak bercampur dengan modul MICE, merchant, dan driver, saya menyarankan tabel khusus:"
+      ],
+      [
+        null,
+        "Tabel database",
+        null,
+        "Fungsi"
+      ],
+      [
+        null,
+        "evoting_events",
+        null,
+        "Data event"
+      ],
+      [
+        null,
+        "evoting_organizers",
+        null,
+        "Data penyelenggara"
+      ],
+      [
+        null,
+        "evoting_candidates",
+        null,
+        "Data kandidat"
+      ],
+      [
+        null,
+        "evoting_categories",
+        null,
+        "Kategori voting"
+      ],
+      [
+        null,
+        "evoting_packages",
+        null,
+        "Paket dan harga vote"
+      ],
+      [
+        null,
+        "evoting_orders",
+        null,
+        "Pesanan paket vote"
+      ],
+      [
+        null,
+        "evoting_payments",
+        null,
+        "Pembayaran"
+      ],
+      [
+        null,
+        "evoting_votes",
+        null,
+        "Catatan suara yang masuk"
+      ],
+      [
+        null,
+        "evoting_results",
+        null,
+        "Rekap hasil"
+      ],
+      [
+        null,
+        "evoting_audit_logs",
+        null,
+        "Riwayat aktivitas"
+      ],
+      [
+        null,
+        "evoting_settlements",
+        null,
+        "Pencairan dana"
+      ],
+      [
+        null,
+        "Aturan teknis paling penting: setiap pembayaran sukses harus diproses secara idempoten, yaitu satu transaksi hanya boleh menghasilkan alokasi vote satu kali. Simpan jumlah paket, jumlah vote, kandidat tujuan, nilai pembayaran, status, dan ID transaksi dalam catatan yang saling terhubung."
+      ],
+      [
+        null,
+        "4. Hal yang harus dikunci oleh Superadmin"
+      ],
+      [
+        null,
+        "Ada tiga keputusan bisnis yang sebaiknya tidak boleh diubah penyelenggara sendiri setelah event dipublikasikan:"
+      ],
+      [
+        null,
+        "1. Harga dan jumlah vote setiap paket."
+      ],
+      [
+        null,
+        "2. Periode mulai dan berakhirnya voting."
+      ],
+      [
+        null,
+        "3. Rumus penentuan pemenang dan bobot penilaian."
+      ],
+      [
+        null,
+        "Perubahan hanya dapat dilakukan dengan persetujuan Superadmin, pencatatan audit, dan pemberitahuan kepada pengguna."
+      ],
+      [
+        null,
+        "Rekomendasi akhir: gunakan satu modul Superadmin E-Voting yang dapat membuat banyak event, sedangkan setiap event memiliki pengaturan kandidat, kategori, paket vote, harga, periode, pembayaran, dan hasilnya sendiri. Dengan demikian, satu sistem Bispira dapat menangani kompetisi Pemuda-Pemudi Daerah, Putra-Putri Daerah, Duta Wisata, Duta Pendidikan, dan berbagai kompetisi popularitas lainnya."
+      ],
+      [
+        null,
+        "1. Dua model penyelenggaraan E-Voting Bispira"
+      ],
+      [
+        null,
+        "Model 1 — Event milik Bispira Pusat"
+      ],
+      [
+        null,
+        "Bispira sebagai penyelenggara"
+      ],
+      [
+        null,
+        "EO Bispira membuat kompetisi."
+      ],
+      [
+        null,
+        "Superadmin membuat event."
+      ],
+      [
+        null,
+        "EO Bispira mengelola kandidat dan peserta."
+      ],
+      [
+        null,
+        "Bispira menetapkan paket dan harga vote."
+      ],
+      [
+        null,
+        "Bispira mengelola transaksi dan voting."
+      ],
+      [
+        null,
+        "EO Bispira mengumumkan pemenang."
+      ],
+      [
+        null,
+        "Model 2 — Event milik mitra Bispira Daerah"
+      ],
+      [
+        null,
+        "Bispira sebagai penyedia platform"
+      ],
+      [
+        null,
+        "EO atau organisasi mendaftar."
+      ],
+      [
+        null,
+        "Superadmin memverifikasi penyelenggara."
+      ],
+      [
+        null,
+        "Mitra membuat atau mengajukan event."
+      ],
+      [
+        null,
+        "Bispira menyediakan sistem e-voting."
+      ],
+      [
+        null,
+        "Penyelenggara mengelola kompetisi."
+      ],
+      [
+        null,
+        "Bispira mengelola teknologi dan transaksi sesuai perjanjian."
+      ]
+    ]
+  },
+  "SISTEM BAYAR": {
+    "sheet_name": "SISTEM BAYAR",
+    "total_rows": 54,
+    "rows": [
+      [
+        "Sistem pembayaran, QR dinamis, barcode, dan escrow"
+      ],
+      [
+        null,
+        "1. Metode pembayaran"
+      ],
+      [
+        null,
+        "Kategori",
+        "Transfer/ATM",
+        "M-Banking",
+        "QRIS",
+        "Tunai kepada driver",
+        "SALDO WALLET DRIVER"
+      ],
+      [
+        null,
+        "Food/Fresh Fruit",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Ya",
+        "potong saldo driver"
+      ],
+      [
+        null,
+        "Sembako",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Ya",
+        "potong saldo driver"
+      ],
+      [
+        null,
+        "Apotek",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Ya",
+        "potong saldo driver"
+      ],
+      [
+        null,
+        "Jasa transportasi",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Ya",
+        "potong saldo driver"
+      ],
+      [
+        null,
+        "Iklan",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Donasi",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Properti",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Kesehatan",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Service/teknisi",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Pendidikan/les privat",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Entertainment",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "MICE/event",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        null,
+        "Bispira event daerah/pusat",
+        "Ya",
+        "Ya",
+        "Ya",
+        "Tidak"
+      ],
+      [
+        2,
+        "Dynamic QR Code dan barcode"
+      ],
+      [
+        "No.",
+        "Jenis kode",
+        "Fungsi"
+      ],
+      [
+        1,
+        "QR pembayaran",
+        "Mengidentifikasi pembayaran transaksi"
+      ],
+      [
+        2,
+        "QR merchant",
+        "Identitas toko/merchant"
+      ],
+      [
+        3,
+        "Barcode produk",
+        "Identitas produk"
+      ],
+      [
+        4,
+        "QR pengambilan pesanan",
+        "Validasi barang diambil"
+      ],
+      [
+        5,
+        "QR pengantaran",
+        "Validasi barang diterima"
+      ],
+      [
+        6,
+        "Barcode tiket penonton",
+        "Validasi penonton masuk"
+      ],
+      [
+        7,
+        "Barcode tiket peserta",
+        "Validasi peserta lomba"
+      ],
+      [
+        8,
+        "QR penyelesaian jasa",
+        "Bukti layanan selesai"
+      ],
+      [
+        9,
+        "QR donasi",
+        "Identifikasi program donasi"
+      ],
+      [
+        3,
+        "Rekber digital dan escrow"
+      ],
+      [
+        null,
+        "Alur escrow Bispira"
+      ],
+      [
+        null,
+        "1. Pembeli melakukan pembayaran"
+      ],
+      [
+        null,
+        "Dana dibayar melalui kanal pembayaran yang tersedia."
+      ],
+      [
+        null,
+        "2. Dana diverifikasi"
+      ],
+      [
+        null,
+        "Sistem memeriksa status pembayaran dan menyimpan pencatatan dana dalam mekanisme escrow/penampungan yang sah."
+      ],
+      [
+        null,
+        "3. Merchant atau penyedia jasa menyelesaikan pesanan"
+      ],
+      [
+        null,
+        "Produk diantar, jasa dilaksanakan, atau event diselenggarakan."
+      ],
+      [
+        null,
+        "4. Pembeli atau sistem mengonfirmasi penyelesaian"
+      ],
+      [
+        null,
+        "Bukti pengiriman, QR, OTP, atau verifikasi event digunakan sesuai kategori."
+      ],
+      [
+        null,
+        "5. Dana masuk jadwal pencairan"
+      ],
+      [
+        null,
+        "Sistem memproses settlement sesuai ketentuan hari Senin dan Kamis atau jadwal khusus event."
+      ],
+      [
+        4,
+        "Jadwal pencairan dana"
+      ],
+      [
+        "No.",
+        "Kategori",
+        "Syarat pencairan",
+        "Jadwal Cair ",
+        "Jam"
+      ],
+      [
+        1,
+        "Food/Fresh Fruit",
+        "Pesanan selesai dan terverifikasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        2,
+        "Sembako",
+        "Pesanan selesai dan terverifikasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        3,
+        "Apotek",
+        "Pesanan selesai dan terverifikasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        4,
+        "Driver/ride hailing",
+        "Perjalanan/pengantaran selesai dan direkonsiliasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        5,
+        "Tenaga kesehatan",
+        "Layanan selesai dan terverifikasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        6,
+        "Tenaga pendidikan",
+        "Pertemuan selesai dan terverifikasi",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        7,
+        "Teknisi/service",
+        "Pekerjaan selesai dan disetujui",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        8,
+        "Entertainment",
+        "Acara/pekerjaan selesai",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        9,
+        "Properti",
+        "Sesuai termin dan ketentuan sewa",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        10,
+        "Sewa baju",
+        "Barang dikembalikan dan diperiksa",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        11,
+        "Event Organizer",
+        "Event selesai dan kewajiban refund diselesaikan",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        12,
+        "Iklan",
+        "Sesuai kebijakan layanan iklan",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ],
+      [
+        13,
+        "Donasi",
+        "Sesuai perjanjian program dan pelaporan",
+        "Senin/Kamis",
+        "17.00-23.59 WIB"
+      ]
+    ]
+  }
+}

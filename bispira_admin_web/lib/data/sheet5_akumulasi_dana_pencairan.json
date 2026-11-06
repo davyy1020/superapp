@@ -1,0 +1,691 @@
+{
+  "rows": [
+    {
+      "no": 1,
+      "nama_penjual_driver": "Toko Pintar Bersama",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 380000,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 378000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 2,
+      "nama_penjual_driver": "Driver Kumis",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 160500,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 159000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 3,
+      "nama_penjual_driver": "Driver Qoriban",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 202500,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 200500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 4,
+      "nama_penjual_driver": "Driver Saladi",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 160500,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 159000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 5,
+      "nama_penjual_driver": "Driver Kapsin",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 364125,
+      "biaya_layanan_trx": 2000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 361125,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 6,
+      "nama_penjual_driver": "Driver Makmuri",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 17100,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 15600,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 7,
+      "nama_penjual_driver": "Warung Suprifood / Driver Sumi",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 70550,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 69050,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 8,
+      "nama_penjual_driver": "Warung Oleh-Oleh Berkah / Driver Usman",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 118700,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 116700,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 9,
+      "nama_penjual_driver": "Driver Qomar",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 366400,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 364400,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 10,
+      "nama_penjual_driver": "Warung Wong Entertainment",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 712500,
+      "biaya_layanan_trx": 1500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 710000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 11,
+      "nama_penjual_driver": "Toko Smart Privat",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 1900000,
+      "biaya_layanan_trx": 2000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 1897000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 12,
+      "nama_penjual_driver": "Toko Raja AC",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 190000,
+      "biaya_layanan_trx": 2000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 187000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 13,
+      "nama_penjual_driver": "Driver Cimahi 1",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 21375,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 19875,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 14,
+      "nama_penjual_driver": "Driver Cimahi 2",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 21375,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 19875,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 15,
+      "nama_penjual_driver": "Driver Cimahi 3",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 21375,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 19875,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 16,
+      "nama_penjual_driver": "Driver Cimahi 4",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 21375,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 19875,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 17,
+      "nama_penjual_driver": "Driver R4 Cimahi 1",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 185000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 183500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 18,
+      "nama_penjual_driver": "Driver R4 Cimahi 2",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 185000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 183500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 19,
+      "nama_penjual_driver": "Driver R4 Cimahi 3",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 185000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 183500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 20,
+      "nama_penjual_driver": "Driver R4 Cimahi 4",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 185000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 183500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 21,
+      "nama_penjual_driver": "Driver Rido",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 839000,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 837000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 22,
+      "nama_penjual_driver": "Driver Salman",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 419500,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 418000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 23,
+      "nama_penjual_driver": "Driver Naga",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 419500,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 418000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 24,
+      "nama_penjual_driver": "Driver Bodi",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 419500,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 418000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 25,
+      "nama_penjual_driver": "Driver Jupri",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 308175,
+      "biaya_layanan_trx": 3500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 303675,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 26,
+      "nama_penjual_driver": "Driver Lisa",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 200000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 198500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 27,
+      "nama_penjual_driver": "Warung Padang Ramesekali / Driver Lisa",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 82150,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 80650,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 28,
+      "nama_penjual_driver": "Warung Mbah Siti / Driver Lisa",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 50800,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 49300,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 29,
+      "nama_penjual_driver": "Toko Bispira Kota Magelang",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 228000,
+      "biaya_layanan_trx": 2000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 225000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 30,
+      "nama_penjual_driver": "Toko Bispira Kota Surabaya",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 57000,
+      "biaya_layanan_trx": 1500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 54500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 31,
+      "nama_penjual_driver": "Toko Bispira Pusat",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 76000,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 74000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 32,
+      "nama_penjual_driver": "Toko Bispira Daerah Kota Semarang",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 47500,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 45500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 33,
+      "nama_penjual_driver": "Toko Green Kost",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 1520000,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 1518000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 34,
+      "nama_penjual_driver": "Toko TanteKost",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 760000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 758500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 35,
+      "nama_penjual_driver": "Toko Queen Fashion",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 1140000,
+      "biaya_layanan_trx": 2000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 1137000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 36,
+      "nama_penjual_driver": "Toko Rawatmasakini",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 2375000,
+      "biaya_layanan_trx": 2500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 2371500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 37,
+      "nama_penjual_driver": "Toko IdolaSPAKU",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 1140000,
+      "biaya_layanan_trx": 1500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 1137500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 38,
+      "nama_penjual_driver": "Toko Pinter Belajar",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 2375000,
+      "biaya_layanan_trx": 2500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 2371500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 39,
+      "nama_penjual_driver": "Toko Servis AC Mukidi",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 855000,
+      "biaya_layanan_trx": 1500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 852500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 40,
+      "nama_penjual_driver": "Yayasan Sosial Adem Makmur",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 475000,
+      "biaya_layanan_trx": 2500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 471500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 41,
+      "nama_penjual_driver": "Yayasan Cinta Keagamaan",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 570000,
+      "biaya_layanan_trx": 1500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 567500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 42,
+      "nama_penjual_driver": "Toko Bispira Pusat ADS",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 7125000,
+      "biaya_layanan_trx": 3000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 7121000,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 43,
+      "nama_penjual_driver": "Driver Sarif",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 44,
+      "nama_penjual_driver": "Driver Marina",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 45,
+      "nama_penjual_driver": "Driver Johan",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 210000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 208500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 46,
+      "nama_penjual_driver": "Driver Johon",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 150000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 148500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 47,
+      "nama_penjual_driver": "Driver Ali",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 48,
+      "nama_penjual_driver": "Warung Kuliner Pemalang / Driver Ali",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 221550,
+      "biaya_layanan_trx": 1000,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 219550,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 49,
+      "nama_penjual_driver": "Driver Baladi",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 100000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 98500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 50,
+      "nama_penjual_driver": "Driver Merrie",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 51,
+      "nama_penjual_driver": "Driver Gibran",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 210000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 208500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 52,
+      "nama_penjual_driver": "Driver Jonton",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 150000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 148500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 53,
+      "nama_penjual_driver": "Driver Budi",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 54,
+      "nama_penjual_driver": "Driver Juki",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 55,
+      "nama_penjual_driver": "Driver Slaman",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 100000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 98500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 56,
+      "nama_penjual_driver": "Driver Marpuah",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 57,
+      "nama_penjual_driver": "Driver Gondok",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 210000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 208500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 58,
+      "nama_penjual_driver": "Driver Gobel",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 150000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 148500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 59,
+      "nama_penjual_driver": "Driver Banrun",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 60,
+      "nama_penjual_driver": "Driver Qonah",
+      "bank_tujuan": "Bank BJB",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 61,
+      "nama_penjual_driver": "Driver Langka",
+      "bank_tujuan": "BSI",
+      "total_hak_gross": 100000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 98500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 62,
+      "nama_penjual_driver": "Driver Sarif R4",
+      "bank_tujuan": "Bank Mandiri",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 63,
+      "nama_penjual_driver": "Driver Qoriban R4",
+      "bank_tujuan": "BRI",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 64,
+      "nama_penjual_driver": "Driver Sarif Amb",
+      "bank_tujuan": "Bank Jatim",
+      "total_hak_gross": 250000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 248500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 65,
+      "nama_penjual_driver": "Driver Qomar Amb",
+      "bank_tujuan": "Bank Jateng",
+      "total_hak_gross": 100000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 98500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 66,
+      "nama_penjual_driver": "Driver Saladi Amb",
+      "bank_tujuan": "BCA",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 67,
+      "nama_penjual_driver": "Driver Kumis Amb",
+      "bank_tujuan": "BNI",
+      "total_hak_gross": 150000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 148500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    },
+    {
+      "no": 68,
+      "nama_penjual_driver": "Driver Qoriban Amb",
+      "bank_tujuan": "Bank DKI",
+      "total_hak_gross": 5000,
+      "biaya_layanan_trx": 500,
+      "biaya_pencairan": 1000,
+      "jumlah_net_diterima": 3500,
+      "status_escrow": "Ready to Disburse (Escrow Safe)"
+    }
+  ],
+  "total": {
+    "totalHakGross": 30342050,
+    "totalBiayaLayananTrx": 62500,
+    "totalBiayaPencairan": 68000,
+    "totalJumlahNetDiterima": 30211550,
+    "totalPenerima": 68
+  }
+}

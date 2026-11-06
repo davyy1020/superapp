@@ -1,0 +1,263 @@
+{
+  "title": "SEBARAN PRODUK INDUK DAN ANAK HYPERLOCAL BISPIRA",
+  "description": "Katalog Terpadu Front End Pembeli dan Back End Penjual (Sheet 10 & 11)",
+  "clusters": [
+    {
+      "cluster_no": 1,
+      "cluster_name": "FOOD & FRESH",
+      "frontend_items": [
+        "Makanan",
+        "Minuman",
+        "Sayuran",
+        "Buah",
+        "Telor",
+        "Daging (sapi, kambing, ayam)",
+        "Ikan",
+        "apotek"
+      ],
+      "backend_items": [
+        "Makanan",
+        "Minuman",
+        "Sayuran",
+        "Buah",
+        "Telor",
+        "Daging (sapi, kambing, ayam)",
+        "Ikan"
+      ]
+    },
+    {
+      "cluster_no": 2,
+      "cluster_name": "TIKET EVENT & WISATA",
+      "frontend_items": [
+        "Event MICE (apasaja)",
+        "Wisata"
+      ],
+      "backend_items": [
+        "Event MICE (apasaja)",
+        "Wisata"
+      ]
+    },
+    {
+      "cluster_no": 3,
+      "cluster_name": "HEALTH & HOMECARE",
+      "frontend_items": [
+        "HEALTH",
+        "Psikiater",
+        "Bidan",
+        "Fisioterapi",
+        "Psikolog",
+        "HOMECARE",
+        "Perawat",
+        "Caregiver",
+        "Child care",
+        "Baby sitter",
+        "Asisten rumah tangga",
+        "BEUTY",
+        "SPA",
+        "BARBERSHOP"
+      ],
+      "backend_items": [
+        "HEALTH",
+        "Dokter (Telemedis Chat dan Tatap Muka)",
+        "Psikiater",
+        "Bidan",
+        "Fisioterapi",
+        "Psikolog",
+        "Apoteker/Apotek",
+        "HOMECARE",
+        "Perawat",
+        "Caregiver",
+        "Child care",
+        "Baby sitter",
+        "Asisten rumah tangga",
+        "BEUTY",
+        "SPA",
+        "BARBERSHOP"
+      ]
+    },
+    {
+      "cluster_no": 4,
+      "cluster_name": "RIDE HAILING",
+      "frontend_items": [
+        "ANTAR JEMPUT",
+        "Motor (Penumpang, Food,Delivery)",
+        "Mobil (Penumpang)",
+        "Mobil Logistik (Delivery)",
+        "Mobil Logistik Barang Besar",
+        "Mobil Ambulance",
+        "ATRIBUT DRIVER",
+        "Helm",
+        "Jaket",
+        "StIcker",
+        "T-Shirt Polo",
+        "Saldo Wallet",
+        "topup"
+      ],
+      "backend_items": [
+        "ANTAR JEMPUT",
+        "Motor (Penumpang, Delivery)",
+        "Mobil (Penumpang)",
+        "Mobil Logistik (Delivery)",
+        "Mobil Ambulance",
+        "ATRIBUT DRIVER",
+        "Helm",
+        "Jaket",
+        "StIcker",
+        "T-Shirt Polo"
+      ]
+    },
+    {
+      "cluster_no": 5,
+      "cluster_name": "SEWA PROPERTY",
+      "frontend_items": [
+        "Kost",
+        "Kontrakan",
+        "Apartemen",
+        "Working space",
+        "Pakaian Event"
+      ],
+      "backend_items": [
+        "Kost",
+        "Kontrakan",
+        "Working space",
+        "Pakaian Event"
+      ]
+    },
+    {
+      "cluster_no": 6,
+      "cluster_name": "EDUKASI & ENTERTAINMENT, SERVICE",
+      "frontend_items": [
+        "EDUKASI",
+        "Tutor/Guru Les Privat Pelajaran",
+        "Trainer let privat pelatihan",
+        "Penceramah keagamaan",
+        "ENTERTAINMENT",
+        "MC",
+        "Penyanyi",
+        "Group Band",
+        "SERVICE",
+        "Teknisi AC",
+        "Teknisi Barang Elektronik",
+        "Montir"
+      ],
+      "backend_items": [
+        "EDUKASI",
+        "Tutor/Guru Les Privat Pelajaran",
+        "Trainer let privat pelatihan",
+        "Penceramah keagamaan",
+        "ENTERTAINMENT",
+        "MC",
+        "Penyanyi",
+        "Group Band",
+        "SERVICE",
+        "Teknisi AC",
+        "Teknisi Barang Elektronik",
+        "Montir"
+      ]
+    },
+    {
+      "cluster_no": 7,
+      "cluster_name": "DONASI",
+      "frontend_items": [
+        "Program kegiatan yayasan sosial",
+        "Program kegiatan yayasan Keagamaan",
+        "Program",
+        "Makan gratis anak yatim piatu Rp. 1.000",
+        "Mulai dari : Rp. 2000",
+        "tidak ada biaya layanan, aplikasi",
+        "hanya kode unik"
+      ],
+      "backend_items": [
+        "Program kegiatan yayasan sosial",
+        "Program kegiatan yayasan Keagamaan"
+      ]
+    },
+    {
+      "cluster_no": 8,
+      "cluster_name": "IKLAN",
+      "frontend_items": [
+        "Pasang Iklan Banner",
+        "berada urutan teratas (1-30), bergeser dari kiri ke kanan otomatis atau bisa digeser tangan pembeli",
+        "Pasang iklan logo"
+      ],
+      "backend_items": [
+        "Pasang Iklan Banner",
+        "Pasang iklan Produk"
+      ]
+    },
+    {
+      "cluster_no": 9,
+      "cluster_name": "BISPIRA EVENT DAERAH",
+      "frontend_items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ],
+      "backend_items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "cluster_no": 10,
+      "cluster_name": "BISPIRA E-VOTING DAERAH",
+      "frontend_items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ],
+      "backend_items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "cluster_no": 11,
+      "cluster_name": "BISPIRA EVENT PUSAT/ PROVINSI",
+      "frontend_items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian",
+        "Pelatihan",
+        "Sertifikasi Profesi"
+      ],
+      "backend_items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian",
+        "Pelatihan",
+        "Sertifikasi Profesi"
+      ]
+    },
+    {
+      "cluster_no": 12,
+      "cluster_name": "BISPIRA E-VOTING PUSAT",
+      "frontend_items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ],
+      "backend_items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "cluster_no": 13,
+      "cluster_name": "PAJAK PENJUAL  (Bulanan/Tahunan)",
+      "frontend_items": [],
+      "backend_items": []
+    }
+  ]
+}

@@ -14,7 +14,7 @@ export async function GET() {
 
     return successResponse(
       {
-        scheduleTime: '17:00 WIB',
+        scheduleTime: '17:00 - 00:00 WIB',
         summary: {
           totalRecipients: list.length,
           totalGrossAmount: totalGross,
@@ -23,7 +23,7 @@ export async function GET() {
         },
         items: list,
       },
-      'Daftar Batch Pencairan Dana Pukul 17:00 WIB Berhasil Diambil'
+      'Daftar Batch Pencairan Dana Rentang 17:00 - 00:00 WIB Berhasil Diambil'
     );
   } catch (error) {
     return errorResponse(error.message, 500);

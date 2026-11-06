@@ -1,0 +1,112 @@
+{
+  "sheet_name": "9. Pengaturan Tarif & Fees",
+  "title": "PENGATURAN TARIF & FEES REVISI NOVEMBER 2026",
+  "ride_hailing": [
+    {
+      "id": "r2_passenger",
+      "name": "Parameter Perjalanan & Ride Hailing Roda 2 (Motor Penumpang)",
+      "vehicle_type": "MOTORCYCLE",
+      "tarif_per_km": 2500,
+      "biaya_min_perjalanan_3km": 8000,
+      "wilayah_i_tarif": "Batas Bawah Rp 2.000 - Batas Atas Rp 2.500",
+      "wilayah_ii_tarif": "Batas Bawah Rp 2.500 - Batas Atas Rp 2.800 (Jabodetabek)",
+      "wilayah_iii_tarif": "Batas Bawah Rp 2.300 - Batas Atas Rp 2.750",
+      "markup_persen": 10,
+      "charge_driver_reguler": 500,
+      "charge_driver_premium_30hari": 15000,
+      "driver_share_percent": 95,
+      "platform_commission_percent": 5,
+      "kode_unik_range": "000-999"
+    },
+    {
+      "id": "r4_passenger",
+      "name": "Parameter Perjalanan & Ride Hailing Roda 4 (Mobil Penumpang)",
+      "vehicle_type": "CAR",
+      "tarif_per_km": 4000,
+      "biaya_min_perjalanan_3km": 15000,
+      "wilayah_i_tarif": "Batas Bawah Rp 6.000 - Batas Atas Rp 3.500",
+      "wilayah_ii_tarif": "Batas Bawah Rp 6.500 - Batas Atas Rp 3.750",
+      "markup_persen": 10,
+      "charge_driver_reguler": 500,
+      "charge_driver_premium_30hari": 15000,
+      "driver_share_percent": 90,
+      "platform_commission_percent": 10,
+      "kode_unik_range": "000-999"
+    },
+    {
+      "id": "r2_food_logistik",
+      "name": "Parameter Perjalanan & Ride Hailing Food & Logistik Barang Kecil Roda 2",
+      "vehicle_type": "MOTORCYCLE_FOOD",
+      "tarif_per_km": 3000,
+      "biaya_min_perjalanan_3km": 10000,
+      "markup_persen": 10,
+      "charge_driver_reguler": 500,
+      "charge_driver_premium_30hari": 15000,
+      "driver_share_percent": 95,
+      "platform_commission_percent": 5,
+      "kode_unik_range": "000-999"
+    },
+    {
+      "id": "ambulance",
+      "name": "Layanan Darurat Khusus Ambulance",
+      "vehicle_type": "AMBULANCE",
+      "biaya_antar_dasar": 120000,
+      "biaya_min_perjalanan_4km": 120000,
+      "tarif_per_km_setelah_4km": 10000,
+      "biaya_angkut_medis": 50000,
+      "markup_persen": 10,
+      "charge_driver_reguler": 500,
+      "charge_driver_premium_30hari": 15000,
+      "driver_share_percent": 95,
+      "platform_commission_percent": 5,
+      "kode_unik_range": "000-999"
+    },
+    {
+      "id": "r4_logistik_besar",
+      "name": "Logistik Pengiriman Barang Besar Roda 4",
+      "vehicle_type": "CAR_LOGISTICS",
+      "tarif_per_km": 5000,
+      "biaya_min_perjalanan_5km": 50000,
+      "biaya_jasa_angkut": 50000,
+      "markup_persen": 10,
+      "charge_driver_reguler": 500,
+      "charge_driver_premium_30hari": 15000,
+      "driver_share_percent": 92.5,
+      "platform_commission_percent": 7.5,
+      "kode_unik_range": "000-999"
+    }
+  ],
+  "merchant_settings": {
+    "markup_persen": 10,
+    "komisi_penjualan_persen": 5,
+    "hak_merchant_persen": 95,
+    "charge_merchant_reguler": 500,
+    "charge_merchant_premium_30hari": 15000,
+    "categories": [
+      "Food & Fresh Sembako",
+      "Event MICE & Wisata",
+      "Sertifikasi Profesi",
+      "Health, Homecare & Beauty",
+      "Sewa Property",
+      "Edukasi, Entertainment & Service"
+    ]
+  },
+  "consumer_and_ecosystem_fees": {
+    "biaya_aplikasi_konsumen": 500,
+    "biaya_layanan_platform": 500,
+    "nominal_kode_unik": "000-999",
+    "masa_berlaku_kode_unik_menit": 30,
+    "biaya_pencairan_payout_fee": 1000,
+    "komisi_driver_r2_merchant_persen": 5.0,
+    "komisi_driver_r4_persen": 7.5
+  },
+  "regional_branch_profit_sharing": {
+    "profit_share_cabang_wilayah_persen": 25,
+    "profit_share_pusat_persen": 75,
+    "event_mandiri_cabang_wilayah_persen": 80,
+    "event_mandiri_pusat_persen": 20,
+    "event_nasional_cabang_persen": 10,
+    "event_nasional_pusat_persen": 90,
+    "jadwal_pembayaran": "Tgl 1 Awal Bulan"
+  }
+}

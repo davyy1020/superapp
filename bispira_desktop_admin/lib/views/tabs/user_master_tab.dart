@@ -15,6 +15,13 @@ class UserMasterTab extends StatefulWidget {
 class _UserMasterTabState extends State<UserMasterTab> {
   String _searchQuery = '';
   String _selectedKycFilter = 'SEMUA';
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
   void _showAddUserDialog(BuildContext context, AdminProvider provider, bool isDark) {
     final nameCtrl = TextEditingController();
@@ -338,15 +345,20 @@ class _UserMasterTabState extends State<UserMasterTab> {
             ),
           const SizedBox(height: 20),
 
-          // Master Table
+          // Master Table with Interactive Horizontal Scrollbar
           NeoBrutalCard(
               bgColor: cardBg,
               padding: const EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Theme(
-                  data: Theme.of(context).copyWith(dividerColor: borderSubtle),
-                  child: DataTable(
+              child: Scrollbar(
+                controller: _horizontalScrollController,
+                thumbVisibility: true,
+                trackVisibility: true,
+                child: SingleChildScrollView(
+                  controller: _horizontalScrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(dividerColor: borderSubtle),
+                    child: DataTable(
                     headingRowColor: WidgetStateProperty.all(isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC)),
                     border: TableBorder.all(color: borderSubtle, width: 1.0),
                     columns: [
@@ -410,6 +422,7 @@ class _UserMasterTabState extends State<UserMasterTab> {
                 ),
               ),
             ),
+          ),
           const SizedBox(height: 28),
 
           // Visual Analytics Charts Section

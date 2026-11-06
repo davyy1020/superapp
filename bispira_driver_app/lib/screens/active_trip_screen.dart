@@ -199,7 +199,7 @@ class _ActiveTripScreenState extends State<ActiveTripScreen> {
                         ],
                       ),
                       Text(
-                        '${_routeDistanceKm > 0 ? _routeDistanceKm.toStringAsFixed(1) : order.distanceKm.toStringAsFixed(1)} km • ~${_routeDurationMin > 0 ? _routeDurationMin : (order.distanceKm * 2.5).round()} mnt',
+                        '${_routeDistanceKm > 0 ? _routeDistanceKm.toStringAsFixed(1) : order.distanceKm.toStringAsFixed(1)} km • ~${_routeDurationMin > 0 ? _routeDurationMin : (order.distanceKm * 2.5).round()} mnt ($_osrmSource)',
                         style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 10, color: NeoColors.textMuted),
                       ),
                     ],

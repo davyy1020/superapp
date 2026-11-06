@@ -1,0 +1,406 @@
+{
+  "title": "PEDOMAN PENDAPATAN SUPERADMIN PER TRANSAKSI & PETA BAGI HASIL NET PROFIT",
+  "description": "Matriks 16 Cluster Pendapatan Ekosistem & Peta Split Kerjasama (75:25, 100:0, 20:80, 60:40)",
+  "matrix": [
+    {
+      "no": 1,
+      "bidang_cluster": "Motor Orang",
+      "penjual": "Ride Hailing",
+      "harga_dasar": "Total Jarak Tempuh KM",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": "PUSAT",
+        "daerah": "DAERAH"
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": "PUSAT",
+        "daerah": "DAERAH"
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": "PUSAT",
+        "daerah": "DAERAH"
+      }
+    },
+    {
+      "no": 2,
+      "bidang_cluster": "Motor Food",
+      "penjual": "Ride Hailing",
+      "harga_dasar": "Total Jarak Tempuh KM",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 3,
+      "bidang_cluster": "Mobil Logistik Kecil",
+      "penjual": "Ride Hailing",
+      "harga_dasar": "Total Jarak Tempuh KM",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "7,5%",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 4,
+      "bidang_cluster": "Mobil Orang, Logistik Besar",
+      "penjual": "Ride Hailing",
+      "harga_dasar": "Total Jarak Tempuh KM",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "7,5%",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 5,
+      "bidang_cluster": "Jasa Angkut Barang, Orang Sakit",
+      "penjual": "Ride Hailing",
+      "harga_dasar": "Harga Dasar Produk/Ongkir",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "1%",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 6,
+      "bidang_cluster": "Food&Fresh Sembako",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 7,
+      "bidang_cluster": "Health",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 8,
+      "bidang_cluster": "Education, Service, Entertainment",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 9,
+      "bidang_cluster": "Event, Wisata, ",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 10,
+      "bidang_cluster": "Donasi",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "8% Akumulasi Dana Diakhir saja",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 11,
+      "bidang_cluster": "Iklan",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 12,
+      "bidang_cluster": "Property",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 13,
+      "bidang_cluster": "Bispira Event Daerah (Kompetisi pendidikan, kebudayaan, kesenian, olahraga)",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 14,
+      "bidang_cluster": "Bispira Event Daerah (E-voting populer)",
+      "penjual": null,
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1.0,
+        "daerah": 0.0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 15,
+      "bidang_cluster": "Bispira Event Pusat (Kompetisi Pendiidkan, Budaya Kesenian, Olahraga, Sertifikasi Profesi)",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    },
+    {
+      "no": 16,
+      "bidang_cluster": "Bispira Event Pusat (E-voting populer)",
+      "penjual": "Merchant",
+      "harga_dasar": "Harga Dasar Produk/Ongkir",
+      "markup": 0.1,
+      "biaya_layanan": "Rp.500",
+      "biaya_aplikasi_reguler": "Rp.500",
+      "biaya_aplikasi_premium_30hari": "Rp. 15.000",
+      "kode_unik_bank": "000-999",
+      "komisi": "0.05",
+      "biaya_pencairan": "Rp. 1.000",
+      "bagi_hasil_kerjasama": {
+        "pusat": 0.75,
+        "daerah": 0.25
+      },
+      "bagi_hasil_tanpa_kerjasama": {
+        "pusat": 1,
+        "daerah": 0
+      },
+      "bagi_hasil_event_mandiri": {
+        "pusat": 0.2,
+        "daerah": 0.8
+      }
+    }
+  ]
+}

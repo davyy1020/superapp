@@ -35,8 +35,10 @@ import {
   FileCheck,
   UserCheck,
   Lock,
-  Plus
+  Plus,
+  FileSpreadsheet
 } from "lucide-react";
+import LedgerExcelView from "./components/LedgerExcelView";
 
 export default function AdminPortal() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -521,6 +523,14 @@ export default function AdminPortal() {
           >
             <Banknote size={18} />
             <span>Batch Settlement (17:00)</span>
+          </button>
+          <button
+            className={`nav-item ${activeTab === "ledger" ? "active" : ""}`}
+            onClick={() => setActiveTab("ledger")}
+          >
+            <FileSpreadsheet size={18} />
+            <span>Buku Kas & Ledger (Sheet 1-6)</span>
+            <span className="nav-badge" style={{ background: "#2563eb", color: "#ffffff" }}>Excel</span>
           </button>
 
           <div className="nav-label">Operasional Armada</div>
@@ -1915,6 +1925,11 @@ export default function AdminPortal() {
                 )}
               </div>
             </div>
+          )}
+
+          {/* TAB 11: BUKU KAS & LEDGER EXCEL (SHEET 1 - 6) */}
+          {activeTab === "ledger" && (
+            <LedgerExcelView showToast={showToast} />
           )}
 
           {/* MODAL 1: TAMBAH MITRA MERCHANT */}

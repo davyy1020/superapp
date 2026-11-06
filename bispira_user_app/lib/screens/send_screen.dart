@@ -48,7 +48,6 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
   int _selectedCourierOptionIndex = 0; // 0 = Motor Instant, 1 = Mobil Box, 2 = Kargo Pickup, 3 = Sameday
   int _userBalance = 250000;
   bool _isInsuranceActive = true;
-  bool _isLoadingSearch = false;
   Timer? _mapMoveTimer;
   Timer? _debounceTimer;
 
@@ -92,43 +91,6 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
     },
   ];
 
-  final List<Map<String, dynamic>> _realDatabase = [
-    {
-      'name': 'Jl. Karang Tengah II, Genuk',
-      'address': 'Genuksari, Kec. Genuk, Kota Semarang, Jawa Tengah',
-      'lat': -6.9536,
-      'lng': 110.4682,
-      'icon': '🏠',
-      'tag': 'Semarang',
-    },
-    {
-      'name': 'Simpang Lima Semarang',
-      'address': 'Pleburan, Semarang Selatan, Kota Semarang',
-      'lat': -6.9903,
-      'lng': 110.4229,
-      'icon': '🏛️',
-      'tag': 'Semarang',
-    },
-    {
-      'name': 'Tlogosari Kulon (Pedurungan)',
-      'address': 'Kec. Pedurungan, Kota Semarang, Jawa Tengah',
-      'lat': -6.9806,
-      'lng': 110.4614,
-      'icon': '🏘️',
-      'tag': 'Semarang',
-    },
-    {
-      'name': 'Stasiun Semarang Tawang',
-      'address': 'Jl. Tawang No. 1, Tanjung Mas, Semarang',
-      'lat': -6.9644,
-      'lng': 110.4279,
-      'icon': '🚆',
-      'tag': 'Semarang',
-    },
-  ];
-
-  late List<Map<String, dynamic>> _filteredLocations;
-
   @override
   void initState() {
     super.initState();
@@ -144,7 +106,6 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
     _packageNoteController = TextEditingController();
     _searchController = TextEditingController();
     _searchFocusNode = FocusNode();
-    _filteredLocations = List.from(_realDatabase);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _mapController.move(_senderLocation, 16.5);
@@ -192,7 +153,7 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
   int _calculateInsuranceFee() => _isInsuranceActive ? 2000 : 0;
 
   int _calculateGrandTotal() {
-    return _calculateBaseDeliveryFee() + _calculateInsuranceFee() + 3000; // 3000 app fee
+    return _calculateBaseDeliveryFee() + _calculateInsuranceFee() + 500 + 500; // Biaya Aplikasi Rp 500 + Biaya Layanan Rp 500 (Excel Sheet 1)
   }
 
   String _formatPrice(int amount) {
@@ -319,12 +280,12 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
                   initialCenter: _senderLocation,
                   initialZoom: 16.5,
                   onPositionChanged: (pos, hasGesture) {
-                    if (hasGesture && pos.center != null) {
-                      setState(() => _senderLocation = pos.center!);
+                    if (hasGesture) {
+                      setState(() => _senderLocation = pos.center);
                       _mapMoveTimer?.cancel();
                       _mapMoveTimer = Timer(const Duration(milliseconds: 350), () async {
                         try {
-                          final url = Uri.parse('https://nominatim.openstreetmap.org/reverse?lat=${pos.center!.latitude}&lon=${pos.center!.longitude}&format=json');
+                          final url = Uri.parse('https://nominatim.openstreetmap.org/reverse?lat=${pos.center.latitude}&lon=${pos.center.longitude}&format=json');
                           final res = await http.get(url, headers: {'User-Agent': 'BispiraApp/1.0'}).timeout(const Duration(seconds: 3));
                           if (res.statusCode == 200) {
                             final data = json.decode(res.body);
@@ -960,6 +921,42 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
                           Text('Jarak: ${distKm.toStringAsFixed(1)} km', style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.brand)),
                         ],
                       ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Ongkir Kurir (Driver 95%)', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('Rp ${_formatPrice(_calculateBaseDeliveryFee())}', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black)),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Biaya Aplikasi (Excel Sheet 1)', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('Rp 500', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black)),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Biaya Layanan (Excel Sheet 1)', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('Rp 500', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black)),
+                        ],
+                      ),
+                      if (_isInsuranceActive) ...[
+                        const SizedBox(height: 3),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text('Asuransi Pengiriman', style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                            Text('Rp 2.000', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.5, color: NeoColors.black)),
+                          ],
+                        ),
+                      ],
+                      const SizedBox(height: 8),
+                      const Divider(color: NeoColors.black, height: 1, thickness: 1),
                       const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

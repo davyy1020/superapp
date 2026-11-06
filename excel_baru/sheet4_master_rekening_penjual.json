@@ -1,0 +1,621 @@
+{
+  "rows": [
+    {
+      "no": 1,
+      "nama_toko_warung_driver": "Toko Pintar Bersama",
+      "nama_pemilik": "Bpk/Ibu Pintar Bersama",
+      "kategori_entitas": "Edukasi",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1008876543",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 2,
+      "nama_toko_warung_driver": "Driver Kumis",
+      "nama_pemilik": "Bpk/Ibu Kumis",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1017753086",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 3,
+      "nama_toko_warung_driver": "Driver Qoriban",
+      "nama_pemilik": "Bpk/Ibu Qoriban",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1026629629",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 4,
+      "nama_toko_warung_driver": "Driver Saladi",
+      "nama_pemilik": "Bpk/Ibu Saladi",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1035506172",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 5,
+      "nama_toko_warung_driver": "Driver Kapsin",
+      "nama_pemilik": "Bpk/Ibu Kapsin",
+      "kategori_entitas": "Topup",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1044382715",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 6,
+      "nama_toko_warung_driver": "Driver Makmuri",
+      "nama_pemilik": "Bpk/Ibu Makmuri",
+      "kategori_entitas": "R2 Logistik",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1053259258",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 7,
+      "nama_toko_warung_driver": "Warung Suprifood / Driver Sumi",
+      "nama_pemilik": "Bpk/Ibu Suprifood / Sumi",
+      "kategori_entitas": "Food",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1062135801",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 8,
+      "nama_toko_warung_driver": "Warung Oleh-Oleh Berkah / Driver Usman",
+      "nama_pemilik": "Bpk/Ibu Oleh-Oleh Berkah / Usman",
+      "kategori_entitas": "Food",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1071012344",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 9,
+      "nama_toko_warung_driver": "Driver Qomar",
+      "nama_pemilik": "Bpk/Ibu Qomar",
+      "kategori_entitas": "R4",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1079888887",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 10,
+      "nama_toko_warung_driver": "Warung Wong Entertainment",
+      "nama_pemilik": "Bpk/Ibu Wong Entertainment",
+      "kategori_entitas": "Jasa",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1088765430",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 11,
+      "nama_toko_warung_driver": "Toko Smart Privat",
+      "nama_pemilik": "Bpk/Ibu Smart Privat",
+      "kategori_entitas": "Edukasi",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1097641973",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 12,
+      "nama_toko_warung_driver": "Toko Raja AC",
+      "nama_pemilik": "Bpk/Ibu Raja AC",
+      "kategori_entitas": "Service",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1106518516",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 13,
+      "nama_toko_warung_driver": "Driver Cimahi 1",
+      "nama_pemilik": "Bpk/Ibu Cimahi 1",
+      "kategori_entitas": "R2",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1115395059",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 14,
+      "nama_toko_warung_driver": "Driver Cimahi 2",
+      "nama_pemilik": "Bpk/Ibu Cimahi 2",
+      "kategori_entitas": "R2",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1124271602",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 15,
+      "nama_toko_warung_driver": "Driver Cimahi 3",
+      "nama_pemilik": "Bpk/Ibu Cimahi 3",
+      "kategori_entitas": "R2",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1133148145",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 16,
+      "nama_toko_warung_driver": "Driver Cimahi 4",
+      "nama_pemilik": "Bpk/Ibu Cimahi 4",
+      "kategori_entitas": "R2",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1142024688",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 17,
+      "nama_toko_warung_driver": "Driver R4 Cimahi 1",
+      "nama_pemilik": "Bpk/Ibu R4 Cimahi 1",
+      "kategori_entitas": "R4",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1150901231",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 18,
+      "nama_toko_warung_driver": "Driver R4 Cimahi 2",
+      "nama_pemilik": "Bpk/Ibu R4 Cimahi 2",
+      "kategori_entitas": "R4",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1159777774",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 19,
+      "nama_toko_warung_driver": "Driver R4 Cimahi 3",
+      "nama_pemilik": "Bpk/Ibu R4 Cimahi 3",
+      "kategori_entitas": "R4",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1168654317",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 20,
+      "nama_toko_warung_driver": "Driver R4 Cimahi 4",
+      "nama_pemilik": "Bpk/Ibu R4 Cimahi 4",
+      "kategori_entitas": "R4",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1177530860",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 21,
+      "nama_toko_warung_driver": "Driver Rido",
+      "nama_pemilik": "Bpk/Ibu Rido",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1186407403",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 22,
+      "nama_toko_warung_driver": "Driver Salman",
+      "nama_pemilik": "Bpk/Ibu Salman",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1195283946",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 23,
+      "nama_toko_warung_driver": "Driver Naga",
+      "nama_pemilik": "Bpk/Ibu Naga",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1204160489",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 24,
+      "nama_toko_warung_driver": "Driver Bodi",
+      "nama_pemilik": "Bpk/Ibu Bodi",
+      "kategori_entitas": "Ambulance",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1213037032",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 25,
+      "nama_toko_warung_driver": "Driver Jupri",
+      "nama_pemilik": "Bpk/Ibu Jupri",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1221913575",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 26,
+      "nama_toko_warung_driver": "Driver Lisa",
+      "nama_pemilik": "Bpk/Ibu Lisa",
+      "kategori_entitas": "Topup",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1230790118",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 27,
+      "nama_toko_warung_driver": "Warung Padang Ramesekali / Driver Lisa",
+      "nama_pemilik": "Bpk/Ibu Padang Ramesekali / Lisa",
+      "kategori_entitas": "Food",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1239666661",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 28,
+      "nama_toko_warung_driver": "Warung Mbah Siti / Driver Lisa",
+      "nama_pemilik": "Bpk/Ibu Mbah Siti / Lisa",
+      "kategori_entitas": "Food",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1248543204",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 29,
+      "nama_toko_warung_driver": "Toko Bispira Kota Magelang",
+      "nama_pemilik": "Bpk/Ibu Bispira Kota Magelang",
+      "kategori_entitas": "MICE",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1257419747",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 30,
+      "nama_toko_warung_driver": "Toko Bispira Kota Surabaya",
+      "nama_pemilik": "Bpk/Ibu Bispira Kota Surabaya",
+      "kategori_entitas": "Kompetisi",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1266296290",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 31,
+      "nama_toko_warung_driver": "Toko Bispira Pusat",
+      "nama_pemilik": "Bpk/Ibu Bispira Pusat",
+      "kategori_entitas": "Kompetisi",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1275172833",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 32,
+      "nama_toko_warung_driver": "Toko Bispira Daerah Kota Semarang",
+      "nama_pemilik": "Bpk/Ibu Bispira Daerah Kota Semarang",
+      "kategori_entitas": "EVoting Mandiri",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1284049376",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 33,
+      "nama_toko_warung_driver": "Toko Green Kost",
+      "nama_pemilik": "Bpk/Ibu Green Kost",
+      "kategori_entitas": "Properti",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1292925919",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 34,
+      "nama_toko_warung_driver": "Toko TanteKost",
+      "nama_pemilik": "Bpk/Ibu TanteKost",
+      "kategori_entitas": "Properti",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1301802462",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 35,
+      "nama_toko_warung_driver": "Toko Queen Fashion",
+      "nama_pemilik": "Bpk/Ibu Queen Fashion",
+      "kategori_entitas": "Properti",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1310679005",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 36,
+      "nama_toko_warung_driver": "Toko Rawatmasakini",
+      "nama_pemilik": "Bpk/Ibu Rawatmasakini",
+      "kategori_entitas": "Homecare",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1319555548",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 37,
+      "nama_toko_warung_driver": "Toko IdolaSPAKU",
+      "nama_pemilik": "Bpk/Ibu IdolaSPAKU",
+      "kategori_entitas": "Beauty",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1328432091",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 38,
+      "nama_toko_warung_driver": "Toko Pinter Belajar",
+      "nama_pemilik": "Bpk/Ibu Pinter Belajar",
+      "kategori_entitas": "Edukasi",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1337308634",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 39,
+      "nama_toko_warung_driver": "Toko Servis AC Mukidi",
+      "nama_pemilik": "Bpk/Ibu Servis AC Mukidi",
+      "kategori_entitas": "Service",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1346185177",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 40,
+      "nama_toko_warung_driver": "Yayasan Sosial Adem Makmur",
+      "nama_pemilik": "Bpk/Ibu Sosial Adem Makmur",
+      "kategori_entitas": "Donasi",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1355061720",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 41,
+      "nama_toko_warung_driver": "Yayasan Cinta Keagamaan",
+      "nama_pemilik": "Bpk/Ibu Cinta Keagamaan",
+      "kategori_entitas": "Donasi",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1363938263",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 42,
+      "nama_toko_warung_driver": "Toko Bispira Pusat ADS",
+      "nama_pemilik": "Bpk/Ibu Bispira Pusat ADS",
+      "kategori_entitas": "Iklan",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1372814806",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 43,
+      "nama_toko_warung_driver": "Driver Sarif",
+      "nama_pemilik": "Bpk/Ibu Sarif",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1381691349",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 44,
+      "nama_toko_warung_driver": "Driver Marina",
+      "nama_pemilik": "Bpk/Ibu Marina",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1390567892",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 45,
+      "nama_toko_warung_driver": "Driver Johan",
+      "nama_pemilik": "Bpk/Ibu Johan",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1399444435",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 46,
+      "nama_toko_warung_driver": "Driver Johon",
+      "nama_pemilik": "Bpk/Ibu Johon",
+      "kategori_entitas": "Topup",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1408320978",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 47,
+      "nama_toko_warung_driver": "Driver Ali",
+      "nama_pemilik": "Bpk/Ibu Ali",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1417197521",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 48,
+      "nama_toko_warung_driver": "Warung Kuliner Pemalang / Driver Ali",
+      "nama_pemilik": "Bpk/Ibu Kuliner Pemalang / Ali",
+      "kategori_entitas": "Food",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1426074064",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 49,
+      "nama_toko_warung_driver": "Driver Baladi",
+      "nama_pemilik": "Bpk/Ibu Baladi",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1434950607",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 50,
+      "nama_toko_warung_driver": "Driver Merrie",
+      "nama_pemilik": "Bpk/Ibu Merrie",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1443827150",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 51,
+      "nama_toko_warung_driver": "Driver Gibran",
+      "nama_pemilik": "Bpk/Ibu Gibran",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1452703693",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 52,
+      "nama_toko_warung_driver": "Driver Jonton",
+      "nama_pemilik": "Bpk/Ibu Jonton",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1461580236",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 53,
+      "nama_toko_warung_driver": "Driver Budi",
+      "nama_pemilik": "Bpk/Ibu Budi",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1470456779",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 54,
+      "nama_toko_warung_driver": "Driver Juki",
+      "nama_pemilik": "Bpk/Ibu Juki",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1479333322",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 55,
+      "nama_toko_warung_driver": "Driver Slaman",
+      "nama_pemilik": "Bpk/Ibu Slaman",
+      "kategori_entitas": "Topup",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1488209865",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 56,
+      "nama_toko_warung_driver": "Driver Marpuah",
+      "nama_pemilik": "Bpk/Ibu Marpuah",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1497086408",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 57,
+      "nama_toko_warung_driver": "Driver Gondok",
+      "nama_pemilik": "Bpk/Ibu Gondok",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1505962951",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 58,
+      "nama_toko_warung_driver": "Driver Gobel",
+      "nama_pemilik": "Bpk/Ibu Gobel",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1514839494",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 59,
+      "nama_toko_warung_driver": "Driver Banrun",
+      "nama_pemilik": "Bpk/Ibu Banrun",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1523716037",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 60,
+      "nama_toko_warung_driver": "Driver Qonah",
+      "nama_pemilik": "Bpk/Ibu Qonah",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "Bank BJB",
+      "nomor_rekening": "1532592580",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 61,
+      "nama_toko_warung_driver": "Driver Langka",
+      "nama_pemilik": "Bpk/Ibu Langka",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BSI",
+      "nomor_rekening": "1541469123",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 62,
+      "nama_toko_warung_driver": "Driver Sarif R4",
+      "nama_pemilik": "Bpk/Ibu Sarif R4",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "Bank Mandiri",
+      "nomor_rekening": "1550345666",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 63,
+      "nama_toko_warung_driver": "Driver Qoriban R4",
+      "nama_pemilik": "Bpk/Ibu Qoriban R4",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "BRI",
+      "nomor_rekening": "1559222209",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 64,
+      "nama_toko_warung_driver": "Driver Sarif Amb",
+      "nama_pemilik": "Bpk/Ibu Sarif Amb",
+      "kategori_entitas": "DP Atribut",
+      "nama_bank": "Bank Jatim",
+      "nomor_rekening": "1568098752",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 65,
+      "nama_toko_warung_driver": "Driver Qomar Amb",
+      "nama_pemilik": "Bpk/Ibu Qomar Amb",
+      "kategori_entitas": "Topup",
+      "nama_bank": "Bank Jateng",
+      "nomor_rekening": "1576975295",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 66,
+      "nama_toko_warung_driver": "Driver Saladi Amb",
+      "nama_pemilik": "Bpk/Ibu Saladi Amb",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "BCA",
+      "nomor_rekening": "1585851838",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 67,
+      "nama_toko_warung_driver": "Driver Kumis Amb",
+      "nama_pemilik": "Bpk/Ibu Kumis Amb",
+      "kategori_entitas": "Topup",
+      "nama_bank": "BNI",
+      "nomor_rekening": "1594728381",
+      "cabang_kota": "Cabang Utama"
+    },
+    {
+      "no": 68,
+      "nama_toko_warung_driver": "Driver Qoriban Amb",
+      "nama_pemilik": "Bpk/Ibu Qoriban Amb",
+      "kategori_entitas": "Cicilan",
+      "nama_bank": "Bank DKI",
+      "nomor_rekening": "1603604924",
+      "cabang_kota": "Cabang Utama"
+    }
+  ],
+  "total": {
+    "totalRekening": 68,
+    "totalBank": 9,
+    "totalKategori": 19
+  }
+}

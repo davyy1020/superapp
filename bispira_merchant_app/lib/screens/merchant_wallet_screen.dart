@@ -17,7 +17,17 @@ class _MerchantWalletScreenState extends State<MerchantWalletScreen> {
   final _accountController = TextEditingController(text: '9876543210');
   String _selectedBank = 'BNI';
 
-  final List<String> _bankList = ['BNI', 'BCA', 'Mandiri', 'BRI', 'Bank Jatim'];
+  final List<String> _bankList = [
+    'BCA',
+    'Bank Mandiri',
+    'BRI',
+    'BNI',
+    'BSI',
+    'Bank Jateng',
+    'Bank Jatim',
+    'Bank DKI',
+    'Bank BJB',
+  ];
 
   @override
   void dispose() {
@@ -57,6 +67,37 @@ class _MerchantWalletScreenState extends State<MerchantWalletScreen> {
                     child: const Icon(Icons.close_rounded, color: NeoColors.black, size: 22),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+
+              // REGULASI JADWAL PENCAIRAN EXCEL SHEET 5 BANNER
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: NeoColors.brandSoft,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: NeoColors.brand, width: 1.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Icons.schedule_rounded, color: NeoColors.brand, size: 18),
+                        SizedBox(width: 8),
+                        Text(
+                          'Jadwal Cair: Senin & Kamis (17.00 - 23.59 WIB)',
+                          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11.5, color: NeoColors.black),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '• Biaya Layanan Trx: Rp 500 / order\n• Biaya Transfer Pencairan: Rp 1.000 / batch transfer\n• Rekening Terverifikasi: ${merchant.bankOperasional} ${merchant.nomorRekening} a/n ${merchant.namaPemilik}',
+                      style: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: NeoColors.black, height: 1.3),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 14),
 
@@ -251,10 +292,78 @@ class _MerchantWalletScreenState extends State<MerchantWalletScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            // MASTER REKENING PENJUAL CARD (EXCEL SHEET 4)
+            const SizedBox(height: 18),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: NeoColors.surface,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: NeoColors.black, width: 1.8),
+                boxShadow: const [
+                  BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'MASTER REKENING OUTLET (SHEET 4)',
+                        style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w900, color: NeoColors.textMuted, letterSpacing: 0.6),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: NeoColors.green.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: NeoColors.green, width: 1),
+                        ),
+                        child: const Text('Tervalidasi 9 Bank', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.greenDark)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: NeoColors.brand,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          merchant.bankOperasional,
+                          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.white),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              merchant.nomorRekening,
+                              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, color: NeoColors.black, letterSpacing: 0.5),
+                            ),
+                            Text(
+                              'a/n ${merchant.namaPemilik}',
+                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: NeoColors.textMuted),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
 
             const Text(
-              'RINGKASAN FORMULA EXCEL SETTLEMENT',
+              'REGULASI & FORMULA LEDGER EXCEL (SHEET 1 - 6)',
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.8, color: NeoColors.textMuted),
             ),
             const SizedBox(height: 12),
@@ -266,23 +375,53 @@ class _MerchantWalletScreenState extends State<MerchantWalletScreen> {
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: NeoColors.black, width: 1.8),
               ),
-              child: const Column(
+              child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Hak Bersih Toko', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
-                      Text('100% Harga Dasar Merchant', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: NeoColors.greenDark)),
+                      const Text('Hak Gross Toko (Sheet 2)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
+                      const Text('100% Harga Dasar Merchant', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: NeoColors.greenDark)),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Divider(color: NeoColors.black, height: 1, thickness: 1),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
+                  const Divider(color: NeoColors.black, height: 1, thickness: 1),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Potongan Disbursment Fee Payout', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
-                      Text('Rp 1.000 / Batch', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: NeoColors.black)),
+                      const Text('Biaya Skema Trx Per Order (Sheet 2 & 5)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
+                      Text('Rp ${merchant.biayaLayananPerTrx} / Order', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: NeoColors.orange)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Divider(color: NeoColors.black, height: 1, thickness: 1),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Biaya Transfer Pencairan (Sheet 5)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
+                      Text('Rp ${merchant.biayaPencairanPerBatch} / Batch Transfer', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: NeoColors.black)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Divider(color: NeoColors.black, height: 1, thickness: 1),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Jadwal Pencairan (Sheet 5)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
+                      Text(merchant.payoutSchedule, style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.brand)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Divider(color: NeoColors.black, height: 1, thickness: 1),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Konsolidasi Rekening Pusat (Sheet 6)', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.textMuted)),
+                      Text('9 Bank Operasional Superadmin', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w900, color: NeoColors.black)),
                     ],
                   ),
                 ],

@@ -18,7 +18,7 @@ class EOScreen extends StatefulWidget {
 
 class _EOScreenState extends State<EOScreen> {
   late bool _isPusat;
-  int _selectedCategoryIndex = 0;
+  // int _selectedCategoryIndex = 0;
 
   @override
   void initState() {

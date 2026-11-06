@@ -1,0 +1,502 @@
+[
+  {
+    "no": 1,
+    "nama_driver": "Driver Kumis",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 160500,
+    "saldo_akhir_wallet": 160500
+  },
+  {
+    "no": 2,
+    "nama_driver": "Driver Qoriban",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 227000,
+    "komisi_penghasilan": 197500,
+    "saldo_akhir_wallet": -34500
+  },
+  {
+    "no": 3,
+    "nama_driver": "Driver Saladi",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 160500,
+    "saldo_akhir_wallet": 160500
+  },
+  {
+    "no": 4,
+    "nama_driver": "Driver Kapsin",
+    "moda_transportasi": "Topup",
+    "total_topup": 300000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 49025,
+    "komisi_penghasilan": 64125,
+    "saldo_akhir_wallet": 315100
+  },
+  {
+    "no": 5,
+    "nama_driver": "Driver Makmuri",
+    "moda_transportasi": "R2 Logistik",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 17100,
+    "saldo_akhir_wallet": 17100
+  },
+  {
+    "no": 6,
+    "nama_driver": "Warung Suprifood / Driver Sumi",
+    "moda_transportasi": "Food",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 70550,
+    "saldo_akhir_wallet": 70550
+  },
+  {
+    "no": 7,
+    "nama_driver": "Warung Oleh-Oleh Berkah / Driver Usman",
+    "moda_transportasi": "Food",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 67550,
+    "komisi_penghasilan": 118700,
+    "saldo_akhir_wallet": 51150
+  },
+  {
+    "no": 8,
+    "nama_driver": "Driver Qomar",
+    "moda_transportasi": "R4",
+    "total_topup": 100000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 266400,
+    "saldo_akhir_wallet": 366400
+  },
+  {
+    "no": 9,
+    "nama_driver": "Driver Cimahi 1",
+    "moda_transportasi": "R2",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 21375,
+    "saldo_akhir_wallet": 21375
+  },
+  {
+    "no": 10,
+    "nama_driver": "Driver Cimahi 2",
+    "moda_transportasi": "R2",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 21375,
+    "saldo_akhir_wallet": 21375
+  },
+  {
+    "no": 11,
+    "nama_driver": "Driver Cimahi 3",
+    "moda_transportasi": "R2",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 21375,
+    "saldo_akhir_wallet": 21375
+  },
+  {
+    "no": 12,
+    "nama_driver": "Driver Cimahi 4",
+    "moda_transportasi": "R2",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 21375,
+    "saldo_akhir_wallet": 21375
+  },
+  {
+    "no": 13,
+    "nama_driver": "Driver R4 Cimahi 1",
+    "moda_transportasi": "R4",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 185000,
+    "saldo_akhir_wallet": 185000
+  },
+  {
+    "no": 14,
+    "nama_driver": "Driver R4 Cimahi 2",
+    "moda_transportasi": "R4",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 185000,
+    "saldo_akhir_wallet": 185000
+  },
+  {
+    "no": 15,
+    "nama_driver": "Driver R4 Cimahi 3",
+    "moda_transportasi": "R4",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 185000,
+    "saldo_akhir_wallet": 185000
+  },
+  {
+    "no": 16,
+    "nama_driver": "Driver R4 Cimahi 4",
+    "moda_transportasi": "R4",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 185000,
+    "saldo_akhir_wallet": 185000
+  },
+  {
+    "no": 17,
+    "nama_driver": "Driver Rido",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 839000,
+    "saldo_akhir_wallet": 839000
+  },
+  {
+    "no": 18,
+    "nama_driver": "Driver Salman",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 419500,
+    "saldo_akhir_wallet": 419500
+  },
+  {
+    "no": 19,
+    "nama_driver": "Driver Naga",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 419500,
+    "saldo_akhir_wallet": 419500
+  },
+  {
+    "no": 20,
+    "nama_driver": "Driver Bodi",
+    "moda_transportasi": "Ambulance",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 419500,
+    "saldo_akhir_wallet": 419500
+  },
+  {
+    "no": 21,
+    "nama_driver": "Driver Jupri",
+    "moda_transportasi": "Topup",
+    "total_topup": 150000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 126750,
+    "komisi_penghasilan": 158175,
+    "saldo_akhir_wallet": 181425
+  },
+  {
+    "no": 22,
+    "nama_driver": "Driver Lisa",
+    "moda_transportasi": "Topup",
+    "total_topup": 200000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 200000
+  },
+  {
+    "no": 23,
+    "nama_driver": "Warung Padang Ramesekali / Driver Lisa",
+    "moda_transportasi": "Food",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 93950,
+    "komisi_penghasilan": 82150,
+    "saldo_akhir_wallet": -11800
+  },
+  {
+    "no": 24,
+    "nama_driver": "Warung Mbah Siti / Driver Lisa",
+    "moda_transportasi": "Food",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 57650,
+    "komisi_penghasilan": 50800,
+    "saldo_akhir_wallet": -6850
+  },
+  {
+    "no": 25,
+    "nama_driver": "Driver Sarif",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 26,
+    "nama_driver": "Driver Marina",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 27,
+    "nama_driver": "Driver Johan",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 28,
+    "nama_driver": "Driver Johon",
+    "moda_transportasi": "Topup",
+    "total_topup": 150000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 150000
+  },
+  {
+    "no": 29,
+    "nama_driver": "Driver Ali",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 30,
+    "nama_driver": "Warung Kuliner Pemalang / Driver Ali",
+    "moda_transportasi": "Food",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 251150,
+    "komisi_penghasilan": 221550,
+    "saldo_akhir_wallet": -29600
+  },
+  {
+    "no": 31,
+    "nama_driver": "Driver Baladi",
+    "moda_transportasi": "Topup",
+    "total_topup": 100000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 100000
+  },
+  {
+    "no": 32,
+    "nama_driver": "Driver Merrie",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 33,
+    "nama_driver": "Driver Gibran",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 34,
+    "nama_driver": "Driver Jonton",
+    "moda_transportasi": "Topup",
+    "total_topup": 150000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 150000
+  },
+  {
+    "no": 35,
+    "nama_driver": "Driver Budi",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 36,
+    "nama_driver": "Driver Juki",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 37,
+    "nama_driver": "Driver Slaman",
+    "moda_transportasi": "Topup",
+    "total_topup": 100000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 100000
+  },
+  {
+    "no": 38,
+    "nama_driver": "Driver Marpuah",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 39,
+    "nama_driver": "Driver Gondok",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 40,
+    "nama_driver": "Driver Gobel",
+    "moda_transportasi": "Topup",
+    "total_topup": 150000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 150000
+  },
+  {
+    "no": 41,
+    "nama_driver": "Driver Banrun",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 42,
+    "nama_driver": "Driver Qonah",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 43,
+    "nama_driver": "Driver Langka",
+    "moda_transportasi": "Topup",
+    "total_topup": 100000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 100000
+  },
+  {
+    "no": 44,
+    "nama_driver": "Driver Sarif R4",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 45,
+    "nama_driver": "Driver Qoriban R4",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 46,
+    "nama_driver": "Driver Sarif Amb",
+    "moda_transportasi": "DP Atribut",
+    "total_topup": 0,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 0
+  },
+  {
+    "no": 47,
+    "nama_driver": "Driver Qomar Amb",
+    "moda_transportasi": "Topup",
+    "total_topup": 100000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 100000
+  },
+  {
+    "no": 48,
+    "nama_driver": "Driver Saladi Amb",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  },
+  {
+    "no": 49,
+    "nama_driver": "Driver Kumis Amb",
+    "moda_transportasi": "Topup",
+    "total_topup": 150000,
+    "potongan_cicilan": 0,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": 150000
+  },
+  {
+    "no": 50,
+    "nama_driver": "Driver Qoriban Amb",
+    "moda_transportasi": "Cicilan",
+    "total_topup": 0,
+    "potongan_cicilan": 5000,
+    "potongan_order_cash": 0,
+    "komisi_penghasilan": 0,
+    "saldo_akhir_wallet": -5000
+  }
+]

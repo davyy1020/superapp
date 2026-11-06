@@ -42,6 +42,10 @@ class NeoColors {
   static const Color brandLight   = Color(0xFFE6F0FF);
   static const Color green        = Color(0xFF00C853);
   static const Color greenSoft    = Color(0xFFE6F9ED);
+  static const Color greenDark    = Color(0xFF15803D);
+  static const Color greenLight   = Color(0xFF86EFAC);
+  static const Color red          = Color(0xFFDC2626);
+  static const Color redSoft      = Color(0xFFFEE2E2);
   static const Color sky          = Color(0xFF0066FF);
   static const Color skySoft      = Color(0xFFE6F0FF);
   static const Color lavender     = Color(0xFFE6F0FF);

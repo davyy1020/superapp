@@ -23,6 +23,8 @@ class NeoBrutalTheme {
   static Color getBorderSubtle(bool isDark) => isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
 
   // Functional Accents
+  static const Color neoBlue = bispiraBlue;
+  static const Color neoGold = Color(0xFFFFB800);
   static const Color neoCyan = Color(0xFF0284C7);          // Sky Blue Accent
   static const Color neoGreen = Color(0xFF10B981);         // Emerald Mint Accent
   static const Color neoYellow = Color(0xFFD97706);        // Amber Accent

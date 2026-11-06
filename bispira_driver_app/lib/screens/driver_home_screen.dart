@@ -20,7 +20,7 @@ class DriverHomeScreen extends StatefulWidget {
 class _DriverHomeScreenState extends State<DriverHomeScreen> {
   int _selectedTab = 0;
   final MapController _mapController = MapController();
-  final LatLng _driverLatLng = const LatLng(-6.2088, 106.8456); // SCBD, Jakarta
+  final LatLng _driverLatLng = const LatLng(-6.9622, 110.4682); // Genuk, Kota Semarang
 
   final currencyFmt = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
 
@@ -52,29 +52,36 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
           mapController: _mapController,
           options: MapOptions(
             initialCenter: _driverLatLng,
-            initialZoom: 15.0,
+            initialZoom: 14.5,
           ),
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'com.bispira.driverapp',
             ),
-            // GACOR HOTSPOT ZONES
+            // GACOR HOTSPOT ZONES (SEMARANG: GENUK, SIMPANG LIMA, TEMBALANG UNDIP)
             CircleLayer(
               circles: [
                 CircleMarker(
-                  point: const LatLng(-6.2088, 106.8456),
+                  point: const LatLng(-6.9622, 110.4682), // Genuk
                   color: NeoColors.brand.withOpacity(0.2),
                   borderColor: NeoColors.brand,
                   borderStrokeWidth: 2,
                   radius: 1200,
                 ),
                 CircleMarker(
-                  point: const LatLng(-6.2240, 106.8090),
+                  point: const LatLng(-6.9903, 110.4229), // Simpang Lima
                   color: NeoColors.gold.withOpacity(0.25),
                   borderColor: NeoColors.gold,
                   borderStrokeWidth: 2,
-                  radius: 800,
+                  radius: 1500,
+                ),
+                CircleMarker(
+                  point: const LatLng(-7.0545, 110.4358), // Tembalang
+                  color: NeoColors.green.withOpacity(0.25),
+                  borderColor: NeoColors.green,
+                  borderStrokeWidth: 2,
+                  radius: 1400,
                 ),
               ],
             ),

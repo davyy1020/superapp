@@ -1,6 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../models/admin_models.dart';
+import '../data/detail_transaksi_data.dart';
+import '../data/akumulasi_penjual_driver_data.dart';
+import '../data/saldo_wallet_driver_data.dart';
+import '../data/master_rekening_penjual_data.dart';
+import '../data/akumulasi_dana_pencairan_data.dart';
+import '../data/pencairan_per_bank_data.dart';
+import '../data/bagi_hasil_pusat_daerah_data.dart';
+import '../data/profil_lisensi_daerah_data.dart';
 
 class AdminProvider with ChangeNotifier {
   final AdminConfigModel config = AdminConfigModel();
@@ -379,6 +387,178 @@ class AdminProvider with ChangeNotifier {
   List<UserModel> get users => List.unmodifiable(_users);
   List<Map<String, String>> get auditLogs => List.unmodifiable(_auditLogs);
 
+  // Master Detail Transaksi (Persis 21 Kolom Sheet 1: 1. Detail Transaksi)
+  final List<DetailTransaksiModel> _ledgerTransactions = List.from(initialDetailTransaksiList);
+  List<DetailTransaksiModel> get ledgerTransactions => List.unmodifiable(_ledgerTransactions);
+
+  double get totalLedgerHargaDasar => _ledgerTransactions.fold(0.0, (s, e) => s + e.hargaDasar);
+  double get totalLedgerHargaResmi => _ledgerTransactions.fold(0.0, (s, e) => s + e.hargaResmi);
+  double get totalLedgerBayarPembeli => _ledgerTransactions.fold(0.0, (s, e) => s + e.totalBayarPembeli);
+  double get totalLedgerKomisi => _ledgerTransactions.fold(0.0, (s, e) => s + e.komisiMarketplace);
+  double get totalLedgerHakPenjual => _ledgerTransactions.fold(0.0, (s, e) => s + e.hakPenjualDriverNet);
+  double get totalLedgerPusatNet => _ledgerTransactions.fold(0.0, (s, e) => s + e.pusatNetProfit);
+
+  void addLedgerTransaction(DetailTransaksiModel tx) {
+    _ledgerTransactions.insert(0, tx);
+    addLog('[LEDGER] Transaksi Baru #${tx.no} (${tx.layananProduk}) berhasil dicatat ke Ledger Real-Time.', type: 'success');
+    notifyListeners();
+  }
+
+  // Master Akumulasi Penjual & Driver (Persis 9 Kolom Sheet 2: 2. Akumulasi Penjual & Driver)
+  final List<AkumulasiPenjualDriverModel> _akumulasiList = List.from(initialAkumulasiPenjualDriverList);
+  List<AkumulasiPenjualDriverModel> get akumulasiList => List.unmodifiable(_akumulasiList);
+
+  int get totalAkumulasiMitra => _akumulasiList.length;
+  int get totalAkumulasiTrx => _akumulasiList.fold(0, (s, e) => s + e.totalTrx);
+  double get totalAkumulasiHargaDasar => _akumulasiList.fold(0.0, (s, e) => s + e.akumulasiHargaDasar);
+  double get totalAkumulasiBiayaAngkut => _akumulasiList.fold(0.0, (s, e) => s + e.akumulasiBiayaAngkut);
+  double get totalAkumulasiKomisi => _akumulasiList.fold(0.0, (s, e) => s + e.akumulasiKomisiMarketplace);
+  double get totalHakPenjualGross => _akumulasiList.fold(0.0, (s, e) => s + e.hakPenjualDriverGross);
+  double get totalBiayaSkemaTrx => _akumulasiList.fold(0.0, (s, e) => s + e.biayaSkemaTrxBulanan);
+
+  // Master Saldo Wallet Driver (Persis 8 Kolom Sheet 3: 3. Saldo Wallet Driver)
+  final List<SaldoWalletDriverModel> _saldoWalletDriverList = List.from(initialSaldoWalletDriverList);
+  List<SaldoWalletDriverModel> get saldoWalletDriverList => List.unmodifiable(_saldoWalletDriverList);
+
+  int get totalDriverCount => _saldoWalletDriverList.length;
+  double get totalDriverTopUp => _saldoWalletDriverList.fold(0.0, (s, e) => s + e.totalTopUp);
+  double get totalDriverPotonganCicilan => _saldoWalletDriverList.fold(0.0, (s, e) => s + e.potonganCicilan);
+  double get totalDriverPotonganCash => _saldoWalletDriverList.fold(0.0, (s, e) => s + e.potonganOrderCash);
+  double get totalDriverKomisiPenghasilan => _saldoWalletDriverList.fold(0.0, (s, e) => s + e.komisiPenghasilan);
+  double get totalDriverSaldoAkhir => _saldoWalletDriverList.fold(0.0, (s, e) => s + e.saldoAkhirWallet);
+
+  int get totalDriverMinus => _saldoWalletDriverList.where((d) => d.isMinus).length;
+  int get totalDriverBelowLimit => _saldoWalletDriverList.where((d) => d.isBelowMinOrderCash && !d.isMinus).length;
+  int get totalDriverReady => _saldoWalletDriverList.where((d) => d.isReadyCash).length;
+
+  void topUpSaldoWalletDriver(String namaDriver, double nominal) {
+    final idx = _saldoWalletDriverList.indexWhere((d) => d.namaDriver.toLowerCase() == namaDriver.toLowerCase());
+    if (idx != -1) {
+      final current = _saldoWalletDriverList[idx];
+      final newTopUp = current.totalTopUp + nominal;
+      final newSaldo = current.saldoAkhirWallet + nominal;
+      _saldoWalletDriverList[idx] = SaldoWalletDriverModel(
+        no: current.no,
+        namaDriver: current.namaDriver,
+        modaTransportasi: current.modaTransportasi,
+        totalTopUp: newTopUp,
+        potonganCicilan: current.potonganCicilan,
+        potonganOrderCash: current.potonganOrderCash,
+        komisiPenghasilan: current.komisiPenghasilan,
+        saldoAkhirWallet: newSaldo,
+      );
+      addLog('[WALLET DRIVER] Top up Rp ${nominal.toStringAsFixed(0)} untuk ${current.namaDriver} berhasil. Saldo Baru: Rp ${newSaldo.toStringAsFixed(0)}', type: 'success');
+      notifyListeners();
+    }
+  }
+
+  // Master Rekening Penjual (Persis 7 Kolom Sheet 4: 4. Master Rekening Penjual)
+  final List<MasterRekeningPenjualModel> _masterRekeningList = List.from(initialMasterRekeningPenjualList);
+  List<MasterRekeningPenjualModel> get masterRekeningList => List.unmodifiable(_masterRekeningList);
+
+  int get totalMasterRekening => _masterRekeningList.length;
+  int get totalRekeningMerchant => _masterRekeningList.where((r) => !r.isDriver).length;
+  int get totalRekeningDriver => _masterRekeningList.where((r) => r.isDriver).length;
+  List<String> get distinctMasterBanks => _masterRekeningList.map((r) => r.namaBank).toSet().toList();
+  List<String> get distinctMasterKategori => _masterRekeningList.map((r) => r.kategoriEntitas).toSet().toList();
+
+  void updateMasterRekening(int no, {String? namaBank, String? nomorRekening, String? namaPemilik, String? cabangKota}) {
+    final idx = _masterRekeningList.indexWhere((r) => r.no == no);
+    if (idx != -1) {
+      final current = _masterRekeningList[idx];
+      _masterRekeningList[idx] = MasterRekeningPenjualModel(
+        no: current.no,
+        namaTokoWarungDriver: current.namaTokoWarungDriver,
+        namaPemilik: namaPemilik ?? current.namaPemilik,
+        kategoriEntitas: current.kategoriEntitas,
+        namaBank: namaBank ?? current.namaBank,
+        nomorRekening: nomorRekening ?? current.nomorRekening,
+        cabangKota: cabangKota ?? current.cabangKota,
+      );
+      addLog('[MASTER REKENING] Rekening #${current.no} (${current.namaTokoWarungDriver}) berhasil diperbarui ke ${namaBank ?? current.namaBank} - ${nomorRekening ?? current.nomorRekening}.', type: 'success');
+      notifyListeners();
+    }
+  }
+
+  // Master Akumulasi Dana Pencairan (Persis 8 Kolom Sheet 5: 5. Akumulasi Dana Pencairan)
+  final List<AkumulasiDanaPencairanModel> _danaPencairanList = List.from(initialAkumulasiDanaPencairanList);
+  List<AkumulasiDanaPencairanModel> get danaPencairanList => List.unmodifiable(_danaPencairanList);
+
+  int get totalPencairanMitra => _danaPencairanList.length;
+  double get totalPencairanGross => _danaPencairanList.fold(0.0, (s, e) => s + e.totalHakGross);
+  double get totalPencairanBiayaLayananTrx => _danaPencairanList.fold(0.0, (s, e) => s + e.biayaLayananTrx);
+  double get totalPencairanBiayaTransfer => _danaPencairanList.fold(0.0, (s, e) => s + e.biayaPencairan);
+  double get totalPencairanNetDiterima => _danaPencairanList.fold(0.0, (s, e) => s + e.jumlahNetDiterima);
+
+  int get totalPencairanPending => _danaPencairanList.where((p) => !p.isDisbursed).length;
+  int get totalPencairanDisbursed => _danaPencairanList.where((p) => p.isDisbursed).length;
+
+  void disburseSingleMitra(int no) {
+    final idx = _danaPencairanList.indexWhere((p) => p.no == no);
+    if (idx != -1) {
+      final current = _danaPencairanList[idx];
+      _danaPencairanList[idx] = AkumulasiDanaPencairanModel(
+        no: current.no,
+        namaPenjualDriver: current.namaPenjualDriver,
+        bankTujuan: current.bankTujuan,
+        totalHakGross: current.totalHakGross,
+        biayaLayananTrx: current.biayaLayananTrx,
+        biayaPencairan: current.biayaPencairan,
+        jumlahNetDiterima: current.jumlahNetDiterima,
+        statusEscrow: 'Disbursed / Sudah Ditransfer',
+        disbursedAt: DateTime.now(),
+      );
+      addLog('[BATCH PAYOUT] Pencairan #${current.no} (${current.namaPenjualDriver}) ke ${current.bankTujuan} sebesar Rp ${current.jumlahNetDiterima.toStringAsFixed(0)} SUKSES DITRANSFER.', type: 'success');
+      notifyListeners();
+    }
+  }
+
+  void executeBatchPayoutAll() {
+    int count = 0;
+    for (int i = 0; i < _danaPencairanList.length; i++) {
+      if (!_danaPencairanList[i].isDisbursed) {
+        _danaPencairanList[i].statusEscrow = 'Disbursed / Sudah Ditransfer';
+        _danaPencairanList[i].disbursedAt = DateTime.now();
+        count++;
+      }
+    }
+    addLog('[BATCH PAYOUT MASSAL] Jadwal Cair Senin & Kamis (17.00 - 23.59 WIB): Berhasil mentransfer $count mitra dengan total net Rp 30.211.550 melalui gateway perbankan.', type: 'success');
+    notifyListeners();
+  }
+
+  // Master Pencairan Per Bank (Persis 7 Kolom Sheet 6: 6. Pencairan Per Bank)
+  final List<PencairanPerBankModel> _pencairanPerBankList = List.from(initialPencairanPerBankList);
+  List<PencairanPerBankModel> get pencairanPerBankList => List.unmodifiable(_pencairanPerBankList);
+
+  int get totalBankOperasionalCount => _pencairanPerBankList.length;
+  int get totalBankAktifCount => _pencairanPerBankList.where((b) => b.isActive).length;
+  int get totalBankMitra => _pencairanPerBankList.fold(0, (s, e) => s + e.jumlahMitra);
+  double get totalBankGrossDisbursement => _pencairanPerBankList.fold(0.0, (s, e) => s + e.totalPencairanGross);
+  double get totalBankBiayaTrx => _pencairanPerBankList.fold(0.0, (s, e) => s + e.totalBiayaLayananTrx);
+  double get totalBankBiayaTransfer => _pencairanPerBankList.fold(0.0, (s, e) => s + e.totalBiayaPencairan);
+  double get totalBankNetDisbursement => _pencairanPerBankList.fold(0.0, (s, e) => s + e.netDisbursement);
+
+  // Master Bagi Hasil Pusat & Daerah (Persis 8 Kolom Sheet 7: 7. Bagi Hasil Pusat & Daerah)
+  final List<BagiHasilPusatDaerahModel> _bagiHasilList = List.from(initialBagiHasilList);
+  List<BagiHasilPusatDaerahModel> get bagiHasilList => List.unmodifiable(_bagiHasilList);
+
+  int get totalWilayahBagiHasil => _bagiHasilList.length;
+  double get totalNetProfitSuperadmin => _bagiHasilList.fold(0.0, (s, e) => s + e.netProfitSuperadmin);
+  double get totalPorsiPusat => _bagiHasilList.fold(0.0, (s, e) => s + e.porsiPusat);
+  double get totalPorsiAdminDaerah => _bagiHasilList.fold(0.0, (s, e) => s + e.porsiAdminDaerah);
+
+  // Master Profil Lisensi Daerah (Persis 11 Kolom Sheet 8: 8. Profil Lisensi Daerah)
+  final List<ProfilLisensiDaerahModel> _profilLisensiDaerahList = List.from(initialProfilLisensiDaerahList);
+  List<ProfilLisensiDaerahModel> get profilLisensiDaerahList => List.unmodifiable(_profilLisensiDaerahList);
+
+  int get totalLisensiDaerahCount => _profilLisensiDaerahList.length;
+  int get totalPenjualMitraDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.jumlahPenjualAktif);
+  int get totalDriverMitraDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.jumlahDriverAktif);
+  int get totalEventBispiraDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.jumlahEventBispira);
+  int get totalEventKompetisiDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.jumlahEventKompetisi);
+  int get totalEventEvotingDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.jumlahEventEvoting);
+  int get totalSeluruhEventDaerah => _profilLisensiDaerahList.fold(0, (s, e) => s + e.totalEventAktif);
+
   void addLog(String message, {String type = 'info'}) {
     final now = DateTime.now();
     final timeStr = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
@@ -398,9 +578,25 @@ class AdminProvider with ChangeNotifier {
     required double ambulanceAngkutFee,
     required double profitShareCabang,
     required int uniqueCodeDurationMinutes,
+    double? tariffR4PerKm,
+    double? minFareR4,
+    double? commissionR4Percent,
+    double? tariffFoodR2PerKm,
+    double? minFareFoodR2,
+    double? logistikTariffPerKm,
+    double? logistikMinFare,
+    double? logistikAngkutFee,
+    double? trukL300BaseFee,
+    double? driverMinWalletBalance,
+    double? skemaKerjasamaPusatPct,
+    double? skemaKerjasamaDaerahPct,
+    double? skemaTanpaKerjasamaPusatPct,
+    double? skemaTanpaKerjasamaDaerahPct,
+    double? skemaEventMandiriPusatPct,
+    double? skemaEventMandiriDaerahPct,
   }) {
-    config.tariffPerKm = tariffPerKm;
-    config.minFare = minFare;
+    config.tariffR2PerKm = tariffPerKm;
+    config.minFareR2 = minFare;
     config.appFee = appFee;
     config.serviceFee = serviceFee;
     config.markupPercent = markupPercent;
@@ -411,8 +607,25 @@ class AdminProvider with ChangeNotifier {
     config.profitShareCabang = profitShareCabang;
     config.uniqueCodeDurationMinutes = uniqueCodeDurationMinutes;
 
+    if (tariffR4PerKm != null) config.tariffR4PerKm = tariffR4PerKm;
+    if (minFareR4 != null) config.minFareR4 = minFareR4;
+    if (commissionR4Percent != null) config.commissionR4Percent = commissionR4Percent;
+    if (tariffFoodR2PerKm != null) config.tariffFoodR2PerKm = tariffFoodR2PerKm;
+    if (minFareFoodR2 != null) config.minFareFoodR2 = minFareFoodR2;
+    if (logistikTariffPerKm != null) config.logistikTariffPerKm = logistikTariffPerKm;
+    if (logistikMinFare != null) config.logistikMinFare = logistikMinFare;
+    if (logistikAngkutFee != null) config.logistikAngkutFee = logistikAngkutFee;
+    if (trukL300BaseFee != null) config.trukL300BaseFee = trukL300BaseFee;
+    if (driverMinWalletBalance != null) config.driverMinWalletBalance = driverMinWalletBalance;
+    if (skemaKerjasamaPusatPct != null) config.skemaKerjasamaPusatPct = skemaKerjasamaPusatPct;
+    if (skemaKerjasamaDaerahPct != null) config.skemaKerjasamaDaerahPct = skemaKerjasamaDaerahPct;
+    if (skemaTanpaKerjasamaPusatPct != null) config.skemaTanpaKerjasamaPusatPct = skemaTanpaKerjasamaPusatPct;
+    if (skemaTanpaKerjasamaDaerahPct != null) config.skemaTanpaKerjasamaDaerahPct = skemaTanpaKerjasamaDaerahPct;
+    if (skemaEventMandiriPusatPct != null) config.skemaEventMandiriPusatPct = skemaEventMandiriPusatPct;
+    if (skemaEventMandiriDaerahPct != null) config.skemaEventMandiriDaerahPct = skemaEventMandiriDaerahPct;
+
     addLog(
-      '[FLUTTER DESKTOP ADMIN] Parameter disimpam: Tarif/KM=Rp${tariffPerKm.toInt()}, AppFee=Rp${appFee.toInt()}, ServiceFee=Rp${serviceFee.toInt()}, Markup=$markupPercent%, DisbursementFee=Rp${disbursementFee.toInt()}, DriverCharge=Rp${driverChargeFee.toInt()}, AmbulanceAntar=Rp${ambulanceAntarFee.toInt()}, AmbulanceAngkut=Rp${ambulanceAngkutFee.toInt()}, ProfitCabang=$profitShareCabang%, TimerKode=${uniqueCodeDurationMinutes}m',
+      '[FLUTTER DESKTOP ADMIN] Parameter Excel Baru Disimpan: Tarif R2=Rp${tariffPerKm.toInt()}, Tarif R4=Rp${config.tariffR4PerKm.toInt()} (Komisi 7.5%), Food R2=Rp${config.tariffFoodR2PerKm.toInt()}, Ambulance=Rp${config.ambulanceTariffPerKm.toInt()}, Logistik Box=Rp${config.logistikTariffPerKm.toInt()}, AppFee=Rp${appFee.toInt()}, Layanan=Rp${serviceFee.toInt()}, SaldoMin=Rp${config.driverMinWalletBalance.toInt()}',
       type: 'success',
     );
     notifyListeners();

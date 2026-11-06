@@ -42,7 +42,6 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   int _selectedServiceIndex = 0; // 0 = Motor, 1 = Kurir, 2 = Kargo, 3 = Ambulance
   String _paymentMethod = 'Transfer Bank (Kode Unik)';
   final int _uniqueCode = 247;
-  bool _isLoadingSearch = false;
 
   // OSRM GIS Routing State
   List<LatLng> _osrmPolylinePoints = [];
@@ -88,11 +87,13 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
     }
   }
 
+  /*
   Map<String, dynamic>? _selectedVoucher = {
     'code': 'BISPIRASUPER',
     'title': 'Diskon Rp 7.000 SuperApp',
     'discountAmount': 7000,
   };
+  */
 
   Timer? _debounceTimer;
   Timer? _mapMoveTimer;
@@ -138,7 +139,16 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
       'lng': 110.4682,
       'icon': '🏠',
       'tag': 'Semarang',
-      'subTag': '📍 Lokasi HP Saya Saat Ini',
+      'subTag': '📍 Lokasi HP Saya Saat Ini (Genuk)',
+    },
+    {
+      'name': 'Tembalang (Kampus UNDIP)',
+      'address': 'Jl. Prof. Soedarto, Tembalang, Kota Semarang',
+      'lat': -7.0545,
+      'lng': 110.4358,
+      'icon': '🎓',
+      'tag': 'Semarang',
+      'subTag': '📍 Kampus Undip & Area Mahasiswa Tembalang',
     },
     {
       'name': 'Simpang Lima Semarang',
@@ -227,7 +237,6 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
     final q = query.trim();
     if (q.isEmpty) {
       setState(() {
-        _isLoadingSearch = false;
         _filteredLocations = List.from(_realDatabase);
       });
       return;
@@ -241,7 +250,6 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
     }).toList();
 
     setState(() {
-      _isLoadingSearch = true;
       _filteredLocations = List.from(localMatches);
     });
 
@@ -286,13 +294,12 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
 
           if (mounted) {
             setState(() {
-              _isLoadingSearch = false;
               _filteredLocations = [...localMatches, ...apiResults];
             });
           }
         }
       } catch (_) {
-        if (mounted) setState(() => _isLoadingSearch = false);
+        // Fallback error ignore
       }
     });
   }
@@ -319,7 +326,7 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
     return base + (dist * 2000).round();
   }
 
-  int _calculateServiceFee() => 3000;
+  int _calculateServiceFee() => 1000; // Biaya Aplikasi Rp 500 + Biaya Layanan Rp 500 (Excel Sheet 1 & 9)
 
   int _calculateGrandTotal() {
     int total = _calculateBasePrice() + _calculateServiceFee();
@@ -480,14 +487,14 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                   initialCenter: _pickupLocation,
                   initialZoom: 16.5,
                   onPositionChanged: (pos, hasGesture) {
-                    if (hasGesture && pos.center != null) {
+                    if (hasGesture) {
                       setState(() {
-                        _pickupLocation = pos.center!;
+                        _pickupLocation = pos.center;
                       });
                       _mapMoveTimer?.cancel();
                       _mapMoveTimer = Timer(const Duration(milliseconds: 350), () async {
                         try {
-                          final url = Uri.parse('https://nominatim.openstreetmap.org/reverse?lat=${pos.center!.latitude}&lon=${pos.center!.longitude}&format=json');
+                          final url = Uri.parse('https://nominatim.openstreetmap.org/reverse?lat=${pos.center.latitude}&lon=${pos.center.longitude}&format=json');
                           final res = await http.get(url, headers: {'User-Agent': 'BispiraApp/1.0'}).timeout(const Duration(seconds: 3));
                           if (res.statusCode == 200) {
                             final data = json.decode(res.body);
@@ -1162,16 +1169,16 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text('Biaya Aplikasi BISPIRA', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
-                          Text('Rp 1.000', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                          Text('Biaya Aplikasi BISPIRA (Excel)', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('Rp 500', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
                         ],
                       ),
                       const SizedBox(height: 4),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text('Biaya Layanan & Penanganan', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
-                          Text('Rp 2.000', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                          Text('Biaya Layanan & Penanganan (Excel)', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
+                          Text('Rp 500', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -1225,6 +1232,43 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                       GestureDetector(
                         onTap: () {
                           final grandTotal = _calculateGrandTotal();
+                          final finalDistKm = _osrmDistanceKm > 0 ? _osrmDistanceKm : _calculateDistanceInKm();
+                          final finalBaseFare = (_osrmFareData?['tripFare'] as num?)?.toInt() ?? (finalDistKm * 2800).round();
+
+                          // Post to Backend Orders API in real-time
+                          try {
+                            http.post(
+                              Uri.parse('http://localhost:3000/api/v1/orders'),
+                              headers: {'Content-Type': 'application/json'},
+                              body: jsonEncode({
+                                'serviceType': _serviceOptions[_selectedServiceIndex]['id'],
+                                'serviceName': 'BISPIRA ${_serviceOptions[_selectedServiceIndex]['name']} ${_serviceOptions[_selectedServiceIndex]['emoji']}',
+                                'serviceEmoji': _serviceOptions[_selectedServiceIndex]['emoji'],
+                                'customerName': 'Davy (User Bispira)',
+                                'customerPhone': '0812-9876-5432',
+                                'pickupAddress': _pickupController.text,
+                                'dropoffAddress': _dropoffController.text,
+                                'pickupLat': _pickupLocation.latitude,
+                                'pickupLng': _pickupLocation.longitude,
+                                'dropoffLat': _dropoffLocation.latitude,
+                                'dropoffLng': _dropoffLocation.longitude,
+                                'distanceKm': finalDistKm,
+                                'durationMin': _osrmDurationMin > 0 ? _osrmDurationMin : 18,
+                                'fare': {
+                                  'grandTotal': grandTotal,
+                                  'tripFare': finalBaseFare,
+                                  'driverShare': (finalBaseFare * 0.95).round(),
+                                  'platformFee': (finalBaseFare * 0.05).round(),
+                                  'appFee': 500,
+                                  'serviceFee': 500,
+                                  'taxPph': (finalBaseFare * 0.005).round(),
+                                },
+                                'paymentMethod': _paymentMethod,
+                                'uniqueCode': _uniqueCode,
+                              }),
+                            );
+                          } catch (_) {}
+
                           showDialog(
                             context: context,
                             builder: (ctx) => AlertDialog(

@@ -16,6 +16,13 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
   String _searchQuery = '';
   String _selectedCategoryFilter = 'SEMUA';
   String _selectedSubFilter = 'SEMUA';
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
   void _showAddMerchantDialog(BuildContext context, AdminProvider provider, bool isDark) {
     final storeCtrl = TextEditingController();
@@ -228,6 +235,203 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
     );
   }
 
+  void _showFormulirPenjualDialog(BuildContext context, bool isDark) {
+    final List<Map<String, String>> formList = [
+      {'code': 'Form A', 'title': 'Pendaftaran Merchant', 'cols': '18 Kolom', 'desc': 'NIK Dukcapil, No HP (OTP SMS/WA), Alamat GPS, NIB/PIRT, Jam Operasional, Rekening 9 Bank.'},
+      {'code': 'Form B1', 'title': 'Food & Minuman', 'cols': '16 Kolom', 'desc': 'Waktu persiapan (menit), satuan porsi/box, varian rasa/pedas, masa simpan (hari).'},
+      {'code': 'Form B2', 'title': 'Fresh Fruit / Buah', 'cols': '13 Kolom', 'desc': 'Kualitas Grade A/B/C, tingkat kematangan, asal panen/lokal, satuan Kg/Gram.'},
+      {'code': 'Form B3', 'title': 'Sembako & Mart', 'cols': '13 Kolom', 'desc': 'Min/Maks order, kondisi segar/kering/beku, kemasan karung/dus/liter, merek.'},
+      {'code': 'Form B4', 'title': 'Apotek & Obat', 'cols': '14 Kolom', 'desc': 'Izin edar BPOM, golongan obat (bebas/keras), kewajiban resep dokter.'},
+      {'code': 'Form C1', 'title': 'Transportasi Online', 'cols': '17 Kolom', 'desc': 'SIM A/C, STNK, SKCK Kepolisian, jenis armada R2/R4, cicilan atribut Rp 5.000/hari.'},
+      {'code': 'Form D1', 'title': 'Tenaga Kesehatan', 'cols': '15 Kolom', 'desc': 'STR & SIP aktif, dokter/bidan/perawat/fisioterapi, tarif konsultasi medis.'},
+      {'code': 'Form D2', 'title': 'Perawat Sakit & ART', 'cols': '14 Kolom', 'desc': 'Caregiver lansia, ART harian/bulanan, babysitter balita, sertifikat pelatihan.'},
+      {'code': 'Form D3', 'title': 'Teknisi Service', 'cols': '15 Kolom', 'desc': 'Teknisi AC, kulkas, montir panggilan, durasi garansi pengerjaan & suku cadang.'},
+      {'code': 'Form D4', 'title': 'Bimbel & Les Privat', 'cols': '14 Kolom', 'desc': 'Mata pelajaran SD-SMA, sertifikasi guru/tutor, durasi pertemuan/sesi.'},
+      {'code': 'Form D5', 'title': 'Entertainment & MC', 'cols': '14 Kolom', 'desc': 'MC event, grup band, sound rider panggung, link portofolio video performance.'},
+      {'code': 'Form E1', 'title': 'Sewa Property & Kost', 'cols': '15 Kolom', 'desc': 'Kost, kontrakan, apartemen, coworking space, deposit jaminan kerusakan.'},
+      {'code': 'Form E2', 'title': 'Sewa Busana & Gaun', 'cols': '14 Kolom', 'desc': 'Baju adat Nusantara, gaun pengantin, jas resmi, jaminan identitas KTP.'},
+      {'code': 'Form F', 'title': 'Iklan & Promosi Banner', 'cols': '12 Kolom', 'desc': 'Slot banner slider 1-30 pada home user app, dimensi pixel, URL tujuan.'},
+      {'code': 'Form G', 'title': 'Donasi & Amal Sosial', 'cols': '12 Kolom', 'desc': 'Yayasan resmi, izin Kemensos/Kemenkumham, santunan yatim (Bebas Potongan Fee).'},
+      {'code': 'Form H', 'title': 'MICE & Tiket Event', 'cols': '14 Kolom', 'desc': 'Event organizer, seminar, konser musik, kuota tiket & scan barcode tiket.'},
+      {'code': 'Form I1', 'title': 'Sertifikasi Profesi', 'cols': '13 Kolom', 'desc': 'Lembaga Sertifikasi Profesi (LSP/BNSP), skema uji kompetensi & asesor.'},
+      {'code': 'Form I2', 'title': 'Event Kompetisi Daerah', 'cols': '14 Kolom', 'desc': 'Turnamen futsal, e-sport daerah, tari kreasi, pendaftaran tim & hadiah.'},
+      {'code': 'Form I3', 'title': 'Event Kompetisi Pusat', 'cols': '14 Kolom', 'desc': 'Kompetisi nasional, penayangan live streaming, dewan juri independen.'},
+      {'code': 'Form J1', 'title': 'E-Voting Bispira Daerah', 'cols': '13 Kolom', 'desc': 'Voting duta wisata/pelajar daerah, tarif Rp 1.000/vote, live leaderboard.'},
+      {'code': 'Form J2', 'title': 'E-Voting Bispira Pusat', 'cols': '13 Kolom', 'desc': 'Voting skala nasional, verifikasi no HP pemilih, transparansi audit sistem.'},
+      {'code': 'Sistem Bayar', 'title': 'Matriks Kanal Pembayaran', 'cols': '12 Kolom', 'desc': 'QRIS dinamis, 9 Bank operasional, Escrow Safe, Payout Senin & Kamis 17.00.'},
+    ];
+
+    showDialog(
+      context: context,
+      builder: (ctx) => Dialog(
+        backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Colors.black, width: 2.5),
+        ),
+        child: Container(
+          width: 800,
+          height: 650,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: NeoBrutalTheme.neoYellow,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.black, width: 2),
+                        ),
+                        child: const Icon(Icons.menu_book_rounded, color: Colors.black, size: 24),
+                      ),
+                      const SizedBox(width: 14),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Panduan Spesifikasi 22 Formulir Penjual (Excel)',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'FORMULIR PENJUAL.xlsx • Standar Registrasi & Input Produk Seluruh Ekosistem',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded, size: 24),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Divider(color: Colors.black, thickness: 1.5),
+              const SizedBox(height: 10),
+
+              // LIST 22 FORMULIR
+              Expanded(
+                child: ListView.separated(
+                  itemCount: formList.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    final item = formList[index];
+                    return Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1), width: 1.5),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 80,
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            decoration: BoxDecoration(
+                              color: item['code'] == 'Form A'
+                                  ? NeoBrutalTheme.neoGreen
+                                  : (item['code']!.startsWith('Form B')
+                                      ? NeoBrutalTheme.bispiraBlue
+                                      : (item['code']!.startsWith('Form C')
+                                          ? NeoBrutalTheme.neoOrange
+                                          : NeoBrutalTheme.neoYellow)),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.black, width: 1.2),
+                            ),
+                            child: Center(
+                              child: Text(
+                                item['code']!,
+                                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11, color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      item['title']!,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w900,
+                                        color: isDark ? Colors.white : Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: Text(
+                                        item['cols']!,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w800,
+                                          color: isDark ? Colors.white70 : Colors.black87,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  item['desc']!,
+                                  style: TextStyle(
+                                    fontSize: 11.5,
+                                    color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  NeoBrutalButton(
+                    label: 'Tutup Panduan',
+                    onPressed: () => Navigator.pop(ctx),
+                    bgColor: NeoBrutalTheme.bispiraBlue,
+                    fontSize: 13,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _showEditMarkupDialog(BuildContext context, AdminProvider provider, MerchantModel merchant, bool isDark) {
     final markupCtrl = TextEditingController(text: merchant.markupPercent.toInt().toString());
 
@@ -335,6 +539,13 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
                     NeoBrutalBadge(text: '${filteredMerchants.length} Merchant Tampil', bgColor: NeoBrutalTheme.bispiraBlue),
                     const SizedBox(width: 12),
                     NeoBrutalButton(
+                      label: '📋 Panduan 22 Formulir Penjual',
+                      onPressed: () => _showFormulirPenjualDialog(context, isDark),
+                      bgColor: NeoBrutalTheme.neoYellow,
+                      fontSize: 13,
+                    ),
+                    const SizedBox(width: 12),
+                    NeoBrutalButton(
                       label: '+ Tambah Merchant Baru',
                       onPressed: () => _showAddMerchantDialog(context, provider, isDark),
                       bgColor: NeoBrutalTheme.neoGreen,
@@ -437,15 +648,20 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
             ),
           const SizedBox(height: 20),
 
-          // Master Table
+          // Master Table with Interactive Horizontal Scrollbar
           NeoBrutalCard(
               bgColor: cardBg,
               padding: const EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Theme(
-                  data: Theme.of(context).copyWith(dividerColor: borderSubtle),
-                  child: DataTable(
+              child: Scrollbar(
+                controller: _horizontalScrollController,
+                thumbVisibility: true,
+                trackVisibility: true,
+                child: SingleChildScrollView(
+                  controller: _horizontalScrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(dividerColor: borderSubtle),
+                    child: DataTable(
                     headingRowColor: WidgetStateProperty.all(isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC)),
                     border: TableBorder.all(color: borderSubtle, width: 1.0),
                     columns: [
@@ -507,6 +723,7 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
                 ),
               ),
             ),
+          ),
           const SizedBox(height: 28),
 
           // Visual Analytics Charts Section

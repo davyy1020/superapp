@@ -43,7 +43,7 @@ export async function POST(request) {
         executionTimestamp: executedAt,
         details: results,
       },
-      `Batch Pencairan Dana 17:00 WIB Sukses Dieksekusi untuk ${results.length} Mitra/Merchant`
+      `Batch Pencairan Dana Rentang 17:00 - 00:00 WIB Sukses Dieksekusi untuk ${results.length} Mitra/Merchant`
     );
   } catch (error) {
     return errorResponse(error.message, 500);

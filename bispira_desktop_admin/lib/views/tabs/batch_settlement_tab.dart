@@ -15,6 +15,13 @@ class BatchSettlementTab extends StatefulWidget {
 class _BatchSettlementTabState extends State<BatchSettlementTab> {
   String _searchQuery = '';
   String _filterStatus = 'ALL';
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
   void _showAddPayoutDialog(BuildContext context, AdminProvider provider, bool isDark) {
     final storeCtrl = TextEditingController();
@@ -271,12 +278,12 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Pencairan Dana Penjual / Mitra (Batch 17:00 WIB)',
+                        'Pencairan Dana Penjual / Mitra (Batch 17:00 - 00:00 WIB)',
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: textPrimary, letterSpacing: -0.3),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Hasil penjualan diakumulasi maksimal 2 hari dan dicairkan per toko atau secara massal setiap pukul 17:00 WIB dipotong Biaya Pencairan.',
+                        'Hasil penjualan diakumulasi maksimal 2 hari dan dicairkan per toko atau secara massal rentang pukul 17:00 - 00:00 WIB dipotong Biaya Pencairan.',
                         style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: textSecondary),
                       ),
                     ],
@@ -360,7 +367,7 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
                 Expanded(
                   child: _buildKpiCard(
                     title: 'Jadwal Batch Transfer',
-                    value: '17:00 WIB',
+                    value: '17:00 - 00:00 WIB',
                     subtitle: 'Otomatisasi Server BISPIRA',
                     icon: Icons.schedule_rounded,
                     iconColor: const Color(0xFF8B5CF6),
@@ -415,10 +422,15 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Data Table
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
+                  // Data Table with Interactive Horizontal Scrollbar
+                  Scrollbar(
+                    controller: _horizontalScrollController,
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    child: SingleChildScrollView(
+                      controller: _horizontalScrollController,
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
                       headingRowColor: WidgetStateProperty.all(isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC)),
                       horizontalMargin: 16,
                       columnSpacing: 20,
@@ -497,7 +509,7 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
                                   ? Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(color: const Color(0xFFF59E0B).withValues(alpha: 0.12), borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.4))),
-                                      child: const Text('Menunggu 17:00', style: TextStyle(color: Color(0xFFF59E0B), fontSize: 11.5, fontWeight: FontWeight.w700)),
+                                      child: const Text('Menunggu 17:00 - 00:00', style: TextStyle(color: Color(0xFFF59E0B), fontSize: 11.5, fontWeight: FontWeight.w700)),
                                     )
                                   : Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -532,6 +544,8 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
                       }).toList(),
                     ),
                   ),
+                ),
+                const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -684,7 +698,7 @@ class _BatchSettlementTabState extends State<BatchSettlementTab> {
       builder: (ctx) => AlertDialog(
         backgroundColor: isDark ? const Color(0xFF131C2E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0))),
-        title: const Row(children: [Icon(Icons.stars_rounded, color: Color(0xFF10B981), size: 26), SizedBox(width: 10), Text('Batch Payout 17:00 WIB Sukses!')]),
+        title: const Row(children: [Icon(Icons.stars_rounded, color: Color(0xFF10B981), size: 26), SizedBox(width: 10), Text('Batch Payout 17:00 - 00:00 WIB Sukses!')]),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 enum DriverArmada { motor, mobil, send, ambulance }
 
@@ -56,6 +58,27 @@ class DriverProvider with ChangeNotifier {
   int _walletBalance = 450000;
   int _acceptanceRate = 98;
 
+  // 4 Pilar Mutasi Saldo Driver Sesuai Excel Sheet 3 (3. Saldo Wallet Driver)
+  int _totalTopUp = 300000;
+  int _potonganCicilan = 0;
+  int _potonganOrderCash = 0;
+  int _komisiPenghasilan = 150000;
+
+  // 17 Kolom Formulir C1 - Pendaftaran Transportasi Online (FORMULIR PENJUAL.xlsx)
+  final String _nikKtp = '3374101988040003';
+  final String _phoneRegistered = '0813-8821-9900 (OTP Terverifikasi)';
+  final String _emailRegistered = 'budi.santoso@driver.bispira.id';
+  final String _homeAddress = 'Jl. Pandanaran No. 45, Kota Semarang, Jawa Tengah';
+  final String _simNumber = 'SIM C: 920811234901 (Exp: 14 Ags 2028)';
+  final String _stnkNumber = 'STNK: 4982-BSP-2027 (Pajak Aktif)';
+  final String _skckNumber = 'SKCK POLRESTABES: SKCK/2026/08/9912';
+  final String _vehicleModel = 'Honda Vario 160 CBS (Hitam Matte)';
+  final String _vehicleYear = '2023';
+  final String _bankOperasional = 'Bank Jateng';
+  final String _nomorRekeningBank = '1017753086';
+  final int _cicilanAtributHarian = 5000; // Rp 5.000 / Hari Potongan Otomatis
+  final String _jadwalPencairan = 'Senin & Kamis (17.00 - 23.59 WIB)';
+
   // Active & Incoming Orders
   DriverOrder? _incomingOrder;
   DriverOrder? _activeOrder;
@@ -101,6 +124,25 @@ class DriverProvider with ChangeNotifier {
   int get todayEarnings => _todayEarnings;
   int get walletBalance => _walletBalance;
   int get acceptanceRate => _acceptanceRate;
+  int get totalTopUp => _totalTopUp;
+  int get potonganCicilan => _potonganCicilan;
+  int get potonganOrderCash => _potonganOrderCash;
+  int get komisiPenghasilan => _komisiPenghasilan;
+  
+  // Getters Formulir C1
+  String get nikKtp => _nikKtp;
+  String get phoneRegistered => _phoneRegistered;
+  String get emailRegistered => _emailRegistered;
+  String get homeAddress => _homeAddress;
+  String get simNumber => _simNumber;
+  String get stnkNumber => _stnkNumber;
+  String get skckNumber => _skckNumber;
+  String get vehicleModel => _vehicleModel;
+  String get vehicleYear => _vehicleYear;
+  String get bankOperasional => _bankOperasional;
+  String get nomorRekeningBank => _nomorRekeningBank;
+  int get cicilanAtributHarian => _cicilanAtributHarian;
+  String get jadwalPencairan => _jadwalPencairan;
   DriverOrder? get incomingOrder => _incomingOrder;
   DriverOrder? get activeOrder => _activeOrder;
   int get countdownSeconds => _countdownSeconds;
@@ -119,67 +161,103 @@ class DriverProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // SIMULATE INCOMING ORDER FOR TESTING / DEMO
-  void simulateIncomingOrder() {
+  // SIMULATE INCOMING ORDER FOR TESTING / DEMO (FETCH LIVE BACKEND OR OSRM SEMARANG ROUTE)
+  Future<void> simulateIncomingOrder() async {
     if (!_isOnline || _activeOrder != null || _incomingOrder != null) return;
 
-    if (_armada == DriverArmada.motor) {
-      _incomingOrder = DriverOrder(
-        id: 'BSP-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
-        serviceName: 'BISPIRA Food 🍔',
-        serviceEmoji: '🛵',
-        customerName: 'Siti Rahmawati',
-        customerPhone: '081298765432',
-        pickupAddress: 'Ayam Goreng Pak Bareng, SCBD',
-        dropoffAddress: 'Gedung Wisma Mandiri Lt 12, Sudirman',
-        pickupLat: -6.2240,
-        pickupLng: 106.8090,
-        dropoffLat: -6.2088,
-        dropoffLng: 106.8456,
-        distanceKm: 3.8,
-        totalFareCustomer: 28000,
-        netDriverEarning: 14250, // 95% of Ongkir
-        paymentMethod: 'BISPIRA Pay 💳',
-        itemsDescription: '2x Paket Ayam Bakar Spesial, 2x Es Teh Manis',
-      );
-    } else if (_armada == DriverArmada.ambulance) {
-      _incomingOrder = DriverOrder(
-        id: 'MED-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
-        serviceName: 'Ambulance Medevac 🚑',
-        serviceEmoji: '🚑',
-        customerName: 'Keluarga Bp. Hendra',
-        customerPhone: '081311223344',
-        pickupAddress: 'Rumah Duka Gatot Subroto No. 45',
-        dropoffAddress: 'RSUPN Cipto Mangunkusumo (RSCM)',
-        pickupLat: -6.2300,
-        pickupLng: 106.8200,
-        dropoffLat: -6.1980,
-        dropoffLng: 106.8480,
-        distanceKm: 6.2,
-        totalFareCustomer: 250000,
-        netDriverEarning: 237500, // 95% of Ambulance Fare
-        paymentMethod: 'Tunai / Cash 💵',
-        itemsDescription: 'Pengantaran Medevac Darurat + Tim Medis',
-      );
-    } else {
-      _incomingOrder = DriverOrder(
-        id: 'RIDE-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
-        serviceName: 'BISPIRA Ride 🛵',
-        serviceEmoji: '🛵',
-        customerName: 'Ahmad Fauzi',
-        customerPhone: '085711229988',
-        pickupAddress: 'Stasiun Gambir Pintu Timur',
-        dropoffAddress: 'Mall Grand Indonesia Pintu West',
-        pickupLat: -6.1767,
-        pickupLng: 106.8306,
-        dropoffLat: -6.1950,
-        dropoffLng: 106.8200,
-        distanceKm: 4.5,
-        totalFareCustomer: 18000,
-        netDriverEarning: 15200,
-        paymentMethod: 'QRIS NISP 📲',
-        itemsDescription: 'Penumpang 1 Orang',
-      );
+    // 1. Try to fetch live pending order from Backend Next.js (/api/v1/orders)
+    try {
+      final res = await http.get(Uri.parse('http://localhost:3000/api/v1/orders?status=LOOKING_FOR_DRIVER'))
+          .timeout(const Duration(seconds: 2));
+      if (res.statusCode == 200) {
+        final data = jsonDecode(res.body);
+        if (data['status'] == 'SUCCESS' && data['data'] != null) {
+          final List orders = data['data']['orders'] ?? [];
+          if (orders.isNotEmpty) {
+            final o = orders[0];
+            _incomingOrder = DriverOrder(
+              id: o['id'] ?? 'BSP-ORD-77192',
+              serviceName: o['serviceName'] ?? 'BISPIRA Ride (Motor) 🛵',
+              serviceEmoji: o['serviceEmoji'] ?? '🛵',
+              customerName: o['customerName'] ?? 'Davy (User Bispira)',
+              customerPhone: o['customerPhone'] ?? '0812-9876-5432',
+              pickupAddress: o['pickupAddress'] ?? 'Jl. Kaligawe Raya No. 12, Genuk, Semarang',
+              dropoffAddress: o['dropoffAddress'] ?? 'Jl. Prof. Soedarto (Undip), Tembalang, Semarang',
+              pickupLat: (o['pickupLat'] as num?)?.toDouble() ?? -6.9622,
+              pickupLng: (o['pickupLng'] as num?)?.toDouble() ?? 110.4682,
+              dropoffLat: (o['dropoffLat'] as num?)?.toDouble() ?? -7.0545,
+              dropoffLng: (o['dropoffLng'] as num?)?.toDouble() ?? 110.4358,
+              distanceKm: (o['distanceKm'] as num?)?.toDouble() ?? 17.19,
+              totalFareCustomer: (o['totalFareCustomer'] as num?)?.toInt() ?? 48478,
+              netDriverEarning: (o['netDriverEarning'] as num?)?.toInt() ?? 43204, // 95% Sesuai Kontrak
+              paymentMethod: o['paymentMethod'] ?? 'Transfer Bank (Kode Unik 247) 🏦',
+              itemsDescription: 'Antar Penumpang Genuk ➔ Tembalang (${o['distanceKm'] ?? 17.2} km)',
+            );
+          }
+        }
+      }
+    } catch (_) {}
+
+    // 2. Default Fallback: Semarang Genuk to Tembalang (17.2 km OSRM)
+    if (_incomingOrder == null) {
+      if (_armada == DriverArmada.motor) {
+        _incomingOrder = DriverOrder(
+          id: 'BSP-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+          serviceName: 'BISPIRA Ride (Motor) 🛵',
+          serviceEmoji: '🛵',
+          customerName: 'Davy (User Bispira)',
+          customerPhone: '0812-9876-5432',
+          pickupAddress: 'Jl. Kaligawe Raya No. 12, Genuk, Semarang',
+          dropoffAddress: 'Jl. Prof. Soedarto (Undip), Tembalang, Semarang',
+          pickupLat: -6.9622,
+          pickupLng: 110.4682,
+          dropoffLat: -7.0545,
+          dropoffLng: 110.4358,
+          distanceKm: 17.19,
+          totalFareCustomer: 48478,
+          netDriverEarning: 43204, // 95% Sesuai Kontrak Pihak Kedua
+          paymentMethod: 'Transfer Bank (Kode Unik 247) 🏦',
+          itemsDescription: 'Antar Penumpang Genuk ➔ Tembalang (17.2 km OSRM)',
+        );
+      } else if (_armada == DriverArmada.ambulance) {
+        _incomingOrder = DriverOrder(
+          id: 'MED-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+          serviceName: 'Ambulance Medevac 🚑',
+          serviceEmoji: '🚑',
+          customerName: 'Keluarga Bp. Hendra',
+          customerPhone: '081311223344',
+          pickupAddress: 'Puskesmas Genuk, Jl. Kaligawe',
+          dropoffAddress: 'RSUP Dr. Kariadi Semarang, Jl. Dr. Sutomo',
+          pickupLat: -6.9610,
+          pickupLng: 110.4670,
+          dropoffLat: -6.9940,
+          dropoffLng: 110.4080,
+          distanceKm: 12.4,
+          totalFareCustomer: 250000,
+          netDriverEarning: 237500, // 95% of Ambulance Fare
+          paymentMethod: 'Transfer Bank / QRIS 🏦',
+          itemsDescription: 'Pengantaran Medevac Darurat Pasien',
+        );
+      } else {
+        _incomingOrder = DriverOrder(
+          id: 'RIDE-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+          serviceName: 'BISPIRA Car (Mobil) 🚗',
+          serviceEmoji: '🚗',
+          customerName: 'Ahmad Fauzi',
+          customerPhone: '085711229988',
+          pickupAddress: 'Jl. Raya Genuk No. 8, Semarang',
+          dropoffAddress: 'Politeknik Negeri Semarang, Tembalang',
+          pickupLat: -6.9622,
+          pickupLng: 110.4682,
+          dropoffLat: -7.0545,
+          dropoffLng: 110.4358,
+          distanceKm: 17.2,
+          totalFareCustomer: 99500,
+          netDriverEarning: 90250, // 95%
+          paymentMethod: 'QRIS BISPIRA 📲',
+          itemsDescription: 'Penumpang 3 Orang AC Dingin',
+        );
+      }
     }
 
     _countdownSeconds = 15;
@@ -201,6 +279,21 @@ class DriverProvider with ChangeNotifier {
     _orderTimer?.cancel();
     _activeOrder = _incomingOrder;
     _activeOrder!.status = 'accepted';
+
+    // Notify backend
+    try {
+      final orderId = _activeOrder!.id;
+      http.post(
+        Uri.parse('http://localhost:3000/api/v1/orders/$orderId/accept'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'driverId': _driverId,
+          'driverName': _driverName,
+          'driverPlate': _licensePlate,
+        }),
+      );
+    } catch (_) {}
+
     _incomingOrder = null;
     notifyListeners();
   }
@@ -256,5 +349,56 @@ class DriverProvider with ChangeNotifier {
     });
     notifyListeners();
     return true;
+  }
+
+  // Top Up Saldo Driver (Sesuai Regulasi Excel Baru: Min Rp 50.000, Layanan Rp 500, App Rp 500, Kode Unik 3 Digit)
+  Map<String, dynamic> requestDriverTopUp(int amount, String bankTarget) {
+    if (amount < 50000) {
+      return {'success': false, 'message': 'Minimal top-up saldo driver adalah Rp 50.000'};
+    }
+
+    final uniqueCode = 100 + (DateTime.now().millisecondsSinceEpoch % 899);
+    const serviceFee = 500;
+    const appFee = 500;
+    final totalTransfer = amount + uniqueCode;
+    final netSaldo = amount - (serviceFee + appFee); // misal 50.000 - 1.000 = 49.000
+
+    _walletBalance += netSaldo;
+    _totalTopUp += netSaldo;
+    _transactionHistory.insert(0, {
+      'id': 'TOPUP-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+      'title': 'Top Up Saldo via Bank $bankTarget (+Kode $uniqueCode)',
+      'time': 'Baru Saja',
+      'type': 'inflow',
+      'amount': netSaldo,
+      'note': 'Gross: Rp $amount • Potongan: Layanan Rp 500 & App Rp 500',
+    });
+
+    notifyListeners();
+    return {
+      'success': true,
+      'uniqueCode': uniqueCode,
+      'totalTransfer': totalTransfer,
+      'netSaldo': netSaldo,
+    };
+  }
+
+  // Cicilan Atribut Harian Driver (Rp 5.000 / Hari Sesuai Regulasi Excel Sheet 3)
+  bool deductDailyAttribute() {
+    if (_walletBalance >= 5000) {
+      _walletBalance -= 5000;
+      _potonganCicilan += 5000;
+      _transactionHistory.insert(0, {
+        'id': 'ATR-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+        'title': 'Cicilan Harian Atribut Driver',
+        'time': 'Hari ini',
+        'type': 'outflow',
+        'amount': -5000,
+        'note': 'Potongan harian DP 50% Helm & Jaket (1:1 tanpa biaya admin)',
+      });
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 }

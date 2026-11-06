@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../../providers/admin_provider.dart';
-import '../../theme/neo_brutal_theme.dart';
 import '../../widgets/bispira_charts.dart';
 
 class FeeCustomizationTab extends StatefulWidget {
@@ -13,19 +12,50 @@ class FeeCustomizationTab extends StatefulWidget {
 }
 
 class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
+  // 1. Roda 2 Ride Hailing (Motor)
   late TextEditingController _tariffController;
   late TextEditingController _minFareController;
+
+  // 2. Roda 4 Ride Hailing (Mobil)
+  late TextEditingController _tariffR4Controller;
+  late TextEditingController _minFareR4Controller;
+  late TextEditingController _commissionR4Controller;
+
+  // 3. Food & Logistik Barang Kecil Roda 2
+  late TextEditingController _tariffFoodR2Controller;
+  late TextEditingController _minFareFoodR2Controller;
+
+  // 4. Biaya Platform & Layanan
   late TextEditingController _appFeeController;
   late TextEditingController _serviceFeeController;
   late TextEditingController _markupController;
   late TextEditingController _disbursementFeeController;
   late TextEditingController _driverChargeController;
+  late TextEditingController _driverMinWalletController;
+
+  // 5. Layanan Darurat Khusus Ambulance (0-100KM)
   late TextEditingController _ambAntarController;
+  late TextEditingController _ambMinFareController;
   late TextEditingController _ambAngkutController;
+
+  // 6. Layanan Logistik Barang Besar (Mobil Box, Bak, Truk L300)
+  late TextEditingController _logistikTariffController;
+  late TextEditingController _logistikMinFareController;
+  late TextEditingController _logistikAngkutController;
+  late TextEditingController _trukL300Controller;
+
+  // 7. Bagi Hasil & Skema Wilayah Dinamis
   late TextEditingController _profitCabangController;
+  late TextEditingController _skemaKerjasamaPusatController;
+  late TextEditingController _skemaKerjasamaDaerahController;
+  late TextEditingController _skemaTanpaKerjasamaPusatController;
+  late TextEditingController _skemaTanpaKerjasamaDaerahController;
+  late TextEditingController _skemaEventMandiriPusatController;
+  late TextEditingController _skemaEventMandiriDaerahController;
   late TextEditingController _uniqueTimerController;
 
-  // Simulator distance
+  // Simulator mode & distance
+  String _selectedSimulatorMode = 'R2_RIDE'; // 'R2_RIDE', 'R4_CAR', 'R2_FOOD', 'AMBULANCE', 'LOGISTIK_BOX'
   double _simulatedKm = 5.0;
   final currencyFmt = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
 
@@ -33,16 +63,37 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
   void initState() {
     super.initState();
     final config = Provider.of<AdminProvider>(context, listen: false).currentConfig;
-    _tariffController = TextEditingController(text: config.tariffPerKm.toInt().toString());
-    _minFareController = TextEditingController(text: config.minFare.toInt().toString());
+    _tariffController = TextEditingController(text: config.tariffR2PerKm.toInt().toString());
+    _minFareController = TextEditingController(text: config.minFareR2.toInt().toString());
+    _tariffR4Controller = TextEditingController(text: config.tariffR4PerKm.toInt().toString());
+    _minFareR4Controller = TextEditingController(text: config.minFareR4.toInt().toString());
+    _commissionR4Controller = TextEditingController(text: config.commissionR4Percent.toString());
+    _tariffFoodR2Controller = TextEditingController(text: config.tariffFoodR2PerKm.toInt().toString());
+    _minFareFoodR2Controller = TextEditingController(text: config.minFareFoodR2.toInt().toString());
+
     _appFeeController = TextEditingController(text: config.appFee.toInt().toString());
     _serviceFeeController = TextEditingController(text: config.serviceFee.toInt().toString());
     _markupController = TextEditingController(text: config.markupPercent.toInt().toString());
     _disbursementFeeController = TextEditingController(text: config.disbursementFee.toInt().toString());
     _driverChargeController = TextEditingController(text: config.driverChargeFee.toInt().toString());
-    _ambAntarController = TextEditingController(text: config.ambulanceAntarFee.toInt().toString());
+    _driverMinWalletController = TextEditingController(text: config.driverMinWalletBalance.toInt().toString());
+
+    _ambAntarController = TextEditingController(text: config.ambulanceTariffPerKm.toInt().toString());
+    _ambMinFareController = TextEditingController(text: config.ambulanceMinFare.toInt().toString());
     _ambAngkutController = TextEditingController(text: config.ambulanceAngkutFee.toInt().toString());
+
+    _logistikTariffController = TextEditingController(text: config.logistikTariffPerKm.toInt().toString());
+    _logistikMinFareController = TextEditingController(text: config.logistikMinFare.toInt().toString());
+    _logistikAngkutController = TextEditingController(text: config.logistikAngkutFee.toInt().toString());
+    _trukL300Controller = TextEditingController(text: config.trukL300BaseFee.toInt().toString());
+
     _profitCabangController = TextEditingController(text: config.profitShareCabang.toInt().toString());
+    _skemaKerjasamaPusatController = TextEditingController(text: config.skemaKerjasamaPusatPct.toInt().toString());
+    _skemaKerjasamaDaerahController = TextEditingController(text: config.skemaKerjasamaDaerahPct.toInt().toString());
+    _skemaTanpaKerjasamaPusatController = TextEditingController(text: config.skemaTanpaKerjasamaPusatPct.toInt().toString());
+    _skemaTanpaKerjasamaDaerahController = TextEditingController(text: config.skemaTanpaKerjasamaDaerahPct.toInt().toString());
+    _skemaEventMandiriPusatController = TextEditingController(text: config.skemaEventMandiriPusatPct.toInt().toString());
+    _skemaEventMandiriDaerahController = TextEditingController(text: config.skemaEventMandiriDaerahPct.toInt().toString());
     _uniqueTimerController = TextEditingController(text: config.uniqueCodeDurationMinutes.toString());
   }
 
@@ -50,14 +101,31 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
   void dispose() {
     _tariffController.dispose();
     _minFareController.dispose();
+    _tariffR4Controller.dispose();
+    _minFareR4Controller.dispose();
+    _commissionR4Controller.dispose();
+    _tariffFoodR2Controller.dispose();
+    _minFareFoodR2Controller.dispose();
     _appFeeController.dispose();
     _serviceFeeController.dispose();
     _markupController.dispose();
     _disbursementFeeController.dispose();
     _driverChargeController.dispose();
+    _driverMinWalletController.dispose();
     _ambAntarController.dispose();
+    _ambMinFareController.dispose();
     _ambAngkutController.dispose();
+    _logistikTariffController.dispose();
+    _logistikMinFareController.dispose();
+    _logistikAngkutController.dispose();
+    _trukL300Controller.dispose();
     _profitCabangController.dispose();
+    _skemaKerjasamaPusatController.dispose();
+    _skemaKerjasamaDaerahController.dispose();
+    _skemaTanpaKerjasamaPusatController.dispose();
+    _skemaTanpaKerjasamaDaerahController.dispose();
+    _skemaEventMandiriPusatController.dispose();
+    _skemaEventMandiriDaerahController.dispose();
     _uniqueTimerController.dispose();
     super.dispose();
   }
@@ -106,20 +174,57 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
     final borderSubtle = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
 
     // Live calculation for preview simulator
-    final double tariffPerKm = double.tryParse(_tariffController.text) ?? 2500;
-    final double minFare = double.tryParse(_minFareController.text) ?? 8000;
-    final double appFee = double.tryParse(_appFeeController.text) ?? 1000;
-    final double serviceFee = double.tryParse(_serviceFeeController.text) ?? 2000;
+    final double appFee = double.tryParse(_appFeeController.text) ?? 500;
+    final double serviceFee = double.tryParse(_serviceFeeController.text) ?? 500;
     final double markupPct = double.tryParse(_markupController.text) ?? 10;
-    final double profitCabangPct = double.tryParse(_profitCabangController.text) ?? 30;
+    final double profitCabangPct = double.tryParse(_profitCabangController.text) ?? 25;
 
-    final double rawDistanceFare = _simulatedKm * tariffPerKm;
-    final double baseTripFare = rawDistanceFare < minFare ? minFare : rawDistanceFare;
+    // Parameter dinamis sesuai moda yang dipilih
+    double simTariffPerKm = 2500;
+    double simMinFare = 8000;
+    double simDriverCutPct = 95.0; // Driver share %
+    double simExtraJasaAngkut = 0.0;
+    String modeLabel = 'Motor R2';
+
+    if (_selectedSimulatorMode == 'R2_RIDE') {
+      simTariffPerKm = double.tryParse(_tariffController.text) ?? 2500;
+      simMinFare = double.tryParse(_minFareController.text) ?? 8000;
+      simDriverCutPct = 95.0;
+      modeLabel = 'Motor (Ride Hailing R2)';
+    } else if (_selectedSimulatorMode == 'R4_CAR') {
+      simTariffPerKm = double.tryParse(_tariffR4Controller.text) ?? 4000;
+      simMinFare = double.tryParse(_minFareR4Controller.text) ?? 15000;
+      final double commR4 = double.tryParse(_commissionR4Controller.text) ?? 7.5;
+      simDriverCutPct = 100.0 - commR4; // 92.5%
+      modeLabel = 'Mobil Penumpang (R4)';
+    } else if (_selectedSimulatorMode == 'R2_FOOD') {
+      simTariffPerKm = double.tryParse(_tariffFoodR2Controller.text) ?? 3000;
+      simMinFare = double.tryParse(_minFareFoodR2Controller.text) ?? 10000;
+      simDriverCutPct = 95.0;
+      modeLabel = 'Food & Logistik Kecil R2';
+    } else if (_selectedSimulatorMode == 'AMBULANCE') {
+      simTariffPerKm = double.tryParse(_ambAntarController.text) ?? 5000;
+      simMinFare = double.tryParse(_ambMinFareController.text) ?? 50000;
+      simExtraJasaAngkut = double.tryParse(_ambAngkutController.text) ?? 50000;
+      simDriverCutPct = 92.5; // Komisi 7.5%
+      modeLabel = 'Ambulance Medis';
+    } else if (_selectedSimulatorMode == 'LOGISTIK_BOX') {
+      simTariffPerKm = double.tryParse(_logistikTariffController.text) ?? 4000;
+      simMinFare = double.tryParse(_logistikMinFareController.text) ?? 50000;
+      simExtraJasaAngkut = double.tryParse(_logistikAngkutController.text) ?? 50000;
+      simDriverCutPct = 92.5; // Komisi 7.5%
+      modeLabel = 'Logistik Box / Bak / L300';
+    }
+
+    final double rawDistanceFare = _simulatedKm * simTariffPerKm;
+    final double baseTripFare = rawDistanceFare < simMinFare ? simMinFare : rawDistanceFare;
     final double markupAmount = baseTripFare * (markupPct / 100);
-    final double totalConsumerPay = baseTripFare + markupAmount + appFee + serviceFee;
+    final double totalConsumerPay = baseTripFare + simExtraJasaAngkut + markupAmount + appFee + serviceFee;
 
-    final double driverGross = baseTripFare * 0.95; // 95% Driver sesuai regulasi Excel
-    final double platformGross = (baseTripFare * 0.05) + markupAmount + appFee + serviceFee;
+    // Driver share: tarif dasar * share% + 99% jasa angkut
+    final double driverGross = (baseTripFare * (simDriverCutPct / 100)) + (simExtraJasaAngkut * 0.99);
+    // Platform share: tarif dasar komisi% + 1% komisi jasa angkut + markup + app fee + service fee
+    final double platformGross = (baseTripFare * ((100 - simDriverCutPct) / 100)) + (simExtraJasaAngkut * 0.01) + markupAmount + appFee + serviceFee;
     final double branchShare = platformGross * (profitCabangPct / 100);
     final double hqNet = platformGross - branchShare;
 
@@ -373,21 +478,26 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                     flex: isWide ? 6 : 1,
                     child: Column(
                         children: [
-                          // SECTION 1: TARIF TRIP & RIDE-HAILING
+                          // SECTION 1: TARIF TRIP & RIDE-HAILING R2 & R4
                           _buildSectionCard(
-                            title: '1. Parameter Perjalanan & Ride-Hailing',
-                            icon: Icons.motorcycle_rounded,
+                            title: '1. Parameter Perjalanan Roda 2 (Motor) & Roda 4 (Mobil)',
+                            icon: Icons.directions_car_rounded,
                             iconColor: const Color(0xFF0066FF),
                             cardBg: cardBg,
                             borderSubtle: borderSubtle,
                             textPrimary: textPrimary,
                             children: [
+                              Text(
+                                '• KENDARAAN RODA 2 (MOTOR RIDE HAILING)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
                                     child: _buildModernInputField(
-                                      label: 'Tarif per KM (Ride Hailing)',
-                                      helper: 'Tarif dasar pengantaran per kilometer',
+                                      label: 'Tarif per KM (Motor R2)',
+                                      helper: 'Tarif dasar pengantaran motor per KM',
                                       controller: _tariffController,
                                       prefix: 'Rp',
                                       isDark: isDark,
@@ -397,8 +507,8 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   const SizedBox(width: 16),
                                   Expanded(
                                     child: _buildModernInputField(
-                                      label: 'Biaya Minimum Perjalanan',
-                                      helper: 'Tarif flat perjalanan jarak dekat (< 3 KM)',
+                                      label: 'Biaya Minimum (< 3 KM)',
+                                      helper: 'Tarif flat perjalanan jarak dekat motor',
                                       controller: _minFareController,
                                       prefix: 'Rp',
                                       isDark: isDark,
@@ -408,8 +518,50 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                 ],
                               ),
                               const SizedBox(height: 16),
+                              Text(
+                                '• KENDARAAN RODA 4 (MOBIL PENUMPANG)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Tarif per KM (Mobil R4)',
+                                      helper: 'Tarif dasar pengantaran mobil per KM',
+                                      controller: _tariffR4Controller,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Minimum Mobil (< 3 KM)',
+                                      helper: 'Tarif flat perjalanan jarak dekat mobil',
+                                      controller: _minFareR4Controller,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Komisi Mobil (%)',
+                                      helper: 'Potongan komisi R4 (Standar: 7.5%)',
+                                      controller: _commissionR4Controller,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
                               _buildModernInputField(
-                                label: 'Persentase Markup Harga (%)',
+                                label: 'Persentase Markup Harga Dasar (%)',
                                 helper: 'Markup margin platform pada katalog menu & produk',
                                 controller: _markupController,
                                 suffix: '%',
@@ -420,9 +572,47 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                           ),
                           const SizedBox(height: 18),
 
-                          // SECTION 2: BIAYA PLATFORM & OPERASIONAL
+                          // SECTION 2: RIDE-HAILING FOOD & LOGISTIK KECIL R2
                           _buildSectionCard(
-                            title: '2. Biaya Layanan Konsumen & Ekosistem',
+                            title: '2. Parameter Food & Logistik Barang Kecil Roda 2',
+                            icon: Icons.fastfood_rounded,
+                            iconColor: const Color(0xFFF59E0B),
+                            cardBg: cardBg,
+                            borderSubtle: borderSubtle,
+                            textPrimary: textPrimary,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Tarif per KM (Food & Logistik R2)',
+                                      helper: 'Tarif antar makanan & logistik kecil',
+                                      controller: _tariffFoodR2Controller,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Minimum (< 3 KM)',
+                                      helper: 'Tarif flat dekat Food/Logistik',
+                                      controller: _minFareFoodR2Controller,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 18),
+
+                          // SECTION 3: BIAYA LAYANAN KONSUMEN & EKOSISTEM
+                          _buildSectionCard(
+                            title: '3. Biaya Layanan Konsumen & Ekosistem Driver',
                             icon: Icons.receipt_long_rounded,
                             iconColor: const Color(0xFF10B981),
                             cardBg: cardBg,
@@ -434,7 +624,7 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   Expanded(
                                     child: _buildModernInputField(
                                       label: 'Biaya Aplikasi (Ke Konsumen)',
-                                      helper: 'Dibebankan ke user per order selesai',
+                                      helper: 'Sesuai Excel: Rp500 per order',
                                       controller: _appFeeController,
                                       prefix: 'Rp',
                                       isDark: isDark,
@@ -445,7 +635,7 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   Expanded(
                                     child: _buildModernInputField(
                                       label: 'Biaya Layanan Platform',
-                                      helper: 'Maintenance & infrastructure fee',
+                                      helper: 'Sesuai Excel: Rp500 per order',
                                       controller: _serviceFeeController,
                                       prefix: 'Rp',
                                       isDark: isDark,
@@ -459,8 +649,8 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                 children: [
                                   Expanded(
                                     child: _buildModernInputField(
-                                      label: 'Biaya Pencairan Penjual (Payout Fee)',
-                                      helper: 'Potongan per batch disbursement 17:00 WIB',
+                                      label: 'Biaya Pencairan (Payout Fee)',
+                                      helper: 'Potongan transfer batch 17:00-00:00 WIB',
                                       controller: _disbursementFeeController,
                                       prefix: 'Rp',
                                       isDark: isDark,
@@ -471,8 +661,19 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   Expanded(
                                     child: _buildModernInputField(
                                       label: 'Charge Driver per Transaksi',
-                                      helper: 'Iuran bantuan driver/asuransi sesuai Excel',
+                                      helper: 'Reguler Rp500 per transaksi',
                                       controller: _driverChargeController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Min. Saldo Driver (Order Cash)',
+                                      helper: 'Batas saldo minimal terima cash',
+                                      controller: _driverMinWalletController,
                                       prefix: 'Rp',
                                       isDark: isDark,
                                       onChanged: (_) => setState(() {}),
@@ -484,21 +685,219 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                           ),
                           const SizedBox(height: 18),
 
-                          // SECTION 3: REVENUE SHARING CABANG & KODE UNIK
+                          // SECTION 4: LAYANAN ARMADA KHUSUS (AMBULANCE & LOGISTIK BOX)
                           _buildSectionCard(
-                            title: '3. Bagi Hasil Cabang & Validasi Keuangan',
-                            icon: Icons.account_balance_rounded,
+                            title: '4. Layanan Armada Khusus (Ambulance & Logistik Box)',
+                            icon: Icons.local_hospital_rounded,
+                            iconColor: const Color(0xFFEF4444),
+                            cardBg: cardBg,
+                            borderSubtle: borderSubtle,
+                            textPrimary: textPrimary,
+                            children: [
+                              Text(
+                                '• LAYANAN KHUSUS AMBULANCE MEDIS (0-100KM)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Antar / KM',
+                                      helper: 'Tarif Ambulance per KM',
+                                      controller: _ambAntarController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Minimum (< 4 KM)',
+                                      helper: 'Flat penjemputan dasar ambulance',
+                                      controller: _ambMinFareController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Angkut Medis Pasien',
+                                      helper: 'Nakes & pendampingan (Komisi 1%)',
+                                      controller: _ambAngkutController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                '• LAYANAN LOGISTIK BESAR (MOBIL BOX, BAK, TRUK L300)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Antar Box/Bak / KM',
+                                      helper: 'Tarif logistik besar per KM',
+                                      controller: _logistikTariffController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Minimum (< 4 KM)',
+                                      helper: 'Flat penjemputan dasar box/bak',
+                                      controller: _logistikMinFareController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Biaya Angkut Barang / Porter',
+                                      helper: 'Jasa angkut barang (Komisi 1%)',
+                                      controller: _logistikAngkutController,
+                                      prefix: 'Rp',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              _buildModernInputField(
+                                label: 'Tarif Truk L300 Flat Penjemputan',
+                                helper: 'Biaya dasar angkutan armada Truk L300',
+                                controller: _trukL300Controller,
+                                prefix: 'Rp',
+                                isDark: isDark,
+                                onChanged: (_) => setState(() {}),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 18),
+
+                          // SECTION 5: SKEMA BAGI HASIL WILAYAH DINAMIS (EXCEL SHEET 7)
+                          _buildSectionCard(
+                            title: '5. Skema Bagi Hasil Wilayah Dinamis (Pusat & Daerah)',
+                            icon: Icons.hub_rounded,
                             iconColor: const Color(0xFF6366F1),
                             cardBg: cardBg,
                             borderSubtle: borderSubtle,
                             textPrimary: textPrimary,
                             children: [
+                              Text(
+                                '• SKEMA 1: KERJASAMA PUSAT & DAERAH (STANDAR 75% : 25%)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
                                     child: _buildModernInputField(
-                                      label: 'Profit Share Cabang Wilayah (%)',
-                                      helper: 'Bagi hasil netto untuk pemegang lisensi cabang',
+                                      label: 'Porsi Pusat (%)',
+                                      helper: 'Bagi hasil Superadmin Pusat',
+                                      controller: _skemaKerjasamaPusatController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Porsi Admin Daerah (%)',
+                                      helper: 'Bagi hasil Pemegang Lisensi Cabang',
+                                      controller: _skemaKerjasamaDaerahController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                '• SKEMA 2: TANPA KERJASAMA (STANDAR 100% : 0%)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Porsi Pusat (%)',
+                                      helper: 'Seluruh profit ke Pusat HQ',
+                                      controller: _skemaTanpaKerjasamaPusatController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Porsi Daerah (%)',
+                                      helper: 'Tanpa lisensi cabang',
+                                      controller: _skemaTanpaKerjasamaDaerahController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                '• SKEMA 3: EVENT MANDIRI DAERAH (STANDAR 20% : 80% - KOLOM 9)',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Porsi Pusat (%)',
+                                      helper: 'Royalti Superadmin Pusat',
+                                      controller: _skemaEventMandiriPusatController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Porsi Panitia Daerah (%)',
+                                      helper: 'Porsi Bispira Event Daerah',
+                                      controller: _skemaEventMandiriDaerahController,
+                                      suffix: '%',
+                                      isDark: isDark,
+                                      onChanged: (_) => setState(() {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildModernInputField(
+                                      label: 'Profit Share Cabang Default (%)',
+                                      helper: 'Persentase acuan kalkulator live',
                                       controller: _profitCabangController,
                                       suffix: '%',
                                       isDark: isDark,
@@ -509,47 +908,9 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   Expanded(
                                     child: _buildModernInputField(
                                       label: 'Masa Berlaku Kode Unik (Menit)',
-                                      helper: 'Timer auto-cancel rekonsiliasi transfer bank',
+                                      helper: 'Timer auto-cancel rekonsiliasi transfer',
                                       controller: _uniqueTimerController,
                                       suffix: 'Mnt',
-                                      isDark: isDark,
-                                      onChanged: (_) => setState(() {}),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 18),
-
-                          // SECTION 4: AMBULANCE SPECIAL FLEET
-                          _buildSectionCard(
-                            title: '4. Layanan Darurat Khusus Ambulance',
-                            icon: Icons.emergency_rounded,
-                            iconColor: const Color(0xFFEF4444),
-                            cardBg: cardBg,
-                            borderSubtle: borderSubtle,
-                            textPrimary: textPrimary,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: _buildModernInputField(
-                                      label: 'Biaya Antar Dasar Ambulance',
-                                      helper: 'Tarif flat penjemputan unit ambulance',
-                                      controller: _ambAntarController,
-                                      prefix: 'Rp',
-                                      isDark: isDark,
-                                      onChanged: (_) => setState(() {}),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: _buildModernInputField(
-                                      label: 'Biaya Angkut Medis Pasien',
-                                      helper: 'Biaya pendampingan nakes & peralatan',
-                                      controller: _ambAngkutController,
-                                      prefix: 'Rp',
                                       isDark: isDark,
                                       onChanged: (_) => setState(() {}),
                                     ),
@@ -569,15 +930,31 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                     provider.updateConfig(
                                       tariffPerKm: double.tryParse(_tariffController.text) ?? 2500,
                                       minFare: double.tryParse(_minFareController.text) ?? 8000,
-                                      appFee: double.tryParse(_appFeeController.text) ?? 1000,
-                                      serviceFee: double.tryParse(_serviceFeeController.text) ?? 2000,
+                                      appFee: double.tryParse(_appFeeController.text) ?? 500,
+                                      serviceFee: double.tryParse(_serviceFeeController.text) ?? 500,
                                       markupPercent: double.tryParse(_markupController.text) ?? 10,
                                       disbursementFee: double.tryParse(_disbursementFeeController.text) ?? 1000,
                                       driverChargeFee: double.tryParse(_driverChargeController.text) ?? 500,
-                                      ambulanceAntarFee: double.tryParse(_ambAntarController.text) ?? 150000,
+                                      ambulanceAntarFee: double.tryParse(_ambAntarController.text) ?? 5000,
                                       ambulanceAngkutFee: double.tryParse(_ambAngkutController.text) ?? 50000,
-                                      profitShareCabang: double.tryParse(_profitCabangController.text) ?? 30,
+                                      profitShareCabang: double.tryParse(_profitCabangController.text) ?? 25,
                                       uniqueCodeDurationMinutes: int.tryParse(_uniqueTimerController.text) ?? 30,
+                                      tariffR4PerKm: double.tryParse(_tariffR4Controller.text) ?? 4000,
+                                      minFareR4: double.tryParse(_minFareR4Controller.text) ?? 15000,
+                                      commissionR4Percent: double.tryParse(_commissionR4Controller.text) ?? 7.5,
+                                      tariffFoodR2PerKm: double.tryParse(_tariffFoodR2Controller.text) ?? 3000,
+                                      minFareFoodR2: double.tryParse(_minFareFoodR2Controller.text) ?? 10000,
+                                      logistikTariffPerKm: double.tryParse(_logistikTariffController.text) ?? 4000,
+                                      logistikMinFare: double.tryParse(_logistikMinFareController.text) ?? 50000,
+                                      logistikAngkutFee: double.tryParse(_logistikAngkutController.text) ?? 50000,
+                                      trukL300BaseFee: double.tryParse(_trukL300Controller.text) ?? 100000,
+                                      driverMinWalletBalance: double.tryParse(_driverMinWalletController.text) ?? 10000,
+                                      skemaKerjasamaPusatPct: double.tryParse(_skemaKerjasamaPusatController.text) ?? 75,
+                                      skemaKerjasamaDaerahPct: double.tryParse(_skemaKerjasamaDaerahController.text) ?? 25,
+                                      skemaTanpaKerjasamaPusatPct: double.tryParse(_skemaTanpaKerjasamaPusatController.text) ?? 100,
+                                      skemaTanpaKerjasamaDaerahPct: double.tryParse(_skemaTanpaKerjasamaDaerahController.text) ?? 0,
+                                      skemaEventMandiriPusatPct: double.tryParse(_skemaEventMandiriPusatController.text) ?? 20,
+                                      skemaEventMandiriDaerahPct: double.tryParse(_skemaEventMandiriDaerahController.text) ?? 80,
                                     );
 
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -587,7 +964,7 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                             Icon(Icons.check_circle_rounded, color: Colors.white),
                                             SizedBox(width: 12),
                                             Text(
-                                              'Konfigurasi Biaya Live Berhasil Diperbarui!',
+                                              'Konfigurasi Biaya Sesuai Excel Baru Berhasil Disimpan!',
                                               style: TextStyle(fontWeight: FontWeight.w700),
                                             ),
                                           ],
@@ -647,18 +1024,35 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   setState(() {
                                     _tariffController.text = '2500';
                                     _minFareController.text = '8000';
-                                    _appFeeController.text = '1000';
-                                    _serviceFeeController.text = '2000';
+                                    _tariffR4Controller.text = '4000';
+                                    _minFareR4Controller.text = '15000';
+                                    _commissionR4Controller.text = '7.5';
+                                    _tariffFoodR2Controller.text = '3000';
+                                    _minFareFoodR2Controller.text = '10000';
+                                    _appFeeController.text = '500';
+                                    _serviceFeeController.text = '500';
                                     _markupController.text = '10';
                                     _disbursementFeeController.text = '1000';
                                     _driverChargeController.text = '500';
-                                    _ambAntarController.text = '150000';
+                                    _driverMinWalletController.text = '10000';
+                                    _ambAntarController.text = '5000';
+                                    _ambMinFareController.text = '50000';
                                     _ambAngkutController.text = '50000';
-                                    _profitCabangController.text = '30';
+                                    _logistikTariffController.text = '4000';
+                                    _logistikMinFareController.text = '50000';
+                                    _logistikAngkutController.text = '50000';
+                                    _trukL300Controller.text = '100000';
+                                    _profitCabangController.text = '25';
+                                    _skemaKerjasamaPusatController.text = '75';
+                                    _skemaKerjasamaDaerahController.text = '25';
+                                    _skemaTanpaKerjasamaPusatController.text = '100';
+                                    _skemaTanpaKerjasamaDaerahController.text = '0';
+                                    _skemaEventMandiriPusatController.text = '20';
+                                    _skemaEventMandiriDaerahController.text = '80';
                                     _uniqueTimerController.text = '30';
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Form direset ke standar default.')),
+                                    const SnackBar(content: Text('Form direset ke standar Excel Baru November 2026.')),
                                   );
                                 },
                                 icon: const Icon(Icons.restart_alt_rounded, size: 20),
@@ -673,13 +1067,13 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                       ),
                     ),
 
-                  // RIGHT COLUMN: LIVE REVENUE SHARING & TRIP SIMULATOR
+                  // RIGHT COLUMN: LIVE REVENUE SHARING & TRIP SIMULATOR (0 - 100 KM)
                   const SizedBox(width: 24),
                   Expanded(
                     flex: isWide ? 4 : 1,
                     child: Column(
                         children: [
-                          // INTERACTIVE SIMULATOR CARD
+                          // INTERACTIVE SIMULATOR CARD (0 - 100 KM)
                           Container(
                             padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
@@ -716,15 +1110,15 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Live Trip Calculator',
+                                            'Live Trip Calculator (0 - 100 KM)',
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.w800,
                                               color: textPrimary,
                                             ),
                                           ),
                                           Text(
-                                            'Simulasi perhitungan tarif & bagi hasil',
+                                            'Simulasi tarif & split settlement multi-armada',
                                             style: TextStyle(fontSize: 11, color: textSecondary),
                                           ),
                                         ],
@@ -732,9 +1126,28 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 18),
 
-                                // Slider Jarak
+                                // MODA VEHICLE SELECTOR BUTTONS
+                                Text(
+                                  'PILIH MODA TRANSPORTASI:',
+                                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: textSecondary, letterSpacing: 0.5),
+                                ),
+                                const SizedBox(height: 8),
+                                Wrap(
+                                  spacing: 6,
+                                  runSpacing: 6,
+                                  children: [
+                                    _buildModePill('R2_RIDE', 'Motor R2', Icons.two_wheeler_rounded),
+                                    _buildModePill('R4_CAR', 'Mobil R4', Icons.directions_car_rounded),
+                                    _buildModePill('R2_FOOD', 'Food R2', Icons.fastfood_rounded),
+                                    _buildModePill('AMBULANCE', 'Ambulance', Icons.local_hospital_rounded),
+                                    _buildModePill('LOGISTIK_BOX', 'Box / Bak', Icons.local_shipping_rounded),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+
+                                // Slider Jarak (1.0 - 100.0 KM)
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -762,22 +1175,26 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                   child: Slider(
                                     value: _simulatedKm,
                                     min: 1.0,
-                                    max: 30.0,
-                                    divisions: 58,
+                                    max: 100.0,
+                                    divisions: 99,
                                     onChanged: (val) => setState(() => _simulatedKm = val),
                                   ),
                                 ),
-                                const Divider(height: 24),
+                                const Divider(height: 20),
 
                                 // Breakdown Rincian Biaya
-                                _buildSimRow('Tarif Jarak Dasar (${_simulatedKm.toStringAsFixed(1)} KM)', currencyFmt.format(baseTripFare), textPrimary, textSecondary),
-                                const SizedBox(height: 8),
+                                _buildSimRow('Tarif Dasar ($modeLabel)', currencyFmt.format(baseTripFare), textPrimary, textSecondary),
+                                if (simExtraJasaAngkut > 0) ...[
+                                  const SizedBox(height: 6),
+                                  _buildSimRow('Biaya Angkut Pasien/Barang', currencyFmt.format(simExtraJasaAngkut), textPrimary, textSecondary),
+                                ],
+                                const SizedBox(height: 6),
                                 _buildSimRow('Markup Platform (${markupPct.toStringAsFixed(0)}%)', currencyFmt.format(markupAmount), textPrimary, textSecondary),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 6),
                                 _buildSimRow('Biaya Aplikasi', currencyFmt.format(appFee), textPrimary, textSecondary),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 6),
                                 _buildSimRow('Biaya Layanan', currencyFmt.format(serviceFee), textPrimary, textSecondary),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 10),
 
                                 // Total Konsumen Bayar
                                 Container(
@@ -805,7 +1222,7 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 16),
+                                const SizedBox(height: 14),
 
                                 // Split Settlement Details (Sesuai Excel)
                                 Text(
@@ -817,21 +1234,23 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
                                     letterSpacing: 0.5,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 8),
                                 _buildSplitPill(
-                                  label: 'Driver (95% Ongkir Dasar)',
+                                  label: 'Driver (${simDriverCutPct.toStringAsFixed(1)}% Dasar)',
                                   amount: currencyFmt.format(driverGross),
                                   color: const Color(0xFF10B981),
-                                  icon: Icons.two_wheeler_rounded,
+                                  icon: _selectedSimulatorMode == 'R4_CAR' || _selectedSimulatorMode == 'AMBULANCE' || _selectedSimulatorMode == 'LOGISTIK_BOX'
+                                      ? Icons.directions_car_rounded
+                                      : Icons.two_wheeler_rounded,
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 6),
                                 _buildSplitPill(
                                   label: 'Pusat HQ Netto',
                                   amount: currencyFmt.format(hqNet),
                                   color: const Color(0xFF0066FF),
                                   icon: Icons.domain_rounded,
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 6),
                                 _buildSplitPill(
                                   label: 'Cabang Wilayah (${profitCabangPct.toStringAsFixed(0)}%)',
                                   amount: currencyFmt.format(branchShare),
@@ -1114,6 +1533,40 @@ class _FeeCustomizationTabState extends State<FeeCustomizationTab> {
         Text(label, style: TextStyle(fontSize: 12, color: textSecondary, fontWeight: FontWeight.w500)),
         Text(value, style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: textPrimary)),
       ],
+    );
+  }
+
+  Widget _buildModePill(String modeKey, String label, IconData icon) {
+    final isSelected = _selectedSimulatorMode == modeKey;
+    return InkWell(
+      onTap: () => setState(() => _selectedSimulatorMode = modeKey),
+      borderRadius: BorderRadius.circular(10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF0066FF) : const Color(0xFF0066FF).withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF0066FF) : const Color(0xFF0066FF).withValues(alpha: 0.2),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 14, color: isSelected ? Colors.white : const Color(0xFF0066FF)),
+            const SizedBox(width: 5),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                color: isSelected ? Colors.white : const Color(0xFF0066FF),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

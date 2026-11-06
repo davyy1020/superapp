@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../theme/neo_theme.dart';
-import '../widgets/neo_widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

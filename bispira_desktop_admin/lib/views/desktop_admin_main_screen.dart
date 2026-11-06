@@ -4,6 +4,14 @@ import '../providers/admin_provider.dart';
 import '../theme/neo_brutal_theme.dart';
 import 'login_screen.dart';
 import 'tabs/dashboard_overview_tab.dart';
+import 'tabs/detail_transaksi_tab.dart';
+import 'tabs/akumulasi_penjual_driver_tab.dart';
+import 'tabs/saldo_wallet_driver_tab.dart';
+import 'tabs/master_rekening_penjual_tab.dart';
+import 'tabs/akumulasi_dana_pencairan_tab.dart';
+import 'tabs/pencairan_per_bank_tab.dart';
+import 'tabs/bagi_hasil_pusat_daerah_tab.dart';
+import 'tabs/profil_lisensi_daerah_tab.dart';
 import 'tabs/manual_reconciliation_tab.dart';
 import 'tabs/batch_settlement_tab.dart';
 import 'tabs/branch_licenses_tab.dart';
@@ -33,6 +41,14 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
   int _selectedTabIndex = 0;
   final List<Widget> _tabs = const [
     DashboardOverviewTab(),
+    DetailTransaksiTab(),
+    AkumulasiPenjualDriverTab(),
+    SaldoWalletDriverTab(),
+    MasterRekeningPenjualTab(),
+    AkumulasiDanaPencairanTab(),
+    PencairanPerBankTab(),
+    BagiHasilPusatDaerahTab(),
+    ProfilLisensiDaerahTab(),
     ManualReconciliationTab(),
     BatchSettlementTab(),
     BranchLicensesTab(),
@@ -45,13 +61,21 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
 
   final List<_NavItemData> _navItems = const [
     _NavItemData(Icons.dashboard_rounded, 'Dashboard & Finansial', 'Dashboard'),
+    _NavItemData(Icons.receipt_long_rounded, '1. Detail Transaksi Ledger', 'Ledger No. 1'),
+    _NavItemData(Icons.pie_chart_rounded, '2. Akumulasi Penjual & Driver', 'Akumulasi No. 2'),
+    _NavItemData(Icons.account_balance_wallet_rounded, '3. Saldo Wallet Driver', 'Wallet No. 3'),
+    _NavItemData(Icons.credit_card_rounded, '4. Master Rekening Penjual', 'Rekening No. 4'),
+    _NavItemData(Icons.payments_rounded, '5. Akumulasi Dana Pencairan', 'Pencairan No. 5'),
+    _NavItemData(Icons.account_balance_rounded, '6. Pencairan Per Bank', 'Bank No. 6'),
+    _NavItemData(Icons.handshake_rounded, '7. Bagi Hasil Pusat & Daerah', 'Bagi Hasil No. 7'),
+    _NavItemData(Icons.verified_user_rounded, '8. Profil Lisensi Daerah', 'Lisensi No. 8'),
     _NavItemData(Icons.fact_check_rounded, 'Verifikasi Mutasi Bank', 'Mutasi'),
-    _NavItemData(Icons.account_balance_wallet_rounded, 'Batch Payout 17:00 WIB', 'Payout'),
+    _NavItemData(Icons.price_change_rounded, 'Batch Payout (17:00-00:00)', 'Payout'),
     _NavItemData(Icons.apartment_rounded, 'Pusat Cabang & Lisensi', 'Cabang'),
     _NavItemData(Icons.two_wheeler_rounded, 'Pusat Driver & Atribut', 'Driver'),
-    _NavItemData(Icons.storefront_rounded, 'Pusat Merchant & Katalog', 'Merchant'),
+    _NavItemData(Icons.storefront_rounded, '10-11. Merchant & Katalog Ekosistem', 'Katalog No. 10'),
     _NavItemData(Icons.people_alt_rounded, 'Pusat User & Nasabah', 'User'),
-    _NavItemData(Icons.tune_rounded, 'Pengaturan Tarif & Fees', 'Tarif'),
+    _NavItemData(Icons.tune_rounded, '9. Pengaturan Tarif & Fees', 'Tarif No. 9'),
     _NavItemData(Icons.map_rounded, 'Peta GIS Live Tracking', 'GIS'),
   ];
 

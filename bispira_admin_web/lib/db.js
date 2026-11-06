@@ -2,28 +2,61 @@
 // Accessible by both User App API and Desktop Admin API
 // Persists in-memory during server runtime and ready for PostgreSQL pooling
 
+import sheet1Data from './data/sheet1_detail_transaksi.json';
+import sheet2Data from './data/sheet2_akumulasi_penjual_driver.json';
+import sheet3Data from './data/sheet3_saldo_wallet_driver.json';
+import sheet4Data from './data/sheet4_master_rekening_penjual.json';
+import sheet5Data from './data/sheet5_akumulasi_dana_pencairan.json';
+import sheet6Data from './data/sheet6_pencairan_per_bank.json';
+import sheet7Data from './data/sheet7_bagi_hasil_pusat_daerah.json';
+import sheet8Data from './data/sheet8_profil_lisensi_daerah.json';
+import sheet9Data from './data/sheet9_pengaturan_tarif_fees.json';
+import sheet1011Data from './data/sheet10_11_produk_katalog_ekosistem.json';
+import sheet12Data from './data/sheet12_pendapatan_superadmin_matrix.json';
+import formulirPenjualMaster from './data/formulir_penjual_master.json';
+
 const globalForDb = globalThis;
 
 if (!globalForDb._bispiraDb) {
   globalForDb._bispiraDb = {
-    // 1. Tariffs & Financial Platform Config
+    // 1. Tariffs & Financial Platform Config (Disinkronkan dengan Excel Sheet 9, 10, 11, 12 & 1)
     settings: {
       tariffs: {
-        ride_motor_per_km: 2800,
-        ride_car_per_km: 5500,
-        service_fee: 2500,
-        application_fee: 1000,
+        ride_motor_per_km: 2500,
+        ride_motor_min_fare: 8000,
+        ride_car_per_km: 4000,
+        ride_car_min_fare: 15000,
+        food_r2_per_km: 3000,
+        food_r2_min_fare: 10000,
+        service_fee: 500,
+        application_fee: 500,
         driver_charge_per_trip: 500,
-        ambulance_base_fee: 160000,
+        driver_charge_premium_30hari: 15000,
+        driver_min_wallet_balance: 10000,
+        ambulance_base_fee: 120000,
+        ambulance_per_km: 10000,
+        ambulance_angkut_fee: 50000,
+        logistik_per_km: 5000,
+        logistik_min_fare: 50000,
+        logistik_angkut_fee: 50000,
+        truk_l300_base_fee: 100000,
         default_markup_percent: 10.0,
+        car_commission_percent: 7.5,
+        r2_commission_percent: 5.0,
+        merchant_commission_percent: 5.0,
+        payout_fee: 1000,
       },
       rules: {
-        branch_profit_share_percent: 30.0,
-        headquarters_profit_share_percent: 70.0,
+        branch_profit_share_percent: 25.0,
+        headquarters_profit_share_percent: 75.0,
+        event_mandiri_branch_share_percent: 80.0,
+        event_mandiri_headquarters_share_percent: 20.0,
         unique_code_timer_minutes: 30,
-        batch_payout_schedule_wib: '17:00',
+        batch_payout_schedule_wib: '17:00-00:00 (Senin & Kamis)',
         min_withdrawal_bifast: 10000,
         bifast_admin_fee: 2500,
+        min_driver_topup: 50000,
+        driver_attribute_installment_daily: 5000,
       },
     },
 
@@ -348,7 +381,150 @@ if (!globalForDb._bispiraDb) {
         status: 'Berhasil',
       },
     ],
+
+    // 11. Live Orders & Trips (User <-> Driver Dispatch Engine)
+    orders: [
+      {
+        id: 'BSP-ORD-77192',
+        serviceType: 'ride_motor',
+        serviceName: 'BISPIRA Ride (Motor) 🛵',
+        serviceEmoji: '🛵',
+        customerName: 'Davy (User Bispira)',
+        customerPhone: '0812-9876-5432',
+        pickupAddress: 'Jl. Kaligawe Raya No. 12, Genuk, Semarang',
+        dropoffAddress: 'Jl. Prof. Soedarto (Undip), Tembalang, Semarang',
+        pickupLat: -6.9622,
+        pickupLng: 110.4682,
+        dropoffLat: -7.0545,
+        dropoffLng: 110.4358,
+        distanceKm: 17.19,
+        durationMin: 18,
+        totalFareCustomer: 48478,
+        netDriverEarning: 43204, // 95% of Trip Fare (Rp 45.478 * 0.95 = Rp 43.204)
+        platformFee: 2274,       // 5% Platform Fee
+        taxPph: 227,             // PMK 37/2025 0.5%
+        appFee: 2000,
+        serviceFee: 1000,
+        uniqueCode: 247,
+        paymentMethod: 'Transfer Bank (Kode Unik 247) 🏦',
+        paymentStatus: 'PENDING_MANUAL_VERIFICATION',
+        status: 'LOOKING_FOR_DRIVER',
+        createdAt: new Date().toISOString(),
+      },
+    ],
+
+    // 12. Master Ledger Real-Time (Persis 21 Kolom Sheet 1: 1. Detail Transaksi)
+    ledgerTransactions: [...sheet1Data.rows],
+    ledgerSummary: sheet1Data.total,
+
+    // 13. Master Akumulasi Penjual & Driver (Persis 9 Kolom Sheet 2: 2. Akumulasi Penjual & Driver)
+    sellerDriverAccumulations: [...sheet2Data.rows],
+    sellerDriverAccumulationsSummary: sheet2Data.total,
+
+    // 14. Master Saldo Wallet Driver (Persis 8 Kolom Sheet 3: 3. Saldo Wallet Driver)
+    driverWalletBalances: [...sheet3Data.rows],
+    driverWalletBalancesSummary: sheet3Data.total,
+
+    // 15. Master Rekening Penjual / Driver (Persis 7 Kolom Sheet 4: 4. Master Rekening Penjual)
+    masterBankAccounts: [...sheet4Data.rows],
+    masterBankAccountsSummary: sheet4Data.total,
+
+    // 16. Master Akumulasi Dana Pencairan (Persis 8 Kolom Sheet 5: 5. Akumulasi Dana Pencairan)
+    disbursementAccumulations: [...sheet5Data.rows],
+    disbursementAccumulationsSummary: sheet5Data.total,
+
+    // 17. Master Rekapitulasi Pencairan Per Bank (Persis 7 Kolom Sheet 6: 6. Pencairan Per Bank)
+    disbursementsPerBank: [...sheet6Data.rows],
+    disbursementsPerBankSummary: sheet6Data.total,
   };
+}
+
+if (!globalForDb._bispiraDb.ledgerTransactions) {
+  globalForDb._bispiraDb.ledgerTransactions = [...sheet1Data.rows];
+  globalForDb._bispiraDb.ledgerSummary = sheet1Data.total;
+}
+
+if (!globalForDb._bispiraDb.sellerDriverAccumulations) {
+  globalForDb._bispiraDb.sellerDriverAccumulations = [...sheet2Data.rows];
+  globalForDb._bispiraDb.sellerDriverAccumulationsSummary = sheet2Data.total;
+}
+
+if (!globalForDb._bispiraDb.driverWalletBalances) {
+  globalForDb._bispiraDb.driverWalletBalances = [...sheet3Data.rows];
+  globalForDb._bispiraDb.driverWalletBalancesSummary = sheet3Data.total;
+}
+
+if (!globalForDb._bispiraDb.masterBankAccounts) {
+  globalForDb._bispiraDb.masterBankAccounts = [...sheet4Data.rows];
+  globalForDb._bispiraDb.masterBankAccountsSummary = sheet4Data.total;
+}
+
+if (!globalForDb._bispiraDb.disbursementAccumulations) {
+  globalForDb._bispiraDb.disbursementAccumulations = [...sheet5Data.rows];
+  globalForDb._bispiraDb.disbursementAccumulationsSummary = sheet5Data.total;
+}
+
+if (!globalForDb._bispiraDb.disbursementsPerBank) {
+  globalForDb._bispiraDb.disbursementsPerBank = [...sheet6Data.rows];
+  globalForDb._bispiraDb.disbursementsPerBankSummary = sheet6Data.total;
+}
+
+if (!globalForDb._bispiraDb.bagiHasilPusatDaerah) {
+  globalForDb._bispiraDb.bagiHasilPusatDaerah = [...sheet7Data.rows];
+  globalForDb._bispiraDb.bagiHasilPusatDaerahSummary = sheet7Data.total;
+}
+
+if (!globalForDb._bispiraDb.profilLisensiDaerah) {
+  globalForDb._bispiraDb.profilLisensiDaerah = [...sheet8Data.rows];
+  globalForDb._bispiraDb.profilLisensiDaerahSummary = sheet8Data.total;
+}
+
+if (!globalForDb._bispiraDb.tariffAndFeesSettings) {
+  globalForDb._bispiraDb.tariffAndFeesSettings = sheet9Data;
+}
+
+if (!globalForDb._bispiraDb.catalogEcosystem) {
+  globalForDb._bispiraDb.catalogEcosystem = sheet1011Data;
+}
+
+if (!globalForDb._bispiraDb.revenueSharingMatrix) {
+  globalForDb._bispiraDb.revenueSharingMatrix = sheet12Data;
+}
+
+if (!globalForDb._bispiraDb.formulirPenjualMaster) {
+  globalForDb._bispiraDb.formulirPenjualMaster = formulirPenjualMaster;
+}
+
+if (!globalForDb._bispiraDb.orders) {
+  globalForDb._bispiraDb.orders = [
+    {
+      id: 'BSP-ORD-77192',
+      serviceType: 'ride_motor',
+      serviceName: 'BISPIRA Ride (Motor) 🛵',
+      serviceEmoji: '🛵',
+      customerName: 'Davy (User Bispira)',
+      customerPhone: '0812-9876-5432',
+      pickupAddress: 'Jl. Kaligawe Raya No. 12, Genuk, Semarang',
+      dropoffAddress: 'Jl. Prof. Soedarto (Undip), Tembalang, Semarang',
+      pickupLat: -6.9622,
+      pickupLng: 110.4682,
+      dropoffLat: -7.0545,
+      dropoffLng: 110.4358,
+      distanceKm: 17.19,
+      durationMin: 18,
+      totalFareCustomer: 48478,
+      netDriverEarning: 43204,
+      platformFee: 2274,
+      taxPph: 227,
+      appFee: 2000,
+      serviceFee: 1000,
+      uniqueCode: 247,
+      paymentMethod: 'Transfer Bank (Kode Unik 247) 🏦',
+      paymentStatus: 'PENDING_MANUAL_VERIFICATION',
+      status: 'LOOKING_FOR_DRIVER',
+      createdAt: new Date().toISOString(),
+    },
+  ];
 }
 
 export const db = globalForDb._bispiraDb;

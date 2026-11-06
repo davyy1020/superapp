@@ -1,0 +1,119 @@
+{
+  "rows": [
+    {
+      "no": 1,
+      "nama_bank": "BRI",
+      "jumlah_mitra": 7,
+      "total_pencairan_gross": 3473550,
+      "total_biaya_layanan_trx": 6000,
+      "total_biaya_pencairan": 7000,
+      "net_disbursement": 3460550
+    },
+    {
+      "no": 2,
+      "nama_bank": "BNI",
+      "jumlah_mitra": 8,
+      "total_pencairan_gross": 1552375,
+      "total_biaya_layanan_trx": 6500,
+      "total_biaya_pencairan": 8000,
+      "net_disbursement": 1537875
+    },
+    {
+      "no": 3,
+      "nama_bank": "Bank Mandiri",
+      "jumlah_mitra": 7,
+      "total_pencairan_gross": 1903700,
+      "total_biaya_layanan_trx": 5500,
+      "total_biaya_pencairan": 7000,
+      "net_disbursement": 1891200
+    },
+    {
+      "no": 4,
+      "nama_bank": "BTN",
+      "jumlah_mitra": 0,
+      "total_pencairan_gross": 0,
+      "total_biaya_layanan_trx": 0,
+      "total_biaya_pencairan": 0,
+      "net_disbursement": 0
+    },
+    {
+      "no": 5,
+      "nama_bank": "BSI",
+      "jumlah_mitra": 7,
+      "total_pencairan_gross": 1660100,
+      "total_biaya_layanan_trx": 6500,
+      "total_biaya_pencairan": 7000,
+      "net_disbursement": 1646600
+    },
+    {
+      "no": 6,
+      "nama_bank": "BCA",
+      "jumlah_mitra": 8,
+      "total_pencairan_gross": 2580050,
+      "total_biaya_layanan_trx": 9000,
+      "total_biaya_pencairan": 8000,
+      "net_disbursement": 2563050
+    },
+    {
+      "no": 7,
+      "nama_bank": "Bank Jateng",
+      "jumlah_mitra": 8,
+      "total_pencairan_gross": 5203500,
+      "total_biaya_layanan_trx": 9000,
+      "total_biaya_pencairan": 8000,
+      "net_disbursement": 5186500
+    },
+    {
+      "no": 8,
+      "nama_bank": "Bank BJB",
+      "jumlah_mitra": 7,
+      "total_pencairan_gross": 9562975,
+      "total_biaya_layanan_trx": 6500,
+      "total_biaya_pencairan": 7000,
+      "net_disbursement": 9549475
+    },
+    {
+      "no": 9,
+      "nama_bank": "Bank Jatim",
+      "jumlah_mitra": 8,
+      "total_pencairan_gross": 2968300,
+      "total_biaya_layanan_trx": 6500,
+      "total_biaya_pencairan": 8000,
+      "net_disbursement": 2953800
+    },
+    {
+      "no": 10,
+      "nama_bank": "Bank BPD DIY",
+      "jumlah_mitra": 0,
+      "total_pencairan_gross": 0,
+      "total_biaya_layanan_trx": 0,
+      "total_biaya_pencairan": 0,
+      "net_disbursement": 0
+    },
+    {
+      "no": 11,
+      "nama_bank": "Bank DKI",
+      "jumlah_mitra": 8,
+      "total_pencairan_gross": 1437500,
+      "total_biaya_layanan_trx": 7000,
+      "total_biaya_pencairan": 8000,
+      "net_disbursement": 1422500
+    },
+    {
+      "no": 12,
+      "nama_bank": "Bank Banten",
+      "jumlah_mitra": 0,
+      "total_pencairan_gross": 0,
+      "total_biaya_layanan_trx": 0,
+      "total_biaya_pencairan": 0,
+      "net_disbursement": 0
+    }
+  ],
+  "total": {
+    "totalMitra": 68,
+    "totalGross": 30342050,
+    "totalBiayaLayananTrx": 62500,
+    "totalBiayaPencairan": 68000,
+    "totalNetDisbursement": 30211550
+  }
+}
