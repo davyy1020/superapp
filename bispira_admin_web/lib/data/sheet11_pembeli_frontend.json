@@ -1,0 +1,197 @@
+{
+  "sheet_name": "11. PEMBELI FRONT END",
+  "title": "SEBARAN PRODUK INDUK DAN ANAK (FRON END)",
+  "description": "Katalog Front End Tampilan Aplikasi Konsumen (Sheet 11)",
+  "columns_count": 13,
+  "clusters": [
+    {
+      "col_index": 1,
+      "no": 1,
+      "category_name": "FOOD & FRESH",
+      "items": [
+        "Makanan",
+        "Minuman",
+        "Sayuran",
+        "Buah",
+        "Telor",
+        "Daging (sapi, kambing, ayam)",
+        "Ikan",
+        "apotek"
+      ]
+    },
+    {
+      "col_index": 2,
+      "no": 2,
+      "category_name": "TIKET EVENT & WISATA",
+      "items": [
+        "Event MICE (apasaja)",
+        "Wisata"
+      ]
+    },
+    {
+      "col_index": 3,
+      "no": 3,
+      "category_name": "HEALTH & HOMECARE",
+      "items": [
+        "HEALTH",
+        "Psikiater",
+        "Bidan",
+        "Fisioterapi",
+        "Psikolog",
+        "HOMECARE",
+        "Perawat",
+        "Caregiver",
+        "Child care",
+        "Baby sitter",
+        "Asisten rumah tangga",
+        "BEUTY",
+        "SPA",
+        "BARBERSHOP"
+      ]
+    },
+    {
+      "col_index": 4,
+      "no": 4,
+      "category_name": "RIDE HAILING",
+      "items": [
+        "ANTAR JEMPUT",
+        "Motor (Penumpang, Food,Delivery)",
+        "Mobil (Penumpang)",
+        "Mobil Logistik (Delivery)",
+        "Mobil Logistik Barang Besar",
+        "Mobil Ambulance",
+        "ATRIBUT DRIVER",
+        "Helm",
+        "Jaket",
+        "StIcker",
+        "T-Shirt Polo",
+        "Saldo Wallet",
+        "topup"
+      ]
+    },
+    {
+      "col_index": 5,
+      "no": 5,
+      "category_name": "SEWA PROPERTY",
+      "items": [
+        "Kost",
+        "Kontrakan",
+        "Apartemen",
+        "Working space",
+        "Pakaian Event"
+      ]
+    },
+    {
+      "col_index": 6,
+      "no": 6,
+      "category_name": "EDUKASI & ENTERTAINMENT, SERVICE",
+      "items": [
+        "EDUKASI",
+        "Tutor/Guru Les Privat Pelajaran",
+        "Trainer let privat pelatihan",
+        "Penceramah keagamaan",
+        "ENTERTAINMENT",
+        "MC",
+        "Penyanyi",
+        "Group Band",
+        "SERVICE",
+        "Teknisi AC",
+        "Teknisi Barang Elektronik",
+        "Montir"
+      ]
+    },
+    {
+      "col_index": 7,
+      "no": 7,
+      "category_name": "DONASI",
+      "items": [
+        "Program kegiatan yayasan sosial",
+        "Program kegiatan yayasan Keagamaan",
+        "Program",
+        "Makan gratis anak yatim piatu Rp. 1.000",
+        "Mulai dari : Rp. 2000",
+        "tidak ada biaya layanan, aplikasi",
+        "hanya kode unik"
+      ]
+    },
+    {
+      "col_index": 8,
+      "no": 8,
+      "category_name": "IKLAN",
+      "items": [
+        "Pasang Iklan Banner",
+        "berada urutan teratas (1-30), bergeser dari kiri ke kanan otomatis atau bisa digeser tangan pembeli",
+        "Pasang iklan logo"
+      ]
+    },
+    {
+      "col_index": 9,
+      "no": 9,
+      "category_name": "BISPIRA EVENT DAERAH",
+      "items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 10,
+      "no": 10,
+      "category_name": "BISPIRA E-VOTING DAERAH",
+      "items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 11,
+      "no": 11,
+      "category_name": "BISPIRA EVENT PUSAT/ PROVINSI",
+      "items": [
+        "KOMPETISI",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian",
+        "Pelatihan",
+        "Sertifikasi Profesi"
+      ]
+    },
+    {
+      "col_index": 12,
+      "no": 12,
+      "category_name": "BISPIRA E-VOTING PUSAT",
+      "items": [
+        "E-VOTING",
+        "Pendidikan",
+        "Budaya",
+        "Kesenian"
+      ]
+    },
+    {
+      "col_index": 13,
+      "no": 13,
+      "category_name": "PAJAK PENJUAL  (Bulanan/Tahunan)",
+      "items": []
+    }
+  ],
+  "special_rules": {
+    "donasi": {
+      "biaya_aplikasi": 0,
+      "biaya_layanan": 0,
+      "kode_unik": "000-999",
+      "minimal_donasi": 1000,
+      "program_populer": "Makan gratis anak yatim piatu Rp 1.000 (Mulai dari Rp 2.000)"
+    },
+    "iklan": {
+      "posisi": "Urutan teratas (1-30) di Homepage Pembeli",
+      "navigasi": "Bergeser dari kiri ke kanan otomatis (Auto-slide) atau swipe gestur tangan pembeli",
+      "jenis": [
+        "Pasang Iklan Banner",
+        "Pasang Iklan Logo"
+      ]
+    }
+  }
+}

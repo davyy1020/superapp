@@ -222,6 +222,53 @@ class DriverProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
+            // ATRIBUT RESMI MITRA DRIVER (EXCEL SHEET 11 CLUSTER 4)
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: NeoColors.surface,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: NeoColors.black, width: 1.8),
+                boxShadow: const [
+                  BoxShadow(color: NeoColors.black, offset: Offset(2.5, 2.5), blurRadius: 0),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: NeoColors.brandSoft,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: NeoColors.black, width: 1.2),
+                        ),
+                        child: const Icon(Icons.sports_motorsports_rounded, color: NeoColors.black, size: 18),
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'ATRIBUT RESMI DRIVER (SHEET 11)',
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.8, color: NeoColors.black),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  _buildInfoRow('1. Helm SNI Bispira', 'Terverifikasi & Diterima ✓'),
+                  const Divider(color: NeoColors.black, height: 16, thickness: 1),
+                  _buildInfoRow('2. Jaket Driver Bispira', 'Ukuran L - Aktif Digunakan ✓'),
+                  const Divider(color: NeoColors.black, height: 16, thickness: 1),
+                  _buildInfoRow('3. Sticker Reflektif Lambung', 'Terpasang Pada Kendaraan ✓'),
+                  const Divider(color: NeoColors.black, height: 16, thickness: 1),
+                  _buildInfoRow('4. T-Shirt Polo Bispira', 'Seragam Resmi Event / Operasional ✓'),
+                  const Divider(color: NeoColors.black, height: 16, thickness: 1),
+                  _buildInfoRow('5. Saldo Wallet & Top Up', 'Aktif Terhubung Ke Ledger Superadmin'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+
             // FORMULIR C1 & EXCEL SHEET 3-5: OPERASIONAL KEUANGAN BISPIRA
             Container(
               padding: const EdgeInsets.all(16),

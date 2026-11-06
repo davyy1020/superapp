@@ -13,6 +13,7 @@ import sheet8Data from './data/sheet8_profil_lisensi_daerah.json';
 import sheet9Data from './data/sheet9_pengaturan_tarif_fees.json';
 import sheet1011Data from './data/sheet10_11_produk_katalog_ekosistem.json';
 import sheet10BackendData from './data/sheet10_produk_penjual_backend.json';
+import sheet11FrontendData from './data/sheet11_pembeli_frontend.json';
 import sheet12Data from './data/sheet12_pendapatan_superadmin_matrix.json';
 import formulirPenjualMaster from './data/formulir_penjual_master.json';
 
@@ -493,6 +494,10 @@ if (!globalForDb._bispiraDb.catalogEcosystem) {
 
 if (!globalForDb._bispiraDb.productsBackend) {
   globalForDb._bispiraDb.productsBackend = sheet10BackendData;
+}
+
+if (!globalForDb._bispiraDb.pembeliFrontend) {
+  globalForDb._bispiraDb.pembeliFrontend = sheet11FrontendData;
 }
 
 if (!globalForDb._bispiraDb.revenueSharingMatrix) {

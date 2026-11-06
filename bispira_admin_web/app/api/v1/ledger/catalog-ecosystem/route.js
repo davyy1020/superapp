@@ -11,6 +11,7 @@ export async function GET() {
       data: {
         ...db.catalogEcosystem,
         sheet10_backend: db.productsBackend,
+        sheet11_frontend: db.pembeliFrontend,
       },
     });
   } catch (error) {

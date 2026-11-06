@@ -5,6 +5,7 @@ import '../../providers/admin_provider.dart';
 import '../../theme/neo_brutal_theme.dart';
 import '../../widgets/bispira_charts.dart';
 import '../../data/produk_penjual_backend_data.dart';
+import '../../data/pembeli_frontend_data.dart';
 
 class MerchantMasterTab extends StatefulWidget {
   const MerchantMasterTab({Key? key}) : super(key: key);
@@ -434,161 +435,220 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
   }
 
   void _showSheet10Dialog(BuildContext context, bool isDark) {
-    final clusters = MasterProdukPenjualBackendData.clusters;
+    bool isFrontEnd = true; // Default view Sheet 11 (Front End Pembeli)
+
     showDialog(
       context: context,
-      builder: (ctx) => Dialog(
-        backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Colors.black, width: 2.5),
-        ),
-        child: Container(
-          width: 960,
-          height: 650,
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setModalState) {
+          final title = isFrontEnd ? MasterPembeliFrontendData.sheetTitle : MasterProdukPenjualBackendData.sheetTitle;
+          final sheetNum = isFrontEnd ? 'Sheet 11: PEMBELI FRONT END' : 'Sheet 10: PRODUK PENJUAL BACK END';
+          final clusters = isFrontEnd
+              ? MasterPembeliFrontendData.clusters.map((c) => {'no': c.no, 'name': c.categoryName, 'items': c.frontendItems}).toList()
+              : MasterProdukPenjualBackendData.clusters.map((c) => {'no': c.no, 'name': c.categoryName, 'items': c.backendItems}).toList();
+
+          return Dialog(
+            backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: Colors.black, width: 2.5),
+            ),
+            child: Container(
+              width: 980,
+              height: 670,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF6366F1).withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: const Color(0xFF6366F1), width: 1.5),
-                        ),
-                        child: const Icon(Icons.inventory_2_rounded, color: Color(0xFF6366F1), size: 24),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            MasterProdukPenjualBackendData.sheetTitle,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900,
-                              color: isDark ? Colors.white : Colors.black,
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isFrontEnd ? const Color(0xFF10B981).withValues(alpha: 0.15) : const Color(0xFF6366F1).withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: isFrontEnd ? const Color(0xFF10B981) : const Color(0xFF6366F1), width: 1.5),
                             ),
+                            child: Icon(isFrontEnd ? Icons.phone_android_rounded : Icons.inventory_2_rounded,
+                                color: isFrontEnd ? const Color(0xFF10B981) : const Color(0xFF6366F1), size: 24),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Excel Sheet 10: 12 Cluster Sebaran Produk Induk & Anak (Back End Penjual)',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
-                            ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w900,
+                                  color: isDark ? Colors.white : Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'Excel $sheetNum • 13 Cluster Layanan Terintegrasi',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      IconButton(
+                        icon: const Icon(Icons.close_rounded, size: 24),
+                        onPressed: () => Navigator.pop(ctx),
+                      ),
                     ],
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.close_rounded, size: 24),
-                    onPressed: () => Navigator.pop(ctx),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const Divider(color: Colors.black, thickness: 1.5),
-              const SizedBox(height: 10),
+                  const SizedBox(height: 14),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: SingleChildScrollView(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: clusters.map((c) {
-                        return Container(
-                          width: 220,
-                          margin: const EdgeInsets.only(right: 12),
-                          padding: const EdgeInsets.all(12),
+                  // TOGGLE BUTTONS SHEET 11 VS SHEET 10
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => setModalState(() => isFrontEnd = true),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1),
-                              width: 1.5,
+                            color: isFrontEnd ? const Color(0xFF10B981) : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: const Color(0xFF10B981), width: 1.5),
+                          ),
+                          child: Text(
+                            '📱 11. PEMBELI FRONT END',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                              color: isFrontEnd ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
                             ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFEF08A),
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: const Color(0xFFCA8A04)),
-                                ),
-                                child: Text(
-                                  '${c.no}. ${c.categoryName}',
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xFF854D0E),
-                                  ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => setModalState(() => isFrontEnd = false),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: !isFrontEnd ? const Color(0xFF6366F1) : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: const Color(0xFF6366F1), width: 1.5),
+                          ),
+                          child: Text(
+                            '⚙️ 10. PRODUK PENJUAL BACK END',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                              color: !isFrontEnd ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Divider(color: Colors.black, thickness: 1.5),
+                  const SizedBox(height: 8),
+
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: SingleChildScrollView(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: clusters.map((c) {
+                            final items = c['items'] as List<String>;
+                            return Container(
+                              width: 220,
+                              margin: const EdgeInsets.only(right: 12),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1),
+                                  width: 1.5,
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              ...c.backendItems.map((item) {
-                                final isSub = [
-                                  'HEALTH', 'HOMECARE', 'BEUTY', 'ANTAR JEMPUT',
-                                  'ATRIBUT DRIVER', 'EDUKASI', 'ENTERTAINMENT',
-                                  'SERVICE', 'KOMPETISI', 'E-VOTING'
-                                ].contains(item.trim().toUpperCase());
-                                return Container(
-                                  margin: const EdgeInsets.only(bottom: 4),
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                                  decoration: isSub
-                                      ? BoxDecoration(
-                                          color: Colors.red.withValues(alpha: 0.12),
-                                          borderRadius: BorderRadius.circular(4),
-                                        )
-                                      : null,
-                                  child: Text(
-                                    isSub ? '🔴 $item' : '• $item',
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: isSub ? FontWeight.w800 : FontWeight.w500,
-                                      color: isSub
-                                          ? Colors.redAccent
-                                          : (isDark ? Colors.white70 : const Color(0xFF334155)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: isFrontEnd ? const Color(0xFFFEF08A) : const Color(0xFFE0F2FE),
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(color: isFrontEnd ? const Color(0xFFCA8A04) : const Color(0xFF0284C7)),
+                                    ),
+                                    child: Text(
+                                      '${c['no']}. ${c['name']}',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w900,
+                                        color: isFrontEnd ? const Color(0xFF854D0E) : const Color(0xFF0369A1),
+                                      ),
                                     ),
                                   ),
-                                );
-                              }).toList(),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                                  const SizedBox(height: 8),
+                                  ...items.map((item) {
+                                    final isSub = [
+                                      'HEALTH', 'HOMECARE', 'BEUTY', 'ANTAR JEMPUT',
+                                      'ATRIBUT DRIVER', 'EDUKASI', 'ENTERTAINMENT',
+                                      'SERVICE', 'KOMPETISI', 'E-VOTING', 'PROGRAM'
+                                    ].contains(item.trim().toUpperCase());
+                                    return Container(
+                                      margin: const EdgeInsets.only(bottom: 4),
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                                      decoration: isSub
+                                          ? BoxDecoration(
+                                              color: Colors.red.withValues(alpha: 0.12),
+                                              borderRadius: BorderRadius.circular(4),
+                                            )
+                                          : null,
+                                      child: Text(
+                                        isSub ? '🔴 $item' : '• $item',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: isSub ? FontWeight.w800 : FontWeight.w500,
+                                          color: isSub
+                                              ? Colors.redAccent
+                                              : (isDark ? Colors.white70 : const Color(0xFF334155)),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  NeoBrutalButton(
-                    label: 'Tutup Katalog Back End',
-                    onPressed: () => Navigator.pop(ctx),
-                    bgColor: NeoBrutalTheme.bispiraBlue,
-                    fontSize: 13,
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      NeoBrutalButton(
+                        label: 'Tutup Katalog Ekosistem',
+                        onPressed: () => Navigator.pop(ctx),
+                        bgColor: NeoBrutalTheme.bispiraBlue,
+                        fontSize: 13,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -700,7 +760,7 @@ class _MerchantMasterTabState extends State<MerchantMasterTab> {
                     NeoBrutalBadge(text: '${filteredMerchants.length} Merchant Tampil', bgColor: NeoBrutalTheme.bispiraBlue),
                     const SizedBox(width: 10),
                     NeoBrutalButton(
-                      label: '📦 10. Sebaran Produk Back End',
+                      label: '📦 10-11. Katalog FE & BE',
                       onPressed: () => _showSheet10Dialog(context, isDark),
                       bgColor: const Color(0xFF6366F1),
                       fontSize: 13,

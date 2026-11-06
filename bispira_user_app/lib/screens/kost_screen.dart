@@ -18,11 +18,19 @@ class _KostScreenState extends State<KostScreen> {
   bool _isPaid = true;
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['Semua Unit', 'Aktif Saya', 'Populer', 'Putri', 'Putra', 'Campur'];
+  final List<String> _filters = [
+    'Semua Property (Sheet 11)',
+    'Kost',
+    'Kontrakan',
+    'Apartemen',
+    'Working Space',
+    'Pakaian Event',
+  ];
 
   final List<Map<String, dynamic>> _kostUnits = [
     {
       'name': 'The Heritage Executive Kost',
+      'category': 'Kost',
       'unit': 'Unit 402B',
       'location': 'Menteng, Jakarta Pusat',
       'price': 4500000,
@@ -34,64 +42,69 @@ class _KostScreenState extends State<KostScreen> {
       'bgGradient': [const Color(0xFF0F172A), const Color(0xFF0040B8)],
     },
     {
-      'name': 'South Quarter Residence',
-      'unit': 'Unit 210A',
-      'location': 'Cilandak, Jakarta Selatan',
-      'price': 3800000,
-      'status': 'POPULER',
+      'name': 'Menteng Park Luxury Apartment',
+      'category': 'Apartemen',
+      'unit': 'Tower Sapphire Lt. 18',
+      'location': 'Menteng, Jakarta Pusat',
+      'price': 8500000,
+      'status': 'APARTEMEN',
       'statusColor': const Color(0xFF10B981),
       'emoji': '🏢',
       'isActive': false,
-      'amenities': ['🔑 Smart Lock', '🏊 Pool Access', '🏋️ Gym', '🍳 Shared Kitchen'],
-      'bgGradient': [const Color(0xFF10B981), const Color(0xFF0F172A)],
+      'amenities': ['🏊 Infinity Pool', '🏋️ Sky Gym', '🔑 Smart Key', '🅿️ Basement Slot'],
+      'bgGradient': [const Color(0xFF0F172A), const Color(0xFF10B981)],
     },
     {
-      'name': 'Senopati Boutique Residence',
-      'unit': 'Unit 501VIP',
-      'location': 'Kebayoran Baru, Jakarta Selatan',
-      'price': 5200000,
-      'status': 'PREMIUM',
-      'statusColor': const Color(0xFFD4A017),
-      'emoji': '👑',
-      'isActive': false,
-      'amenities': ['👑 King Bed', '📺 Smart TV 43"', '🚿 Water Heater', '🧹 Housekeeping'],
-      'bgGradient': [const Color(0xFFD4A017), const Color(0xFF0040B8)],
-    },
-    {
-      'name': 'Gading Luxury Living Kost',
-      'unit': 'Unit 105',
-      'location': 'Kelapa Gading, Jakarta Utara',
-      'price': 2900000,
-      'status': 'REKOMENDASI',
+      'name': 'Rumah Kontrakan Asri Tebet',
+      'category': 'Kontrakan',
+      'unit': 'Rumah 2 Lantai 3 KT',
+      'location': 'Tebet Timur, Jakarta Selatan',
+      'price': 6000000,
+      'status': 'KONTRAKAN',
       'statusColor': const Color(0xFF0284C7),
       'emoji': '🏡',
       'isActive': false,
-      'amenities': ['❄️ AC Dual Inverter', '🌅 Balcony', '🧺 Free Laundry', '🛡️ Security 24H'],
+      'amenities': ['🛋️ Furnished', '🚗 Carport 2 Mobil', '🌳 Taman Asri', '⚡ Listrik 3500W'],
       'bgGradient': [const Color(0xFF0284C7), const Color(0xFF0F172A)],
     },
     {
-      'name': 'Kemang Garden Exclusive Kost',
-      'unit': 'Unit 304',
-      'location': 'Kemang, Jakarta Selatan',
-      'price': 3200000,
-      'status': 'TERLARIS',
+      'name': 'SCBD Executive Working Space & Pod',
+      'category': 'Working Space',
+      'unit': 'Dedicated Desk #12',
+      'location': 'Sudirman SCBD, Jakarta Selatan',
+      'price': 1800000,
+      'status': 'WORKING SPACE',
       'statusColor': const Color(0xFF7C3AED),
-      'emoji': '🌿',
+      'emoji': '💻',
       'isActive': false,
-      'amenities': ['📶 High-Speed WiFi', '❄️ AC', '🛋️ Living Lounge', '🌳 Garden View'],
+      'amenities': ['⚡ Fiber 500Mbps', '☕ Free Flow Coffee', '🖨️ Printing & Pod', '👥 Meeting Room'],
       'bgGradient': [const Color(0xFF7C3AED), const Color(0xFF0040B8)],
     },
     {
-      'name': 'BSD Green Park Kost Hub',
-      'unit': 'Unit 112',
-      'location': 'Serpong, Tangerang Selatan',
-      'price': 2200000,
-      'status': 'STUDENT',
-      'statusColor': const Color(0xFFE11D48),
-      'emoji': '🎒',
+      'name': 'Griya Kebaya & Gaun Pakaian Event',
+      'category': 'Pakaian Event',
+      'unit': 'Paket Busana Adat & Jas',
+      'location': 'Kebayoran Baru, Jakarta Selatan',
+      'price': 1200000,
+      'status': 'PAKAIAN EVENT',
+      'statusColor': const Color(0xFFD4A017),
+      'emoji': '👗',
       'isActive': false,
-      'amenities': ['📚 Study Area', '📶 Fiber 100Mbps', '🍳 Pantry 24H', '📹 CCTV Grid'],
-      'bgGradient': [const Color(0xFFE11D48), const Color(0xFF0F172A)],
+      'amenities': ['👗 Fitting Gratis', '👔 Jas & Kebaya', '✨ Aksesoris Lengkap', '🧼 Dry Clean'],
+      'bgGradient': [const Color(0xFFD4A017), const Color(0xFF0040B8)],
+    },
+    {
+      'name': 'Kemang Garden Exclusive Kost',
+      'category': 'Kost',
+      'unit': 'Unit 304',
+      'location': 'Kemang, Jakarta Selatan',
+      'price': 3200000,
+      'status': 'KOST',
+      'statusColor': const Color(0xFF00B4D8),
+      'emoji': '🌿',
+      'isActive': false,
+      'amenities': ['📶 High-Speed WiFi', '❄️ AC', '🛋️ Living Lounge', '🌳 Garden View'],
+      'bgGradient': [const Color(0xFF0040B8), const Color(0xFF0284C7)],
     },
   ];
 
@@ -621,14 +634,38 @@ class _KostScreenState extends State<KostScreen> {
               ),
               const SizedBox(height: 14),
 
-              // Dynamic Kost Unit Cards List
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _kostUnits.length,
-                itemBuilder: (context, index) {
-                  final item = _kostUnits[index];
-                  final bool isActive = item['isActive'] as bool;
+              // Dynamic Kost & Property Unit Cards List (Sheet 11)
+              Builder(
+                builder: (context) {
+                  final filteredList = _selectedFilterIndex == 0
+                      ? _kostUnits
+                      : _kostUnits.where((u) => u['category'] == _filters[_selectedFilterIndex]).toList();
+
+                  if (filteredList.isEmpty) {
+                    return Container(
+                      padding: const EdgeInsets.all(24),
+                      margin: const EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: NeoColors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: NeoColors.black, width: 1.8),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Belum ada unit pada kategori ini di wilayah Anda.',
+                          style: TextStyle(fontWeight: FontWeight.w700, color: NeoColors.textMuted),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: filteredList.length,
+                    itemBuilder: (context, index) {
+                      final item = filteredList[index];
+                      final bool isActive = item['isActive'] as bool;
 
                   return Container(
                     margin: const EdgeInsets.only(bottom: 18),
@@ -831,8 +868,10 @@ class _KostScreenState extends State<KostScreen> {
                     ),
                   );
                 },
-              ),
-              const SizedBox(height: 14),
+              );
+            },
+          ),
+          const SizedBox(height: 14),
 
               // ============================================================
               // 6. NEED HELP / CONCIERGE BANNER (EXACT MATCH REFERENCE DESIGN)

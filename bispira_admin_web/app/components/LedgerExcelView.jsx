@@ -91,7 +91,7 @@ export default function LedgerExcelView({ showToast }) {
     { key: "sheet7", title: "7. Bagi Hasil Daerah", desc: "29 Wilayah • 75:25, 100:0, 20:80", badge: "Sheet 7" },
     { key: "sheet8", title: "8. Profil Lisensi", desc: "12 Lisensi • 261 Toko • 346 Driver • 101 Event", badge: "Sheet 8" },
     { key: "sheet9", title: "9. Pengaturan Tarif & Fees", desc: "5 Parameter Armada • Markup 10% • Fees Rp 500", badge: "Sheet 9" },
-    { key: "sheet10", title: "10 & 11. Katalog Ekosistem", desc: "12 Kategori • Sebaran Front End & Back End", badge: "Sheet 10-11" },
+    { key: "sheet10", title: "10 & 11. Katalog Ekosistem (FE & BE)", desc: "13 Cluster • Sebaran Front End (Sheet 11) & Back End (Sheet 10)", badge: "Sheet 10-11" },
     { key: "sheet12", title: "12. Matriks Pendapatan & Split", desc: "16 Cluster Pendapatan • Matriks Split Kerjasama", badge: "Sheet 12" },
     { key: "formulir_penjual", title: "Formulir Penjual (22 Form)", desc: "22 Sheet Master Formulir Registrasi & Input Produk", badge: "22 Form" },
   ];
@@ -1500,23 +1500,32 @@ function renderSheet9(data, search, fmt) {
 // SHEET 10 & 11: PRODUK PENJUAL BACK END & PEMBELI FRONT END
 // -------------------------------------------------------------
 function Sheet10RendererComponent({ data, search }) {
-  const [viewMode, setViewMode] = React.useState("excel_grid"); // 'excel_grid' or 'comparison_cards'
+  const [viewMode, setViewMode] = React.useState("sheet11_grid"); // 'sheet11_grid', 'sheet10_grid', or 'comparison_cards'
 
   if (!data) return null;
-  const backendClusters = (data.sheet10_backend?.clusters || []).map((c) => {
-    return {
-      no: c.no,
-      category_name: c.category_name,
-      items: c.items || [],
-    };
-  });
+  const backendClusters = (data.sheet10_backend?.clusters || []).map((c) => ({
+    no: c.no,
+    category_name: c.category_name,
+    items: c.items || [],
+  }));
 
-  // If backendClusters empty, fallback to data.clusters
-  const clusters = backendClusters.length > 0 ? backendClusters : (data.clusters || []).map((c) => ({
+  const frontendClusters = (data.sheet11_frontend?.clusters || []).map((c) => ({
+    no: c.no,
+    category_name: c.category_name,
+    items: c.items || [],
+  }));
+
+  // Fallback if sheet11_frontend or sheet10_backend not loaded yet
+  const feClusters = frontendClusters.length > 0 ? frontendClusters : (data.clusters || []).map((c) => ({
+    no: c.cluster_no,
+    category_name: c.cluster_name,
+    items: c.frontend_items || [],
+  }));
+
+  const beClusters = backendClusters.length > 0 ? backendClusters : (data.clusters || []).map((c) => ({
     no: c.cluster_no,
     category_name: c.cluster_name,
     items: c.backend_items || [],
-    frontend_items: c.frontend_items || [],
   }));
 
   const compClusters = (data.clusters || []).filter((c) => {
@@ -1528,7 +1537,6 @@ function Sheet10RendererComponent({ data, search }) {
     return matchName || matchFE || matchBE;
   });
 
-  // Helper to detect subheader items like in Excel screenshot (colored red/amber)
   const isSubheader = (val) => {
     const s = String(val).trim().toUpperCase();
     return [
@@ -1537,8 +1545,8 @@ function Sheet10RendererComponent({ data, search }) {
     ].includes(s);
   };
 
-  // Find max row count across all clusters for grid view
-  const maxRows = Math.max(...clusters.map((c) => (c.items || []).length), 17);
+  const activeClusters = viewMode === "sheet11_grid" ? feClusters : beClusters;
+  const maxRows = Math.max(...activeClusters.map((c) => (c.items || []).length), 18);
 
   return (
     <div>
@@ -1547,17 +1555,17 @@ function Sheet10RendererComponent({ data, search }) {
         <div className="stat-card">
           <div className="stat-label">Total Cluster Induk</div>
           <div className="stat-value" style={{ color: "#38bdf8" }}>13 Cluster</div>
-          <div className="stat-sub">12 Layanan + Pajak Penjual (Sheet 10)</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-label">Total Item Back End</div>
-          <div className="stat-value" style={{ color: "#f59e0b" }}>54 Layanan</div>
-          <div className="stat-sub">Katalog Input Formulir Penjual</div>
+          <div className="stat-sub">12 Layanan + Pajak Penjual (Sheet 11)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total Item Front End</div>
           <div className="stat-value" style={{ color: "#10b981" }}>52 Tampilan</div>
           <div className="stat-sub">Katalog Tampilan User App (Sheet 11)</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Item Back End</div>
+          <div className="stat-value" style={{ color: "#f59e0b" }}>54 Layanan</div>
+          <div className="stat-sub">Katalog Input Formulir Penjual (Sheet 10)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Model Bisnis Ekosistem</div>
@@ -1566,70 +1574,128 @@ function Sheet10RendererComponent({ data, search }) {
         </div>
       </div>
 
+      {/* SPECIAL RULES BANNER (SHEET 11) */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "12px", marginBottom: "18px" }}>
+        <div style={{ padding: "12px 16px", borderRadius: "10px", background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.25)" }}>
+          <div style={{ fontWeight: "800", color: "#10b981", fontSize: "12px", marginBottom: "3px" }}>
+            🤝 Aturan Khusus Donasi (Kolom 7 Sheet 11):
+          </div>
+          <div style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: "1.5" }}>
+            Makan gratis anak yatim piatu Rp 1.000 (Mulai dari Rp 2.000). <strong>Tidak ada biaya layanan, aplikasi, hanya kode unik 3 digit verifikasi.</strong>
+          </div>
+        </div>
+        <div style={{ padding: "12px 16px", borderRadius: "10px", background: "rgba(56, 189, 248, 0.08)", border: "1px solid rgba(56, 189, 248, 0.25)" }}>
+          <div style={{ fontWeight: "800", color: "#38bdf8", fontSize: "12px", marginBottom: "3px" }}>
+            📢 Aturan Khusus Iklan Banner (Kolom 8 Sheet 11):
+          </div>
+          <div style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: "1.5" }}>
+            Berada <strong>urutan teratas (1-30) di Homepage Pembeli</strong>, bergeser dari kiri ke kanan otomatis (auto-slide) atau bisa digeser tangan pembeli.
+          </div>
+        </div>
+        <div style={{ padding: "12px 16px", borderRadius: "10px", background: "rgba(245, 158, 11, 0.08)", border: "1px solid rgba(245, 158, 11, 0.25)" }}>
+          <div style={{ fontWeight: "800", color: "#f59e0b", fontSize: "12px", marginBottom: "3px" }}>
+            🛵 Atribut Driver & Saldo Wallet (Kolom 4 Sheet 11):
+          </div>
+          <div style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: "1.5" }}>
+            Katalog konsumen memuat pembelian atribut resmi (Helm, Jaket, Sticker, Polo) & top up saldo wallet instan.
+          </div>
+        </div>
+      </div>
+
       {/* VIEW MODE TOGGLE BUTTONS */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
         <div style={{ display: "flex", gap: "8px" }}>
           <button
-            onClick={() => setViewMode("excel_grid")}
+            onClick={() => setViewMode("sheet11_grid")}
             style={{
               padding: "8px 16px",
               borderRadius: "10px",
-              border: viewMode === "excel_grid" ? "1px solid #38bdf8" : "1px solid var(--border-subtle)",
-              background: viewMode === "excel_grid" ? "rgba(56, 189, 248, 0.2)" : "var(--bg-card)",
-              color: viewMode === "excel_grid" ? "#38bdf8" : "var(--text-muted)",
+              border: viewMode === "sheet11_grid" ? "1px solid #10b981" : "1px solid var(--border-subtle)",
+              background: viewMode === "sheet11_grid" ? "rgba(16, 185, 129, 0.2)" : "var(--bg-card)",
+              color: viewMode === "sheet11_grid" ? "#34d399" : "var(--text-muted)",
               fontWeight: "700",
               fontSize: "12px",
               cursor: "pointer",
             }}
           >
-            📊 Grid Asli Excel (10. PRODUK PENJUAL BACK END)
+            📱 Grid Asli Sheet 11: PEMBELI FRONT END
+          </button>
+          <button
+            onClick={() => setViewMode("sheet10_grid")}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "10px",
+              border: viewMode === "sheet10_grid" ? "1px solid #38bdf8" : "1px solid var(--border-subtle)",
+              background: viewMode === "sheet10_grid" ? "rgba(56, 189, 248, 0.2)" : "var(--bg-card)",
+              color: viewMode === "sheet10_grid" ? "#38bdf8" : "var(--text-muted)",
+              fontWeight: "700",
+              fontSize: "12px",
+              cursor: "pointer",
+            }}
+          >
+            ⚙️ Grid Asli Sheet 10: PRODUK PENJUAL BACK END
           </button>
           <button
             onClick={() => setViewMode("comparison_cards")}
             style={{
               padding: "8px 16px",
               borderRadius: "10px",
-              border: viewMode === "comparison_cards" ? "1px solid #10b981" : "1px solid var(--border-subtle)",
-              background: viewMode === "comparison_cards" ? "rgba(16, 185, 129, 0.2)" : "var(--bg-card)",
-              color: viewMode === "comparison_cards" ? "#34d399" : "var(--text-muted)",
+              border: viewMode === "comparison_cards" ? "1px solid #a855f7" : "1px solid var(--border-subtle)",
+              background: viewMode === "comparison_cards" ? "rgba(168, 85, 247, 0.2)" : "var(--bg-card)",
+              color: viewMode === "comparison_cards" ? "#c084fc" : "var(--text-muted)",
               fontWeight: "700",
               fontSize: "12px",
               cursor: "pointer",
             }}
           >
-            📱 Komparasi Front End (Sheet 11) vs Back End (Sheet 10)
+            ⚖️ Komparasi Front End vs Back End
           </button>
         </div>
         <span style={{ fontSize: "11.5px", color: "var(--text-muted)" }}>
-          {viewMode === "excel_grid" ? "Tampilan tabular persis seperti lembar kerja Excel Sheet 10" : "Perbandingan visual antarmuka pembeli vs input penjual"}
+          {viewMode === "sheet11_grid"
+            ? "Tampilan tabular persis seperti lembar kerja Excel Sheet 11 (Tampilan Konsumen)"
+            : viewMode === "sheet10_grid"
+            ? "Tampilan tabular persis seperti lembar kerja Excel Sheet 10 (Input Mitra Penjual)"
+            : "Perbandingan visual antarmuka pembeli vs input penjual"}
         </span>
       </div>
 
-      {/* MODE 1: EXCEL SPREADSHEET GRID VIEW */}
-      {viewMode === "excel_grid" ? (
+      {/* SPREADSHEET GRID VIEW (SHEET 11 OR SHEET 10) */}
+      {viewMode === "sheet11_grid" || viewMode === "sheet10_grid" ? (
         <div className="table-wrapper" style={{ overflowX: "auto", marginBottom: "24px" }}>
-          <div style={{ padding: "14px 18px", background: "#fef08a", borderBottom: "2px solid #ca8a04", color: "#854d0e", fontWeight: "900", fontSize: "13px" }}>
-            📑 SEBARAN PRODUK INDUK DAN ANAK (BACK END) - SHEET 10 EXCEL
+          <div
+            style={{
+              padding: "14px 18px",
+              background: viewMode === "sheet11_grid" ? "#fef08a" : "#e0f2fe",
+              borderBottom: viewMode === "sheet11_grid" ? "2px solid #ca8a04" : "2px solid #0284c7",
+              color: viewMode === "sheet11_grid" ? "#854d0e" : "#0369a1",
+              fontWeight: "900",
+              fontSize: "13px",
+            }}
+          >
+            {viewMode === "sheet11_grid"
+              ? "📑 SEBARAN PRODUK INDUK DAN ANAK (FRON END) - SHEET 11 EXCEL"
+              : "📑 SEBARAN PRODUK INDUK DAN ANAK (BACK END) - SHEET 10 EXCEL"}
           </div>
           <table style={{ minWidth: "1600px", fontSize: "11.5px", borderCollapse: "collapse" }}>
             <thead>
               {/* Row 2: Cluster Numbers */}
-              <tr style={{ background: "#fef9c3", borderBottom: "1px solid #eab308" }}>
-                {clusters.map((c, idx) => (
-                  <th key={idx} style={{ textAlign: "center", color: "#854d0e", fontWeight: "900", padding: "6px", borderRight: "1px solid rgba(0,0,0,0.1)" }}>
+              <tr style={{ background: viewMode === "sheet11_grid" ? "#fef9c3" : "#f0f9ff", borderBottom: "1px solid var(--border-subtle)" }}>
+                {activeClusters.map((c, idx) => (
+                  <th key={idx} style={{ textAlign: "center", color: viewMode === "sheet11_grid" ? "#854d0e" : "#0369a1", fontWeight: "900", padding: "6px", borderRight: "1px solid rgba(0,0,0,0.1)" }}>
                     {c.no || idx + 1}
                   </th>
                 ))}
               </tr>
               {/* Row 3: Cluster Category Titles */}
-              <tr style={{ background: "#fef08a", borderBottom: "2px solid #ca8a04" }}>
-                {clusters.map((c, idx) => (
+              <tr style={{ background: viewMode === "sheet11_grid" ? "#fef08a" : "#bae6fd", borderBottom: "2px solid var(--border-subtle)" }}>
+                {activeClusters.map((c, idx) => (
                   <th
                     key={idx}
                     style={{
                       padding: "10px 8px",
                       textAlign: "center",
-                      color: "#713f12",
+                      color: viewMode === "sheet11_grid" ? "#713f12" : "#0c4a6e",
                       fontWeight: "900",
                       fontSize: "11px",
                       borderRight: "1px solid rgba(0,0,0,0.1)",
@@ -1645,7 +1711,7 @@ function Sheet10RendererComponent({ data, search }) {
             <tbody>
               {Array.from({ length: maxRows }).map((_, rIdx) => (
                 <tr key={rIdx} style={{ borderBottom: "1px solid var(--border-subtle)", background: rIdx % 2 === 0 ? "rgba(255,255,255,0.01)" : "transparent" }}>
-                  {clusters.map((c, cIdx) => {
+                  {activeClusters.map((c, cIdx) => {
                     const item = (c.items || [])[rIdx];
                     if (!item) {
                       return <td key={cIdx} style={{ padding: "7px 10px", borderRight: "1px solid var(--border-subtle)" }}></td>;
@@ -1674,7 +1740,7 @@ function Sheet10RendererComponent({ data, search }) {
           </table>
         </div>
       ) : (
-        /* MODE 2: COMPARISON CARDS (FRONT END VS BACK END) */
+        /* MODE 3: COMPARISON CARDS (FRONT END VS BACK END) */
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "16px" }}>
           {compClusters.map((c) => (
             <div key={c.cluster_no || c.no} style={{ background: "var(--bg-card)", padding: "18px", borderRadius: "14px", border: "1px solid var(--border-subtle)" }}>

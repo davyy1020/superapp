@@ -19,12 +19,59 @@ class _DonationScreenState extends State<DonationScreen> {
 
   final List<String> _categories = [
     'Semua',
+    '🍲 Makan Gratis Anak Yatim',
+    '🤝 Yayasan Sosial',
+    '🕌 Yayasan Keagamaan',
     '🌋 Bencana Alam',
-    '🏥 Panti & Medis',
     '🎓 Pendidikan',
   ];
 
   final List<Map<String, dynamic>> _campaigns = [
+    {
+      'title': 'Program Makan Gratis Anak Yatim Piatu (Rp 1.000 / Rp 2.000)',
+      'category': '🍲 Makan Gratis Anak Yatim',
+      'badge': 'SHEET 11 RESMI',
+      'badgeColor': const Color(0xFF10B981),
+      'description': 'Pemberian makan sehat dan bergizi untuk anak-anak yatim piatu dhuafa. Donasi mikro mulai dari Rp 1.000 dan Rp 2.000 tanpa potongan biaya apa pun.',
+      'collected': 18500000,
+      'target': 25000000,
+      'percentage': 0.74,
+      'percentText': '74%',
+      'donorCount': '+3.4k',
+      'emoji': '🍲',
+      'isPrimary': true,
+      'bgGradient': [const Color(0xFF0F172A), const Color(0xFF059669)],
+    },
+    {
+      'title': 'Program Kegiatan Yayasan Sosial Nusantara',
+      'category': '🤝 Yayasan Sosial',
+      'badge': 'SOSIAL',
+      'badgeColor': const Color(0xFF0284C7),
+      'description': 'Bantuan operasional yayasan sosial mitra Bispira, santunan panti jompo, dan pemberdayaan tunawisma.',
+      'collected': 34200000,
+      'target': 50000000,
+      'percentage': 0.68,
+      'percentText': '68%',
+      'donorCount': '+1.8k',
+      'emoji': '🤝',
+      'isPrimary': false,
+      'bgGradient': [const Color(0xFF0284C7), const Color(0xFF0F172A)],
+    },
+    {
+      'title': 'Program Kegiatan Yayasan Keagamaan Peduli Umat',
+      'category': '🕌 Yayasan Keagamaan',
+      'badge': 'KEAGAMAAN',
+      'badgeColor': const Color(0xFFD4A017),
+      'description': 'Renovasi sarana ibadah di pelosok, santunan guru ngaji, dan program keagamaan lintas daerah terpencil.',
+      'collected': 42000000,
+      'target': 60000000,
+      'percentage': 0.70,
+      'percentText': '70%',
+      'donorCount': '+2.1k',
+      'emoji': '🕌',
+      'isPrimary': false,
+      'bgGradient': [const Color(0xFF78350F), const Color(0xFFD97706)],
+    },
     {
       'title': 'Bantu Korban Banjir Bandang Luwu Timur',
       'category': '🌋 Bencana Alam',
@@ -37,38 +84,8 @@ class _DonationScreenState extends State<DonationScreen> {
       'percentText': '75%',
       'donorCount': '+1.2k',
       'emoji': '🌊',
-      'isPrimary': true,
+      'isPrimary': false,
       'bgGradient': [const Color(0xFF0F172A), const Color(0xFF0040B8)],
-    },
-    {
-      'title': 'Berbagi Kebahagiaan: Makan Siang Panti Asuhan Kasih Ibu',
-      'category': '🏥 Panti & Medis',
-      'badge': 'PANTI',
-      'badgeColor': const Color(0xFF00B4D8),
-      'description': 'Penyediaan 500 paket makanan bergizi rutin untuk anak-anak panti asuhan.',
-      'collected': 12000000,
-      'target': 20000000,
-      'percentage': 0.60,
-      'percentText': '60%',
-      'donorCount': '+450',
-      'emoji': '🍲',
-      'isPrimary': false,
-      'bgGradient': [const Color(0xFF10B981), const Color(0xFF0040B8)],
-    },
-    {
-      'title': 'Layanan Medis Gratis Lansia Dhuafa',
-      'category': '🏥 Panti & Medis',
-      'badge': 'MEDIS',
-      'badgeColor': const Color(0xFF00B4D8),
-      'description': 'Pemeriksaan kesehatan, obat-obatan, dan perawatan gratis untuk lansia kurang mampu.',
-      'collected': 18000000,
-      'target': 40000000,
-      'percentage': 0.45,
-      'percentText': '45%',
-      'donorCount': '+320',
-      'emoji': '🩺',
-      'isPrimary': false,
-      'bgGradient': [const Color(0xFF0284C7), const Color(0xFF0F172A)],
     },
     {
       'title': 'Beasiswa Masa Depan Anak Pesosial',
@@ -115,8 +132,9 @@ class _DonationScreenState extends State<DonationScreen> {
   }
 
   void _openDonationModal(Map<String, dynamic> campaign) {
-    int selectedAmount = 50000;
-    final List<int> presetAmounts = [10000, 50000, 100000, 500000];
+    int selectedAmount = 2000;
+    final List<int> presetAmounts = [1000, 2000, 5000, 10000, 25000, 50000, 100000];
+    final int uniqueCode = 100 + (DateTime.now().millisecondsSinceEpoch % 899);
     bool isAnonymous = false;
     TextEditingController noteController = TextEditingController();
 
@@ -207,6 +225,29 @@ class _DonationScreenState extends State<DonationScreen> {
                     ),
                     const SizedBox(height: 16),
 
+                    // Sheet 11 Special Rule Banner
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFEF9C3),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: const Color(0xFFCA8A04), width: 1.5),
+                      ),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.verified, size: 18, color: Color(0xFF854D0E)),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Aturan Sheet 11: Rp 0 Biaya Layanan & Rp 0 Biaya Aplikasi. Donasi mikro mulai Rp 1.000 / Rp 2.000 hanya ditambah kode unik 3 digit.',
+                              style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: Color(0xFF854D0E)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
                     // Preset Amount Chips
                     const Text('Pilih Nominal Donasi:', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: NeoColors.black)),
                     const SizedBox(height: 8),
@@ -218,7 +259,7 @@ class _DonationScreenState extends State<DonationScreen> {
                         return GestureDetector(
                           onTap: () => setModalState(() => selectedAmount = amt),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                             decoration: BoxDecoration(
                               color: isSel ? const Color(0xFF00B4D8) : NeoColors.white,
                               borderRadius: BorderRadius.circular(12),
@@ -270,7 +311,56 @@ class _DonationScreenState extends State<DonationScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 14),
+
+                    // Breakdown Payment
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: NeoColors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: NeoColors.black, width: 1.5),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Nominal Donasi', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                              Text('Rp ${_formatPrice(selectedAmount)}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text('Biaya Layanan & Aplikasi', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                              Text('Rp 0 (GRATIS)', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF10B981))),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Kode Unik 3 Digit (Sheet 11)', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                              Text('+$uniqueCode', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: NeoColors.brand)),
+                            ],
+                          ),
+                          const Divider(height: 12, thickness: 1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Total Pembayaran', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900)),
+                              Text(
+                                'Rp ${_formatPrice(selectedAmount + uniqueCode)}',
+                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: Color(0xFF0F172A)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
                     // Submit Button
                     GestureDetector(
@@ -282,7 +372,7 @@ class _DonationScreenState extends State<DonationScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Terima kasih! Donasi sebesar Rp ${_formatPrice(selectedAmount)} telah disalurkan ❤️',
+                              'Terima kasih! Donasi sebesar Rp ${_formatPrice(selectedAmount + uniqueCode)} telah disalurkan ❤️',
                             ),
                             backgroundColor: NeoColors.brand,
                           ),
@@ -301,7 +391,7 @@ class _DonationScreenState extends State<DonationScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Salurkan Donasi Rp ${_formatPrice(selectedAmount)} 🚀',
+                            'Salurkan Donasi Rp ${_formatPrice(selectedAmount + uniqueCode)} 🚀',
                             style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 13.5),
                           ),
                         ),
