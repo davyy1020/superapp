@@ -104,7 +104,8 @@ function calculateFare(serviceType, distanceKm) {
 }
 
 async function fetchOsrmRoute(originLat, originLng, destLat, destLng) {
-  const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${originLng},${originLat};${destLng},${destLat}?overview=full&geometries=geojson&steps=true`;
+  const baseUrl = process.env.OSRM_SERVER_URL || 'https://router.project-osrm.org';
+  const osrmUrl = `${baseUrl}/route/v1/driving/${originLng},${originLat};${destLng},${destLat}?overview=full&geometries=geojson&steps=true`;
   
   try {
     const controller = new AbortController();
