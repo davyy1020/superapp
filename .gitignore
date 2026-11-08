@@ -31,3 +31,7 @@ desktop.ini
 
 # Environment variables
 .env*.local
+
+# Scratch and Temp
+scratch/
+
