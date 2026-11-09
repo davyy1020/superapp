@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../theme/neo_theme.dart';
+import '../theme/map_theme.dart';
 import '../widgets/neo_widgets.dart';
 
 class FoodScreen extends StatefulWidget {
@@ -397,10 +398,7 @@ class _FoodScreenState extends State<FoodScreen> {
                             },
                           ),
                           children: [
-                            TileLayer(
-                              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'com.bispira.userapp',
-                            ),
+                            BispiraMapTheme.cartoVoyagerTileLayer,
                           ],
                         ),
 

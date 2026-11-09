@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import '../theme/neo_theme.dart';
+import '../theme/map_theme.dart';
 import '../widgets/neo_widgets.dart';
 
 enum SendStep { sender, receiver, checkout }
@@ -301,10 +302,7 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
                   },
                 ),
                 children: [
-                  TileLayer(
-                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.bispira.userapp',
-                  ),
+                  BispiraMapTheme.cartoVoyagerTileLayer,
                 ],
               ),
 
@@ -749,18 +747,12 @@ class _SendScreenState extends State<SendScreen> with SingleTickerProviderStateM
               initialZoom: 12.0,
             ),
             children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.bispira.userapp',
-              ),
+              BispiraMapTheme.cartoVoyagerTileLayer,
               PolylineLayer(
-                polylines: [
-                  Polyline(
-                    points: [_senderLocation, _receiverLocation],
-                    strokeWidth: 4.5,
-                    color: NeoColors.brand,
-                  ),
-                ],
+                polylines: BispiraMapTheme.buildGrabGojekPolyline(
+                  points: [_senderLocation, _receiverLocation],
+                  coreColor: NeoColors.brand,
+                ),
               ),
             ],
           ),

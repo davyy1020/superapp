@@ -6,8 +6,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import '../theme/neo_theme.dart';
+import '../theme/map_theme.dart';
 import '../widgets/neo_widgets.dart';
 import '../services/api_service.dart';
+import 'live_ride_tracking_screen.dart';
 
 enum RideStep { pickup, destination, checkout }
 
@@ -49,6 +51,21 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   double _osrmDistanceKm = 0.0;
   int _osrmDurationMin = 0;
   Map<String, dynamic>? _osrmFareData;
+  List<Map<String, dynamic>> _nearbyDrivers = [];
+
+  void _loadNearbyFleet() async {
+    try {
+      final serviceType = _serviceOptions[_selectedServiceIndex]['id'] as String;
+      final drivers = await ApiService.getNearbyDrivers(
+        lat: _pickupLocation.latitude,
+        lng: _pickupLocation.longitude,
+        vehicleType: serviceType == 'kargo' ? 'mobil' : serviceType,
+      );
+      if (mounted) {
+        setState(() => _nearbyDrivers = drivers);
+      }
+    } catch (_) {}
+  }
 
   Future<void> _fetchOsrmRouteAndFare() async {
     setState(() => _isLoadingRoute = true);
@@ -217,6 +234,7 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _mapController.move(_pickupLocation, 16.8);
+      _loadNearbyFleet();
     });
   }
 
@@ -538,9 +556,87 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                   },
                 ),
                 children: [
-                  TileLayer(
-                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.bispira.userapp',
+                  BispiraMapTheme.cartoVoyagerTileLayer,
+
+                  // ANIMATED RADAR SCANNING RING (GRAB / GOJEK STYLE)
+                  AnimatedBuilder(
+                    animation: _driverAnimController,
+                    builder: (context, _) {
+                      return CircleLayer(
+                        circles: [
+                          CircleMarker(
+                            point: _pickupLocation,
+                            radius: 25.0 + (_driverAnimController.value * 50.0),
+                            color: NeoColors.brand.withValues(alpha: 0.12 * (1.0 - _driverAnimController.value)),
+                            borderColor: NeoColors.brand.withValues(alpha: 0.45 * (1.0 - _driverAnimController.value)),
+                            borderStrokeWidth: 2.0,
+                          ),
+                          CircleMarker(
+                            point: _pickupLocation,
+                            radius: 10.0,
+                            color: NeoColors.brand.withValues(alpha: 0.25),
+                            borderColor: NeoColors.brand,
+                            borderStrokeWidth: 2.0,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+
+                  // NEARBY FLEET RADAR MARKERS (ROTATED WITH BEARING)
+                  MarkerLayer(
+                    markers: _nearbyDrivers.map((drv) {
+                      final LatLng pos = LatLng(drv['lat'] as double, drv['lng'] as double);
+                      final double bearing = (drv['bearing'] as num?)?.toDouble() ?? 0.0;
+                      final bool isCar = drv['vehicleType'] == 'CAR';
+                      final String etaLabel = drv['etaLabel'] ?? '2 Mnt';
+                      final bool isClosest = _nearbyDrivers.isNotEmpty && drv == _nearbyDrivers.first;
+
+                      return Marker(
+                        point: pos,
+                        width: 55,
+                        height: 55,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (isClosest)
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF00C853),
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: Text(
+                                  etaLabel,
+                                  style: const TextStyle(color: Colors.white, fontSize: 8.5, fontWeight: FontWeight.w900),
+                                ),
+                              ),
+                            Transform.rotate(
+                              angle: bearing * math.pi / 180,
+                              child: Container(
+                                width: 32,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.black, width: 1.8),
+                                  boxShadow: const [
+                                    BoxShadow(color: Colors.black26, offset: Offset(1.5, 1.5), blurRadius: 2),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    isCar ? '🚗' : '🛵',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ],
               ),
@@ -892,18 +988,12 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                   initialZoom: 12.0,
                 ),
                 children: [
-                  TileLayer(
-                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.bispira.userapp',
-                  ),
+                  BispiraMapTheme.cartoVoyagerTileLayer,
                   PolylineLayer(
-                    polylines: [
-                      Polyline(
-                        points: _osrmPolylinePoints.isNotEmpty ? _osrmPolylinePoints : [_pickupLocation, _dropoffLocation],
-                        strokeWidth: 5.0,
-                        color: NeoColors.brand,
-                      ),
-                    ],
+                    polylines: BispiraMapTheme.buildGrabGojekPolyline(
+                      points: _osrmPolylinePoints.isNotEmpty ? _osrmPolylinePoints : [_pickupLocation, _dropoffLocation],
+                      coreColor: const Color(0xFF00C853), // Gojek neon emerald
+                    ),
                   ),
                   MarkerLayer(
                     markers: [
@@ -1488,10 +1578,28 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                                   const SizedBox(height: 18),
 
                                   SoftNeoButton(
-                                    text: 'Saya Sudah Transfer / Pantau Driver 👍',
-                                    backgroundColor: NeoColors.brand,
+                                    text: 'Pantau Driver Live GPS (OSRM) 🚀',
+                                    backgroundColor: const Color(0xFF00C853),
                                     textColor: NeoColors.white,
-                                    onPressed: () => Navigator.pop(ctx),
+                                    onPressed: () {
+                                      Navigator.pop(ctx);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => LiveRideTrackingScreen(
+                                            pickupLocation: _pickupLocation,
+                                            dropoffLocation: _dropoffLocation,
+                                            pickupAddress: _pickupController.text,
+                                            dropoffAddress: _dropoffController.text,
+                                            polylinePoints: _osrmPolylinePoints,
+                                            serviceName: selectedService['name'] as String,
+                                            serviceEmoji: selectedService['emoji'] as String,
+                                            totalFare: grandTotal,
+                                            orderId: 'BSP-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ],
                               ),

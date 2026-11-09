@@ -128,15 +128,24 @@ class _ActiveTripScreenState extends State<ActiveTripScreen> {
             ),
             children: [
               TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png',
+                subdomains: const ['a', 'b', 'c', 'd'],
                 userAgentPackageName: 'com.bispira.driverapp',
+                retinaMode: true,
               ),
               PolylineLayer(
                 polylines: [
+                  // Outer Road Casing (Grab/Gojek 3D Road Effect)
                   Polyline(
                     points: _osrmRoutePoints.isNotEmpty ? _osrmRoutePoints : [pickupLatLng, dropoffLatLng],
-                    strokeWidth: 5.5,
-                    color: NeoColors.brand,
+                    strokeWidth: 8.0,
+                    color: const Color(0xFF0F172A),
+                  ),
+                  // Inner Navigation Core (Neon Emerald Highway)
+                  Polyline(
+                    points: _osrmRoutePoints.isNotEmpty ? _osrmRoutePoints : [pickupLatLng, dropoffLatLng],
+                    strokeWidth: 4.8,
+                    color: const Color(0xFF00C853),
                   ),
                 ],
               ),

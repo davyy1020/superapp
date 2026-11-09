@@ -103,6 +103,43 @@ function calculateFare(serviceType, distanceKm) {
   };
 }
 
+function formatManeuver(step) {
+  const type = step.maneuver?.type || 'turn';
+  const modifier = step.maneuver?.modifier || '';
+  const roadName = step.name && step.name.trim() !== '' ? step.name : 'jalan utama';
+
+  let text = `Lurus terus di ${roadName}`;
+  let icon = 'straight';
+
+  if (type === 'depart') {
+    text = `Mulai dari ${roadName}`;
+    icon = 'depart';
+  } else if (type === 'arrive') {
+    text = `Tiba di tujuan (${roadName})`;
+    icon = 'pin_drop';
+  } else if (modifier.includes('right')) {
+    text = modifier.includes('slight') ? `Sedikit ke kanan masuk ${roadName}` : `Belok kanan ke ${roadName}`;
+    icon = 'turn_right';
+  } else if (modifier.includes('left')) {
+    text = modifier.includes('slight') ? `Sedikit ke kiri masuk ${roadName}` : `Belok kiri ke ${roadName}`;
+    icon = 'turn_left';
+  } else if (type.includes('roundabout') || type.includes('rotary')) {
+    text = `Di bundaran, ambil jalur keluar menuju ${roadName}`;
+    icon = 'roundabout';
+  } else if (modifier.includes('uturn')) {
+    text = `Putar balik di ${roadName}`;
+    icon = 'uturn';
+  }
+
+  return {
+    instruction: text,
+    icon,
+    name: roadName,
+    distance: Math.round(step.distance || 0),
+    duration: Math.round(step.duration || 0),
+  };
+}
+
 async function fetchOsrmRoute(originLat, originLng, destLat, destLng) {
   const baseUrl = process.env.OSRM_SERVER_URL || 'https://router.project-osrm.org';
   const osrmUrl = `${baseUrl}/route/v1/driving/${originLng},${originLat};${destLng},${destLat}?overview=full&geometries=geojson&steps=true`;
@@ -135,12 +172,7 @@ async function fetchOsrmRoute(originLat, originLng, destLat, destLng) {
 
         const polylinePoints = primary.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
 
-        const steps = (primary.legs[0]?.steps || []).map(s => ({
-          instruction: s.maneuver?.type + (s.name ? ` ke ${s.name}` : ''),
-          name: s.name || 'Jalan',
-          distance: Math.round(s.distance),
-          duration: Math.round(s.duration),
-        }));
+        const steps = (primary.legs[0]?.steps || []).map(formatManeuver);
 
         return {
           source: 'OSRM_ONLINE_ENGINE',
