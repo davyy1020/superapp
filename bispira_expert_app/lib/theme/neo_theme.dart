@@ -17,6 +17,8 @@ class NeoColors {
   static const Color goldSoft = Color(0xFFFFF7D6);
   static const Color orange = Color(0xFFFF6B00);
   static const Color red = Color(0xFFEF4444);
+  static const Color redDark = Color(0xFFB91C1C);
+  static const Color redSoft = Color(0xFFFEE2E2);
 
   static const Color bg = Color(0xFFF8FAFC);
   static const Color surface = Colors.white;
