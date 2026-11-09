@@ -35,3 +35,6 @@ desktop.ini
 # Scratch and Temp
 scratch/
 
+
+# Zip Packages
+*.zip
