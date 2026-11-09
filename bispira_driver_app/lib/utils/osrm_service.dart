@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 
 class OsrmRoutingService {
-  static const String backendUrl = 'http://localhost:3000/api/v1/routing';
+  static const String backendUrl = 'https://superapp.agungtrijayaabadi.com/api/v1/routing';
 
   static Future<Map<String, dynamic>> fetchRoute({
     required double originLat,

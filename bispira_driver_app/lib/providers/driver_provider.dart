@@ -197,7 +197,7 @@ class DriverProvider with ChangeNotifier {
 
     // 1. Try to fetch live pending order from Backend Next.js (/api/v1/orders)
     try {
-      final res = await http.get(Uri.parse('http://localhost:3000/api/v1/orders?status=LOOKING_FOR_DRIVER'))
+      final res = await http.get(Uri.parse('https://superapp.agungtrijayaabadi.com/api/v1/orders?status=LOOKING_FOR_DRIVER'))
           .timeout(const Duration(seconds: 2));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
@@ -314,7 +314,7 @@ class DriverProvider with ChangeNotifier {
     try {
       final orderId = _activeOrder!.id;
       http.post(
-        Uri.parse('http://localhost:3000/api/v1/orders/$orderId/accept'),
+        Uri.parse('https://superapp.agungtrijayaabadi.com/api/v1/orders/$orderId/accept'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'driverId': _driverId,

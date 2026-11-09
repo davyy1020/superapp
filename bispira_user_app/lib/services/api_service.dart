@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  // Backend Express.js Server URL (Local Node.js / VPS Server)
-  static const String baseUrl = 'http://localhost:3000/api/v1';
+  // Production Server cPanel URL
+  static const String baseUrl = 'https://superapp.agungtrijayaabadi.com/api/v1';
 
   // Local fallback state in case backend is offline
   static int _mockBalance = 250000;

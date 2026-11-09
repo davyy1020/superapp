@@ -1354,7 +1354,7 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
                           // Post to Backend Orders API in real-time
                           try {
                             http.post(
-                              Uri.parse('http://localhost:3000/api/v1/orders'),
+                              Uri.parse('${ApiService.baseUrl}/orders'),
                               headers: {'Content-Type': 'application/json'},
                               body: jsonEncode({
                                 'serviceType': _serviceOptions[_selectedServiceIndex]['id'],
