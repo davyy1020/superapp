@@ -24,3 +24,4 @@ class DesktopAdminApiService {
     'Accept': 'application/json',
   };
 }
+

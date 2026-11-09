@@ -265,9 +265,33 @@ class _MerchantHomeScreenState extends State<MerchantHomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Order #${order.id}',
-                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14, color: NeoColors.black),
+              Row(
+                children: [
+                  Text(
+                    'Order #${order.id}',
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14, color: NeoColors.black),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: order.orderType == 'pickup' ? const Color(0xFFFFF7ED) : const Color(0xFFEFF6FF),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: order.orderType == 'pickup' ? const Color(0xFFEA580C) : NeoColors.brand,
+                        width: 1.2,
+                      ),
+                    ),
+                    child: Text(
+                      order.orderType == 'pickup' ? '🛍️ PICK UP' : '🛵 DELIVERY',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        color: order.orderType == 'pickup' ? const Color(0xFFEA580C) : NeoColors.brand,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -290,8 +314,12 @@ class _MerchantHomeScreenState extends State<MerchantHomeScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            'Driver: ${order.driverName}',
-            style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: NeoColors.brand),
+            order.orderType == 'pickup' ? 'Metode: Ambil Sendiri di Resto (Lunas via BISPIRA)' : 'Driver: ${order.driverName}',
+            style: TextStyle(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w700,
+              color: order.orderType == 'pickup' ? const Color(0xFFEA580C) : NeoColors.brand,
+            ),
           ),
           const SizedBox(height: 8),
           const Divider(color: NeoColors.black, height: 1, thickness: 1),
@@ -328,7 +356,10 @@ class _MerchantHomeScreenState extends State<MerchantHomeScreen> {
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: NeoColors.black, width: 1.8),
                     ),
-                    child: const Text('TERIMA & MASAK 🍳', style: TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 12)),
+                    child: Text(
+                      order.orderType == 'pickup' ? 'TERIMA & MASAK (PICK UP) 🍳' : 'TERIMA & MASAK 🍳',
+                      style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 12),
+                    ),
                   ),
                 )
               else if (order.status == 'preparing')
@@ -341,7 +372,10 @@ class _MerchantHomeScreenState extends State<MerchantHomeScreen> {
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: NeoColors.black, width: 1.8),
                     ),
-                    child: const Text('MAKANAN SIAP 🛵', style: TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 12)),
+                    child: Text(
+                      order.orderType == 'pickup' ? 'SIAP DIAMBIL PEMBELI 🛍️' : 'MAKANAN SIAP 🛵',
+                      style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 12),
+                    ),
                   ),
                 )
               else if (order.status == 'ready')
@@ -354,7 +388,10 @@ class _MerchantHomeScreenState extends State<MerchantHomeScreen> {
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: NeoColors.black, width: 1.8),
                     ),
-                    child: const Text('SERAHKAN KE DRIVER ✅', style: TextStyle(color: NeoColors.black, fontWeight: FontWeight.w900, fontSize: 12)),
+                    child: Text(
+                      order.orderType == 'pickup' ? 'SERAHKAN KE PEMBELI (KASIR) ✅' : 'SERAHKAN KE DRIVER ✅',
+                      style: const TextStyle(color: NeoColors.black, fontWeight: FontWeight.w900, fontSize: 12),
+                    ),
                   ),
                 ),
             ],

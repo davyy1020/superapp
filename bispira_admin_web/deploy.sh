@@ -67,3 +67,4 @@ echo "🎉 DEPLOYMENT SELESAI! Backend BISPIRA aktif pada http://localhost:3000"
 echo "Status PM2:"
 pm2 status
 echo "=============================================================================="
+

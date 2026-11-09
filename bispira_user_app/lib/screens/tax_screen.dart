@@ -21,7 +21,7 @@ class _TaxScreenState extends State<TaxScreen> {
 
   final List<Map<String, dynamic>> _taxTransactions = [
     {
-      'title': 'Top-Up Virtual Account BNI',
+      'title': 'Top-Up Transfer Bank BNI (ATM/MBanking)',
       'date': '24 Okt 2026 • 14:20',
       'amount': '+ Rp 5.000.000',
       'isPositive': true,
@@ -97,7 +97,7 @@ class _TaxScreenState extends State<TaxScreen> {
               ),
               const SizedBox(height: 14),
 
-              const Text('Pilih Nominal Top-Up Virtual Account (BNI/Mandiri):',
+              const Text('Pilih Nominal Top-Up Transfer Bank / QRIS:',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: NeoColors.black)),
               const SizedBox(height: 12),
 
@@ -110,7 +110,7 @@ class _TaxScreenState extends State<TaxScreen> {
                       setState(() {
                         _userBalance += amt;
                         _taxTransactions.insert(0, {
-                          'title': 'Top-Up Virtual Account BNI',
+                          'title': 'Top-Up Transfer Bank BNI (ATM/MBanking)',
                           'date': 'Hari Ini • Sekarang',
                           'amount': '+ Rp ${_formatPrice(amt)}',
                           'isPositive': true,

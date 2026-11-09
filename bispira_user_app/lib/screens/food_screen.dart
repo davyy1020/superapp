@@ -844,6 +844,7 @@ class _FoodScreenState extends State<FoodScreen> {
   // OPEN CHECKOUT SHEET
   void _openCheckoutSheet() {
     String selectedPayment = 'transfer'; // 'transfer', 'cash'
+    String fulfillmentType = 'delivery'; // 'delivery' (Diantar Driver), 'pickup' (Ambil Sendiri)
     final int uniqueCode = 100 + Random().nextInt(899);
 
     showModalBottomSheet(
@@ -858,7 +859,7 @@ class _FoodScreenState extends State<FoodScreen> {
             final int markup10Percent = subtotal - baseMerchantPrice;
             const int appFee = 500;
             const int serviceFee = 500;
-            const int ongkir = 9000;
+            final int ongkir = (fulfillmentType == 'pickup') ? 0 : 9000;
             final int baseTotal = subtotal + appFee + serviceFee + ongkir;
             final int grandTotal = (selectedPayment == 'transfer') ? baseTotal + uniqueCode : baseTotal;
             final int driverPayout = (ongkir * 0.95).round();
@@ -900,37 +901,169 @@ class _FoodScreenState extends State<FoodScreen> {
                     ),
                     const SizedBox(height: 14),
 
-                    // Delivery Address Info
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(ctx);
-                        _openLocationPickerSheet();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: NeoColors.brandSoft,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: NeoColors.brand, width: 1.5),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.location_on_rounded, color: NeoColors.brand, size: 22),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('Lokasi Pengantaran (Ketuk untuk ubah)', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w800)),
-                                  Text(_deliveryAddress, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
-                                ],
+                    // PILIHAN METODE PENGIRIMAN: DELIVERY VS PICK UP
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: NeoColors.black, width: 2),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => setModalState(() => fulfillmentType = 'delivery'),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: fulfillmentType == 'delivery' ? NeoColors.brand : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: fulfillmentType == 'delivery' ? Border.all(color: NeoColors.black, width: 1.5) : null,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('🛵', style: TextStyle(fontSize: 15)),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      'Delivery (Diantar)',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 11.5,
+                                        color: fulfillmentType == 'delivery' ? NeoColors.white : NeoColors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            const Icon(Icons.edit_location_alt_rounded, color: NeoColors.brand, size: 20),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => setModalState(() {
+                                fulfillmentType = 'pickup';
+                                selectedPayment = 'transfer'; // Pick up wajib bayar lunas via app duluan
+                              }),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: fulfillmentType == 'pickup' ? const Color(0xFFEA580C) : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: fulfillmentType == 'pickup' ? Border.all(color: NeoColors.black, width: 1.5) : null,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('🛍️', style: TextStyle(fontSize: 15)),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      'Pick Up (Ambil Sendiri)',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 11.5,
+                                        color: fulfillmentType == 'pickup' ? NeoColors.white : NeoColors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // KARTU LOKASI ATAU PETUNJUK PICK UP
+                    if (fulfillmentType == 'delivery') ...[
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(ctx);
+                          _openLocationPickerSheet();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: NeoColors.brandSoft,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: NeoColors.brand, width: 1.5),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.location_on_rounded, color: NeoColors.brand, size: 22),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('Lokasi Pengantaran (Ketuk untuk ubah)', style: TextStyle(fontSize: 10, color: NeoColors.textMuted, fontWeight: FontWeight.w800)),
+                                    Text(_deliveryAddress, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.edit_location_alt_rounded, color: NeoColors.brand, size: 20),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ] else ...[
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFF7ED),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: const Color(0xFFEA580C), width: 1.8),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(Icons.storefront_rounded, color: Color(0xFFEA580C), size: 22),
+                                const SizedBox(width: 8),
+                                const Expanded(
+                                  child: Text('AMBIL LANGSUNG DI OUTLET / RESTO', style: TextStyle(fontSize: 11, color: Color(0xFFEA580C), fontWeight: FontWeight.w900)),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF16A34A),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: const Text('ONGKIR RP 0', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 10)),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            const Text('Resto Ayam Geprek Juara Bispira (0.8 km)', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12.5, color: NeoColors.black)),
+                            const Text('Jl. Sudirman No. 42, Jakarta Selatan', style: TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w600)),
                           ],
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEFF6FF),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: NeoColors.brand, width: 1.2),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text('💡', style: TextStyle(fontSize: 14)),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Alur Pick Up: Pembeli bayar dulu lewat aplikasi BISPIRA, setelah pembayaran terverifikasi baru pesanan diproses/dimasak oleh merchant. Anda tinggal datang ke resto, konfirmasi kode pickup ke kasir, dan langsung ambil!',
+                                style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: Color(0xFF1E3A8A), height: 1.3),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 16),
 
                     // Cart Items List
@@ -1001,8 +1134,18 @@ class _FoodScreenState extends State<FoodScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Ongkos Kirim BISPIRA Express ⚡', style: TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700)),
-                        Text('+ Rp ${_formatPrice(ongkir)}', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: NeoColors.black)),
+                        Text(
+                          fulfillmentType == 'pickup' ? 'Ongkir Pengantaran (Ambil Sendiri di Resto)' : 'Ongkos Kirim BISPIRA Express ⚡',
+                          style: const TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          fulfillmentType == 'pickup' ? 'Rp 0 (GRATIS)' : '+ Rp ${_formatPrice(ongkir)}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 12,
+                            color: fulfillmentType == 'pickup' ? const Color(0xFF16A34A) : NeoColors.black,
+                          ),
+                        ),
                       ],
                     ),
                     if (selectedPayment == 'transfer') ...[
@@ -1031,7 +1174,9 @@ class _FoodScreenState extends State<FoodScreen> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              'Transparansi Split Settlement Excel:\n• Merchant Payout (100% Base): Rp ${_formatPrice(merchantPayout)}\n• Driver Payout (95% Ongkir): Rp ${_formatPrice(driverPayout)}',
+                              fulfillmentType == 'pickup'
+                                  ? 'Transparansi Split Settlement Excel (Pick Up):\n• Merchant Payout (100% Base): Rp ${_formatPrice(merchantPayout)}\n• Porsi Driver: Rp 0 (Tanpa Kurir)'
+                                  : 'Transparansi Split Settlement Excel (Delivery):\n• Merchant Payout (100% Base): Rp ${_formatPrice(merchantPayout)}\n• Driver Payout (95% Ongkir): Rp ${_formatPrice(driverPayout)}',
                               style: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: Color(0xFF334155), height: 1.3),
                             ),
                           ),
@@ -1064,7 +1209,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                   const Text('🏦', style: TextStyle(fontSize: 16)),
                                   const SizedBox(width: 6),
                                   Text(
-                                    'Transfer Bank',
+                                    'Transfer Bank / QRIS',
                                     style: TextStyle(
                                       fontSize: 11.5,
                                       fontWeight: FontWeight.w900,
@@ -1079,28 +1224,43 @@ class _FoodScreenState extends State<FoodScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () => setModalState(() => selectedPayment = 'cash'),
+                            onTap: () {
+                              if (fulfillmentType == 'pickup') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('⚠️ Pesanan Pick Up wajib dibayar lunas via Transfer/QRIS BISPIRA terlebih dahulu agar merchant bisa mulai memasak.'),
+                                    backgroundColor: Color(0xFFEA580C),
+                                  ),
+                                );
+                                return;
+                              }
+                              setModalState(() => selectedPayment = 'cash');
+                            },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                               decoration: BoxDecoration(
-                                color: selectedPayment == 'cash' ? NeoColors.brandSoft : NeoColors.white,
+                                color: fulfillmentType == 'pickup'
+                                    ? Colors.grey.shade200
+                                    : (selectedPayment == 'cash' ? NeoColors.brandSoft : NeoColors.white),
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: selectedPayment == 'cash' ? NeoColors.brand : NeoColors.black,
-                                  width: selectedPayment == 'cash' ? 2 : 1.2,
+                                  color: selectedPayment == 'cash' && fulfillmentType != 'pickup' ? NeoColors.brand : Colors.grey.shade400,
+                                  width: selectedPayment == 'cash' && fulfillmentType != 'pickup' ? 2 : 1.2,
                                 ),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text('💵', style: TextStyle(fontSize: 16)),
+                                  Text('💵', style: TextStyle(fontSize: 16, color: fulfillmentType == 'pickup' ? Colors.grey : null)),
                                   const SizedBox(width: 6),
                                   Text(
-                                    'Bayar Tunai / COD',
+                                    fulfillmentType == 'pickup' ? 'Tunai (Nonaktif)' : 'Bayar Tunai / COD',
                                     style: TextStyle(
                                       fontSize: 11.5,
                                       fontWeight: FontWeight.w900,
-                                      color: selectedPayment == 'cash' ? NeoColors.brand : NeoColors.black,
+                                      color: fulfillmentType == 'pickup'
+                                          ? Colors.grey
+                                          : (selectedPayment == 'cash' ? NeoColors.brand : NeoColors.black),
                                     ),
                                   ),
                                 ],
@@ -1121,7 +1281,7 @@ class _FoodScreenState extends State<FoodScreen> {
                           border: Border.all(color: NeoColors.gold, width: 1.2),
                         ),
                         child: const Text(
-                          '💡 Transfer tepat sesuai total hingga 3 digit terakhir ke Rekening Resmi PT Bispira (BCA / Mandiri / BRI / BNI / BSI / Jateng / Jatim / DKI / BJB).',
+                          '💡 Transfer tepat sesuai total hingga 3 digit terakhir ke Rekening Resmi PT Bispira (BCA / Mandiri / BRI / BNI / BSI / Bank Daerah) atau Scan QRIS.',
                           style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: NeoColors.black, height: 1.3),
                         ),
                       ),
@@ -1148,6 +1308,8 @@ class _FoodScreenState extends State<FoodScreen> {
                           _cartItems.clear();
                         });
 
+                        final pickupCode = 'PKP-$uniqueCode';
+
                         showDialog(
                           context: context,
                           builder: (c) => AlertDialog(
@@ -1158,21 +1320,49 @@ class _FoodScreenState extends State<FoodScreen> {
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text('🛵', style: TextStyle(fontSize: 54)),
+                                Text(fulfillmentType == 'pickup' ? '🛍️' : '🛵', style: const TextStyle(fontSize: 54)),
                                 const SizedBox(height: 10),
-                                const Text('Pesanan Berhasil Dibuat!', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: NeoColors.black)),
-                                const SizedBox(height: 6),
                                 Text(
-                                  selectedPayment == 'transfer'
-                                      ? 'Silakan transfer Rp ${_formatPrice(grandTotal)} (termasuk kode unik $uniqueCode) ke Rekening Resmi BISPIRA.\nDriver akan segera meluncur mengantar!'
-                                      : 'Siapkan uang tunai pas Rp ${_formatPrice(grandTotal)} saat Driver tiba di: $_deliveryAddress',
+                                  fulfillmentType == 'pickup' ? 'Pesanan Pick Up Dibuat!' : 'Pesanan Berhasil Dibuat!',
+                                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: NeoColors.black),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w600, height: 1.3),
                                 ),
+                                const SizedBox(height: 8),
+                                if (fulfillmentType == 'pickup') ...[
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFF7ED),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: const Color(0xFFEA580C), width: 1.8),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        const Text('KODE PENGAMBILAN (TUNJUKKAN KE RESTO):', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Color(0xFFEA580C))),
+                                        const SizedBox(height: 2),
+                                        Text(pickupCode, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, letterSpacing: 2, color: NeoColors.black)),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    '1. Segera transfer Rp ${_formatPrice(grandTotal)} (Kode Unik: $uniqueCode) via ATM/M-Banking/QRIS.\n2. Setelah pembayaran terverifikasi, resto akan langsung memproses pesanan Anda.\n3. Datang ke Resto Ayam Geprek Juara, tunjukkan kode $pickupCode, tinggal ambil saja tanpa antre bayar!',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w600, height: 1.35),
+                                  ),
+                                ] else ...[
+                                  Text(
+                                    selectedPayment == 'transfer'
+                                        ? 'Silakan transfer Rp ${_formatPrice(grandTotal)} (termasuk kode unik $uniqueCode) ke Rekening Resmi BISPIRA.\nDriver akan segera meluncur mengantar!'
+                                        : 'Siapkan uang tunai pas Rp ${_formatPrice(grandTotal)} saat Driver tiba di: $_deliveryAddress',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 12, color: NeoColors.textMuted, fontWeight: FontWeight.w600, height: 1.3),
+                                  ),
+                                ],
                                 const SizedBox(height: 18),
                                 SoftNeoButton(
-                                  text: 'OK, Selesai 👍',
-                                  backgroundColor: NeoColors.brand,
+                                  text: fulfillmentType == 'pickup' ? 'OK, Saya Mengerti 👍' : 'OK, Selesai 👍',
+                                  backgroundColor: fulfillmentType == 'pickup' ? const Color(0xFFEA580C) : NeoColors.brand,
                                   textColor: NeoColors.white,
                                   onPressed: () => Navigator.pop(c),
                                 ),
@@ -1185,7 +1375,7 @@ class _FoodScreenState extends State<FoodScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         decoration: BoxDecoration(
-                          color: NeoColors.brand,
+                          color: fulfillmentType == 'pickup' ? const Color(0xFFEA580C) : NeoColors.brand,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(color: NeoColors.black, width: 2.2),
                           boxShadow: const [
@@ -1194,9 +1384,11 @@ class _FoodScreenState extends State<FoodScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            selectedPayment == 'transfer'
-                                ? 'Konfirmasi Transfer Rp ${_formatPrice(grandTotal)} 🏦'
-                                : 'Pesan Sekarang (Bayar Tunai) 💵',
+                            fulfillmentType == 'pickup'
+                                ? 'Bayar Rp ${_formatPrice(grandTotal)} & Ambil di Resto 🛍️'
+                                : (selectedPayment == 'transfer'
+                                    ? 'Konfirmasi Transfer Rp ${_formatPrice(grandTotal)} 🏦'
+                                    : 'Pesan Sekarang (Bayar Tunai) 💵'),
                             style: const TextStyle(color: NeoColors.white, fontWeight: FontWeight.w900, fontSize: 13.5),
                           ),
                         ),

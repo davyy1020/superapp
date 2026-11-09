@@ -20,3 +20,4 @@ class HealthApiService {
     'Accept': 'application/json',
   };
 }
+

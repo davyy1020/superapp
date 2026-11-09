@@ -10,7 +10,7 @@ class ApiService {
   static final List<Map<String, dynamic>> _mockTransactions = [
     {
       'txId': 'tx_1001',
-      'title': 'Top-Up Virtual Account BNI',
+      'title': 'Top-Up Transfer Bank BNI (ATM/MBanking)',
       'date': '25 Okt 2026 • 09:30',
       'amount': '+ Rp 500.000',
       'isPositive': true,

@@ -45,6 +45,7 @@ class MerchantOrder {
   final String itemsSummary;
   final int totalMerchantEarning; // 100% Base Merchant Price
   final String orderTime;
+  final String orderType; // 'delivery' or 'pickup'
   String status; // 'incoming', 'preparing', 'ready', 'completed'
 
   MerchantOrder({
@@ -54,6 +55,7 @@ class MerchantOrder {
     required this.itemsSummary,
     required this.totalMerchantEarning,
     required this.orderTime,
+    this.orderType = 'delivery',
     this.status = 'incoming',
   });
 }
