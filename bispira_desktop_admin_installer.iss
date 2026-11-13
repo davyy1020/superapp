@@ -4,7 +4,7 @@
 #define MyAppPublisher "PT Agung Tri Jaya Abadi / BISPIRA"
 #define MyAppURL "https://superapp.agungtrijayaabadi.com"
 #define MyAppExeName "bispira_desktop_admin.exe"
-#define SourceDir "C:\Users\Davy\Documents\superapp\BISPIRA_BINARIES_RELEASE\Bispira_Desktop_Admin_Windows"
+#define SourceDir "C:\Users\Davy\Documents\superapp\bispira_desktop_admin\build\windows\x64\runner\Release"
 #define OutputDir "C:\Users\Davy\Documents\superapp\BISPIRA_BINARIES_RELEASE"
 
 [Setup]
@@ -18,7 +18,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\BISPIRA Superadmin
 DefaultGroupName=BISPIRA
 AllowNoIcons=yes
-OutputDir={#OutputDir}
+OutputDir={#OutputDir}co
 OutputBaseFilename=Bispira_Superadmin_Windows_Setup
 SetupIconFile=C:\Users\Davy\Documents\superapp\bispira_desktop_admin\windows\runner\resources\app_icon.ico
 Compression=lzma2/ultra64
@@ -37,9 +37,7 @@ Name: "desktopicon"; Description: "Buat ikon di Desktop"; GroupDescription: "Iko
 [Files]
 Source: "{#SourceDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourceDir}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceDir}\*.so"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceDir}\*.dat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceDir}\flutter_assets\*"; DestDir: "{app}\flutter_assets"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#SourceDir}\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
