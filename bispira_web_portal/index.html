@@ -649,38 +649,46 @@
 
       <!-- FORM 1: DRIVER -->
       <div id="form-driver" class="reg-form-card" data-aos="fade-up">
-        <h3>Form Pendaftaran Mitra Driver, Kurir & Medevac</h3>
+        <h3>Form Pendaftaran Mitra Driver, Kurir & Kargo</h3>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          Pilih armada Anda mulai dari Motor, Mobil, Kurir Send, Mobil Box, hingga Bak Terbuka.
+        </p>
         <form onsubmit="handleFormSubmit(event, 'Mitra Driver')">
           <div class="form-grid">
             <div class="input-field">
               <label>Nama Lengkap (Sesuai KTP)</label>
-              <input type="text" placeholder="Contoh: Budi Santoso" required>
+              <input type="text" id="drv-name" placeholder="Contoh: Budi Santoso" required>
             </div>
             <div class="input-field">
-              <label>Nomor Telepon / WhatsApp Active</label>
-              <input type="tel" placeholder="Contoh: 08123456789" required>
+              <label>Nomor Telepon / WhatsApp Aktif</label>
+              <input type="tel" id="drv-phone" placeholder="Contoh: 08123456789" required>
             </div>
             <div class="input-field">
               <label>Pilihan Armada Kendaraan</label>
-              <select required>
-                <option value="motor">Motor (Bispira Ride & Food)</option>
-                <option value="mobil">Mobil (Bispira Car)</option>
-                <option value="send">Kurir Express (Bispira Send)</option>
-                <option value="ambulance">Ambulance Medevac Darurat</option>
+              <select id="drv-armada" required>
+                <option value="motor">🛵 Motor Ride & Food (Bispira Ride)</option>
+                <option value="mobil">🚗 Mobil Car (Bispira Car)</option>
+                <option value="send">📦 Kurir Express Paket (Bispira Send)</option>
+                <option value="mobilBox">🚚 Kargo Mobil Box Tertutup (Bispira Box)</option>
+                <option value="bakTerbuka">🛻 Pickup Bak Terbuka (Bispira Bak)</option>
+                <option value="ambulance">🚑 Ambulance Medevac Siaga 24 Jam</option>
               </select>
             </div>
             <div class="input-field">
               <label>Kota Operasional Penjemputan</label>
-              <input type="text" placeholder="Contoh: Jakarta Selatan" required>
+              <input type="text" id="drv-city" placeholder="Contoh: Semarang / Jakarta" required>
             </div>
             <div class="input-field">
               <label>Nomor Plat Kendaraan</label>
-              <input type="text" placeholder="Contoh: B 4982 BSP" required>
+              <input type="text" id="drv-plate" placeholder="Contoh: B 4982 BSP" required>
             </div>
             <div class="input-field">
               <label>Upload Foto KTP & SIM (PDF/JPG)</label>
-              <input type="file" required>
+              <input type="file">
             </div>
+          </div>
+          <div style="background: #eff6ff; border: 1.5px solid #2563eb; border-radius: 10px; padding: 12px; margin: 14px 0; font-size: 12px; color: #1e3a8a;">
+            🔔 <strong>Alur Approval:</strong> Data Anda akan diverifikasi oleh Admin BISPIRA. Begitu disetujui (ACC), sistem otomatis mengirim pesan WhatsApp resmi satu arah berisi ID Akun & PIN Default.
           </div>
           <button type="submit" class="btn-submit">Kirim Pendaftaran Driver 🚀</button>
         </form>
@@ -688,66 +696,83 @@
 
       <!-- FORM 2: MERCHANT -->
       <div id="form-merchant" class="reg-form-card" style="display: none;">
-        <h3>Form Pendaftaran Mitra Resto & Merchant Toko</h3>
-        <form onsubmit="handleFormSubmit(event, 'Mitra Resto')">
+        <h3>Form Pendaftaran Penjual & Merchant Toko</h3>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          Terbuka untuk Resto Kuliner, Apotek/Farmasi, Toko Sembako, Sewa Properti/Busana, Tiket & Event.
+        </p>
+        <form onsubmit="handleFormSubmit(event, 'Mitra Penjual (Merchant)')">
           <div class="form-grid">
             <div class="input-field">
-              <label>Nama Outlet / Resto / Toko</label>
-              <input type="text" placeholder="Contoh: Ayam Goreng Pak Bareng" required>
+              <label>Nama Outlet / Resto / Apotek / Usaha</label>
+              <input type="text" id="mrc-name" placeholder="Contoh: Apotek Kimia Farma / Warung Barokah" required>
             </div>
             <div class="input-field">
-              <label>Nama Pemilik Outlet</label>
-              <input type="text" placeholder="Contoh: Siti Rahmawati" required>
+              <label>Nama Pemilik Usaha</label>
+              <input type="text" id="mrc-owner" placeholder="Contoh: Siti Rahmawati" required>
             </div>
             <div class="input-field">
-              <label>Kategori Usaha</label>
-              <select required>
-                <option value="food">Kuliner Makanan & Minuman (Bispira Food)</option>
-                <option value="mart">Sembako & Supermarket (Bispira Mart)</option>
-                <option value="expert">Jasa Perbaikan & Servis (Bispira Expert)</option>
+              <label>Nomor WhatsApp Pemilik (Untuk Konfirmasi Akun)</label>
+              <input type="tel" id="mrc-phone" placeholder="Contoh: 081298765432" required>
+            </div>
+            <div class="input-field">
+              <label>Bidang Usaha Toko</label>
+              <select id="mrc-category" required>
+                <option value="food">🍲 Kuliner, Makanan & Minuman (Bispira Food)</option>
+                <option value="apotek">💊 Apotek, Obat & Farmasi (Bispira Health/Apotek)</option>
+                <option value="mart">🌾 Sembako & Supermarket (Bispira Mart)</option>
+                <option value="properti">🏢 Sewa Properti & Busana (Kos, Kontrakan, Baju Wisuda/Event, Kostum)</option>
+                <option value="tiket">🎟️ Tiket Mess, Wisata, Seminar, Pelatihan & Ujian</option>
+                <option value="iklan">📢 Bispira Iklan (Jual Slot Banner & Logo Sponsor)</option>
+                <option value="donasi">🤝 Yayasan Sosial, Panti Asuhan & Donasi</option>
+                <option value="event">🏆 Penyelenggara Event & Lomba E-Voting</option>
               </select>
             </div>
             <div class="input-field">
-              <label>Alamat Lengkap Outlet</label>
-              <input type="text" placeholder="Contoh: Jl. SCBD Lot 8, Jakarta Selatan" required>
+              <label>Alamat Lengkap Usaha & Kota</label>
+              <input type="text" id="mrc-address" placeholder="Contoh: Jl. Diponegoro No. 45, Semarang" required>
             </div>
             <div class="input-field">
-              <label>Nomor Rekening Bank Resto (Pencairan Saldo)</label>
-              <input type="text" placeholder="Contoh: BNI - 9876543210" required>
-            </div>
-            <div class="input-field">
-              <label>Upload Foto Toko / Dapur</label>
-              <input type="file" required>
+              <label>Nomor Rekening Bank Usaha (Pencairan Saldo)</label>
+              <input type="text" id="mrc-bank" placeholder="Contoh: BCA - 1234567890 a.n Toko" required>
             </div>
           </div>
-          <button type="submit" class="btn-submit">Kirim Pendaftaran Resto 🏪</button>
+          <div style="background: #fefce8; border: 1.5px solid #ca8a04; border-radius: 10px; padding: 12px; margin: 14px 0; font-size: 12px; color: #854d0e;">
+            📢 <strong>Konfirmasi WA Satu Arah:</strong> Setelah akun di-ACC Superadmin BISPIRA, Anda akan menerima pesan WhatsApp resmi berisi ID Toko dan PIN Kasir agar Anda langsung bisa masuk ke aplikasi merchant dan menambah produk.
+          </div>
+          <button type="submit" class="btn-submit">Kirim Pendaftaran Merchant 🏪</button>
         </form>
       </div>
 
       <!-- FORM 3: BRANCH -->
       <div id="form-branch" class="reg-form-card" style="display: none;">
         <h3>Form Pengajuan Pemegang Lisensi Cabang Regional</h3>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          Peluang bisnis pemilik hak eksklusif operasional wilayah kota / kabupaten di seluruh Indonesia.
+        </p>
         <form onsubmit="handleFormSubmit(event, 'Pemegang Lisensi Cabang')">
           <div class="form-grid">
             <div class="input-field">
               <label>Nama Perusahaan / Perorangan</label>
-              <input type="text" placeholder="Contoh: PT Bispira Cabang Malang" required>
+              <input type="text" id="brn-company" placeholder="Contoh: PT Bispira Cabang Semarang" required>
             </div>
             <div class="input-field">
               <label>Wilayah Cabang yang Diajukan</label>
-              <input type="text" placeholder="Contoh: Kabupaten Malang / Kota Malang" required>
+              <input type="text" id="brn-city" placeholder="Contoh: Kota Semarang / Kab. Demak" required>
             </div>
             <div class="input-field">
-              <label>Nomor HP / Email Penanggung Jawab</label>
-              <input type="text" placeholder="Contoh: admin@bispira-malang.com" required>
+              <label>Nomor HP / WhatsApp Penanggung Jawab</label>
+              <input type="tel" id="brn-phone" placeholder="Contoh: 081234567890" required>
             </div>
             <div class="input-field">
               <label>Skema Profit Share yang Dipilih</label>
-              <select required>
-                <option value="30">30% Profit Share Cabang (Standard)</option>
-                <option value="40">40% Profit Share Cabang (Exclusivity Zone)</option>
+              <select id="brn-scheme" required>
+                <option value="30">30% Bagi Hasil Cabang (Standard Non-Eksklusif)</option>
+                <option value="40">40% Bagi Hasil Cabang (Hak Eksklusif Wilayah)</option>
               </select>
             </div>
+          </div>
+          <div style="background: #eff6ff; border: 1.5px solid #2563eb; border-radius: 10px; padding: 12px; margin: 14px 0; font-size: 12px; color: #1e3a8a;">
+            🏢 <strong>Aktivasi Lisensi:</strong> Pendaftaran akan masuk ke Desktop Superadmin BISPIRA Pusat untuk verifikasi zona dan penerbitan akun Cabang.
           </div>
           <button type="submit" class="btn-submit">Kirim Pengajuan Cabang 🏢</button>
         </form>

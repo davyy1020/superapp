@@ -115,32 +115,46 @@ class _RideScreenState extends State<RideScreen> with SingleTickerProviderStateM
   Timer? _debounceTimer;
   Timer? _mapMoveTimer;
 
-  // 4 ARMADA TERSEDIA (SESUAI EXCEL SHEET 9: PENGATURAN TARIF & FEES REVISI)
+  // ARMADA TERSEDIA (SESUAI EXCEL SHEET 9 & ARAHAN BISNIS BISPIRA)
   final List<Map<String, dynamic>> _serviceOptions = [
     {
       'id': 'motor',
-      'name': 'Motor',
+      'name': 'Motor Ride',
       'sub': 'Rp 2.500/KM • Min Rp 8rb',
       'emoji': '🛵',
       'basePrice': 8000,
     },
     {
+      'id': 'mobil',
+      'name': 'Mobil Car',
+      'sub': 'Rp 4.500/KM • Min Rp 16rb',
+      'emoji': '🚗',
+      'basePrice': 16000,
+    },
+    {
       'id': 'kurir',
-      'name': 'Kurir',
+      'name': 'Kurir Send',
       'sub': 'Rp 3.000/KM • Min Rp 10rb',
       'emoji': '📦',
       'basePrice': 10000,
     },
     {
-      'id': 'kargo',
-      'name': 'Kargo',
-      'sub': 'Rp 4.000/KM • Min Rp 50rb',
+      'id': 'mobil_box',
+      'name': 'Mobil Box',
+      'sub': 'Rp 5.000/KM • Min Rp 45rb',
       'emoji': '🚚',
-      'basePrice': 50000,
+      'basePrice': 45000,
+    },
+    {
+      'id': 'bak_terbuka',
+      'name': 'Bak Terbuka',
+      'sub': 'Rp 4.500/KM • Min Rp 40rb',
+      'emoji': '🛻',
+      'basePrice': 40000,
     },
     {
       'id': 'ambulance',
-      'name': 'Ambulance',
+      'name': 'Ambulance Medevac',
       'sub': 'Rp 5.000/KM • Min Rp 50rb',
       'emoji': '🚑',
       'basePrice': 50000,

@@ -38,3 +38,8 @@ scratch/
 
 # Zip Packages
 *.zip
+
+# Local Binary Releases & Deploy Packages (Uploaded to Google Drive / cPanel)
+BISPIRA_BINARIES_RELEASE/
+BISPIRA_WEB_DEPLOY/
+DRIVE_UPLOAD_SIAP_PAKAI/

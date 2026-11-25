@@ -106,9 +106,15 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                       child: Text(
                         driver.armada == DriverArmada.motor
                             ? '🛵'
-                            : driver.armada == DriverArmada.ambulance
-                                ? '🚑'
-                                : '🚗',
+                            : driver.armada == DriverArmada.send
+                                ? '📦'
+                                : driver.armada == DriverArmada.mobilBox
+                                    ? '🚚'
+                                    : driver.armada == DriverArmada.bakTerbuka
+                                        ? '🛻'
+                                        : driver.armada == DriverArmada.ambulance
+                                            ? '🚑'
+                                            : '🚗',
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),

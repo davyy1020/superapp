@@ -17,39 +17,126 @@ class _EVotingScreenState extends State<EVotingScreen> {
   int _userBalance = 250000;
   int? _votedCandidateId;
   int _totalVotes = 12482901;
+  bool _isPusat = true;
+  int _selectedPillarIndex = 0;
 
-  final List<Map<String, dynamic>> _candidates = [
+  final List<String> _pillarFilters = [
+    'Semua Pilar',
+    'Pendidikan',
+    'Kesenian',
+    'Kebudayaan',
+    'Olahraga',
+  ];
+
+  final List<Map<String, dynamic>> _allCandidates = [
+    // PUSAT
     {
       'id': 1,
-      'numberBadge': 'CANDIDATE #01',
+      'isPusat': true,
+      'category': 'Pendidikan',
+      'numberBadge': 'PENDIDIKAN #01',
       'name': 'Dr. Aris Sudarsono',
-      'expertise': 'Digital Infrastructure',
-      'quote': '"Building a unified digital backbone for national prosperity and technological sovereignty."',
+      'expertise': 'Inovasi Pendidikan & Riset Digital Nasional',
+      'quote': '"Membangun kedaulatan riset teknologi dan akses pendidikan gratis di seluruh pelosok Indonesia."',
       'votesPercentage': 42,
       'emoji': '👨‍💼',
       'bgGradient': [const Color(0xFF0F172A), const Color(0xFF0040B8)],
     },
     {
       'id': 2,
-      'numberBadge': 'CANDIDATE #02',
+      'isPusat': true,
+      'category': 'Kebudayaan',
+      'numberBadge': 'KEBUDAYAAN #02',
       'name': 'Siti Maemunah, M.A.',
-      'expertise': 'Social Inclusion',
-      'quote': '"Leveraging technology to ensure every citizen has equal access to education and opportunity."',
+      'expertise': 'Pelestari Warisan Budaya Nusantara & Adat 38 Provinsi',
+      'quote': '"Menjaga keluhuran adat dan tradisi leluhur sebagai identitas martabat bangsa di mata dunia."',
       'votesPercentage': 38,
       'emoji': '👩‍💼',
       'bgGradient': [const Color(0xFF10B981), const Color(0xFF0F172A)],
     },
     {
       'id': 3,
-      'numberBadge': 'CANDIDATE #03',
-      'name': 'Budi Santoso, Eng.',
-      'expertise': 'Sustainable Cities',
-      'quote': '"Transforming our urban landscapes into smart, carbon-neutral hubs for the next generation."',
+      'isPusat': true,
+      'category': 'Olahraga',
+      'numberBadge': 'OLAHRAGA #03',
+      'name': 'Budi Santoso, S.Or.',
+      'expertise': 'Kapten Timnas Atletik & Pelatih Muda Berbakat',
+      'quote': '"Sportivitas, dedikasi, dan pembinaan atlet usia dini menuju panggung medali emas dunia."',
       'votesPercentage': 20,
       'emoji': '🧑‍💻',
       'bgGradient': [const Color(0xFF0284C7), const Color(0xFF0040B8)],
     },
+    {
+      'id': 4,
+      'isPusat': true,
+      'category': 'Kesenian',
+      'numberBadge': 'KESENIAN #04',
+      'name': 'Cantika Ayu & Sanggar Harmoni',
+      'expertise': 'Komposer Musik Tradisional Kontemporer Nasional',
+      'quote': '"Harmoni alunan gamelan dan orkestra modern menyatukan keberagaman suara bangsa."',
+      'votesPercentage': 25,
+      'emoji': '🎭',
+      'bgGradient': [const Color(0xFF7C3AED), const Color(0xFF0040B8)],
+    },
+
+    // DAERAH
+    {
+      'id': 5,
+      'isPusat': false,
+      'category': 'Pendidikan',
+      'numberBadge': 'PELAJAR DAERAH #01',
+      'name': 'Ahmad Fauzi (SMAN 1)',
+      'expertise': 'Juara Olimpiade Sains & Inovator Robotika Daerah',
+      'quote': '"Karya anak daerah untuk memecahkan masalah pertanian dengan kecerdasan buatan."',
+      'votesPercentage': 45,
+      'emoji': '🧑‍🎓',
+      'bgGradient': [const Color(0xFF0F172A), const Color(0xFF0284C7)],
+    },
+    {
+      'id': 6,
+      'isPusat': false,
+      'category': 'Kesenian',
+      'numberBadge': 'SENI TARI #02',
+      'name': 'Grup Tari Melati Ayu',
+      'expertise': 'Penampil Tari Kreasi Tradisional Jawa Tengah',
+      'quote': '"Gerak tari gemulai melestarikan cerita rakyat daerah untuk generasi muda."',
+      'votesPercentage': 32,
+      'emoji': '💃',
+      'bgGradient': [const Color(0xFFD4A017), const Color(0xFF78350F)],
+    },
+    {
+      'id': 7,
+      'isPusat': false,
+      'category': 'Kebudayaan',
+      'numberBadge': 'DUTA DAERAH #03',
+      'name': 'Raden Arya & Putri Kirana',
+      'expertise': 'Duta Wisata & Promosi Warisan Budaya Kota/Kabupaten',
+      'quote': '"Mengenalkan pesona kearifan lokal daerah ke tingkat nasional dan internasional."',
+      'votesPercentage': 28,
+      'emoji': '👑',
+      'bgGradient': [const Color(0xFF059669), const Color(0xFF0F172A)],
+    },
+    {
+      'id': 8,
+      'isPusat': false,
+      'category': 'Olahraga',
+      'numberBadge': 'ATLET DAERAH #04',
+      'name': 'Gilang Pratama',
+      'expertise': 'Juara Futsal & Pendekar Pencak Silat Kejurda',
+      'quote': '"Bermain dengan hati, menjunjung tinggi sportivitas dan membanggakan daerah tercinta."',
+      'votesPercentage': 35,
+      'emoji': '⚽',
+      'bgGradient': [const Color(0xFFDC2626), const Color(0xFF0F172A)],
+    },
   ];
+
+  List<Map<String, dynamic>> get _candidates {
+    return _allCandidates.where((c) {
+      if (c['isPusat'] != _isPusat) return false;
+      if (_selectedPillarIndex == 0) return true;
+      return c['category'] == _pillarFilters[_selectedPillarIndex];
+    }).toList();
+  }
 
   String _formatNumber(int number) {
     return number.toString().replaceAllMapped(
@@ -335,12 +422,12 @@ class _EVotingScreenState extends State<EVotingScreen> {
                       const Icon(Icons.location_on_rounded, color: NeoColors.brand, size: 18),
                       const SizedBox(width: 4),
                       const Text(
-                        'BISPIRA',
+                        'BISPIRA E-VOTING',
                         style: TextStyle(
                           color: NeoColors.brand,
                           fontWeight: FontWeight.w900,
-                          fontSize: 18,
-                          letterSpacing: 1.2,
+                          fontSize: 16,
+                          letterSpacing: 1.0,
                         ),
                       ),
                     ],
@@ -365,17 +452,120 @@ class _EVotingScreenState extends State<EVotingScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 14),
+
+              // ============================================================
+              // SEGMENTED SWITCHER (PUSAT VS DAERAH)
+              // ============================================================
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: NeoColors.surface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: NeoColors.black, width: 2),
+                  boxShadow: const [
+                    BoxShadow(color: NeoColors.black, offset: Offset(2.5, 2.5), blurRadius: 0),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _isPusat = true),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: _isPusat ? NeoColors.gold : Colors.transparent,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '👑 E-Voting Pusat',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 12,
+                                color: _isPusat ? NeoColors.black : NeoColors.textMuted,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _isPusat = false),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: !_isPusat ? NeoColors.brand : Colors.transparent,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '📍 E-Voting Daerah',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 12,
+                                color: !_isPusat ? NeoColors.white : NeoColors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // 4 PILAR FILTER CHIPS
+              SizedBox(
+                height: 36,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: _pillarFilters.length,
+                  itemBuilder: (context, idx) {
+                    final isSelected = _selectedPillarIndex == idx;
+                    return GestureDetector(
+                      onTap: () => setState(() => _selectedPillarIndex = idx),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                        decoration: BoxDecoration(
+                          color: isSelected ? const Color(0xFF0F172A) : NeoColors.surface,
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: NeoColors.black, width: 1.8),
+                          boxShadow: isSelected
+                              ? const [BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0)]
+                              : null,
+                        ),
+                        child: Center(
+                          child: Text(
+                            _pillarFilters[idx],
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w900,
+                              color: isSelected ? NeoColors.white : NeoColors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
 
               // ============================================================
               // 2. HERO LIVE STATUS HEADER (EXACT MATCH REFERENCE DESIGN)
               // ============================================================
               Row(
-                children: const [
-                  Text('🔴 ', style: TextStyle(fontSize: 12)),
+                children: [
+                  const Text('🔴 ', style: TextStyle(fontSize: 12)),
                   Text(
-                    'LIVE ELECTION STATUS',
-                    style: TextStyle(
+                    _isPusat ? 'LIVE E-VOTING NASIONAL' : 'LIVE E-VOTING DAERAH',
+                    style: const TextStyle(
                       color: Colors.redAccent,
                       fontWeight: FontWeight.w900,
                       fontSize: 11,
@@ -386,20 +576,22 @@ class _EVotingScreenState extends State<EVotingScreen> {
               ),
               const SizedBox(height: 6),
 
-              const Text(
-                'National Digital\nLeadership 2026',
-                style: TextStyle(
+              Text(
+                _isPusat ? 'Lomba E-Voting Pusat 👑' : 'Lomba E-Voting Daerah 📍',
+                style: const TextStyle(
                   color: NeoColors.black,
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.w900,
                   height: 1.15,
                 ),
               ),
               const SizedBox(height: 8),
 
-              const Text(
-                "Cast your vote securely using BISPIRA's blockchain-verified infrastructure. Your identity is anonymized while your voice is guaranteed to be heard.",
-                style: TextStyle(
+              Text(
+                _isPusat
+                    ? "Berikan voting transparan untuk lomba tingkat Nasional (Pendidikan, Kesenian, Kebudayaan, Olahraga) dengan verifikasi Blockchain."
+                    : "Voting warga untuk peserta lomba tingkat Kabupaten / Kota (Pendidikan, Kesenian, Kebudayaan, Olahraga).",
+                style: const TextStyle(
                   color: NeoColors.textMuted,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,

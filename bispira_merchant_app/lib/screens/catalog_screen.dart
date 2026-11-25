@@ -78,29 +78,25 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           value: selectedCluster,
                           isExpanded: true,
                           items: const [
-                            DropdownMenuItem(value: 'B1. Food & Resto', child: Text('🍲 1. Food & Fresh (Resto/Sayur/Daging)')),
-                            DropdownMenuItem(value: 'B2. Fresh Fruit', child: Text('🍎 1. Fresh Fruit / Buah & Telor')),
-                            DropdownMenuItem(value: 'B3. Sembako Mart', child: Text('🌾 1. Sembako & Bahan Pokok')),
-                            DropdownMenuItem(value: 'B4. Apotek & Farmasi', child: Text('💊 3. Health & Farmasi / Apotek')),
-                            DropdownMenuItem(value: 'C1. Tiket Wisata', child: Text('🎟️ 2. Tiket Event MICE & Wisata')),
-                            DropdownMenuItem(value: 'C2. Homecare & Beauty', child: Text('💆 3. Homecare, Perawat, SPA & Barbershop')),
-                            DropdownMenuItem(value: 'D1. Sewa Property', child: Text('🏢 5. Sewa Kost, Kontrakan & Working Space')),
-                            DropdownMenuItem(value: 'D2. Edukasi & Service', child: Text('🛠️ 6. Edukasi, MC/Band & Teknisi Service')),
-                            DropdownMenuItem(value: 'E1. Donasi & Iklan', child: Text('🤝 7 & 8. Program Donasi & Pasang Iklan')),
-                            DropdownMenuItem(value: 'E2. Event & E-Voting', child: Text('🗳️ 9-12. Bispira Event & E-Voting')),
+                            DropdownMenuItem(value: 'B1. Food & Resto', child: Text('🍲 1. Food & Resto (Kuliner, Makan/Minum)')),
+                            DropdownMenuItem(value: 'B4. Apotek & Farmasi', child: Text('💊 2. Apotek & Farmasi (Obat, Resep & Vitamin)')),
+                            DropdownMenuItem(value: 'B3. Sembako Mart', child: Text('🌾 3. Sembako Mart (Bahan Pokok & Fresh)')),
+                            DropdownMenuItem(value: 'D1. Sewa Properti & Busana', child: Text('🏢 4. Sewa Properti, Kos, Kontrakan, Baju Event, Wisuda & Kostum')),
+                            DropdownMenuItem(value: 'C1. Tiket Mess dan Wisata', child: Text('🎟️ 5. Tiket Mess, Wisata, Seminar, Latihan, Ujian, Lomba')),
+                            DropdownMenuItem(value: 'E1. Bispira Iklan', child: Text('📢 6. Bispira Iklan (Jual Iklan Banner & Logo Sponsor)')),
+                            DropdownMenuItem(value: 'E2. Donasi Yayasan', child: Text('🤝 7. Donasi Yayasan (Yatim Piatu, ZISWAF, Sosial)')),
+                            DropdownMenuItem(value: 'E3. Event & E-Voting', child: Text('🏆 8. Event & E-Voting (Pusat & Daerah)')),
                           ],
                           onChanged: (val) {
                             if (val != null) {
                               setModalState(() {
                                 selectedCluster = val;
                                 if (val.contains('B1')) portionUnit = 'Porsi';
-                                else if (val.contains('B2')) portionUnit = 'Kg';
                                 else if (val.contains('B3')) portionUnit = 'Bungkus / Kemasan';
                                 else if (val.contains('B4')) portionUnit = 'Strip / Botol';
                                 else if (val.contains('C1')) portionUnit = 'Tiket';
-                                else if (val.contains('C2')) portionUnit = 'Sesi / Jam';
-                                else if (val.contains('D1')) portionUnit = 'Bulan / Hari';
-                                else if (val.contains('D2')) portionUnit = 'Layanan / Jam';
+                                else if (val.contains('D1')) portionUnit = 'Bulan / Hari / Event';
+                                else if (val.contains('E1')) portionUnit = 'Slot Tayang';
                                 else portionUnit = 'Paket';
                               });
                             }
@@ -352,6 +348,117 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         },
                       ),
                     ],
+
+                    // FIELD KHUSUS FORMULIR D1 (SEWA PROPERTI & BUSANA)
+                    if (selectedCluster.contains('D1')) ...[
+                      const Text('KATEGORI SEWA PROPERTI / BUSANA',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      DropdownButtonFormField<String>(
+                        value: 'Sewa Kos',
+                        isDense: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        items: const [
+                          DropdownMenuItem(value: 'Sewa Kos', child: Text('🛏️ Sewa Kamar Kos')),
+                          DropdownMenuItem(value: 'Sewa Kontrakan', child: Text('🏡 Sewa Rumah Kontrakan')),
+                          DropdownMenuItem(value: 'Sewa Baju Event', child: Text('👗 Sewa Baju Event & Pesta')),
+                          DropdownMenuItem(value: 'Sewa Baju Wisuda', child: Text('🎓 Sewa Baju Wisuda / Toga')),
+                          DropdownMenuItem(value: 'Sewa Kostum', child: Text('🎭 Sewa Kostum Adat & Karakter')),
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      const SizedBox(height: 10),
+                      const Text('FASILITAS / KELENGKAPAN SEWA',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      TextField(
+                        controller: variantCtrl,
+                        decoration: InputDecoration(
+                          hintText: 'Contoh: AC, WiFi, KM Dalam / Fitting Gratis, Aksesoris',
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ],
+
+                    // FIELD KHUSUS FORMULIR C1 (TIKET MESS DAN WISATA)
+                    if (selectedCluster.contains('C1')) ...[
+                      const Text('KATEGORI TIKET / ACARA',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      DropdownButtonFormField<String>(
+                        value: 'Tiket Seminar',
+                        isDense: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        items: const [
+                          DropdownMenuItem(value: 'Tiket Seminar', child: Text('🎤 Tiket Seminar')),
+                          DropdownMenuItem(value: 'Latihan & Pelatihan', child: Text('🏋️ Latihan & Pelatihan')),
+                          DropdownMenuItem(value: 'Workshop & Kursus', child: Text('📚 Workshop & Kursus')),
+                          DropdownMenuItem(value: 'Ujian & Sertifikasi', child: Text('📝 Ujian & Sertifikasi')),
+                          DropdownMenuItem(value: 'Tiket Wisata', child: Text('🏖️ Tiket Wisata')),
+                          DropdownMenuItem(value: 'Tiket Pertandingan', child: Text('⚽ Tiket Pertandingan Olahraga')),
+                          DropdownMenuItem(value: 'Tiket Mess', child: Text('🏨 Tiket Mess / Penginapan')),
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      const SizedBox(height: 10),
+                      const Text('LOKASI / KUOTA TIKET',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      TextField(
+                        controller: prepTimeCtrl,
+                        decoration: InputDecoration(
+                          hintText: 'Contoh: Kuota 100 Kursi / Tiket',
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ],
+
+                    // FIELD KHUSUS FORMULIR E1 (BISPIRA IKLAN)
+                    if (selectedCluster.contains('E1')) ...[
+                      const Text('PAKET SLOT IKLAN',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      DropdownButtonFormField<String>(
+                        value: 'Banner Top Carousel',
+                        isDense: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        items: const [
+                          DropdownMenuItem(value: 'Banner Top Carousel', child: Text('🖼️ Iklan Banner (Top Carousel)')),
+                          DropdownMenuItem(value: 'Banner Kategori Promo', child: Text('🏷️ Iklan Banner (Kategori Promo)')),
+                          DropdownMenuItem(value: 'Logo Sponsor Mitra', child: Text('👑 Iklan Logo Sponsor Mitra')),
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      const SizedBox(height: 10),
+                      const Text('DURASI TAYANG IKLAN',
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: NeoColors.textMuted)),
+                      const SizedBox(height: 4),
+                      DropdownButtonFormField<String>(
+                        value: '30 Hari',
+                        isDense: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        items: const [
+                          DropdownMenuItem(value: '7 Hari', child: Text('7 Hari Tayang')),
+                          DropdownMenuItem(value: '14 Hari', child: Text('14 Hari Tayang')),
+                          DropdownMenuItem(value: '30 Hari', child: Text('30 Hari Tayang')),
+                        ],
+                        onChanged: (val) {},
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -376,9 +483,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
                   if (name.isNotEmpty && basePrice > 0) {
                     String emoji = '🍲';
-                    if (selectedCluster.contains('B2')) emoji = '🍎';
-                    else if (selectedCluster.contains('B3')) emoji = '🌾';
+                    if (selectedCluster.contains('B3')) emoji = '🌾';
                     else if (selectedCluster.contains('B4')) emoji = '💊';
+                    else if (selectedCluster.contains('D1')) emoji = '🏢';
+                    else if (selectedCluster.contains('C1')) emoji = '🎟️';
+                    else if (selectedCluster.contains('E1')) emoji = '📢';
+                    else if (selectedCluster.contains('E2')) emoji = '🤝';
+                    else if (selectedCluster.contains('E3')) emoji = '🏆';
 
                     merchant.addProduct(
                       name,

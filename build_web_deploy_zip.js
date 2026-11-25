@@ -39,20 +39,33 @@ function copyFolderSync(from, to) {
   });
 }
 
-// 1. Copy each Flutter Web App and adjust <base href>
+// 1. Copy each Flutter Web App and adjust <base href> dynamically
 apps.forEach(app => {
   if (fs.existsSync(app.src)) {
     const targetDir = path.join(deployDir, app.id);
     console.log(`[COPYING] ${app.name} -> /${app.id}/`);
     copyFolderSync(app.src, targetDir);
 
-    // Adjust base href in index.html for subdirectory hosting
+    // Adjust base href in index.html with universal self-detecting script
     const indexPath = path.join(targetDir, 'index.html');
     if (fs.existsSync(indexPath)) {
       let html = fs.readFileSync(indexPath, 'utf8');
-      html = html.replace(/<base href="\/">/g, `<base href="/${app.id}/">`);
+      const universalBaseTag = `  <base href="./">
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      if (!path.endsWith('/')) {
+        path += '/';
+        window.history.replaceState(null, '', path + window.location.search + window.location.hash);
+      }
+      var base = document.querySelector('base') || document.createElement('base');
+      base.href = path;
+      if (!base.parentNode) document.head.insertBefore(base, document.head.firstChild);
+    })();
+  </script>`;
+      html = html.replace(/<base href="[^"]*">/g, universalBaseTag);
       fs.writeFileSync(indexPath, html, 'utf8');
-      console.log(`[BASE-HREF] Updated <base href="/${app.id}/"> in ${app.id}/index.html`);
+      console.log(`[BASE-HREF] Updated dynamic <base> in ${app.id}/index.html`);
     }
   } else {
     console.warn(`[WARNING] Build folder tidak ditemukan untuk ${app.name}: ${app.src}`);
@@ -558,30 +571,35 @@ AddType font/ttf .ttf
   AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
 
+# Automatically handle trailing slashes for directories
+<IfModule mod_dir.c>
+  DirectorySlash On
+</IfModule>
+
 # Subdirectory Routing for Flutter Single Page Applications (SPA)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^user/(.*)$ user/index.html [L]
+RewriteRule ^(.*)user/(.*)$ $1user/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^merchant/(.*)$ merchant/index.html [L]
+RewriteRule ^(.*)merchant/(.*)$ $1merchant/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^driver/(.*)$ driver/index.html [L]
+RewriteRule ^(.*)driver/(.*)$ $1driver/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^admin/(.*)$ admin/index.html [L]
+RewriteRule ^(.*)admin/(.*)$ $1admin/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^health/(.*)$ health/index.html [L]
+RewriteRule ^(.*)health/(.*)$ $1health/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^expert/(.*)$ expert/index.html [L]
+RewriteRule ^(.*)expert/(.*)$ $1expert/index.html [L]
 `;
 fs.writeFileSync(path.join(deployDir, '.htaccess'), htaccess, 'utf8');
 console.log('[CREATED] BISPIRA_WEB_DEPLOY/.htaccess');

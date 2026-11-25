@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # BISPIRA SuperApp - Windows to VPS Sync & Deployment Helper
 # ==============================================================================
 param(
@@ -39,3 +39,4 @@ Write-Host "`n⚡ [4/4] Menjalankan automasi deployment di server..." -Foregroun
 & $SSH "$ServerUser@$ServerHost" "cd $RemoteDir/bispira_admin_web && chmod +x deploy.sh && ./deploy.sh"
 
 Write-Host "`n🎉 Deployment Selesai! Backend Bispira aktif di server." -ForegroundColor Yellow
+

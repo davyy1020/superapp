@@ -635,20 +635,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 4,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.76,
+                childAspectRatio: 0.74,
                 children: [
                   SoftNeoServiceTile(emoji: '🍔', label: '1. FOOD', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('food')),
                   SoftNeoServiceTile(emoji: '💊', label: '2. APOTEK', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('apotek')),
                   SoftNeoServiceTile(emoji: '🥦', label: '3. SEMBAKO', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('mart')),
-                  SoftNeoServiceTile(emoji: '🛵', label: '4. DRIVER', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('ride')),
+                  SoftNeoServiceTile(emoji: '🛵', label: '4. ARMADA', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('ride')),
                   SoftNeoServiceTile(emoji: '📦', label: '5. KIRIM', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('send')),
-                  SoftNeoServiceTile(emoji: '🎓', label: '6. JASA', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('jasa')),
-                  SoftNeoServiceTile(emoji: '🏥', label: '7. SEHAT', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('health')),
-                  SoftNeoServiceTile(emoji: '🎟️', label: '8. TIKET', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('tickets')),
-                  SoftNeoServiceTile(emoji: '🏢', label: '9. KOST', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('kost')),
-                  SoftNeoServiceTile(emoji: '📢', label: '10. IKLAN', color: NeoColors.goldSoft, onTap: () => _showAdsModal(context)),
-                  SoftNeoServiceTile(emoji: '🤝', label: '11. DONASI', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('donasi')),
-                  SoftNeoServiceTile(emoji: '🗳️', label: '12. VOTE', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('evoting_pusat')),
+                  SoftNeoServiceTile(emoji: '👨‍⚕️', label: '6. MEDIS', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('health')),
+                  SoftNeoServiceTile(emoji: '🎙️', label: '7. EXPERT', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('expert')),
+                  SoftNeoServiceTile(emoji: '🎟️', label: '8. TIKET', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('tickets')),
+                  SoftNeoServiceTile(emoji: '🏢', label: '9. SEWA', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('kost')),
+                  SoftNeoServiceTile(emoji: '📢', label: '10. IKLAN', color: NeoColors.brandSoft, onTap: () => _showAdsModal(context)),
+                  SoftNeoServiceTile(emoji: '🤝', label: '11. DONASI', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('donasi')),
+                  SoftNeoServiceTile(emoji: '🏆', label: '12. EVENT', color: NeoColors.brandSoft, onTap: () => widget.onOpenService('eo')),
+                  SoftNeoServiceTile(emoji: '🗳️', label: '13. VOTE', color: NeoColors.goldSoft, onTap: () => widget.onOpenService('evoting')),
                 ],
               ),
               const SizedBox(height: 24),
@@ -919,8 +920,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Mitra Ads (Sistem Iklan Mandiri) 📢',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
+                    'Rumah Bispira Iklan 📢',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.5, color: NeoColors.black),
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pop(ctx),
@@ -932,9 +933,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 6),
+              const Text(
+                'Tingkatkan omset toko & eksposur brand bisnis Anda di hadapan ribuan pengguna aktif BISPIRA.',
+                style: TextStyle(fontSize: 11.5, color: NeoColors.textMuted, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(height: 14),
 
-              // Feature 1: Brand Awareness
+              // Paket 1: Iklan Banner Top Hero Carousel
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -944,17 +950,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('👑', style: TextStyle(fontSize: 22)),
-                    SizedBox(width: 10),
+                  children: [
+                    const Text('🖼️', style: TextStyle(fontSize: 22)),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('1. Brand Awareness', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                        children: const [
+                          Text('1. Jual Iklan Banner (Top Carousel)', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
                           SizedBox(height: 3),
                           Text(
-                            'Menampilkan profil & brand mitra terverifikasi sesuai kategori produk di papan atas (Top Hero) secara bergantian otomatis.',
+                            'Spanduk utama di puncak Beranda (auto-slide setiap 3 detik). Langsung diklik menuju toko/menu Anda.\n• Rp 150.000 / 7 Hari  |  • Rp 500.000 / 30 Hari',
                             style: TextStyle(fontSize: 11, color: NeoColors.black, fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -963,9 +969,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
 
-              // Feature 2: Banner Produk & Harga
+              // Paket 2: Iklan Logo Sponsor Mitra
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -975,17 +981,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('🏷️', style: TextStyle(fontSize: 22)),
-                    SizedBox(width: 10),
+                  children: [
+                    const Text('👑', style: TextStyle(fontSize: 22)),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('2. Banner Produk & Harga', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
+                        children: const [
+                          Text('2. Jual Iklan Logo Sponsor Mitra', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: NeoColors.black)),
                           SizedBox(height: 3),
                           Text(
-                            'Spanduk utama (top tier banner) menampilkan foto produk + harga diskon, berputar otomatis (auto-scroll) setiap User membuka aplikasi.',
+                            'Penempatan logo resmi toko dengan lencana "Verified Sponsor" emas di etalase mitra beranda BISPIRA.\n• Rp 250.000 / 30 Hari (Aktif 24 Jam)',
                             style: TextStyle(fontSize: 11, color: NeoColors.black, fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -1003,7 +1009,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pop(ctx);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Banner Iklan Mandiri Anda Berhasil Diaktifkan di Top Carousel!'),
+                        content: Text('Pengajuan Slot Iklan Banner & Logo Berhasil Diteruskan ke Admin BISPIRA! 📢✨'),
                         backgroundColor: NeoColors.brand,
                       ),
                     );
@@ -1018,7 +1024,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       side: const BorderSide(color: NeoColors.black, width: 2),
                     ),
                   ),
-                  child: const Text('Pasang Iklan Produk Sekarang 🚀', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13)),
+                  child: const Text(
+                    'Pesan Slot Iklan Banner / Logo Sekarang 🚀',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13.5),
+                  ),
                 ),
               ),
             ],

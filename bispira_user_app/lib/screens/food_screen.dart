@@ -120,7 +120,8 @@ class _FoodScreenState extends State<FoodScreen> {
   // CATEGORIES
   final List<Map<String, String>> _categories = [
     {'name': 'Semua', 'emoji': '🍱'},
-    {'name': 'Resto', 'emoji': '🍗'},
+    {'name': 'Resto Kuliner', 'emoji': '🍗'},
+    {'name': 'Apotek & Obat', 'emoji': '💊'},
     {'name': 'Toko Sembako', 'emoji': '🛒'},
     {'name': 'Kopi & Boba', 'emoji': '☕'},
     {'name': 'Fast Food', 'emoji': '🍔'},
@@ -129,12 +130,21 @@ class _FoodScreenState extends State<FoodScreen> {
   // 1. SERING DIREKOMENDASIKAN
   final List<Map<String, dynamic>> _seringDirekomendasikan = [
     {
-      'name': 'McDonald\'s - Lippo SCBD',
+      'name': 'Apotek Kimia Farma - SCBD',
+      'tag': 'Apotek Resmi',
+      'rating': 4.95,
+      'distance': '0.6 km',
+      'time': '10 min',
+      'emoji': '💊',
+      'bgColor': const Color(0xFFEFF6FF),
+    },
+    {
+      'name': 'Ayam Geprek Juara - Sudirman',
       'tag': 'Diskon 30%',
       'rating': 4.9,
       'distance': '1.2 km',
       'time': '15 min',
-      'emoji': '🍔',
+      'emoji': '🍗',
       'bgColor': const Color(0xFFFFE5E5),
     },
     {
@@ -143,22 +153,31 @@ class _FoodScreenState extends State<FoodScreen> {
       'rating': 4.8,
       'distance': '0.8 km',
       'time': '10 min',
-      'emoji': '🍗',
+      'emoji': '🛒',
       'bgColor': const Color(0xFFFFF3D6),
     },
     {
-      'name': 'Holland Bakery - Sudirman',
-      'tag': 'Diskon 20%',
+      'name': 'Apotek K-24 - Senopati 24 Jam',
+      'tag': 'Buka 24 Jam',
       'rating': 4.9,
-      'distance': '1.5 km',
-      'time': '18 min',
-      'emoji': '🎂',
-      'bgColor': const Color(0xFFE6F0FF),
+      'distance': '1.1 km',
+      'time': '12 min',
+      'emoji': '🩺',
+      'bgColor': const Color(0xFFE8F5E9),
     },
   ];
 
   // 2. PERLU KAMU COBA
   final List<Map<String, dynamic>> _perluKamuCoba = [
+    {
+      'name': 'Vitamin C 1000mg Strip (Apotek)',
+      'sub': 'Suplemen daya tahan tubuh & kekebalan (Apotek)',
+      'price': 18000,
+      'originalPrice': 24000,
+      'tag': 'Apotek Resmi 💊',
+      'rating': 4.9,
+      'emoji': '💊',
+    },
     {
       'name': 'Gudeg Jogja Bu Kromo',
       'sub': 'Nasi gudeg komplit krecek & telur suwir',
@@ -167,6 +186,15 @@ class _FoodScreenState extends State<FoodScreen> {
       'tag': 'Jawara Rasa',
       'rating': 4.9,
       'emoji': '🍲',
+    },
+    {
+      'name': 'Minyak Kayu Putih 120ml (Apotek)',
+      'sub': 'Meredakan perut kembung & masuk angin',
+      'price': 32000,
+      'originalPrice': 38000,
+      'tag': 'Apotek Resmi 💊',
+      'rating': 4.85,
+      'emoji': '🧴',
     },
     {
       'name': 'Warung Nasi Uduk Mamah',

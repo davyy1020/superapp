@@ -127,6 +127,22 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                   ),
                   const SizedBox(width: 8),
                   _buildArmadaTile(
+                    armada: DriverArmada.mobilBox,
+                    title: 'Mobil Box',
+                    emoji: '🚚',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  _buildArmadaTile(
+                    armada: DriverArmada.bakTerbuka,
+                    title: 'Bak Terbuka',
+                    emoji: '🛻',
+                  ),
+                  const SizedBox(width: 8),
+                  _buildArmadaTile(
                     armada: DriverArmada.ambulance,
                     title: 'Ambulance Medevac',
                     emoji: '🚑',

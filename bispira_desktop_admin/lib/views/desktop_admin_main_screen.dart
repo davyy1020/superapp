@@ -18,6 +18,7 @@ import 'tabs/branch_licenses_tab.dart';
 import 'tabs/driver_master_tab.dart';
 import 'tabs/merchant_master_tab.dart';
 import 'tabs/user_master_tab.dart';
+import 'tabs/mitra_approval_tab.dart';
 import 'tabs/fee_customization_tab.dart';
 import 'tabs/pendapatan_superadmin_tab.dart';
 import 'tabs/gis_tracking_tab.dart';
@@ -55,6 +56,7 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
     BranchLicensesTab(),
     DriverMasterTab(),
     MerchantMasterTab(),
+    MitraApprovalTab(),
     UserMasterTab(),
     FeeCustomizationTab(),
     PendapatanSuperadminTab(),
@@ -76,6 +78,7 @@ class _DesktopAdminMainScreenState extends State<DesktopAdminMainScreen> with Si
     _NavItemData(Icons.apartment_rounded, 'Pusat Cabang & Lisensi', 'Cabang'),
     _NavItemData(Icons.two_wheeler_rounded, 'Pusat Driver & Atribut', 'Driver'),
     _NavItemData(Icons.storefront_rounded, '10-11. Merchant & Katalog Ekosistem', 'Katalog No. 10'),
+    _NavItemData(Icons.how_to_reg_rounded, 'Persetujuan Mitra & Kirim WA (Gratis)', 'Approval WA'),
     _NavItemData(Icons.people_alt_rounded, 'Pusat User & Nasabah', 'User'),
     _NavItemData(Icons.tune_rounded, '9. Pengaturan Tarif & Fees', 'Tarif No. 9'),
     _NavItemData(Icons.analytics_rounded, '12. Pendapatan Superadmin & Split', 'Pendapatan No. 12'),

@@ -136,3 +136,4 @@ curl -X GET https://api.bispira.id/api/v1/db/status
 # 2. Cek endpoint routing & OSRM
 curl -X GET "https://api.bispira.id/api/v1/routing?origin_lat=-6.200000&origin_lng=106.816666&dest_lat=-6.210000&dest_lng=106.820000"
 ```
+

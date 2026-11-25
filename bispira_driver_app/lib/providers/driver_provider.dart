@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-enum DriverArmada { motor, mobil, send, ambulance }
+enum DriverArmada { motor, mobil, send, mobilBox, bakTerbuka, ambulance }
 
 class DriverOrder {
   final String id;
@@ -248,6 +248,44 @@ class DriverProvider with ChangeNotifier {
           netDriverEarning: 43204, // 95% Sesuai Kontrak Pihak Kedua
           paymentMethod: 'Transfer Bank (Kode Unik 247) 🏦',
           itemsDescription: 'Antar Penumpang Genuk ➔ Tembalang (17.2 km OSRM)',
+        );
+      } else if (_armada == DriverArmada.mobilBox) {
+        _incomingOrder = DriverOrder(
+          id: 'BOX-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+          serviceName: 'Kargo Mobil Box (Tertutup) 🚚',
+          serviceEmoji: '🚚',
+          customerName: 'Gudang Logistik Sinar Abadi',
+          customerPhone: '0813-5566-7788',
+          pickupAddress: 'Kawasan Industri Candi, Semarang',
+          dropoffAddress: 'Gudang Pusat Distribusi Pelabuhan Tanjung Emas',
+          pickupLat: -6.9820,
+          pickupLng: 110.3600,
+          dropoffLat: -6.9480,
+          dropoffLng: 110.4210,
+          distanceKm: 14.8,
+          totalFareCustomer: 120000,
+          netDriverEarning: 114000, // 95% Sesuai Kontrak
+          paymentMethod: 'Transfer Bank (Kode Unik) 🏦',
+          itemsDescription: 'Kargo 8 Koli Karton Segel (Mobil Box Tertutup Aman Hujan)',
+        );
+      } else if (_armada == DriverArmada.bakTerbuka) {
+        _incomingOrder = DriverOrder(
+          id: 'BAK-ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+          serviceName: 'Pickup Bak Terbuka 🛻',
+          serviceEmoji: '🛻',
+          customerName: 'Toko Material Bangunan Jaya',
+          customerPhone: '0857-4433-2211',
+          pickupAddress: 'Toko Bangunan Jaya, Jl. Majapahit, Semarang',
+          dropoffAddress: 'Proyek Renovasi Ruko, Jl. MT Haryono, Semarang',
+          pickupLat: -7.0010,
+          pickupLng: 110.4500,
+          dropoffLat: -6.9850,
+          dropoffLng: 110.4300,
+          distanceKm: 9.6,
+          totalFareCustomer: 95000,
+          netDriverEarning: 90250, // 95% Sesuai Kontrak
+          paymentMethod: 'Transfer Bank / QRIS 🏦',
+          itemsDescription: 'Muatan Semen, Pipa & Rangka Besi (Bak Terbuka)',
         );
       } else if (_armada == DriverArmada.ambulance) {
         _incomingOrder = DriverOrder(

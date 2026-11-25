@@ -208,10 +208,46 @@ function toggleFaq(button) {
   }
 }
 
-// FORM SUBMISSION HANDLER WITH FEEDBACK
+// FORM SUBMISSION HANDLER WITH FEEDBACK & LOCALSTORAGE PERSISTENCE
 function handleFormSubmit(event, roleTitle) {
   event.preventDefault();
-  alert(`✅ Terima kasih! Pendaftaran ${roleTitle} BISPIRA berhasil dikirim.\n\nTim Verification HQ & Lisensi Cabang kami akan menghubungi WhatsApp Anda dalam 1x24 Jam.`);
+
+  let regData = {
+    id: 'REG-' + Date.now(),
+    role: roleTitle,
+    submittedAt: new Date().toISOString(),
+    status: 'Menunggu Verifikasi',
+  };
+
+  if (roleTitle.includes('Driver')) {
+    regData.name = document.getElementById('drv-name')?.value || 'Mitra Driver';
+    regData.phone = document.getElementById('drv-phone')?.value || '08123456789';
+    regData.armada = document.getElementById('drv-armada')?.value || 'motor';
+    regData.city = document.getElementById('drv-city')?.value || 'Semarang';
+    regData.plate = document.getElementById('drv-plate')?.value || 'B 1234 BSP';
+  } else if (roleTitle.includes('Merchant') || roleTitle.includes('Penjual')) {
+    regData.name = document.getElementById('mrc-name')?.value || 'Toko Mitra';
+    regData.owner = document.getElementById('mrc-owner')?.value || 'Pemilik';
+    regData.phone = document.getElementById('mrc-phone')?.value || '081298765432';
+    regData.category = document.getElementById('mrc-category')?.value || 'food';
+    regData.address = document.getElementById('mrc-address')?.value || 'Jl. Pemuda';
+    regData.bank = document.getElementById('mrc-bank')?.value || 'BCA';
+  } else if (roleTitle.includes('Cabang')) {
+    regData.name = document.getElementById('brn-company')?.value || 'PT Mitra Cabang';
+    regData.city = document.getElementById('brn-city')?.value || 'Kota Semarang';
+    regData.phone = document.getElementById('brn-phone')?.value || '081234567890';
+    regData.scheme = document.getElementById('brn-scheme')?.value || '30';
+  }
+
+  try {
+    const existing = JSON.parse(localStorage.getItem('bispira_pending_registrations') || '[]');
+    existing.unshift(regData);
+    localStorage.setItem('bispira_pending_registrations', JSON.stringify(existing));
+  } catch (e) {
+    console.error('Failed to save registration:', e);
+  }
+
+  alert(`✅ TERIMA KASIH!\n\nPendaftaran ${roleTitle} (${regData.name || ''}) berhasil terkirim ke Desktop Superadmin BISPIRA.\n\n🔔 ALUR SELANJUTNYA:\nAdmin BISPIRA akan memverifikasi data Anda. Setelah di-ACC, Anda akan menerima pesan WhatsApp resmi SATU ARAH berisi ID Mitra & PIN default untuk login ke aplikasi.\n\nHarap pastikan nomor WhatsApp ${regData.phone} Anda selalu aktif!`);
   event.target.reset();
 }
 

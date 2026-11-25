@@ -18,7 +18,15 @@ class EOScreen extends StatefulWidget {
 
 class _EOScreenState extends State<EOScreen> {
   late bool _isPusat;
-  // int _selectedCategoryIndex = 0;
+  int _selectedPillarIndex = 0;
+
+  final List<String> _pillarFilters = [
+    'Semua Pilar',
+    'Pendidikan',
+    'Kesenian',
+    'Kebudayaan',
+    'Olahraga',
+  ];
 
   @override
   void initState() {
@@ -34,7 +42,7 @@ class _EOScreenState extends State<EOScreen> {
       'category': 'Olahraga',
       'date': '12 - 16 Nov 2026',
       'venue': 'GOR Jatidiri, Semarang',
-      'organizer': 'Bispira EO Cabang Semarang',
+      'organizer': 'Bispira Event Daerah Cabang Semarang',
       'fee': 'Rp 250.000 / Tim',
       'slots': '16 / 32 Tim Terdaftar',
       'bracket': [
@@ -46,12 +54,12 @@ class _EOScreenState extends State<EOScreen> {
       'emoji': '⚽',
     },
     {
-      'title': 'Olimpiade Sains & Cerdas Cermat Tingkat SMP',
+      'title': 'Olimpiade Sains & Cerdas Cermat Tingkat SMP / MTs',
       'level': 'KABUPATEN / KOTA',
       'category': 'Pendidikan',
       'date': '28 Nov 2026',
       'venue': 'Auditorium Balaikota Semarang',
-      'organizer': 'Bispira EO Cabang Semarang',
+      'organizer': 'Bispira Event Daerah Cabang Semarang',
       'fee': 'Rp 75.000 / Peserta',
       'slots': '84 / 100 Kursi',
       'bracket': [
@@ -61,6 +69,37 @@ class _EOScreenState extends State<EOScreen> {
       ],
       'emoji': '🧠',
     },
+    {
+      'title': 'Festival Tari Kreasi & Band Akustik Pelajar Daerah',
+      'level': 'KABUPATEN / KOTA',
+      'category': 'Kesenian',
+      'date': '02 Des 2026',
+      'venue': 'Taman Budaya Raden Saleh, Semarang',
+      'organizer': 'Bispira Event Daerah Cabang Semarang',
+      'fee': 'Rp 100.000 / Tim',
+      'slots': '24 / 30 Grup Terdaftar',
+      'bracket': [
+        {'match': 'Audisi 1', 'teamA': '15 Grup Tari', 'teamB': 'Penilaian Koreografi'},
+        {'match': 'Audisi 2', 'teamA': '15 Band Akustik', 'teamB': 'Penilaian Musikalitas'},
+        {'match': 'Malam Puncak', 'teamA': '6 Finalis Terbaik', 'teamB': 'Pentas Terbuka Juara'},
+      ],
+      'emoji': '🎭',
+    },
+    {
+      'title': 'Pentas Busana Batik & Lomba Cipta Puisi Daerah',
+      'level': 'KABUPATEN / KOTA',
+      'category': 'Kebudayaan',
+      'date': '08 Des 2026',
+      'venue': 'Gedung Kesenian Daerah Semarang',
+      'organizer': 'Bispira Event Daerah Cabang Semarang',
+      'fee': 'Rp 50.000 / Peserta',
+      'slots': '52 / 80 Peserta',
+      'bracket': [
+        {'match': 'Babak Seleksi', 'teamA': 'Kurasi Puisi', 'teamB': 'Catwalk Batik'},
+        {'match': 'Grand Final', 'teamA': 'Top 10 Duta Budaya', 'teamB': 'Pemberian Mahkota'},
+      ],
+      'emoji': '🏛️',
+    },
   ];
 
   // DATA TURNAMEN PUSAT (PROVINSI & NASIONAL) - MENU 12
@@ -68,10 +107,10 @@ class _EOScreenState extends State<EOScreen> {
     {
       'title': 'Kejuaraan Nasional Pencak Silat Piala Presiden 2026',
       'level': 'TINGKAT NASIONAL',
-      'category': 'Kejurnas',
+      'category': 'Olahraga',
       'date': '05 - 10 Des 2026',
       'venue': 'Istora Senayan, Jakarta',
-      'organizer': 'Bispira EO Pusat (Nasional)',
+      'organizer': 'Bispira Event Pusat (Nasional)',
       'fee': 'Rp 500.000 / Kontingen',
       'slots': '34 Provinsi Terverifikasi',
       'bracket': [
@@ -82,14 +121,14 @@ class _EOScreenState extends State<EOScreen> {
       'emoji': '🥋',
     },
     {
-      'title': 'BISPIRA National SuperApp Hackathon 2026',
-      'level': 'TINGKAT PROVINSI & NASIONAL',
-      'category': 'Teknologi & Inovasi',
+      'title': 'BISPIRA National SuperApp Hackathon & AI Innovation 2026',
+      'level': 'TINGKAT NASIONAL',
+      'category': 'Pendidikan',
       'date': '18 - 20 Des 2026',
       'venue': 'Online & Hybrid JCC Senayan',
-      'organizer': 'Bispira EO Pusat (Nasional)',
+      'organizer': 'Bispira Event Pusat (Nasional)',
       'fee': 'GRATIS (Sponsor Bispira)',
-      'slots': '142 / 200 Tim Startup',
+      'slots': '142 / 200 Tim Mahasiswa & Startup',
       'bracket': [
         {'match': 'Idea Screening', 'teamA': '500+ Proposal', 'teamB': 'Review Dewan Juri'},
         {'match': 'Demo Day 20 Besar', 'teamA': 'Pitching 10 Menit', 'teamB': 'Tanya Jawab Investor'},
@@ -97,11 +136,44 @@ class _EOScreenState extends State<EOScreen> {
       ],
       'emoji': '💻',
     },
+    {
+      'title': 'Festival Paduan Suara & Orkestra Nasional Piala Harmoni',
+      'level': 'TINGKAT NASIONAL',
+      'category': 'Kesenian',
+      'date': '22 - 24 Des 2026',
+      'venue': 'Teater Jakarta, TIM Cikini',
+      'organizer': 'Bispira Event Pusat (Nasional)',
+      'fee': 'Rp 750.000 / Kontingen',
+      'slots': '28 Provinsi Terdaftar',
+      'bracket': [
+        {'match': 'Penyisihan Nasional', 'teamA': 'Lagu Wajib Nusantara', 'teamB': 'Komposisi Klasik'},
+        {'match': 'Final Kejurnas', 'teamA': 'Top 5 Kontingen', 'teamB': 'Pentas Akbar Istana'},
+      ],
+      'emoji': '🎶',
+    },
+    {
+      'title': 'Pekan Kebudayaan Nasional & Parade Busana Adat 38 Provinsi',
+      'level': 'TINGKAT NASIONAL',
+      'category': 'Kebudayaan',
+      'date': '26 - 29 Des 2026',
+      'venue': 'Monas & Gelora Bung Karno, Jakarta',
+      'organizer': 'Bispira Event Pusat (Nasional)',
+      'fee': 'GRATIS (Terbuka untuk Umum)',
+      'slots': '38 Delegasi Provinsi Resmi',
+      'bracket': [
+        {'match': 'Karnaval Akbar', 'teamA': 'Parade 38 Provinsi', 'teamB': 'Pameran Warisan Budaya'},
+        {'match': 'Malam Anugerah', 'teamA': 'Penetapan Duta Budaya', 'teamB': 'Piala Bergilir Presiden'},
+      ],
+      'emoji': '👑',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    final events = _isPusat ? _pusatEvents : _cabangEvents;
+    final rawEvents = _isPusat ? _pusatEvents : _cabangEvents;
+    final events = _selectedPillarIndex == 0
+        ? rawEvents
+        : rawEvents.where((e) => e['category'] == _pillarFilters[_selectedPillarIndex]).toList();
 
     return Scaffold(
       backgroundColor: NeoColors.bg,
@@ -128,13 +200,13 @@ class _EOScreenState extends State<EOScreen> {
                       Row(
                         children: [
                           Text(
-                            _isPusat ? 'Bispira EO Pusat 🏆' : 'Bispira EO Cabang ⚡',
+                            _isPusat ? 'Bispira Event Pusat 🏆' : 'Bispira Event Daerah 📍',
                             style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: NeoColors.black),
                           ),
                         ],
                       ),
                       Text(
-                        _isPusat ? 'Menu 12: Turnamen Provinsi & Nasional' : 'Menu 11: Lomba & Bagan Kota/Kabupaten',
+                        _isPusat ? 'Lomba Nasional: Pendidikan, Seni, Budaya & Olahraga' : 'Lomba Daerah: Pendidikan, Seni, Budaya & Olahraga',
                         style: const TextStyle(fontSize: 11, color: NeoColors.textMuted, fontWeight: FontWeight.w700),
                       ),
                     ],
@@ -145,7 +217,7 @@ class _EOScreenState extends State<EOScreen> {
 
             // SEGMENTED SWITCHER (CABANG VS PUSAT)
             Container(
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.fromLTRB(16, 14, 16, 10),
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: NeoColors.surface,
@@ -168,7 +240,7 @@ class _EOScreenState extends State<EOScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            '📍 11. EO Cabang (Lokal)',
+                            '📍 Event Daerah (Lokal)',
                             style: TextStyle(
                               fontWeight: FontWeight.w900,
                               fontSize: 12,
@@ -190,7 +262,7 @@ class _EOScreenState extends State<EOScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            '👑 12. EO Pusat (Nasional)',
+                            '👑 Event Pusat (Nasional)',
                             style: TextStyle(
                               fontWeight: FontWeight.w900,
                               fontSize: 12,
@@ -202,6 +274,45 @@ class _EOScreenState extends State<EOScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            // 4 PILAR FILTER CHIPS (PENDIDIKAN, KESENIAN, KEBUDAYAAN, OLAHRAGA)
+            Container(
+              height: 38,
+              margin: const EdgeInsets.only(bottom: 12),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _pillarFilters.length,
+                itemBuilder: (context, idx) {
+                  final isSelected = _selectedPillarIndex == idx;
+                  return GestureDetector(
+                    onTap: () => setState(() => _selectedPillarIndex = idx),
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isSelected ? const Color(0xFF0F172A) : NeoColors.surface,
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(color: NeoColors.black, width: 1.8),
+                        boxShadow: isSelected
+                            ? const [BoxShadow(color: NeoColors.black, offset: Offset(2, 2), blurRadius: 0)]
+                            : null,
+                      ),
+                      child: Center(
+                        child: Text(
+                          _pillarFilters[idx],
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w900,
+                            color: isSelected ? NeoColors.white : NeoColors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
 
